@@ -42,5 +42,4 @@ public class Stocker {
         StockerView sv = new StockerView();
         sv.setVisible(true);
     }
-
 }

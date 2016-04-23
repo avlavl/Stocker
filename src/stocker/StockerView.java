@@ -49,7 +49,6 @@ public class StockerView extends javax.swing.JFrame {
         jLabelStatus = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePoint = new javax.swing.JTable();
-        jButtonOK = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldStartDate = new javax.swing.JTextField();
         jTextFieldEndDate = new javax.swing.JTextField();
@@ -115,14 +114,6 @@ public class StockerView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTablePoint);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 350, 142));
-
-        jButtonOK.setText("确定");
-        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOKActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, -1, -1));
 
         jLabel7.setText("起始日期：");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
@@ -220,18 +211,6 @@ public class StockerView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        double d = 0;
-        try {
-            d = NumberFormat.getInstance().parse(closeString).doubleValue();
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-        livermore(dateString, d);
-        updateTable();
-        jLabelStatus.setText("趋势：" + Status);
-    }//GEN-LAST:event_jButtonOKActionPerformed
-
     private void jButtonReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadActionPerformed
         String s;
         String[] ss = null;
@@ -254,7 +233,7 @@ public class StockerView extends javax.swing.JFrame {
                 updatePrice(s);
 
                 double d = Double.parseDouble(closeString);
-                livermore(dateString, d);
+                Livermore(dateString, d);
                 updateTable();
                 jLabelStatus.setText("趋势：" + Status);
             } else {
@@ -290,7 +269,7 @@ public class StockerView extends javax.swing.JFrame {
                 ss = s.split("\t");
                 if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
                     try {
-                        livermore(ss[0], NumberFormat.getInstance().parse(ss[4]).doubleValue());
+                        Livermore(ss[0], NumberFormat.getInstance().parse(ss[4]).doubleValue());
                     } catch (ParseException ex) {
                         ex.printStackTrace();
                     }
@@ -417,7 +396,7 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void livermore(String date, double d) {
+    protected void Livermore(String date, double d) {
         switch (Status) {
             case "mainRiseStatus":
                 if (d > mainRiseVal) {
@@ -715,7 +694,6 @@ public class StockerView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonContinuous;
-    private javax.swing.JButton jButtonOK;
     private javax.swing.JButton jButtonRead;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
