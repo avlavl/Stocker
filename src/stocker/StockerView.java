@@ -61,14 +61,13 @@ public class StockerView extends javax.swing.JFrame {
         jLabelDate = new javax.swing.JLabel();
         jButtonContinuous = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabelStockName = new javax.swing.JLabel();
         jLabelStockCode = new javax.swing.JLabel();
         jLabelMA5 = new javax.swing.JLabel();
         jLabelMA10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxStartStatus = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -80,20 +79,26 @@ public class StockerView extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabelHigh.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelHigh.setText("最高：");
-        jPanel1.add(jLabelHigh, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
+        jPanel1.add(jLabelHigh, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
 
+        jLabelLow.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelLow.setText("最低：");
-        jPanel1.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, -1, -1));
+        jPanel1.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
+        jLabelOpen.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelOpen.setText("开盘：");
-        jPanel1.add(jLabelOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
+        jPanel1.add(jLabelOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
 
+        jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelClose.setText("收盘：");
-        jPanel1.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, -1, -1));
+        jPanel1.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, -1));
 
-        jLabelStatus.setText("趋势：");
-        jPanel1.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
+        jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelStatus.setText("主上升");
+        jPanel1.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
         jTablePoint.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -113,81 +118,98 @@ public class StockerView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTablePoint);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 350, 142));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 330, 142));
 
+        jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel7.setText("起始日期：");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
 
+        jTextFieldStartDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldStartDate.setText("2016/01/04");
-        jPanel1.add(jTextFieldStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 80, -1));
+        jPanel1.add(jTextFieldStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 80, -1));
 
-        jTextFieldEndDate.setText("2016/04/08");
-        jPanel1.add(jTextFieldEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 80, -1));
+        jTextFieldEndDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldEndDate.setText("2016/04/22");
+        jPanel1.add(jTextFieldEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 80, -1));
 
+        jLabel8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel8.setText("结束日期：");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
 
         jTextAreaMain.setColumns(20);
         jTextAreaMain.setRows(5);
         jScrollPane2.setViewportView(jTextAreaMain);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 350, 80));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 650, 80));
 
+        jButtonRead.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonRead.setText("读取");
         jButtonRead.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReadActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, -1, -1));
+        jPanel1.add(jButtonRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
 
+        jComboBox1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "K线实体", "K线引线", "MA1", "MA5", "MA10", "MA20", "MA60" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
 
+        jLabel9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel9.setText("模式：");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
 
+        jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
         jLabelDate.setText("日期：2016/01/04");
-        jPanel1.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, -1, -1));
+        jPanel1.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
+        jButtonContinuous.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonContinuous.setText("连续");
         jButtonContinuous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonContinuousActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonContinuous, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, -1, -1));
+        jPanel1.add(jButtonContinuous, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 280, -1, -1));
 
+        jCheckBox1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBox1.setText("使能V形反转");
         jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jLabel6.setText("反转点：");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
-
+        jTextField1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextField1.setText("20");
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 30, -1));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 30, -1));
 
         jLabelStockName.setFont(new java.awt.Font("华文行楷", 0, 18)); // NOI18N
-        jLabelStockName.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelStockName.setForeground(new java.awt.Color(0, 0, 255));
         jLabelStockName.setText("上证指数");
         jPanel1.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabelStockCode.setFont(new java.awt.Font("黑体", 0, 16)); // NOI18N
-        jLabelStockCode.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelStockCode.setForeground(new java.awt.Color(0, 0, 255));
         jLabelStockCode.setText("(000001)");
         jPanel1.add(jLabelStockCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
+        jLabelMA5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA5.setText("MA5：");
-        jPanel1.add(jLabelMA5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, -1, -1));
+        jPanel1.add(jLabelMA5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
+        jLabelMA10.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA10.setText("MA10：");
-        jPanel1.add(jLabelMA10, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, -1, -1));
+        jPanel1.add(jLabelMA10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel1.setText("起始状态：");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, -1));
+        jComboBoxStartStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBoxStartStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
+        jComboBoxStartStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStartStatusActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxStartStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 420));
 
@@ -235,7 +257,7 @@ public class StockerView extends javax.swing.JFrame {
                 double d = Double.parseDouble(closeString);
                 Livermore(dateString, d);
                 updateTable();
-                jLabelStatus.setText("趋势：" + Status);
+                parseStatus();
             } else {
                 JOptionPane.showMessageDialog(new JFrame(), "对不起，没有行情数据了！");
                 fileReader.close();
@@ -278,7 +300,7 @@ public class StockerView extends javax.swing.JFrame {
                     break;
                 }
             }
-            jLabelStatus.setText("趋势：" + Status);
+            parseStatus();
             updatePrice(s);
             updateTable();
         } catch (IOException e1) {
@@ -311,6 +333,58 @@ public class StockerView extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jMenuItemImportActionPerformed
+
+    private void jComboBoxStartStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStartStatusActionPerformed
+        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+    }//GEN-LAST:event_jComboBoxStartStatusActionPerformed
+
+    protected void parseStatus() {
+        switch (Status) {
+            case "mainRiseStatus":
+                jLabelStatus.setText("主上升！");
+                jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
+                break;
+            case "normalFallUStatus":
+                jLabelStatus.setText("自然回撤");
+                jLabelStatus.setForeground(new java.awt.Color(255, 51, 51));
+                break;
+            case "normalRiseUStatus":
+                jLabelStatus.setText("自然回升");
+                jLabelStatus.setForeground(new java.awt.Color(255, 51, 51));
+                break;
+            case "minorFallUStatus":
+                jLabelStatus.setText("次级回撤");
+                jLabelStatus.setForeground(new java.awt.Color(255, 153, 153));
+                break;
+            case "minorRiseUStatus":
+                jLabelStatus.setText("次级回升");
+                jLabelStatus.setForeground(new java.awt.Color(255, 153, 153));
+                break;
+
+            case "mainFallStatus":
+                jLabelStatus.setText("主下降！");
+                jLabelStatus.setForeground(new java.awt.Color(0, 255, 0));
+                break;
+            case "normalRiseDStatus":
+                jLabelStatus.setText("自然回升");
+                jLabelStatus.setForeground(new java.awt.Color(51, 255, 51));
+                break;
+            case "normalFallDStatus":
+                jLabelStatus.setText("自然回撤");
+                jLabelStatus.setForeground(new java.awt.Color(51, 255, 51));
+                break;
+            case "minorRiseDStatus":
+                jLabelStatus.setText("次级回升");
+                jLabelStatus.setForeground(new java.awt.Color(153, 255, 153));
+                break;
+            case "minorFallDStatus":
+                jLabelStatus.setText("次级回撤");
+                jLabelStatus.setForeground(new java.awt.Color(153, 255, 153));
+                break;
+            default:
+                break;
+        }
+    }
 
     protected void updatePrice(String s) {
         String[] ss = s.split("\t");
@@ -697,9 +771,8 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRead;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxStartStatus;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
