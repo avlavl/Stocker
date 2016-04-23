@@ -295,7 +295,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="jComboBoxMode">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
@@ -303,13 +303,13 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="8">
                 <StringItem index="0" value="&#x6536;&#x76d8;&#x4ef7;"/>
-                <StringItem index="1" value="K&#x7ebf;&#x5b9e;&#x4f53;"/>
-                <StringItem index="2" value="K&#x7ebf;&#x5f15;&#x7ebf;"/>
-                <StringItem index="3" value="MA1"/>
-                <StringItem index="4" value="MA5"/>
-                <StringItem index="5" value="MA10"/>
-                <StringItem index="6" value="MA20"/>
-                <StringItem index="7" value="MA60"/>
+                <StringItem index="1" value="5&#x65e5;&#x5747;&#x7ebf;"/>
+                <StringItem index="2" value="10&#x65e5;&#x5747;&#x7ebf;"/>
+                <StringItem index="3" value="20&#x65e5;&#x5747;&#x7ebf;"/>
+                <StringItem index="4" value="30&#x65e5;&#x5747;&#x7ebf;"/>
+                <StringItem index="5" value="60&#x65e5;&#x5747;&#x7ebf;"/>
+                <StringItem index="6" value="K&#x7ebf;&#x5b9e;&#x4f53;"/>
+                <StringItem index="7" value="K&#x7ebf;&#x5f15;&#x7ebf;"/>
               </StringArray>
             </Property>
           </Properties>
@@ -340,7 +340,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x65e5;&#x671f;&#xff1a;2016/01/04"/>
+            <Property name="text" type="java.lang.String" value="&#x65e5;&#x671f;&#xff1a;----/--/--"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

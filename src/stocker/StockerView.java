@@ -11,8 +11,6 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -56,7 +54,7 @@ public class StockerView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaMain = new javax.swing.JTextArea();
         jButtonRead = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxMode = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
         jButtonContinuous = new javax.swing.JButton();
@@ -151,16 +149,16 @@ public class StockerView extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "K线实体", "K线引线", "MA1", "MA5", "MA10", "MA20", "MA60" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
+        jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "5日均线", "10日均线", "20日均线", "30日均线", "60日均线", "K线实体", "K线引线" }));
+        jPanel1.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel9.setText("模式：");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
 
         jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
-        jLabelDate.setText("日期：2016/01/04");
+        jLabelDate.setText("日期：----/--/--");
         jPanel1.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
         jButtonContinuous.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -252,9 +250,9 @@ public class StockerView extends javax.swing.JFrame {
             } while (((s != null) && ss[0].compareTo(jTextFieldStartDate.getText()) < 0));
 
             if (s != null) {
-                updatePrice(s);
+                updateMarket(s);
 
-                double d = Double.parseDouble(closeString);
+                double d = getModeData();
                 Livermore(dateString, d);
                 updateTable();
                 parseStatus();
@@ -290,18 +288,15 @@ public class StockerView extends javax.swing.JFrame {
             while ((s = bufferedReader.readLine()) != null) {
                 ss = s.split("\t");
                 if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
-                    try {
-                        Livermore(ss[0], NumberFormat.getInstance().parse(ss[4]).doubleValue());
-                    } catch (ParseException ex) {
-                        ex.printStackTrace();
-                    }
+                    updateMarket(s);
+                    double d = getModeData();
+                    Livermore(dateString, d);
                 }
                 if (ss[0].compareTo(jTextFieldEndDate.getText()) > 0) {
                     break;
                 }
             }
             parseStatus();
-            updatePrice(s);
             updateTable();
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -337,6 +332,25 @@ public class StockerView extends javax.swing.JFrame {
     private void jComboBoxStartStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStartStatusActionPerformed
         Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
     }//GEN-LAST:event_jComboBoxStartStatusActionPerformed
+
+    protected double getModeData() {
+        switch (jComboBoxMode.getSelectedIndex()) {
+            case 0:
+                return Double.parseDouble(closeString);
+            case 1:
+                return Double.parseDouble(ma5String);
+            case 2:
+                return Double.parseDouble(ma10String);
+            case 3:
+                return Double.parseDouble(ma20String);
+            case 4:
+                return Double.parseDouble(ma30String);
+            case 5:
+                return Double.parseDouble(ma60String);
+            default:
+                return Double.parseDouble(closeString);
+        }
+    }
 
     protected void parseStatus() {
         switch (Status) {
@@ -386,7 +400,7 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void updatePrice(String s) {
+    protected void updateMarket(String s) {
         String[] ss = s.split("\t");
         int len = ss.length;
         dateString = ss[0];
@@ -770,7 +784,7 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonContinuous;
     private javax.swing.JButton jButtonRead;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxMode;
     private javax.swing.JComboBox<String> jComboBoxStartStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
