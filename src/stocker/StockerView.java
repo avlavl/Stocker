@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,6 +30,11 @@ public class StockerView extends javax.swing.JFrame {
     public StockerView() {
         initComponents();
         setLocationRelativeTo(null);
+
+        final URL filename = this.getClass().getResource("resources/Livermore.png");
+        if (filename != null) {
+            setIconImage(new ImageIcon(filename, "Icon").getImage());
+        }
     }
 
     /**
@@ -123,7 +130,7 @@ public class StockerView extends javax.swing.JFrame {
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
 
         jTextFieldStartDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldStartDate.setText("2016/01/04");
+        jTextFieldStartDate.setText("2015/01/04");
         jPanel1.add(jTextFieldStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 80, -1));
 
         jTextFieldEndDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
