@@ -64,8 +64,8 @@ public class StockerView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
         jButtonContinuous = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jTextField1 = new javax.swing.JTextField();
+        jCheckBoxVpoint = new javax.swing.JCheckBox();
+        jTextFieldVpoint = new javax.swing.JTextField();
         jLabelStockName = new javax.swing.JLabel();
         jLabelStockCode = new javax.swing.JLabel();
         jLabelMA5 = new javax.swing.JLabel();
@@ -177,14 +177,13 @@ public class StockerView extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonContinuous, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
 
-        jCheckBox1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jCheckBox1.setText("使能V形反转");
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jCheckBoxVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBoxVpoint.setText("使能V形反转");
+        jPanel1.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextField1.setText("20");
-        jTextField1.setEnabled(false);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 30, -1));
+        jTextFieldVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldVpoint.setText("20");
+        jPanel1.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 30, -1));
 
         jLabelStockName.setFont(new java.awt.Font("华文行楷", 0, 18)); // NOI18N
         jLabelStockName.setForeground(new java.awt.Color(0, 0, 255));
@@ -542,6 +541,9 @@ public class StockerView extends javax.swing.JFrame {
     }
 
     protected void Livermore(String date, double d) {
+        boolean vpointEnable = jCheckBoxVpoint.isSelected();
+        int vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+
         switch (Status) {
             case "mainRiseStatus":
                 if (d > mainRiseVal) {
@@ -562,7 +564,15 @@ public class StockerView extends javax.swing.JFrame {
                     jTextAreaMain.append("[" + date + "] " + "进入下降趋势！！！\n");
                     appendValue();
                 } else if (d < normalFallUVal) {
-                    normalFallUVal = d;
+                    if ((vpointEnable) && (d < riseKeyHead * (100 - vpointValue) / 100)) {
+                        Status = "mainFallStatus";
+                        resetTrendValue();
+                        mainFallVal = d;
+                        jTextAreaMain.append("[" + date + "] " + "进入下降趋势（V形反转）！！！\n");
+                        appendValue();
+                    } else {
+                        normalFallUVal = d;
+                    }
                 } else if (d > (normalFallUVal * 1.1)) {
                     Status = "normalRiseUStatus";
                     normalRiseUVal = d;
@@ -688,7 +698,15 @@ public class StockerView extends javax.swing.JFrame {
                     jTextAreaMain.append("[" + date + "] " + "进入上升趋势！！！\n");
                     appendValue();
                 } else if (d > normalRiseDVal) {
-                    normalRiseDVal = d;
+                    if ((vpointEnable) && (d > fallKeyFoot * (100 + vpointValue) / 100)) {
+                        Status = "mainRiseStatus";
+                        resetTrendValue();
+                        mainRiseVal = d;
+                        jTextAreaMain.append("[" + date + "] " + "进入上升趋势（V形反转）！！！\n");
+                        appendValue();
+                    } else {
+                        normalRiseDVal = d;
+                    }
                 } else if (d < (normalRiseDVal * 0.9)) {
                     Status = "normalFallDStatus";
                     normalFallDVal = d;
@@ -838,7 +856,7 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonContinuous;
     private javax.swing.JButton jButtonRead;
     private javax.swing.JButton jButtonReset;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxVpoint;
     private javax.swing.JComboBox<String> jComboBoxMode;
     private javax.swing.JComboBox<String> jComboBoxStartStatus;
     private javax.swing.JLabel jLabel1;
@@ -864,8 +882,8 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablePoint;
     private javax.swing.JTextArea jTextAreaMain;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldEndDate;
     private javax.swing.JTextField jTextFieldStartDate;
+    private javax.swing.JTextField jTextFieldVpoint;
     // End of variables declaration//GEN-END:variables
 }
