@@ -670,7 +670,7 @@ public class StockerView extends javax.swing.JFrame {
                 break;
 
             case "mainFallStatus":
-                if (d < mainFallVal) {
+                if ((d < mainFallVal) || (mainFallVal == 0)) {
                     mainFallVal = d;
                 } else if (d > (mainFallVal * 1.1)) {
                     Status = "normalRiseDStatus";
