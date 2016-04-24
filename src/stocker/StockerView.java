@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -73,6 +72,7 @@ public class StockerView extends javax.swing.JFrame {
         jLabelMA10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxStartStatus = new javax.swing.JComboBox<>();
+        jButtonReset = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -102,7 +102,7 @@ public class StockerView extends javax.swing.JFrame {
 
         jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelStatus.setText("主上升");
+        jLabelStatus.setText("主上升!");
         jPanel1.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
         jTablePoint.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
@@ -154,7 +154,7 @@ public class StockerView extends javax.swing.JFrame {
                 jButtonReadActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
+        jPanel1.add(jButtonRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
         jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "5日均线", "10日均线", "20日均线", "30日均线", "60日均线", "K线实体", "K线引线" }));
@@ -175,7 +175,7 @@ public class StockerView extends javax.swing.JFrame {
                 jButtonContinuousActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonContinuous, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 280, -1, -1));
+        jPanel1.add(jButtonContinuous, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
 
         jCheckBox1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBox1.setText("使能V形反转");
@@ -183,11 +183,13 @@ public class StockerView extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextField1.setText("20");
+        jTextField1.setEnabled(false);
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 30, -1));
 
         jLabelStockName.setFont(new java.awt.Font("华文行楷", 0, 18)); // NOI18N
         jLabelStockName.setForeground(new java.awt.Color(0, 0, 255));
         jLabelStockName.setText("上证指数");
+        jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jPanel1.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabelStockCode.setFont(new java.awt.Font("黑体", 0, 16)); // NOI18N
@@ -205,7 +207,7 @@ public class StockerView extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel1.setText("起始状态：");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
 
         jComboBoxStartStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxStartStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
@@ -214,7 +216,16 @@ public class StockerView extends javax.swing.JFrame {
                 jComboBoxStartStatusActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxStartStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
+        jPanel1.add(jComboBoxStartStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
+
+        jButtonReset.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonReset.setText("复位");
+        jButtonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResetActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 420));
 
@@ -244,12 +255,14 @@ public class StockerView extends javax.swing.JFrame {
 
         try {
             if (fileOpened == false) {
+                reset();
                 fileReader = new FileReader(fileName);
                 bufferedReader = new BufferedReader(fileReader);
                 fileOpened = true;
                 bufferedReader.readLine();
                 bufferedReader.readLine();
             }
+
             do {
                 if ((s = bufferedReader.readLine()) != null) {
                     ss = s.split("\t");
@@ -264,14 +277,11 @@ public class StockerView extends javax.swing.JFrame {
                 updateTable();
                 parseStatus();
             } else {
-                JOptionPane.showMessageDialog(new JFrame(), "对不起，没有行情数据了！");
+                JOptionPane.showMessageDialog(this, "对不起，没有更多的行情数据了！");
                 fileReader.close();
                 bufferedReader.close();
                 fileOpened = false;
             }
-
-            return;
-
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -281,28 +291,30 @@ public class StockerView extends javax.swing.JFrame {
         String s;
         String[] ss = null;
 
-        try {
-            if (fileOpened) {
-                bufferedReader.close();
-                fileReader.close();
-            }
+        if ((jTextFieldEndDate.getText().compareTo(jTextFieldStartDate.getText()) < 0)) {
+            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+            return;
+        }
 
+        try {
+            reset();
             fileReader = new FileReader(fileName);
             bufferedReader = new BufferedReader(fileReader);
             fileOpened = true;
             bufferedReader.readLine();
             bufferedReader.readLine();
-            while ((s = bufferedReader.readLine()) != null) {
-                ss = s.split("\t");
-                if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
-                    updateMarket(s);
-                    double d = getModeData();
-                    Livermore(dateString, d);
+
+            do {
+                if ((s = bufferedReader.readLine()) != null) {
+                    ss = s.split("\t");
+                    if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
+                        updateMarket(s);
+                        double d = getModeData();
+                        Livermore(dateString, d);
+                    }
                 }
-                if (ss[0].compareTo(jTextFieldEndDate.getText()) > 0) {
-                    break;
-                }
-            }
+            } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
+
             parseStatus();
             updateTable();
         } catch (IOException e1) {
@@ -338,7 +350,45 @@ public class StockerView extends javax.swing.JFrame {
 
     private void jComboBoxStartStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStartStatusActionPerformed
         Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+        parseStatus();
     }//GEN-LAST:event_jComboBoxStartStatusActionPerformed
+
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
+        reset();
+    }//GEN-LAST:event_jButtonResetActionPerformed
+
+    protected void reset() {
+        riseKeyHead = 0;
+        riseKeyFoot = 0;
+        mainRiseVal = 0;
+        normalRiseUVal = 0;
+        normalFallUVal = 0;
+        minorRiseUVal = 0;
+        minorFallUVal = 0;
+        fallKeyHead = 0;
+        fallKeyFoot = 0;
+        mainFallVal = 0;
+        normalRiseDVal = 0;
+        normalFallDVal = 0;
+        minorRiseDVal = 0;
+        minorFallDVal = 0;
+        updateTable();
+
+        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+        parseStatus();
+
+        if (fileOpened) {
+            try {
+                bufferedReader.close();
+                fileReader.close();
+                fileOpened = false;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        jTextAreaMain.setText("");
+    }
 
     protected double getModeData() {
         switch (jComboBoxMode.getSelectedIndex()) {
@@ -384,7 +434,7 @@ public class StockerView extends javax.swing.JFrame {
 
             case "mainFallStatus":
                 jLabelStatus.setText("主下降！");
-                jLabelStatus.setForeground(new java.awt.Color(0, 255, 0));
+                jLabelStatus.setForeground(new java.awt.Color(0, 153, 0));
                 break;
             case "normalRiseDStatus":
                 jLabelStatus.setText("自然回升");
@@ -778,18 +828,16 @@ public class StockerView extends javax.swing.JFrame {
     private String ma120String = "";
 
     private String Status = "mainRiseStatus";
-    private String Trend = "rise";
-
+    private String fileName = "data\\000001.txt";
     FileReader fileReader;
     BufferedReader bufferedReader;
     boolean readFlag = false;
     private boolean fileOpened = false;
 
-    private String fileName = "data\\000001.txt";
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonContinuous;
     private javax.swing.JButton jButtonRead;
+    private javax.swing.JButton jButtonReset;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBoxMode;
     private javax.swing.JComboBox<String> jComboBoxStartStatus;
