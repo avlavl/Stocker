@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -255,7 +256,7 @@ public class StockerView extends javax.swing.JFrame {
         try {
             if (fileOpened == false) {
                 reset();
-                fileReader = new FileReader(fileName);
+                fileReader = new FileReader(fileIn);
                 bufferedReader = new BufferedReader(fileReader);
                 fileOpened = true;
                 bufferedReader.readLine();
@@ -270,9 +271,8 @@ public class StockerView extends javax.swing.JFrame {
 
             if (s != null) {
                 updateMarket(s);
-
                 double d = getModeData();
-                Livermore(dateString, d);
+                Livermore(d);
                 updateTable();
                 parseStatus();
             } else {
@@ -297,7 +297,8 @@ public class StockerView extends javax.swing.JFrame {
 
         try {
             reset();
-            fileReader = new FileReader(fileName);
+            fileWriter = new FileWriter(fileOut);
+            fileReader = new FileReader(fileIn);
             bufferedReader = new BufferedReader(fileReader);
             fileOpened = true;
             bufferedReader.readLine();
@@ -309,13 +310,20 @@ public class StockerView extends javax.swing.JFrame {
                     if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
                         updateMarket(s);
                         double d = getModeData();
-                        Livermore(dateString, d);
+                        Livermore(d);
                     }
                 }
             } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
             parseStatus();
             updateTable();
+
+            bufferedReader.close();
+            fileReader.close();
+            fileOpened = false;
+            fileWriter.flush();
+            fileWriter.close();
+            fileWriter = null;
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -328,11 +336,11 @@ public class StockerView extends javax.swing.JFrame {
         chooser.setDialogTitle("Select Stock Data File");
         int ret = chooser.showOpenDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
-            fileName = chooser.getSelectedFile().getPath();
-            System.out.println("Select file: " + fileName);
+            fileIn = chooser.getSelectedFile().getPath();
+            fileOut = fileIn.substring(0, fileIn.length() - 4) + "_out.txt";
 
             try {
-                File file = new File(fileName);
+                File file = new File(fileIn);
                 InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
                 BufferedReader br = new BufferedReader(isr);
                 String[] s = br.readLine().split("\t");
@@ -355,6 +363,16 @@ public class StockerView extends javax.swing.JFrame {
     private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
         reset();
     }//GEN-LAST:event_jButtonResetActionPerformed
+
+    public void Logger(String str) {
+        if (fileWriter != null) {
+            try {
+                fileWriter.write(str + "\r\n");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
     protected void reset() {
         riseKeyHead = 0;
@@ -498,21 +516,23 @@ public class StockerView extends javax.swing.JFrame {
         jTablePoint.setValueAt(minorRiseDVal, 6, 3);
     }
 
-    protected void appendValue() {
-        jTextAreaMain.append("riseKeyHead:" + riseKeyHead
-                + "\t\tfallKeyHead:" + fallKeyHead
-                + "\nriseKeyFoot:" + riseKeyFoot
-                + "\t\tfallKeyFoot:" + fallKeyFoot
-                + "\nmainRiseVal:" + mainRiseVal
-                + "\t\tmainFallVal:" + mainFallVal
-                + "\nnormalFallUVal:" + normalFallUVal
-                + "\t\tnormalFallDVal:" + normalFallDVal
-                + "\nnormalRiseUVal:" + normalRiseUVal
-                + "\t\tnormalRiseDVal:" + normalRiseDVal
-                + "\nminorFallUVal:" + minorFallUVal
-                + "\t\tminorFallDVal:" + minorFallDVal
-                + "\nminorRiseUVal:" + minorRiseUVal
-                + "\t\tminorRiseDVal:" + minorRiseDVal + "\n");
+    protected void statusRecord(String status) {
+        jTextAreaMain.append("[" + dateString + "] " + status + "\n");
+        Logger("[" + dateString + "] " + status);
+        Logger("上关键点：" + riseKeyHead
+                + "\t\t上关键点：" + fallKeyHead
+                + "\r\n下关键点：" + riseKeyFoot
+                + "\t\t下关键点：" + fallKeyFoot
+                + "\r\n主上升值：" + mainRiseVal
+                + "\t\t主下降值：" + mainFallVal
+                + "\r\n自然回撤：" + normalFallUVal
+                + "\t\t自然回撤：" + normalFallDVal
+                + "\r\n自然回升：" + normalRiseUVal
+                + "\t\t自然回升：" + normalRiseDVal
+                + "\r\n次级回撤：" + minorFallUVal
+                + "\t\t次级回撤：" + minorFallDVal
+                + "\r\n次级回升：" + minorRiseUVal
+                + "\t\t次级回升：" + minorRiseDVal + "\r\n");
     }
 
     protected void resetTrendValue() {
@@ -540,7 +560,7 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void Livermore(String date, double d) {
+    protected void Livermore(double d) {
         boolean vpointEnable = jCheckBoxVpoint.isSelected();
         int vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
 
@@ -552,8 +572,7 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalFallUStatus";
                     normalFallUVal = d;
                     riseKeyHead = mainRiseVal;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回撤（上升）\n");
-                    appendValue();
+                    statusRecord("进入自然回撤（上升）");
                 }
                 break;
             case "normalFallUStatus":
@@ -561,15 +580,13 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainFallStatus";
                     resetTrendValue();
                     mainFallVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入下降趋势！！！\n");
-                    appendValue();
+                    statusRecord("进入下降趋势！！！");
                 } else if (d < normalFallUVal) {
                     if ((vpointEnable) && (d < riseKeyHead * (100 - vpointValue) / 100)) {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入下降趋势（V形反转）！！！\n");
-                        appendValue();
+                        statusRecord("进入下降趋势（V形反转）！！！");
                     } else {
                         normalFallUVal = d;
                     }
@@ -577,38 +594,32 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalRiseUStatus";
                     normalRiseUVal = d;
                     riseKeyFoot = normalFallUVal;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回升（上升）\n");
-                    appendValue();
+                    statusRecord("进入自然回升（上升）");
                 }
                 break;
             case "normalRiseUStatus":
                 if (d > mainRiseVal) {
                     Status = "mainRiseStatus";
                     mainRiseVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "恢复上升趋势！！！\n");
-                    appendValue();
+                    statusRecord("恢复上升趋势！！！");
                 } else if (d > normalRiseUVal) {
                     normalRiseUVal = d;
                 } else if ((d >= (normalRiseUVal * 0.9)) && (d < (normalRiseUVal * 0.95))) {
-                    jTextAreaMain.append("[" + date + "] " + "注意：上升趋势可能会改变！\n");
-                    appendValue();
+                    statusRecord("注意：上升趋势可能会改变！");
                 } else if (d < (normalRiseUVal * 0.9)) {
                     if (d < riseKeyFoot * 0.95) {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入下降趋势！！！\n");
-                        appendValue();
+                        statusRecord("进入下降趋势！！！");
                     } else if (d < normalFallUVal) {
                         Status = "normalFallUStatus";
                         normalFallUVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入自然回撤（上升）\n");
-                        appendValue();
+                        statusRecord("进入自然回撤（上升）");
                     } else {
                         Status = "minorFallUStatus";
                         minorFallUVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入次级回撤（上升）\n");
-                        appendValue();
+                        statusRecord("进入次级回撤（上升）");
                     }
                 }
                 break;
@@ -617,31 +628,26 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainFallStatus";
                     resetTrendValue();
                     mainFallVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入下降趋势！！！\n");
-                    appendValue();
+                    statusRecord("进入下降趋势！！！");
                 } else if (d < normalFallUVal) {
                     Status = "normalFallUStatus";
                     normalFallUVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回撤（上升）\n");
-                    appendValue();
+                    statusRecord("进入自然回撤（上升）");
                 } else if (d < minorFallUVal) {
                     minorFallUVal = d;
                 } else if (d > minorFallUVal * 1.1) {
                     if (d > mainRiseVal) {
                         Status = "mainRiseStatus";
                         mainRiseVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "恢复上升趋势！！！\n");
-                        appendValue();
+                        statusRecord("恢复上升趋势！！！");
                     } else if (d > normalRiseUVal) {
                         Status = "normalRiseUStatus";
                         normalRiseUVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入自然回升（上升）\n");
-                        appendValue();
+                        statusRecord("进入自然回升（上升）");
                     } else {
                         Status = "minorRiseUStatus";
                         minorRiseUVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入次级回升（上升）\n");
-                        appendValue();
+                        statusRecord("进入次级回升（上升）");
                     }
                 }
                 break;
@@ -649,13 +655,11 @@ public class StockerView extends javax.swing.JFrame {
                 if (d > mainRiseVal) {
                     Status = "mainRiseStatus";
                     mainRiseVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "恢复上升趋势！！！\n");
-                    appendValue();
+                    statusRecord("恢复上升趋势！！！");
                 } else if (d > normalRiseUVal) {
                     Status = "normalRiseUStatus";
                     normalRiseUVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回升（上升）\n");
-                    appendValue();
+                    statusRecord("进入自然回升（上升）");
                 } else if (d > minorRiseUVal) {
                     minorRiseUVal = d;
                 } else if (d < minorRiseUVal * 0.9) {
@@ -663,18 +667,15 @@ public class StockerView extends javax.swing.JFrame {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入下降趋势\n");
-                        appendValue();
+                        statusRecord("进入下降趋势");
                     } else if (d < normalFallUVal) {
                         Status = "normalFallUStatus";
                         normalFallUVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入自然回撤（上升）\n");
-                        appendValue();
+                        statusRecord("进入自然回撤（上升）");
                     } else {
                         Status = "minorFallUStatus";
                         minorFallUVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入次级回撤（上升）\n");
-                        appendValue();
+                        statusRecord("进入次级回撤（上升）");
                     }
                 }
                 break;
@@ -686,8 +687,7 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalRiseDStatus";
                     normalRiseDVal = d;
                     fallKeyFoot = mainFallVal;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回升（下降）\n");
-                    appendValue();
+                    statusRecord("进入自然回升（下降）");
                 }
                 break;
             case "normalRiseDStatus":
@@ -695,15 +695,13 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainRiseStatus";
                     resetTrendValue();
                     mainRiseVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入上升趋势！！！\n");
-                    appendValue();
+                    statusRecord("进入上升趋势！！！");
                 } else if (d > normalRiseDVal) {
                     if ((vpointEnable) && (d > fallKeyFoot * (100 + vpointValue) / 100)) {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入上升趋势（V形反转）！！！\n");
-                        appendValue();
+                        statusRecord("进入上升趋势（V形反转）！！！");
                     } else {
                         normalRiseDVal = d;
                     }
@@ -711,38 +709,32 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalFallDStatus";
                     normalFallDVal = d;
                     fallKeyHead = normalRiseDVal;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回撤（下降）\n");
-                    appendValue();
+                    statusRecord("进入自然回撤（下降）");
                 }
                 break;
             case "normalFallDStatus":
                 if (d < mainFallVal) {
                     Status = "mainFallStatus";
                     mainFallVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "恢复下降趋势！！！\n");
-                    appendValue();
+                    statusRecord("恢复下降趋势！！！");
                 } else if (d < normalFallDVal) {
                     normalFallDVal = d;
                 } else if ((d <= (normalFallDVal * 1.1)) && (d > (normalFallDVal * 1.05))) {
-                    jTextAreaMain.append("[" + date + "] " + "注意：下降趋势可能会改变！\n");
-                    appendValue();
+                    statusRecord("注意：下降趋势可能会改变！");
                 } else if (d > (normalFallDVal * 1.1)) {
                     if (d > fallKeyHead * 1.05) {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入上升趋势！！！\n");
-                        appendValue();
+                        statusRecord("进入上升趋势！！！");
                     } else if (d > normalRiseDVal) {
                         Status = "normalRiseDStatus";
                         normalRiseDVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入自然回升（下降）\n");
-                        appendValue();
+                        statusRecord("进入自然回升（下降）");
                     } else {
                         Status = "minorRiseDStatus";
                         minorRiseDVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入次级回升（下降）\n");
-                        appendValue();
+                        statusRecord("进入次级回升（下降）");
                     }
                 }
                 break;
@@ -751,31 +743,26 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainRiseStatus";
                     resetTrendValue();
                     mainRiseVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入上升趋势！！！\n");
-                    appendValue();
+                    statusRecord("进入上升趋势！！！");
                 } else if (d > normalRiseDVal) {
                     Status = "normalRiseDStatus";
                     normalRiseDVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回升（下降）\n");
-                    appendValue();
+                    statusRecord("进入自然回升（下降）");
                 } else if (d > minorRiseDVal) {
                     minorRiseDVal = d;
                 } else if (d < minorRiseDVal * 0.9) {
                     if (d < mainFallVal) {
                         Status = "mainFallStatus";
                         mainFallVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "恢复下降趋势！！！\n");
-                        appendValue();
+                        statusRecord("恢复下降趋势！！！");
                     } else if (d < normalFallDVal) {
                         Status = "normalFallDStatus";
                         normalFallDVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入自然回撤（下降）\n");
-                        appendValue();
+                        statusRecord("进入自然回撤（下降）");
                     } else {
                         Status = "minorFallDStatus";
                         minorFallDVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入次级回撤（下降）\n");
-                        appendValue();
+                        statusRecord("进入次级回撤（下降）");
                     }
                 }
                 break;
@@ -783,13 +770,11 @@ public class StockerView extends javax.swing.JFrame {
                 if (d < mainFallVal) {
                     Status = "mainFallStatus";
                     mainFallVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "恢复下降趋势！！！\n");
-                    appendValue();
+                    statusRecord("恢复下降趋势！！！");
                 } else if (d < normalFallDVal) {
                     Status = "normalFallDStatus";
                     normalFallDVal = d;
-                    jTextAreaMain.append("[" + date + "] " + "进入自然回撤（下降）\n");
-                    appendValue();
+                    statusRecord("进入自然回撤（下降）");
                 } else if (d < minorFallDVal) {
                     minorFallDVal = d;
                 } else if (d > minorFallDVal * 1.1) {
@@ -797,18 +782,15 @@ public class StockerView extends javax.swing.JFrame {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入上升趋势！！！\n");
-                        appendValue();
+                        statusRecord("进入上升趋势！！！");
                     } else if (d > normalRiseDVal) {
                         Status = "normalRiseDStatus";
                         normalRiseDVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入自然回升（下降）\n");
-                        appendValue();
+                        statusRecord("进入自然回升（下降）");
                     } else {
                         Status = "minorRiseDStatus";
                         minorRiseDVal = d;
-                        jTextAreaMain.append("[" + date + "] " + "进入次级回升（下降）\n");
-                        appendValue();
+                        statusRecord("进入次级回升（下降）");
                     }
                 }
                 break;
@@ -846,9 +828,11 @@ public class StockerView extends javax.swing.JFrame {
     private String ma120String = "";
 
     private String Status = "mainRiseStatus";
-    private String fileName = "data\\000001.txt";
-    FileReader fileReader;
-    BufferedReader bufferedReader;
+    private String fileIn = "data\\000001.txt";
+    private String fileOut = "data\\000001_out.txt";
+    public FileReader fileReader;
+    public FileWriter fileWriter;
+    public BufferedReader bufferedReader;
     boolean readFlag = false;
     private boolean fileOpened = false;
 
