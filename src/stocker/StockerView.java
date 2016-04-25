@@ -74,6 +74,7 @@ public class StockerView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBoxStartStatus = new javax.swing.JComboBox<>();
         jButtonReset = new javax.swing.JButton();
+        jButtonImport = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -155,7 +156,7 @@ public class StockerView extends javax.swing.JFrame {
                 jButtonReadActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
+        jPanel1.add(jButtonRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
 
         jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "5日均线", "10日均线", "20日均线", "30日均线", "60日均线", "K线实体", "K线引线" }));
@@ -176,7 +177,7 @@ public class StockerView extends javax.swing.JFrame {
                 jButtonContinuousActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonContinuous, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
+        jPanel1.add(jButtonContinuous, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
 
         jCheckBoxVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBoxVpoint.setText("使能V形反转");
@@ -225,7 +226,16 @@ public class StockerView extends javax.swing.JFrame {
                 jButtonResetActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, -1, -1));
+        jPanel1.add(jButtonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 280, -1, -1));
+
+        jButtonImport.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonImport.setText("导入");
+        jButtonImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImportActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 420));
 
@@ -330,6 +340,23 @@ public class StockerView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonContinuousActionPerformed
 
     private void jMenuItemImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportActionPerformed
+        dataImport();
+    }//GEN-LAST:event_jMenuItemImportActionPerformed
+
+    private void jComboBoxStartStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStartStatusActionPerformed
+        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+        parseStatus();
+    }//GEN-LAST:event_jComboBoxStartStatusActionPerformed
+
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
+        reset();
+    }//GEN-LAST:event_jButtonResetActionPerformed
+
+    private void jButtonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
+        dataImport();
+    }//GEN-LAST:event_jButtonImportActionPerformed
+
+    protected void dataImport() {
         JFileChooser chooser = new JFileChooser("data/");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Stock Data File (*.txt)", "txt");
         chooser.setFileFilter(filter);
@@ -351,18 +378,8 @@ public class StockerView extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-    }//GEN-LAST:event_jMenuItemImportActionPerformed
-
-    private void jComboBoxStartStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStartStatusActionPerformed
-        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
-        parseStatus();
-    }//GEN-LAST:event_jComboBoxStartStatusActionPerformed
-
-    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
-        reset();
-    }//GEN-LAST:event_jButtonResetActionPerformed
+    }
 
     public void Logger(String str) {
         if (fileWriter != null) {
@@ -838,6 +855,7 @@ public class StockerView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonContinuous;
+    private javax.swing.JButton jButtonImport;
     private javax.swing.JButton jButtonRead;
     private javax.swing.JButton jButtonReset;
     private javax.swing.JCheckBox jCheckBoxVpoint;
