@@ -314,8 +314,7 @@ public class StockerView extends javax.swing.JFrame {
 
             if (s != null) {
                 updateMarket(s);
-                double d = getModeData();
-                Livermore(d);
+                doModeComputing();
                 updateTable();
                 parseStatus();
             } else {
@@ -352,8 +351,7 @@ public class StockerView extends javax.swing.JFrame {
                     ss = s.split("\t");
                     if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
                         updateMarket(s);
-                        double d = getModeData();
-                        Livermore(d);
+                        doModeComputing();
                     }
                 }
             } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
@@ -522,24 +520,43 @@ public class StockerView extends javax.swing.JFrame {
         jTextAreaMain.setText("");
     }
 
-    protected double getModeData() {
+    protected void doModeComputing() {
+        double data;
         switch (jComboBoxMode.getSelectedIndex()) {
             case 0:
-                return Double.parseDouble(closeString);
+                data = Double.parseDouble(closeString);
+                Livermore(data);
             case 1:
-                return Double.parseDouble(ma2String);
+                data = Double.parseDouble(ma2String);
+                Livermore(data);
             case 2:
-                return Double.parseDouble(ma3String);
+                data = Double.parseDouble(ma3String);
+                Livermore(data);
             case 3:
-                return Double.parseDouble(ma4String);
+                data = Double.parseDouble(ma4String);
+                Livermore(data);
             case 4:
-                return Double.parseDouble(ma5String);
+                data = Double.parseDouble(ma5String);
+                Livermore(data);
             case 5:
-                return Double.parseDouble(ma10String);
+                data = Double.parseDouble(ma10String);
+                Livermore(data);
             case 6:
-                return Double.parseDouble(ma20String);
+                data = Double.parseDouble(ma20String);
+                Livermore(data);
+            case 7:
+                data = Double.parseDouble(openString);
+                Livermore(data);
+                data = Double.parseDouble(closeString);
+                Livermore(data);
+            case 8:
+                data = Double.parseDouble(closeString.compareTo(openString) > 0 ? lowString : highString);
+                Livermore(data);
+                data = Double.parseDouble(closeString.compareTo(openString) > 0 ? highString : lowString);
+                Livermore(data);
             default:
-                return Double.parseDouble(closeString);
+                data = Double.parseDouble(ma2String);
+                Livermore(data);
         }
     }
 
