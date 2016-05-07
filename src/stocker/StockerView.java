@@ -714,7 +714,7 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalFallUStatus";
                     normalFallUVal = d;
                     riseKeyHead = mainRiseVal;
-                    statusRecord("进入自然回撤（上升）");
+                    statusRecord("↗ 进入自然回撤");
                 }
                 break;
             case "normalFallUStatus":
@@ -722,13 +722,13 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainFallStatus";
                     resetTrendValue();
                     mainFallVal = d;
-                    statusRecord("进入下降趋势！！！");
+                    statusRecord("↘↘↘↘↘↘ 进入下降趋势");
                 } else if (d < normalFallUVal) {
                     if ((vpointEnable) && (d < riseKeyHead * (100 - vpointValue) / 100)) {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
-                        statusRecord("进入下降趋势（V形反转）！！！");
+                        statusRecord("↘↘↘↘ 进入下降趋势V");
                     } else {
                         normalFallUVal = d;
                     }
@@ -736,32 +736,32 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalRiseUStatus";
                     normalRiseUVal = d;
                     riseKeyFoot = normalFallUVal;
-                    statusRecord("进入自然回升（上升）");
+                    statusRecord("↗ 进入自然回升");
                 }
                 break;
             case "normalRiseUStatus":
                 if (d > mainRiseVal) {
                     Status = "mainRiseStatus";
                     mainRiseVal = d;
-                    statusRecord("恢复上升趋势！！！");
+                    statusRecord("↗↗↗ 恢复上升趋势");
                 } else if (d > normalRiseUVal) {
                     normalRiseUVal = d;
                 } else if ((d >= (normalRiseUVal * (100 - tpointValue1) / 100)) && (d < (normalRiseUVal * (100 - tpointValue2) / 100))) {
-                    statusRecord("注意：上升趋势可能会改变！");
+                    statusRecord("↗ 上升趋势可能改变");
                 } else if (d < (normalRiseUVal * (100 - tpointValue1) / 100)) {
                     if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
-                        statusRecord("进入下降趋势！！！");
+                        statusRecord("↘↘↘↘↘↘ 进入下降趋势");
                     } else if (d < normalFallUVal) {
                         Status = "normalFallUStatus";
                         normalFallUVal = d;
-                        statusRecord("进入自然回撤（上升）");
+                        statusRecord("↗ 进入自然回撤");
                     } else {
                         Status = "minorFallUStatus";
                         minorFallUVal = d;
-                        statusRecord("进入次级回撤（上升）");
+                        statusRecord("↗ 进入次级回撤");
                     }
                 }
                 break;
@@ -770,26 +770,26 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainFallStatus";
                     resetTrendValue();
                     mainFallVal = d;
-                    statusRecord("进入下降趋势！！！");
+                    statusRecord("↘↘↘↘↘↘ 进入下降趋势");
                 } else if (d < normalFallUVal) {
                     Status = "normalFallUStatus";
                     normalFallUVal = d;
-                    statusRecord("进入自然回撤（上升）");
+                    statusRecord("↗ 进入自然回撤");
                 } else if (d < minorFallUVal) {
                     minorFallUVal = d;
                 } else if (d > minorFallUVal * (100 + tpointValue1) / 100) {
                     if (d > mainRiseVal) {
                         Status = "mainRiseStatus";
                         mainRiseVal = d;
-                        statusRecord("恢复上升趋势！！！");
+                        statusRecord("↗↗↗ 恢复上升趋势");
                     } else if (d > normalRiseUVal) {
                         Status = "normalRiseUStatus";
                         normalRiseUVal = d;
-                        statusRecord("进入自然回升（上升）");
+                        statusRecord("↗ 进入自然回升");
                     } else {
                         Status = "minorRiseUStatus";
                         minorRiseUVal = d;
-                        statusRecord("进入次级回升（上升）");
+                        statusRecord("↗ 进入次级回升");
                     }
                 }
                 break;
@@ -797,11 +797,11 @@ public class StockerView extends javax.swing.JFrame {
                 if (d > mainRiseVal) {
                     Status = "mainRiseStatus";
                     mainRiseVal = d;
-                    statusRecord("恢复上升趋势！！！");
+                    statusRecord("↗↗↗ 恢复上升趋势");
                 } else if (d > normalRiseUVal) {
                     Status = "normalRiseUStatus";
                     normalRiseUVal = d;
-                    statusRecord("进入自然回升（上升）");
+                    statusRecord("↗ 进入自然回升");
                 } else if (d > minorRiseUVal) {
                     minorRiseUVal = d;
                 } else if (d < minorRiseUVal * (100 - tpointValue1) / 100) {
@@ -809,15 +809,15 @@ public class StockerView extends javax.swing.JFrame {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
-                        statusRecord("进入下降趋势");
+                        statusRecord("↘↘↘↘↘↘ 进入下降趋势");
                     } else if (d < normalFallUVal) {
                         Status = "normalFallUStatus";
                         normalFallUVal = d;
-                        statusRecord("进入自然回撤（上升）");
+                        statusRecord("↗ 进入自然回撤");
                     } else {
                         Status = "minorFallUStatus";
                         minorFallUVal = d;
-                        statusRecord("进入次级回撤（上升）");
+                        statusRecord("↗ 进入次级回撤");
                     }
                 }
                 break;
@@ -829,7 +829,7 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalRiseDStatus";
                     normalRiseDVal = d;
                     fallKeyFoot = mainFallVal;
-                    statusRecord("进入自然回升（下降）");
+                    statusRecord("↘ 进入自然回升");
                 }
                 break;
             case "normalRiseDStatus":
@@ -837,13 +837,13 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainRiseStatus";
                     resetTrendValue();
                     mainRiseVal = d;
-                    statusRecord("进入上升趋势！！！");
+                    statusRecord("↗↗↗↗↗↗ 进入上升趋势");
                 } else if (d > normalRiseDVal) {
                     if ((vpointEnable) && (d > fallKeyFoot * (100 + vpointValue) / 100)) {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
-                        statusRecord("进入上升趋势（V形反转）！！！");
+                        statusRecord("↗↗↗↗ 进入上升趋势V");
                     } else {
                         normalRiseDVal = d;
                     }
@@ -851,32 +851,32 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "normalFallDStatus";
                     normalFallDVal = d;
                     fallKeyHead = normalRiseDVal;
-                    statusRecord("进入自然回撤（下降）");
+                    statusRecord("↘ 进入自然回撤");
                 }
                 break;
             case "normalFallDStatus":
                 if (d < mainFallVal) {
                     Status = "mainFallStatus";
                     mainFallVal = d;
-                    statusRecord("恢复下降趋势！！！");
+                    statusRecord("↘↘↘ 恢复下降趋势");
                 } else if (d < normalFallDVal) {
                     normalFallDVal = d;
                 } else if ((d <= (normalFallDVal * (100 + tpointValue1) / 100)) && (d > (normalFallDVal * (100 + tpointValue2) / 100))) {
-                    statusRecord("注意：下降趋势可能会改变！");
+                    statusRecord("↘ 下降趋势可能改变");
                 } else if (d > (normalFallDVal * (100 + tpointValue1) / 100)) {
                     if (d > fallKeyHead * (100 + tpointValue2) / 100) {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
-                        statusRecord("进入上升趋势！！！");
+                        statusRecord("↗↗↗↗↗↗ 进入上升趋势");
                     } else if (d > normalRiseDVal) {
                         Status = "normalRiseDStatus";
                         normalRiseDVal = d;
-                        statusRecord("进入自然回升（下降）");
+                        statusRecord("↘ 进入自然回升");
                     } else {
                         Status = "minorRiseDStatus";
                         minorRiseDVal = d;
-                        statusRecord("进入次级回升（下降）");
+                        statusRecord("↘ 进入次级回升");
                     }
                 }
                 break;
@@ -885,26 +885,26 @@ public class StockerView extends javax.swing.JFrame {
                     Status = "mainRiseStatus";
                     resetTrendValue();
                     mainRiseVal = d;
-                    statusRecord("进入上升趋势！！！");
+                    statusRecord("↗↗↗↗↗↗ 进入上升趋势");
                 } else if (d > normalRiseDVal) {
                     Status = "normalRiseDStatus";
                     normalRiseDVal = d;
-                    statusRecord("进入自然回升（下降）");
+                    statusRecord("↘ 进入自然回升");
                 } else if (d > minorRiseDVal) {
                     minorRiseDVal = d;
                 } else if (d < minorRiseDVal * (100 - tpointValue1) / 100) {
                     if (d < mainFallVal) {
                         Status = "mainFallStatus";
                         mainFallVal = d;
-                        statusRecord("恢复下降趋势！！！");
+                        statusRecord("↘↘↘ 恢复下降趋势");
                     } else if (d < normalFallDVal) {
                         Status = "normalFallDStatus";
                         normalFallDVal = d;
-                        statusRecord("进入自然回撤（下降）");
+                        statusRecord("↘ 进入自然回撤");
                     } else {
                         Status = "minorFallDStatus";
                         minorFallDVal = d;
-                        statusRecord("进入次级回撤（下降）");
+                        statusRecord("↘ 进入次级回撤");
                     }
                 }
                 break;
@@ -912,11 +912,11 @@ public class StockerView extends javax.swing.JFrame {
                 if (d < mainFallVal) {
                     Status = "mainFallStatus";
                     mainFallVal = d;
-                    statusRecord("恢复下降趋势！！！");
+                    statusRecord("↘↘↘ 恢复下降趋势");
                 } else if (d < normalFallDVal) {
                     Status = "normalFallDStatus";
                     normalFallDVal = d;
-                    statusRecord("进入自然回撤（下降）");
+                    statusRecord("↘ 进入自然回撤");
                 } else if (d < minorFallDVal) {
                     minorFallDVal = d;
                 } else if (d > minorFallDVal * (100 + tpointValue1) / 100) {
@@ -924,15 +924,15 @@ public class StockerView extends javax.swing.JFrame {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
-                        statusRecord("进入上升趋势！！！");
+                        statusRecord("↗↗↗↗↗↗ 进入上升趋势");
                     } else if (d > normalRiseDVal) {
                         Status = "normalRiseDStatus";
                         normalRiseDVal = d;
-                        statusRecord("进入自然回升（下降）");
+                        statusRecord("↘ 进入自然回升");
                     } else {
                         Status = "minorRiseDStatus";
                         minorRiseDVal = d;
-                        statusRecord("进入次级回升（下降）");
+                        statusRecord("↘ 进入次级回升");
                     }
                 }
                 break;
