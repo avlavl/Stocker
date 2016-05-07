@@ -530,31 +530,39 @@ public class StockerView extends javax.swing.JFrame {
             case 0:
                 data = Double.parseDouble(closeString);
                 Livermore(data);
+                break;
             case 1:
                 data = Double.parseDouble(ma2String);
                 Livermore(data);
+                break;
             case 2:
                 data = Double.parseDouble(ma3String);
                 Livermore(data);
+                break;
             case 3:
                 data = Double.parseDouble(ma5String);
                 Livermore(data);
+                break;
             case 4:
                 data = Double.parseDouble(ma10String);
                 Livermore(data);
+                break;
             case 5:
                 data = Double.parseDouble(openString);
                 Livermore(data);
                 data = Double.parseDouble(closeString);
                 Livermore(data);
+                break;
             case 6:
                 data = Double.parseDouble(closeString.compareTo(openString) > 0 ? lowString : highString);
                 Livermore(data);
                 data = Double.parseDouble(closeString.compareTo(openString) > 0 ? highString : lowString);
                 Livermore(data);
+                break;
             default:
                 data = Double.parseDouble(ma2String);
                 Livermore(data);
+                break;
         }
     }
 
