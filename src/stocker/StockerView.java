@@ -61,9 +61,7 @@ public class StockerView extends javax.swing.JFrame {
         jLabelMA2 = new javax.swing.JLabel();
         jLabelMA3 = new javax.swing.JLabel();
         jLabelMA5 = new javax.swing.JLabel();
-        jLabelMA4 = new javax.swing.JLabel();
         jLabelMA10 = new javax.swing.JLabel();
-        jLabelMA20 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldStartDate = new javax.swing.JTextField();
@@ -117,7 +115,7 @@ public class StockerView extends javax.swing.JFrame {
             new Object [][] {
                 {"上关键点", null, "上关键点", null},
                 {"下关键点", null, "下关键点", null},
-                {"主上升", null, "主下降", null},
+                {"上升趋势", null, "下降趋势", null},
                 {"自然回撤", null, "自然回撤", null},
                 {"自然回升", null, "自然回升", null},
                 {"次级回撤", null, "次级回撤", null},
@@ -161,21 +159,13 @@ public class StockerView extends javax.swing.JFrame {
 
         jLabelMA5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA5.setText("MA5：");
-        jPanelPrice.add(jLabelMA5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
-
-        jLabelMA4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelMA4.setText("MA4：");
-        jPanelPrice.add(jLabelMA4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanelPrice.add(jLabelMA5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jLabelMA10.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA10.setText("MA10：");
-        jPanelPrice.add(jLabelMA10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jPanelPrice.add(jLabelMA10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
 
-        jLabelMA20.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelMA20.setText("MA20：");
-        jPanelPrice.add(jLabelMA20, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
-
-        jPanelMain.add(jPanelPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 270, 130));
+        jPanelMain.add(jPanelPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 270, 110));
 
         jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel7.setText("起始日期：");
@@ -190,7 +180,7 @@ public class StockerView extends javax.swing.JFrame {
         jPanelMain.add(jTextFieldStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 80, -1));
 
         jTextFieldEndDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldEndDate.setText("2016/04/22");
+        jTextFieldEndDate.setText("2016/05/06");
         jPanelMain.add(jTextFieldEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 80, -1));
 
         jButtonImport.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -235,7 +225,7 @@ public class StockerView extends javax.swing.JFrame {
 
         jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxMode.setMaximumRowCount(9);
-        jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "4日均线", "5日均线", "10日均线", "20日均线", "K线实体", "K线引线" }));
+        jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "5日均线", "10日均线", "K线实体", "K线引线" }));
         jComboBoxMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxModeActionPerformed(evt);
@@ -400,14 +390,10 @@ public class StockerView extends javax.swing.JFrame {
         jLabelMA2.setFont(new java.awt.Font("微软雅黑", 0, 12));
         jLabelMA3.setForeground(new java.awt.Color(0, 0, 0));
         jLabelMA3.setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jLabelMA4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelMA4.setFont(new java.awt.Font("微软雅黑", 0, 12));
         jLabelMA5.setForeground(new java.awt.Color(0, 0, 0));
         jLabelMA5.setFont(new java.awt.Font("微软雅黑", 0, 12));
         jLabelMA10.setForeground(new java.awt.Color(0, 0, 0));
         jLabelMA10.setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jLabelMA20.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelMA20.setFont(new java.awt.Font("微软雅黑", 0, 12));
         switch (jComboBoxMode.getSelectedIndex()) {
             case 0:
                 jLabelClose.setForeground(new java.awt.Color(255, 0, 153));
@@ -422,28 +408,20 @@ public class StockerView extends javax.swing.JFrame {
                 jLabelMA3.setFont(new java.awt.Font("微软雅黑", 1, 13));
                 break;
             case 3:
-                jLabelMA4.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelMA4.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                break;
-            case 4:
                 jLabelMA5.setForeground(new java.awt.Color(255, 0, 153));
                 jLabelMA5.setFont(new java.awt.Font("微软雅黑", 1, 13));
                 break;
-            case 5:
+            case 4:
                 jLabelMA10.setForeground(new java.awt.Color(255, 0, 153));
                 jLabelMA10.setFont(new java.awt.Font("微软雅黑", 1, 13));
                 break;
-            case 6:
-                jLabelMA20.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelMA20.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                break;
-            case 7:
+            case 5:
                 jLabelOpen.setForeground(new java.awt.Color(255, 0, 153));
                 jLabelOpen.setFont(new java.awt.Font("微软雅黑", 1, 13));
                 jLabelClose.setForeground(new java.awt.Color(255, 0, 153));
                 jLabelClose.setFont(new java.awt.Font("微软雅黑", 1, 13));
                 break;
-            case 8:
+            case 6:
                 jLabelHigh.setForeground(new java.awt.Color(255, 0, 153));
                 jLabelHigh.setFont(new java.awt.Font("微软雅黑", 1, 13));
                 jLabelLow.setForeground(new java.awt.Color(255, 0, 153));
@@ -533,23 +511,17 @@ public class StockerView extends javax.swing.JFrame {
                 data = Double.parseDouble(ma3String);
                 Livermore(data);
             case 3:
-                data = Double.parseDouble(ma4String);
-                Livermore(data);
-            case 4:
                 data = Double.parseDouble(ma5String);
                 Livermore(data);
-            case 5:
+            case 4:
                 data = Double.parseDouble(ma10String);
                 Livermore(data);
-            case 6:
-                data = Double.parseDouble(ma20String);
-                Livermore(data);
-            case 7:
+            case 5:
                 data = Double.parseDouble(openString);
                 Livermore(data);
                 data = Double.parseDouble(closeString);
                 Livermore(data);
-            case 8:
+            case 6:
                 data = Double.parseDouble(closeString.compareTo(openString) > 0 ? lowString : highString);
                 Livermore(data);
                 data = Double.parseDouble(closeString.compareTo(openString) > 0 ? highString : lowString);
@@ -618,10 +590,8 @@ public class StockerView extends javax.swing.JFrame {
         closeString = ss[4];
         ma2String = ss[len - 6];
         ma3String = ss[len - 5];
-        ma4String = ss[len - 4];
-        ma5String = ss[len - 3];
-        ma10String = ss[len - 2];
-        ma20String = ss[len - 1];
+        ma5String = ss[len - 4];
+        ma10String = ss[len - 3];
 
         jLabelDate.setText("日期：" + dateString);
         jLabelOpen.setText("开盘：" + openString);
@@ -630,10 +600,8 @@ public class StockerView extends javax.swing.JFrame {
         jLabelClose.setText("收盘：" + closeString);
         jLabelMA2.setText("MA2：" + ma2String);
         jLabelMA3.setText("MA3：" + ma3String);
-        jLabelMA4.setText("MA4：" + ma4String);
         jLabelMA5.setText("MA5：" + ma5String);
         jLabelMA10.setText("MA10：" + ma10String);
-        jLabelMA20.setText("MA20：" + ma20String);
     }
 
     protected void updateTable() {
@@ -960,10 +928,8 @@ public class StockerView extends javax.swing.JFrame {
     private String lowString = "";
     private String ma2String = "";
     private String ma3String = "";
-    private String ma4String = "";
     private String ma5String = "";
     private String ma10String = "";
-    private String ma20String = "";
 
     private String Status = "mainRiseStatus";
     private String fileIn = "data\\000001.txt";
@@ -992,9 +958,7 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLow;
     private javax.swing.JLabel jLabelMA10;
     private javax.swing.JLabel jLabelMA2;
-    private javax.swing.JLabel jLabelMA20;
     private javax.swing.JLabel jLabelMA3;
-    private javax.swing.JLabel jLabelMA4;
     private javax.swing.JLabel jLabelMA5;
     private javax.swing.JLabel jLabelOpen;
     private javax.swing.JLabel jLabelStatus;
