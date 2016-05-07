@@ -72,12 +72,17 @@ public class StockerView extends javax.swing.JFrame {
         jButtonReset = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jComboBoxMode = new javax.swing.JComboBox<>();
-        jCheckBoxVpoint = new javax.swing.JCheckBox();
-        jTextFieldVpoint = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBoxStartStatus = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaMain = new javax.swing.JTextArea();
+        jPanelConfig = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxStartStatus = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldTpoint1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldTpoint2 = new javax.swing.JTextField();
+        jCheckBoxVpoint = new javax.swing.JCheckBox();
+        jTextFieldVpoint = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -221,7 +226,7 @@ public class StockerView extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel9.setText("模式：");
-        jPanelMain.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
+        jPanelMain.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
 
         jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxMode.setMaximumRowCount(9);
@@ -231,19 +236,20 @@ public class StockerView extends javax.swing.JFrame {
                 jComboBoxModeActionPerformed(evt);
             }
         });
-        jPanelMain.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
+        jPanelMain.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, -1, -1));
 
-        jCheckBoxVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jCheckBoxVpoint.setText("使能V形反转");
-        jPanelMain.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jTextAreaMain.setColumns(20);
+        jTextAreaMain.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaMain);
 
-        jTextFieldVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldVpoint.setText("20");
-        jPanelMain.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 30, -1));
+        jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 650, 80));
+
+        jPanelConfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelConfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel1.setText("起始状态：");
-        jPanelMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
+        jPanelConfig.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jComboBoxStartStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxStartStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
@@ -252,13 +258,33 @@ public class StockerView extends javax.swing.JFrame {
                 jComboBoxStartStatusActionPerformed(evt);
             }
         });
-        jPanelMain.add(jComboBoxStartStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
+        jPanelConfig.add(jComboBoxStartStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
-        jTextAreaMain.setColumns(20);
-        jTextAreaMain.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaMain);
+        jLabel2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabel2.setText("弹抽点：");
+        jPanelConfig.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 650, 80));
+        jTextFieldTpoint1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldTpoint1.setText("10");
+        jPanelConfig.add(jTextFieldTpoint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 30, -1));
+
+        jLabel3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabel3.setText("反转点：");
+        jPanelConfig.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+
+        jTextFieldTpoint2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldTpoint2.setText("5");
+        jPanelConfig.add(jTextFieldTpoint2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 30, -1));
+
+        jCheckBoxVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBoxVpoint.setText("使能V形反转");
+        jPanelConfig.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+
+        jTextFieldVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldVpoint.setText("20");
+        jPanelConfig.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 30, -1));
+
+        jPanelMain.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 330, 100));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 420));
 
@@ -669,12 +695,14 @@ public class StockerView extends javax.swing.JFrame {
     protected void Livermore(double d) {
         boolean vpointEnable = jCheckBoxVpoint.isSelected();
         int vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+        int tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
+        int tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
 
         switch (Status) {
             case "mainRiseStatus":
                 if (d > mainRiseVal) {
                     mainRiseVal = d;
-                } else if (d < (mainRiseVal * 0.9)) {
+                } else if (d < (mainRiseVal * (100 - tpointValue1) / 100)) {
                     Status = "normalFallUStatus";
                     normalFallUVal = d;
                     riseKeyHead = mainRiseVal;
@@ -682,7 +710,7 @@ public class StockerView extends javax.swing.JFrame {
                 }
                 break;
             case "normalFallUStatus":
-                if (d < riseKeyFoot * 0.95) {
+                if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
                     Status = "mainFallStatus";
                     resetTrendValue();
                     mainFallVal = d;
@@ -696,7 +724,7 @@ public class StockerView extends javax.swing.JFrame {
                     } else {
                         normalFallUVal = d;
                     }
-                } else if (d > (normalFallUVal * 1.1)) {
+                } else if (d > (normalFallUVal * (100 + tpointValue1) / 100)) {
                     Status = "normalRiseUStatus";
                     normalRiseUVal = d;
                     riseKeyFoot = normalFallUVal;
@@ -710,10 +738,10 @@ public class StockerView extends javax.swing.JFrame {
                     statusRecord("恢复上升趋势！！！");
                 } else if (d > normalRiseUVal) {
                     normalRiseUVal = d;
-                } else if ((d >= (normalRiseUVal * 0.9)) && (d < (normalRiseUVal * 0.95))) {
+                } else if ((d >= (normalRiseUVal * (100 - tpointValue1) / 100)) && (d < (normalRiseUVal * (100 - tpointValue2) / 100))) {
                     statusRecord("注意：上升趋势可能会改变！");
-                } else if (d < (normalRiseUVal * 0.9)) {
-                    if (d < riseKeyFoot * 0.95) {
+                } else if (d < (normalRiseUVal * (100 - tpointValue1) / 100)) {
+                    if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
@@ -730,7 +758,7 @@ public class StockerView extends javax.swing.JFrame {
                 }
                 break;
             case "minorFallUStatus":
-                if (d < riseKeyFoot * 0.95) {
+                if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
                     Status = "mainFallStatus";
                     resetTrendValue();
                     mainFallVal = d;
@@ -741,7 +769,7 @@ public class StockerView extends javax.swing.JFrame {
                     statusRecord("进入自然回撤（上升）");
                 } else if (d < minorFallUVal) {
                     minorFallUVal = d;
-                } else if (d > minorFallUVal * 1.1) {
+                } else if (d > minorFallUVal * (100 + tpointValue1) / 100) {
                     if (d > mainRiseVal) {
                         Status = "mainRiseStatus";
                         mainRiseVal = d;
@@ -768,8 +796,8 @@ public class StockerView extends javax.swing.JFrame {
                     statusRecord("进入自然回升（上升）");
                 } else if (d > minorRiseUVal) {
                     minorRiseUVal = d;
-                } else if (d < minorRiseUVal * 0.9) {
-                    if (d < riseKeyFoot * 0.95) {
+                } else if (d < minorRiseUVal * (100 - tpointValue1) / 100) {
+                    if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
                         Status = "mainFallStatus";
                         resetTrendValue();
                         mainFallVal = d;
@@ -789,7 +817,7 @@ public class StockerView extends javax.swing.JFrame {
             case "mainFallStatus":
                 if ((d < mainFallVal) || (mainFallVal == 0)) {
                     mainFallVal = d;
-                } else if (d > (mainFallVal * 1.1)) {
+                } else if (d > (mainFallVal * (100 + tpointValue1) / 100)) {
                     Status = "normalRiseDStatus";
                     normalRiseDVal = d;
                     fallKeyFoot = mainFallVal;
@@ -797,7 +825,7 @@ public class StockerView extends javax.swing.JFrame {
                 }
                 break;
             case "normalRiseDStatus":
-                if ((fallKeyHead != 0) && (d > fallKeyHead * 1.05)) {
+                if ((fallKeyHead != 0) && (d > fallKeyHead * (100 + tpointValue2) / 100)) {
                     Status = "mainRiseStatus";
                     resetTrendValue();
                     mainRiseVal = d;
@@ -811,7 +839,7 @@ public class StockerView extends javax.swing.JFrame {
                     } else {
                         normalRiseDVal = d;
                     }
-                } else if (d < (normalRiseDVal * 0.9)) {
+                } else if (d < (normalRiseDVal * (100 - tpointValue1) / 100)) {
                     Status = "normalFallDStatus";
                     normalFallDVal = d;
                     fallKeyHead = normalRiseDVal;
@@ -825,10 +853,10 @@ public class StockerView extends javax.swing.JFrame {
                     statusRecord("恢复下降趋势！！！");
                 } else if (d < normalFallDVal) {
                     normalFallDVal = d;
-                } else if ((d <= (normalFallDVal * 1.1)) && (d > (normalFallDVal * 1.05))) {
+                } else if ((d <= (normalFallDVal * (100 + tpointValue1) / 100)) && (d > (normalFallDVal * (100 + tpointValue2) / 100))) {
                     statusRecord("注意：下降趋势可能会改变！");
-                } else if (d > (normalFallDVal * 1.1)) {
-                    if (d > fallKeyHead * 1.05) {
+                } else if (d > (normalFallDVal * (100 + tpointValue1) / 100)) {
+                    if (d > fallKeyHead * (100 + tpointValue2) / 100) {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
@@ -845,7 +873,7 @@ public class StockerView extends javax.swing.JFrame {
                 }
                 break;
             case "minorRiseDStatus":
-                if (d > fallKeyHead * 1.05) {
+                if (d > fallKeyHead * (100 + tpointValue2) / 100) {
                     Status = "mainRiseStatus";
                     resetTrendValue();
                     mainRiseVal = d;
@@ -856,7 +884,7 @@ public class StockerView extends javax.swing.JFrame {
                     statusRecord("进入自然回升（下降）");
                 } else if (d > minorRiseDVal) {
                     minorRiseDVal = d;
-                } else if (d < minorRiseDVal * 0.9) {
+                } else if (d < minorRiseDVal * (100 - tpointValue1) / 100) {
                     if (d < mainFallVal) {
                         Status = "mainFallStatus";
                         mainFallVal = d;
@@ -883,8 +911,8 @@ public class StockerView extends javax.swing.JFrame {
                     statusRecord("进入自然回撤（下降）");
                 } else if (d < minorFallDVal) {
                     minorFallDVal = d;
-                } else if (d > minorFallDVal * 1.1) {
-                    if (d > fallKeyHead * 1.05) {
+                } else if (d > minorFallDVal * (100 + tpointValue1) / 100) {
+                    if (d > fallKeyHead * (100 + tpointValue2) / 100) {
                         Status = "mainRiseStatus";
                         resetTrendValue();
                         mainRiseVal = d;
@@ -949,6 +977,8 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxMode;
     private javax.swing.JComboBox<String> jComboBoxStartStatus;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -968,6 +998,7 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuItemImport;
+    private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelPrice;
     private javax.swing.JScrollPane jScrollPane1;
@@ -976,6 +1007,8 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaMain;
     private javax.swing.JTextField jTextFieldEndDate;
     private javax.swing.JTextField jTextFieldStartDate;
+    private javax.swing.JTextField jTextFieldTpoint1;
+    private javax.swing.JTextField jTextFieldTpoint2;
     private javax.swing.JTextField jTextFieldVpoint;
     // End of variables declaration//GEN-END:variables
 }
