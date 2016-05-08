@@ -368,6 +368,7 @@ public class StockerView extends javax.swing.JFrame {
                     if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
                         updateMarket(s);
                         doModeComputing();
+                        doPropertyComputing();
                     }
                 }
             } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
@@ -508,6 +509,9 @@ public class StockerView extends javax.swing.JFrame {
         minorFallDVal = 0;
         updateTable();
 
+        property = 0;
+        formerStatus = "";
+
         Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
         parseStatus();
 
@@ -563,6 +567,49 @@ public class StockerView extends javax.swing.JFrame {
                 data = Double.parseDouble(ma2String);
                 Livermore(data);
                 break;
+        }
+    }
+
+    protected void doPropertyComputing() {
+        if (Status.equals(formerStatus) == false) {
+            if (formerStatus.equals("")) {
+                property = 0;
+                jTextAreaMain.append("[" + dateString + "] 首次买入" + Double.parseDouble(closeString) + ", 当前资产：" + property + "\n");
+                formerStatus = Status;
+                return;
+            }
+
+            switch (Status) {
+                case "mainRiseStatus":
+                    property -= Double.parseDouble(closeString);
+                    jTextAreaMain.append("[" + dateString + "] 买入" + Double.parseDouble(closeString) + ", 当前资产：" + property + "\n");
+                    formerStatus = Status;
+                    break;
+                case "normalFallUStatus":
+                    break;
+                case "normalRiseUStatus":
+                    break;
+                case "minorFallUStatus":
+                    break;
+                case "minorRiseUStatus":
+                    break;
+
+                case "mainFallStatus":
+                    property += Double.parseDouble(closeString);
+                    jTextAreaMain.append("[" + dateString + "] 买出" + Double.parseDouble(closeString) + ", 当前资产：" + property + "\n");
+                    formerStatus = Status;
+                    break;
+                case "normalRiseDStatus":
+                    break;
+                case "normalFallDStatus":
+                    break;
+                case "minorRiseDStatus":
+                    break;
+                case "minorFallDStatus":
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -968,6 +1015,7 @@ public class StockerView extends javax.swing.JFrame {
     private String ma10String = "";
 
     private String Status = "mainRiseStatus";
+    private String formerStatus = "";
     private String fileIn = "data\\000001.txt";
     private String fileOut = "data\\000001_out.txt";
     public FileReader fileReader;
@@ -975,6 +1023,7 @@ public class StockerView extends javax.swing.JFrame {
     public BufferedReader bufferedReader;
     boolean readFlag = false;
     private boolean fileOpened = false;
+    private double property = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonContinuous;
