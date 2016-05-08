@@ -330,6 +330,10 @@ public class StockerView extends javax.swing.JFrame {
 
             if (s != null) {
                 updateMarket(s);
+                vpointEnable = jCheckBoxVpoint.isSelected();
+                vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+                tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
+                tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
                 doModeComputing();
                 updateTable();
                 parseStatus();
@@ -362,6 +366,11 @@ public class StockerView extends javax.swing.JFrame {
             bufferedReader.readLine();
             bufferedReader.readLine();
 
+            vpointEnable = jCheckBoxVpoint.isSelected();
+            vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+            tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
+            tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
+
             do {
                 if ((s = bufferedReader.readLine()) != null) {
                     ss = s.split("\t");
@@ -372,6 +381,7 @@ public class StockerView extends javax.swing.JFrame {
                     }
                 }
             } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
+            jTextAreaMain.append("原始资产：" + propertyOrig + ", 定投资产：" + propertyA + ", 迭代资产：" + propertyB + "\n");
 
             parseStatus();
             updateTable();
@@ -509,7 +519,9 @@ public class StockerView extends javax.swing.JFrame {
         minorFallDVal = 0;
         updateTable();
 
-        property = 0;
+        propertyA = 0;
+        propertyB = 0;
+        ratio = 1;
         formerStatus = "";
 
         Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
@@ -573,16 +585,17 @@ public class StockerView extends javax.swing.JFrame {
     protected void doPropertyComputing() {
         if (Status.equals(formerStatus) == false) {
             if (formerStatus.equals("")) {
-                property = 0;
-                jTextAreaMain.append("[" + dateString + "] 首次买入" + Double.parseDouble(closeString) + ", 当前资产：" + property + "\n");
+                propertyOrig = Double.parseDouble(closeString);
+                jTextAreaMain.append("[" + dateString + "] 首次买入" + propertyOrig + ", 当前资产：0\n");
                 formerStatus = Status;
                 return;
             }
 
             switch (Status) {
                 case "mainRiseStatus":
-                    property -= Double.parseDouble(closeString);
-                    jTextAreaMain.append("[" + dateString + "] 买入" + Double.parseDouble(closeString) + ", 当前资产：" + property + "\n");
+                    ratio = propertyB / Double.parseDouble(closeString);
+                    propertyA -= Double.parseDouble(closeString);
+                    jTextAreaMain.append("[" + dateString + "] 买入" + Double.parseDouble(closeString) + ", 定投剩余：" + propertyA + ", 迭代比例：" + ratio + "\n");
                     formerStatus = Status;
                     break;
                 case "normalFallUStatus":
@@ -595,8 +608,9 @@ public class StockerView extends javax.swing.JFrame {
                     break;
 
                 case "mainFallStatus":
-                    property += Double.parseDouble(closeString);
-                    jTextAreaMain.append("[" + dateString + "] 买出" + Double.parseDouble(closeString) + ", 当前资产：" + property + "\n");
+                    propertyA += Double.parseDouble(closeString);
+                    propertyB = ratio * Double.parseDouble(closeString);
+                    jTextAreaMain.append("[" + dateString + "] 买出" + Double.parseDouble(closeString) + ", 定投资产：" + propertyA + ", 迭代资产：" + propertyB + "\n");
                     formerStatus = Status;
                     break;
                 case "normalRiseDStatus":
@@ -750,11 +764,6 @@ public class StockerView extends javax.swing.JFrame {
     }
 
     protected void Livermore(double d) {
-        boolean vpointEnable = jCheckBoxVpoint.isSelected();
-        int vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
-        int tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
-        int tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
-
         switch (Status) {
             case "mainRiseStatus":
                 if (d > mainRiseVal) {
@@ -1035,7 +1044,15 @@ public class StockerView extends javax.swing.JFrame {
     public BufferedReader bufferedReader;
     boolean readFlag = false;
     private boolean fileOpened = false;
-    private double property = 0;
+    private double propertyOrig = 0;
+    private double propertyA = 0;
+    private double propertyB = 0;
+    private double ratio = 1;
+
+    boolean vpointEnable = false;
+    int vpointValue = 20;
+    int tpointValue1 = 10;
+    int tpointValue2 = 5;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonContinuous;
