@@ -706,20 +706,22 @@ public class StockerView extends javax.swing.JFrame {
     protected void statusRecord(String status) {
         jTextAreaMain.append("[" + dateString + "] " + status + "\n");
         Logger("[" + dateString + "] " + status);
-        Logger("上关键点：" + riseKeyHead
-                + "\t\t上关键点：" + fallKeyHead
-                + "\r\n下关键点：" + riseKeyFoot
-                + "\t\t下关键点：" + fallKeyFoot
-                + "\r\n主上升值：" + mainRiseVal
-                + "\t\t主下降值：" + mainFallVal
-                + "\r\n自然回撤：" + normalFallUVal
-                + "\t\t自然回撤：" + normalFallDVal
-                + "\r\n自然回升：" + normalRiseUVal
-                + "\t\t自然回升：" + normalRiseDVal
-                + "\r\n次级回撤：" + minorFallUVal
-                + "\t\t次级回撤：" + minorFallDVal
-                + "\r\n次级回升：" + minorRiseUVal
-                + "\t\t次级回升：" + minorRiseDVal + "\r\n");
+        if (!status.contains("趋势可能改变")) {
+            Logger("上关键点：" + riseKeyHead
+                    + "\t\t上关键点：" + fallKeyHead
+                    + "\r\n下关键点：" + riseKeyFoot
+                    + "\t\t下关键点：" + fallKeyFoot
+                    + "\r\n主上升值：" + mainRiseVal
+                    + "\t\t主下降值：" + mainFallVal
+                    + "\r\n自然回撤：" + normalFallUVal
+                    + "\t\t自然回撤：" + normalFallDVal
+                    + "\r\n自然回升：" + normalRiseUVal
+                    + "\t\t自然回升：" + normalRiseDVal
+                    + "\r\n次级回撤：" + minorFallUVal
+                    + "\t\t次级回撤：" + minorFallDVal
+                    + "\r\n次级回升：" + minorRiseUVal
+                    + "\t\t次级回升：" + minorRiseDVal + "\r\n");
+        }
     }
 
     protected void resetTrendValue() {
@@ -765,7 +767,12 @@ public class StockerView extends javax.swing.JFrame {
                 }
                 break;
             case "normalFallUStatus":
-                if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
+                if (d < fallKeyFoot) {
+                    Status = "mainFallStatus";
+                    resetTrendValue();
+                    mainFallVal = d;
+                    statusRecord("↘↘↘↘ 恢复下降趋势");
+                } else if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
                     Status = "mainFallStatus";
                     resetTrendValue();
                     mainFallVal = d;
@@ -880,7 +887,12 @@ public class StockerView extends javax.swing.JFrame {
                 }
                 break;
             case "normalRiseDStatus":
-                if ((fallKeyHead != 0) && (d > fallKeyHead * (100 + tpointValue2) / 100)) {
+                if ((riseKeyHead != 0) && (d > riseKeyHead)) {
+                    Status = "mainRiseStatus";
+                    resetTrendValue();
+                    mainRiseVal = d;
+                    statusRecord("↗↗↗↗ 恢复上升趋势");
+                } else if ((fallKeyHead != 0) && (d > fallKeyHead * (100 + tpointValue2) / 100)) {
                     Status = "mainRiseStatus";
                     resetTrendValue();
                     mainRiseVal = d;
