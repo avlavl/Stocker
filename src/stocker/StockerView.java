@@ -584,18 +584,15 @@ public class StockerView extends javax.swing.JFrame {
 
     protected void doPropertyComputing() {
         if (Status.equals(formerStatus) == false) {
-            if (formerStatus.equals("")) {
-                propertyOrig = Double.parseDouble(closeString);
-                jTextAreaMain.append("[" + dateString + "] 首次买入" + propertyOrig + ", 当前资产：0\n");
-                formerStatus = Status;
-                return;
-            }
-
+            double price = Double.parseDouble(closeString);
             switch (Status) {
                 case "mainRiseStatus":
-                    ratio = propertyB / Double.parseDouble(closeString);
-                    propertyA -= Double.parseDouble(closeString);
-                    jTextAreaMain.append("[" + dateString + "] 买入" + Double.parseDouble(closeString) + ", 定投剩余：" + propertyA + ", 迭代比例：" + ratio + "\n");
+                    if (formerStatus.equals("")) {
+                        propertyOrig = price;
+                        jTextAreaMain.append("[" + dateString + "] 首次买入" + propertyOrig + ", 当前资产：0\n");
+                    } else {
+                        BRM(true, price);
+                    }
                     formerStatus = Status;
                     break;
                 case "normalFallUStatus":
@@ -608,9 +605,7 @@ public class StockerView extends javax.swing.JFrame {
                     break;
 
                 case "mainFallStatus":
-                    propertyA += Double.parseDouble(closeString);
-                    propertyB = ratio * Double.parseDouble(closeString);
-                    jTextAreaMain.append("[" + dateString + "] 买出" + Double.parseDouble(closeString) + ", 定投资产：" + propertyA + ", 迭代资产：" + propertyB + "\n");
+                    BRM(false, price);
                     formerStatus = Status;
                     break;
                 case "normalRiseDStatus":
@@ -1006,6 +1001,16 @@ public class StockerView extends javax.swing.JFrame {
                 break;
             default:
                 break;
+        }
+    }
+
+    protected void BRM(boolean bs, double price) {
+        if (bs) {
+            propertyA -= price;
+            jTextAreaMain.append("[" + dateString + "] 买入价：" + price + ", 可用资金：" + propertyA + "\n");
+        } else if (bs == false) {
+            propertyA += price;
+            jTextAreaMain.append("[" + dateString + "] 卖出价：" + price + ", 可用资金：" + propertyA + "\n");
         }
     }
 
