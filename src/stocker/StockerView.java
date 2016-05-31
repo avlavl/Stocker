@@ -146,7 +146,7 @@ public class StockerView extends javax.swing.JFrame {
         jLabelClose.setFont(new java.awt.Font("微软雅黑", 1, 13)); // NOI18N
         jLabelClose.setForeground(new java.awt.Color(255, 0, 153));
         jLabelClose.setText("收盘：");
-        jPanelPrice.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
+        jPanelPrice.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         jLabelHigh.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelHigh.setText("最高：");
@@ -154,7 +154,7 @@ public class StockerView extends javax.swing.JFrame {
 
         jLabelLow.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelLow.setText("最低：");
-        jPanelPrice.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        jPanelPrice.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         jLabelMA2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA2.setText("MA2：");
@@ -162,7 +162,7 @@ public class StockerView extends javax.swing.JFrame {
 
         jLabelMA3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA3.setText("MA3：");
-        jPanelPrice.add(jLabelMA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
+        jPanelPrice.add(jLabelMA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
         jLabelMA5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA5.setText("MA5：");
@@ -170,9 +170,9 @@ public class StockerView extends javax.swing.JFrame {
 
         jLabelMA10.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelMA10.setText("MA10：");
-        jPanelPrice.add(jLabelMA10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
+        jPanelPrice.add(jLabelMA10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
 
-        jPanelMain.add(jPanelPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 270, 110));
+        jPanelMain.add(jPanelPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 300, 110));
 
         jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel7.setText("起始日期：");
@@ -280,13 +280,13 @@ public class StockerView extends javax.swing.JFrame {
 
         jCheckBoxVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBoxVpoint.setText("使能V形反转");
-        jPanelConfig.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+        jPanelConfig.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
 
         jTextFieldVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldVpoint.setText("20");
-        jPanelConfig.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 30, -1));
+        jPanelConfig.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 30, -1));
 
-        jPanelMain.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 330, 100));
+        jPanelMain.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 310, 100));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 420));
 
