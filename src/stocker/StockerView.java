@@ -183,11 +183,11 @@ public class StockerView extends javax.swing.JFrame {
         jPanelMain.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
 
         jTextFieldStartDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldStartDate.setText("2015/01/04");
+        jTextFieldStartDate.setText("1990/05/14");
         jPanelMain.add(jTextFieldStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 80, -1));
 
         jTextFieldEndDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldEndDate.setText("2016/05/06");
+        jTextFieldEndDate.setText("2016/05/31");
         jPanelMain.add(jTextFieldEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 80, -1));
 
         jButtonImport.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -1098,10 +1098,10 @@ public class StockerView extends javax.swing.JFrame {
     protected void BRMB(boolean bs, double price) {
         if (bs) {
             propertyA -= price;
-            jTextAreaMain.append("[" + dateString + "] 买入价：" + price + ", 可用资金：" + propertyA + "\n");
+            jTextAreaMain.append("[" + dateString + "] 买入价：" + price + ", 剩余资金：" + propertyA + "\n");
         } else if (bs == false) {
             propertyA += price;
-            jTextAreaMain.append("[" + dateString + "] 卖出价：" + price + ", 可用资金：" + propertyA + "\n");
+            jTextAreaMain.append("[" + dateString + "] 卖出价：" + price + ", 总资产：" + propertyA + "\n");
         }
     }
 
@@ -1261,8 +1261,8 @@ public class StockerView extends javax.swing.JFrame {
 
     private String Status = "mainRiseStatus";
     private String formerStatus = "";
-    private String fileIn = "data\\000001.txt";
-    private String fileOut = "data\\000001_out.txt";
+    private String fileIn = "data\\上证指数.txt";
+    private String fileOut = "data\\上证指数_out.txt";
     public FileReader fileReader;
     public FileWriter fileWriter;
     public BufferedReader bufferedReader;
