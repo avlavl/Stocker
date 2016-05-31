@@ -83,10 +83,12 @@ public class StockerView extends javax.swing.JFrame {
         jTextFieldTpoint2 = new javax.swing.JTextField();
         jCheckBoxVpoint = new javax.swing.JCheckBox();
         jTextFieldVpoint = new javax.swing.JTextField();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuAdd = new javax.swing.JMenu();
+        jMenuTradeSystem = new javax.swing.JMenu();
+        jMenuItemMACD = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stocker");
@@ -298,12 +300,24 @@ public class StockerView extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemImport);
 
-        jMenuBar1.add(jMenuFile);
+        jMenuBar.add(jMenuFile);
 
-        jMenu2.setText("添加");
-        jMenuBar1.add(jMenu2);
+        jMenuAdd.setText("添加");
+        jMenuBar.add(jMenuAdd);
 
-        setJMenuBar(jMenuBar1);
+        jMenuTradeSystem.setText("交易系统");
+
+        jMenuItemMACD.setText("MACD");
+        jMenuItemMACD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMACDActionPerformed(evt);
+            }
+        });
+        jMenuTradeSystem.add(jMenuItemMACD);
+
+        jMenuBar.add(jMenuTradeSystem);
+
+        setJMenuBar(jMenuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -467,6 +481,34 @@ public class StockerView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxModeActionPerformed
 
+    private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
+        String s;
+        String[] ss = null;
+
+        try {
+            reset();
+            fileReader = new FileReader(fileIn);
+            bufferedReader = new BufferedReader(fileReader);
+            fileOpened = true;
+            bufferedReader.readLine();
+            bufferedReader.readLine();
+
+            do {
+                if ((s = bufferedReader.readLine()) != null) {
+                    ss = s.split("\t");
+                    updateMarket(s);
+                    doMACDComputing();
+                }
+            } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
+
+            bufferedReader.close();
+            fileReader.close();
+            fileOpened = false;
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItemMACDActionPerformed
+
     protected void dataImport() {
         JFileChooser chooser = new JFileChooser("data/");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Stock Data File (*.txt)", "txt");
@@ -591,7 +633,7 @@ public class StockerView extends javax.swing.JFrame {
                         propertyOrig = price;
                         jTextAreaMain.append("[" + dateString + "] 首次买入" + propertyOrig + ", 当前资产：0\n");
                     } else {
-                        BRM(true, price);
+                        BRMB(true, price);
                     }
                     formerStatus = Status;
                     break;
@@ -605,7 +647,7 @@ public class StockerView extends javax.swing.JFrame {
                     break;
 
                 case "mainFallStatus":
-                    BRM(false, price);
+                    BRMB(false, price);
                     formerStatus = Status;
                     break;
                 case "normalRiseDStatus":
@@ -1004,13 +1046,190 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void BRM(boolean bs, double price) {
+    protected void MACD(double d) {
+        int s = 12;
+        int l = 26;
+        int m = 9;
+
+        EMASY = EMAST;
+        EMALY = EMALT;
+        DIFY = DIFT;
+        DEAY = DEAT;
+        BARY = BART;
+        STFY = STFT;
+        LTFY = LTFT;
+
+        if (EMASY == 0) {
+            EMAST = d;
+        } else {
+            EMAST = EMASY * (s - 1) / (s + 1) + d * 2 / (s + 1);
+        }
+        if (EMALY == 0) {
+            EMALT = d;
+        } else {
+            EMALT = EMALY * (l - 1) / (l + 1) + d * 2 / (l + 1);
+        }
+
+        DIFT = EMAST - EMALT;
+
+        if (DEAY == 10000) {
+            DEAT = DIFT * 2 / (m + 1);
+        } else {
+            DEAT = DEAY * (m - 1) / (m + 1) + DIFT * 2 / (m + 1);
+        }
+
+        BART = 2 * (DIFT - DEAT);
+        STFT = (BART >= 0);
+        LTFT = (DIFT >= 0);
+    }
+
+    protected void BRMA(boolean bs, double price) {
+        if (bs) {
+            ratio = propertyB / price;
+            propertyA -= price;
+            jTextAreaMain.append("[" + dateString + "] 买入价：" + price + ", 可用资金：" + propertyA + ", 迭代比例：" + ratio + "\n");
+        } else if (bs == false) {
+            propertyA += price;
+            propertyB = ratio * price;
+            jTextAreaMain.append("[" + dateString + "] 卖出价：" + price + ", 定投总资产：" + propertyA + ", 迭代总资产：" + propertyB + "\n");
+        }
+    }
+
+    protected void BRMB(boolean bs, double price) {
         if (bs) {
             propertyA -= price;
             jTextAreaMain.append("[" + dateString + "] 买入价：" + price + ", 可用资金：" + propertyA + "\n");
         } else if (bs == false) {
             propertyA += price;
             jTextAreaMain.append("[" + dateString + "] 卖出价：" + price + ", 可用资金：" + propertyA + "\n");
+        }
+    }
+
+    protected void BRM(boolean bs, double scale) {
+        double price = Double.parseDouble(closeString);
+
+        if (bs) {
+            int count = (int) (property * scale / (int) (price * 100));
+            stockCount += count;
+            moneyAsset -= price * 100 * count;
+
+            jTextAreaMain.append("[" + dateString + "] 买入" + scale * 10 + "成仓位， 买入价：" + price + "买入数量：" + count + "手 ");
+            jTextAreaMain.append("股票数量" + stockCount + " 市值：" + (price * 100 * stockCount) + "总资产：" + (moneyAsset + price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
+        } else if ((bs == false) && (stockCount > 0)) {
+            int count = stockCount - (int) (stockCount * (1 - scale));
+            stockCount -= count;
+            moneyAsset += price * 100 * count;
+            if (scale != 1) {
+                jTextAreaMain.append("[" + dateString + "] 卖出" + scale * 10 + "成仓位， 卖出价：" + price + "买出数量：" + count + "手 ");
+                jTextAreaMain.append("股票数量" + stockCount + " 市值：" + (price * 100 * stockCount) + "总资产：" + (moneyAsset + price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
+            } else {
+                property = moneyAsset;
+                jTextAreaMain.append("[" + dateString + "] 清仓! 卖出价：" + price + "买出数量：" + count + "手 ");
+                jTextAreaMain.append("总资产：" + property + "可用资金：" + moneyAsset + "\n");
+            }
+        }
+    }
+
+    protected void BRM(int status, double price) {
+        switch (status) {
+            case 1:     //开仓
+                openCount = (int) (property * 0.4 / (int) (price * 100));
+                openPrice = price;
+                stockCount = openCount;
+                moneyAsset -= price * 100 * openCount;
+
+                jTextAreaMain.append("[" + dateString + "] 开仓！买入价：" + price + "，买入数量：" + openCount + "手 ");
+                jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
+                break;
+            case 2:     //加仓1
+                addCount1 = (int) (property * 0.4 / (int) (price * 100));
+                addPrice1 = price;
+                stockCount += addCount1;
+                moneyAsset -= price * 100 * addCount1;
+
+                jTextAreaMain.append("[" + dateString + "] 首次加仓，买入价：" + price + "，买入数量：" + addCount1 + "手 ");
+                jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
+                break;
+            case 3:     //加仓2
+                addCount2 = (int) (property * 0.2 / (int) (price * 100));
+                addPrice2 = price;
+                stockCount += addCount2;
+                moneyAsset -= price * 100 * addCount2;
+
+                jTextAreaMain.append("[" + dateString + "] 二次加仓，买入价：" + price + "，买入数量：" + addCount2 + "手 ");
+                jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
+                break;
+            case -1:    //减仓
+                if (stockCount > 0) {
+                    int count = stockCount - (int) (stockCount * 0.5);
+                    stockCount -= count;
+                    moneyAsset += price * 100 * count;
+
+                    jTextAreaMain.append("[" + dateString + "] 减仓，卖出价：" + price + "，买出数量：" + count + "手 ");
+                    jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
+                }
+                break;
+            case 0: //清仓
+                if (stockCount > 0) {
+                    int count = stockCount;
+                    stockCount = 0;
+                    moneyAsset += price * 100 * count;
+                    property = moneyAsset;
+
+                    jTextAreaMain.append("[" + dateString + "] 清仓！卖出价：" + price + "，买出数量：" + count + "手 ");
+                    jTextAreaMain.append("总资产：" + property + "可用资金：" + moneyAsset + "\n");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void doMACDComputing() {
+        double price = Double.parseDouble(closeString);
+        MACD(price);
+        if (!STFY && STFT && (DIFT >= 0)) {
+            if (position == 0) {
+                position = 1;
+            } else if ((position == 1) || (position == 11)) {
+                position = 2;
+            } else if ((position == 2) || (position == 22)) {
+                position = 3;
+            }
+            BRM(position, price);
+//            if (propertyOrig == 0) {
+//                propertyOrig = Double.parseDouble(closeString);
+//                jTextAreaMain.append("[" + dateString + "] 首次金叉买入" + propertyOrig + ", 当前资产：0\n");
+//            } else {
+//                ratioo = propertyB / Double.parseDouble(closeString);
+//                propertyA -= Double.parseDouble(closeString);
+//                jTextAreaMain.append("[" + dateString + "] 金叉买入" + Double.parseDouble(closeString) + ", 定投剩余：" + propertyA + ", 迭代比例：" + ratioo + "\n");
+//            }
+        } else if (STFY && !STFT && (DIFT >= 0)) {
+            if (position == 1) {
+                position = 11;
+                BRM(-1, price);
+            } else if (position == 2) {
+                position = 22;
+                BRM(-1, price);
+            } else if (position == 3) {
+                position = 33;
+                BRM(-1, price);
+            } else if ((position == 11) || (position == 22) || (position == 33)) {
+                position = 0;
+                BRM(0, price);
+            }
+
+//            if (propertyOrig == 0) {
+//                jTextAreaMain.append("[" + dateString + "] 死叉\n");
+//            } else {
+//                propertyA += Double.parseDouble(closeString);
+//                propertyB = ratioo * Double.parseDouble(closeString);
+//                jTextAreaMain.append("[" + dateString + "] 死叉买出" + Double.parseDouble(closeString) + ", 定投资产：" + propertyA + ", 迭代资产：" + propertyB + "\n");
+//            }
+        } else if ((DIFY > 0) && (DIFT < 0)) {
+            position = 0;
+            BRM(position, price);
         }
     }
 
@@ -1059,6 +1278,33 @@ public class StockerView extends javax.swing.JFrame {
     int tpointValue1 = 10;
     int tpointValue2 = 5;
 
+    private double EMASY = 0;
+    private double EMAST = 0;
+    private double EMALY = 0;
+    private double EMALT = 0;
+    private double DIFY = 0;
+    private double DIFT = 0;
+    private double DEAY = 10000;
+    private double DEAT = 0;
+    private double BARY = 0;
+    private double BART = 0;
+    private boolean STFY = true;
+    private boolean STFT = true;
+    private boolean LTFY = true;
+    private boolean LTFT = true;
+
+    private double property = 10000000;
+    private double moneyAsset = 10000000;
+    private double stockAsset = 0;
+    private int stockCount = 0;
+    private int openCount = 0;
+    private int addCount1 = 0;
+    private int addCount2 = 0;
+    private double openPrice = 0;
+    private double addPrice1 = 0;
+    private double addPrice2 = 0;
+    private int position = 0;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonContinuous;
     private javax.swing.JButton jButtonImport;
@@ -1085,10 +1331,12 @@ public class StockerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStockCode;
     private javax.swing.JLabel jLabelStockName;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuAdd;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuItemImport;
+    private javax.swing.JMenuItem jMenuItemMACD;
+    private javax.swing.JMenu jMenuTradeSystem;
     private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelPrice;
