@@ -469,6 +469,8 @@ public class StockerView extends javax.swing.JFrame {
     private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
         String s;
         String[] ss = null;
+
+        MACD macd = new MACD(12, 26, 9);
         BRM brm = new BRM(0);
 
         try {
@@ -483,7 +485,7 @@ public class StockerView extends javax.swing.JFrame {
                 if ((s = bufferedReader.readLine()) != null) {
                     ss = s.split("\t");
                     updateMarket(s);
-                    doMACDAnalysis(brm);
+                    doMACDAnalysis(macd, brm);
                 }
             } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
@@ -1019,47 +1021,10 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void MACD(double d) {
-        int s = 12;
-        int l = 26;
-        int m = 9;
-
-        EMASY = EMAST;
-        EMALY = EMALT;
-        DIFY = DIFT;
-        DEAY = DEAT;
-        BARY = BART;
-        STFY = STFT;
-        LTFY = LTFT;
-
-        if (EMASY == 0) {
-            EMAST = d;
-        } else {
-            EMAST = EMASY * (s - 1) / (s + 1) + d * 2 / (s + 1);
-        }
-        if (EMALY == 0) {
-            EMALT = d;
-        } else {
-            EMALT = EMALY * (l - 1) / (l + 1) + d * 2 / (l + 1);
-        }
-
-        DIFT = EMAST - EMALT;
-
-        if (DEAY == 10000) {
-            DEAT = DIFT * 2 / (m + 1);
-        } else {
-            DEAT = DEAY * (m - 1) / (m + 1) + DIFT * 2 / (m + 1);
-        }
-
-        BART = 2 * (DIFT - DEAT);
-        STFT = (BART >= 0);
-        LTFT = (DIFT >= 0);
-    }
-
-    protected void doMACDAnalysis(BRM brm) {
+    protected void doMACDAnalysis(MACD macd, BRM brm) {
         double price = Double.parseDouble(strClose);
-        MACD(price);
-        if (!STFY && STFT) {
+        macd.arithmetic(price);
+        if (!macd.STFY && macd.STFT) {
 //            if (position == 0) {
 //                position = 1;
 //            } else if ((position == 1) || (position == 11)) {
@@ -1070,7 +1035,7 @@ public class StockerView extends javax.swing.JFrame {
 //            quota(position, price);
             brm.quota(true, price);
             msgLogger("买入价：" + price + "\t剩余资金：" + brm.asset);
-        } else if (STFY && !STFT) {
+        } else if (macd.STFY && !macd.STFT) {
 //            if (position == 1) {
 //                position = 11;
 //                quota(-1, price);
@@ -1086,7 +1051,7 @@ public class StockerView extends javax.swing.JFrame {
 //            }
             brm.quota(false, price);
             msgLogger("卖出价：" + price + "\t总资产：" + brm.asset);
-        } else if ((DIFY > 0) && (DIFT < 0)) {
+        } else if ((macd.DIFY > 0) && (macd.DIFT < 0)) {
 //            position = 0;
 //            quota(position, price);
         }
@@ -1129,21 +1094,6 @@ public class StockerView extends javax.swing.JFrame {
     int vpointValue = 20;
     int tpointValue1 = 10;
     int tpointValue2 = 5;
-
-    private double EMASY = 0;
-    private double EMAST = 0;
-    private double EMALY = 0;
-    private double EMALT = 0;
-    private double DIFY = 0;
-    private double DIFT = 0;
-    private double DEAY = 10000;
-    private double DEAT = 0;
-    private double BARY = 0;
-    private double BART = 0;
-    private boolean STFY = true;
-    private boolean STFT = true;
-    private boolean LTFY = true;
-    private boolean LTFT = true;
 
     private String strDate = "";
     private String strOpen = "";
