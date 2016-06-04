@@ -295,33 +295,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelMA2">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="MA2&#xff1a;"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="60" width="-1" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelMA3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="MA3&#xff1a;"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="150" y="60" width="-1" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelMA5">
+            <Component class="javax.swing.JLabel" name="jLabelMA1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
@@ -330,16 +304,42 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="80" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="20" y="60" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelMA10">
+            <Component class="javax.swing.JLabel" name="jLabelMA2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="MA10&#xff1a;"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="150" y="60" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelMA3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="MA20&#xff1a;"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="20" y="80" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelMA4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="MA60&#xff1a;"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -485,14 +485,13 @@
             </Property>
             <Property name="maximumRowCount" type="int" value="9"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
+              <StringArray count="6">
                 <StringItem index="0" value="&#x6536;&#x76d8;&#x4ef7;"/>
                 <StringItem index="1" value="2&#x65e5;&#x5747;&#x7ebf;"/>
                 <StringItem index="2" value="3&#x65e5;&#x5747;&#x7ebf;"/>
                 <StringItem index="3" value="5&#x65e5;&#x5747;&#x7ebf;"/>
-                <StringItem index="4" value="10&#x65e5;&#x5747;&#x7ebf;"/>
-                <StringItem index="5" value="K&#x7ebf;&#x5b9e;&#x4f53;"/>
-                <StringItem index="6" value="K&#x7ebf;&#x5f15;&#x7ebf;"/>
+                <StringItem index="4" value="K&#x7ebf;&#x5b9e;&#x4f53;"/>
+                <StringItem index="5" value="K&#x7ebf;&#x5f15;&#x7ebf;"/>
               </StringArray>
             </Property>
           </Properties>
