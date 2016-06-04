@@ -313,7 +313,12 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
 
-        Livermore lm = new Livermore();
+        boolean status = (jComboBoxStatus.getSelectedIndex() == 0);
+        int t1 = Integer.parseInt(jTextFieldTpoint1.getText());
+        int t2 = Integer.parseInt(jTextFieldTpoint2.getText());
+        Livermore lm = new Livermore(status, t1, t2);
+        lm.vpointEnable = jCheckBoxVpoint.isSelected();
+        lm.vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
         BRM brm = new BRM(0);
 
         try {
@@ -323,10 +328,6 @@ public class MainView extends javax.swing.JFrame {
             bufferedReader.readLine();
             bufferedReader.readLine();
 
-            lm.vpointEnable = jCheckBoxVpoint.isSelected();
-            lm.vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
-            lm.tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
-            lm.tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
             do {
                 if ((line = bufferedReader.readLine()) != null) {
                     words = line.split("\t");

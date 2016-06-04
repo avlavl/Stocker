@@ -11,8 +11,10 @@ package Trader;
  */
 public class Livermore {
 
-    public Livermore() {
-
+    public Livermore(boolean status, int t1, int t2) {
+        Status = status ? "mainRiseStatus" : "mainFallStatus";
+        tpointValue1 = t1;
+        tpointValue2 = t2;
     }
 
     protected String arithmetic(double price) {
