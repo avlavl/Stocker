@@ -67,7 +67,7 @@ public class StockerView extends javax.swing.JFrame {
         jTextAreaMain = new javax.swing.JTextArea();
         jPanelConfig = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBoxStartStatus = new javax.swing.JComboBox<>();
+        jComboBoxStatus = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldTpoint1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -141,8 +141,7 @@ public class StockerView extends javax.swing.JFrame {
         jLabelOpen.setText("开盘：");
         jPanelPrice.add(jLabelOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabelClose.setFont(new java.awt.Font("微软雅黑", 1, 13)); // NOI18N
-        jLabelClose.setForeground(new java.awt.Color(255, 0, 153));
+        jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelClose.setText("收盘：");
         jPanelPrice.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
@@ -194,14 +193,14 @@ public class StockerView extends javax.swing.JFrame {
         jLabel1.setText("起始状态：");
         jPanelConfig.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
-        jComboBoxStartStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBoxStartStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
-        jComboBoxStartStatus.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
+        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxStartStatusActionPerformed(evt);
+                jComboBoxStatusActionPerformed(evt);
             }
         });
-        jPanelConfig.add(jComboBoxStartStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        jPanelConfig.add(jComboBoxStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel2.setText("弹抽点：");
@@ -234,11 +233,6 @@ public class StockerView extends javax.swing.JFrame {
         jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxMode.setMaximumRowCount(9);
         jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "5日均线", "K线实体", "K线引线" }));
-        jComboBoxMode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxModeActionPerformed(evt);
-            }
-        });
         jPanelConfig.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -302,9 +296,17 @@ public class StockerView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItemImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportActionPerformed
+        dataImport();
+    }//GEN-LAST:event_jMenuItemImportActionPerformed
+
+    private void jButtonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
+        dataImport();
+    }//GEN-LAST:event_jButtonImportActionPerformed
+
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestActionPerformed
-        String s;
-        String[] ss = null;
+        String line;
+        String[] words = null;
 
         if ((jTextFieldEndDate.getText().compareTo(jTextFieldStartDate.getText()) < 0)) {
             JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
@@ -315,120 +317,67 @@ public class StockerView extends javax.swing.JFrame {
         BRM brm = new BRM(0);
 
         try {
-            reset();
             fileWriter = new FileWriter(fileOut);
             fileReader = new FileReader(fileIn);
             bufferedReader = new BufferedReader(fileReader);
-            fileOpened = true;
             bufferedReader.readLine();
             bufferedReader.readLine();
 
-//            vpointEnable = jCheckBoxVpoint.isSelected();
-//            vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
-//            tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
-//            tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
+            lm.vpointEnable = jCheckBoxVpoint.isSelected();
+            lm.vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+            lm.tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
+            lm.tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
             do {
-                if ((s = bufferedReader.readLine()) != null) {
-                    ss = s.split("\t");
-                    if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
-                        updateMarket(s);
+                if ((line = bufferedReader.readLine()) != null) {
+                    words = line.split("\t");
+                    if ((words[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (words[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
+                        updateMarket(line);
                         doModeComputing(lm);
-
                         doLivermoreAnalysis(lm, brm);
                     }
                 }
-            } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
+            } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
             parseStatus(lm.Status);
             updateTable(lm);
 
             bufferedReader.close();
             fileReader.close();
-            fileOpened = false;
             fileWriter.flush();
             fileWriter.close();
-            fileWriter = null;
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }//GEN-LAST:event_jButtonTestActionPerformed
 
-    private void jMenuItemImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportActionPerformed
-        dataImport();
-    }//GEN-LAST:event_jMenuItemImportActionPerformed
-
-    private void jComboBoxStartStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStartStatusActionPerformed
-        String status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
         parseStatus(status);
-    }//GEN-LAST:event_jComboBoxStartStatusActionPerformed
-
-    private void jButtonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
-        dataImport();
-    }//GEN-LAST:event_jButtonImportActionPerformed
-
-    private void jComboBoxModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeActionPerformed
-        jLabelOpen.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelOpen.setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jLabelClose.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jLabelHigh.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelHigh.setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jLabelLow.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelLow.setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jLabelMA1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelMA1.setFont(new java.awt.Font("微软雅黑", 0, 12));
-        switch (jComboBoxMode.getSelectedIndex()) {
-            case 0:
-                jLabelClose.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelClose.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                break;
-            case 3:
-                jLabelMA1.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelMA1.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                break;
-            case 4:
-                jLabelOpen.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelOpen.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                jLabelClose.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelClose.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                break;
-            case 5:
-                jLabelHigh.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelHigh.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                jLabelLow.setForeground(new java.awt.Color(255, 0, 153));
-                jLabelLow.setFont(new java.awt.Font("微软雅黑", 1, 13));
-                break;
-            default:
-                break;
-        }
-    }//GEN-LAST:event_jComboBoxModeActionPerformed
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
-        String s;
-        String[] ss = null;
+        String line;
+        String[] words = null;
 
         MACD macd = new MACD(12, 26, 9);
         BRM brm = new BRM(0);
 
         try {
-            reset();
             fileReader = new FileReader(fileIn);
             bufferedReader = new BufferedReader(fileReader);
-            fileOpened = true;
             bufferedReader.readLine();
             bufferedReader.readLine();
 
             do {
-                if ((s = bufferedReader.readLine()) != null) {
-                    ss = s.split("\t");
-                    updateMarket(s);
+                if ((line = bufferedReader.readLine()) != null) {
+                    words = line.split("\t");
+                    updateMarket(line);
                     doMACDAnalysis(macd, brm);
                 }
-            } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
+            } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
             bufferedReader.close();
             fileReader.close();
-            fileOpened = false;
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -459,27 +408,6 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void reset() {
-
-//        updateTable();
-//
-//        formerStatus = "";
-//
-//        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
-//        parseStatus();
-        if (fileOpened) {
-            try {
-                bufferedReader.close();
-                fileReader.close();
-                fileOpened = false;
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        jTextAreaMain.setText("");
-    }
-
     protected void doModeComputing(Livermore lm) {
         double price;
         String msg = "";
@@ -487,39 +415,39 @@ public class StockerView extends javax.swing.JFrame {
             case 0:
                 price = Double.parseDouble(strClose);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 break;
             case 1:
                 price = Double.parseDouble(strMA2);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 break;
             case 2:
                 price = Double.parseDouble(strMA3);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 break;
             case 3:
                 price = Double.parseDouble(strMA5);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 break;
             case 4:
                 price = Double.parseDouble(strOpen);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 price = Double.parseDouble(strClose);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 break;
             case 5:
                 price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strLow : strHigh);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strHigh : strLow);
                 msg = lm.arithmetic(price);
+                statusRecord(lm, msg);
                 break;
-            default:
-                price = Double.parseDouble(strClose);
-                msg = lm.arithmetic(price);
-                break;
-        }
-
-        if (msg.equals("") != true) {
-            statusRecord(lm, msg);
         }
     }
 
@@ -587,7 +515,6 @@ public class StockerView extends javax.swing.JFrame {
                 jLabelStatus.setText("次级回升");
                 jLabelStatus.setForeground(new java.awt.Color(255, 153, 153));
                 break;
-
             case "mainFallStatus":
                 jLabelStatus.setText("主下降！");
                 jLabelStatus.setForeground(new java.awt.Color(0, 153, 0));
@@ -613,20 +540,20 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void updateMarket(String s) {
-        String[] ss = s.split("\t");
-        int len = ss.length;
-        strDate = ss[0];
-        strOpen = ss[1];
-        strHigh = ss[2];
-        strLow = ss[3];
-        strClose = ss[4];
-        strMA2 = ss[len - 6];
-        strMA3 = ss[len - 5];
-        strMA5 = ss[len - 4];
-        strMA10 = ss[len - 3];
-        strMA20 = ss[len - 2];
-        strMA60 = ss[len - 1];
+    protected void updateMarket(String line) {
+        String[] words = line.split("\t");
+        int len = words.length;
+        strDate = words[0];
+        strOpen = words[1];
+        strHigh = words[2];
+        strLow = words[3];
+        strClose = words[4];
+        strMA2 = words[len - 6];
+        strMA3 = words[len - 5];
+        strMA5 = words[len - 4];
+        strMA10 = words[len - 3];
+        strMA20 = words[len - 2];
+        strMA60 = words[len - 1];
 
         jLabelDate.setText("日期：" + strDate);
         jLabelOpen.setText("开盘：" + strOpen);
@@ -658,23 +585,25 @@ public class StockerView extends javax.swing.JFrame {
     }
 
     protected void statusRecord(Livermore lm, String msg) {
-        msgLogger(msg);
-        fileLogger("[" + strDate + "] " + msg);
-        if (!msg.contains("趋势可能改变")) {
-            fileLogger("上关键点：" + lm.riseKeyHead
-                    + "\t\t上关键点：" + lm.fallKeyHead
-                    + "\r\n下关键点：" + lm.riseKeyFoot
-                    + "\t\t下关键点：" + lm.fallKeyFoot
-                    + "\r\n主上升值：" + lm.mainRiseVal
-                    + "\t\t主下降值：" + lm.mainFallVal
-                    + "\r\n自然回撤：" + lm.normalFallUVal
-                    + "\t\t自然回撤：" + lm.normalFallDVal
-                    + "\r\n自然回升：" + lm.normalRiseUVal
-                    + "\t\t自然回升：" + lm.normalRiseDVal
-                    + "\r\n次级回撤：" + lm.minorFallUVal
-                    + "\t\t次级回撤：" + lm.minorFallDVal
-                    + "\r\n次级回升：" + lm.minorRiseUVal
-                    + "\t\t次级回升：" + lm.minorRiseDVal);
+        if (msg.equals("") != true) {
+            msgLogger(msg);
+            fileLogger("[" + strDate + "] " + msg);
+            if (!msg.contains("趋势可能改变")) {
+                fileLogger("上关键点：" + lm.riseKeyHead
+                        + "\t\t上关键点：" + lm.fallKeyHead
+                        + "\r\n下关键点：" + lm.riseKeyFoot
+                        + "\t\t下关键点：" + lm.fallKeyFoot
+                        + "\r\n主上升值：" + lm.mainRiseVal
+                        + "\t\t主下降值：" + lm.mainFallVal
+                        + "\r\n自然回撤：" + lm.normalFallUVal
+                        + "\t\t自然回撤：" + lm.normalFallDVal
+                        + "\r\n自然回升：" + lm.normalRiseUVal
+                        + "\t\t自然回升：" + lm.normalRiseDVal
+                        + "\r\n次级回撤：" + lm.minorFallUVal
+                        + "\t\t次级回撤：" + lm.minorFallDVal
+                        + "\r\n次级回升：" + lm.minorRiseUVal
+                        + "\t\t次级回升：" + lm.minorRiseDVal);
+            }
         }
     }
 
@@ -745,14 +674,13 @@ public class StockerView extends javax.swing.JFrame {
     public FileReader fileReader;
     public FileWriter fileWriter;
     public BufferedReader bufferedReader;
-    private boolean fileOpened = false;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;
     private javax.swing.JButton jButtonTest;
     private javax.swing.JCheckBox jCheckBoxVpoint;
     private javax.swing.JComboBox<String> jComboBoxMode;
-    private javax.swing.JComboBox<String> jComboBoxStartStatus;
+    private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
