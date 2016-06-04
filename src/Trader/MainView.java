@@ -29,8 +29,8 @@ public class MainView extends javax.swing.JFrame {
      */
     public MainView() {
         initComponents();
-        setLocationRelativeTo(null);
 
+        setLocationRelativeTo(null);
         final URL filename = this.getClass().getResource("resources/Livermore1.jpg");
         if (filename != null) {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
@@ -85,11 +85,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
         jMenuAdd = new javax.swing.JMenu();
-        jMenuTradeSystem = new javax.swing.JMenu();
+        jMenuTestSystem = new javax.swing.JMenu();
         jMenuItemMACD = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Stocker");
+        setTitle("交易系统");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -279,7 +279,7 @@ public class MainView extends javax.swing.JFrame {
         jMenuAdd.setText("添加");
         jMenuBar.add(jMenuAdd);
 
-        jMenuTradeSystem.setText("交易系统");
+        jMenuTestSystem.setText("测试系统");
 
         jMenuItemMACD.setText("MACD");
         jMenuItemMACD.addActionListener(new java.awt.event.ActionListener() {
@@ -287,9 +287,9 @@ public class MainView extends javax.swing.JFrame {
                 jMenuItemMACDActionPerformed(evt);
             }
         });
-        jMenuTradeSystem.add(jMenuItemMACD);
+        jMenuTestSystem.add(jMenuItemMACD);
 
-        jMenuBar.add(jMenuTradeSystem);
+        jMenuBar.add(jMenuTestSystem);
 
         setJMenuBar(jMenuBar);
 
@@ -704,7 +704,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuItemImport;
     private javax.swing.JMenuItem jMenuItemMACD;
-    private javax.swing.JMenu jMenuTradeSystem;
+    private javax.swing.JMenu jMenuTestSystem;
     private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelPrice;

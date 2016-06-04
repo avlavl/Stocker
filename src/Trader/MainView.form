@@ -24,9 +24,9 @@
             <Property name="text" type="java.lang.String" value="&#x6dfb;&#x52a0;"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuTradeSystem">
+        <Menu class="javax.swing.JMenu" name="jMenuTestSystem">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x4ea4;&#x6613;&#x7cfb;&#x7edf;"/>
+            <Property name="text" type="java.lang.String" value="&#x6d4b;&#x8bd5;&#x7cfb;&#x7edf;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMACD">
@@ -44,7 +44,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Stocker"/>
+    <Property name="title" type="java.lang.String" value="&#x4ea4;&#x6613;&#x7cfb;&#x7edf;"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar"/>
