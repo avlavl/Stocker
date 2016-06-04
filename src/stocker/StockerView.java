@@ -344,13 +344,13 @@ public class StockerView extends javax.swing.JFrame {
 
             if (s != null) {
                 updateMarket(s);
-                vpointEnable = jCheckBoxVpoint.isSelected();
-                vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
-                tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
-                tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
-                doModeComputing();
-                updateTable();
-                parseStatus();
+//                vpointEnable = jCheckBoxVpoint.isSelected();
+//                vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+//                tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
+//                tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
+//                doModeComputing();
+//                updateTable();
+//                parseStatus();
             } else {
                 JOptionPane.showMessageDialog(this, "对不起，没有更多的行情数据了！");
                 fileReader.close();
@@ -371,6 +371,7 @@ public class StockerView extends javax.swing.JFrame {
             return;
         }
 
+        Livermore lm = new Livermore();
         BRM brm = new BRM(0);
 
         try {
@@ -382,24 +383,24 @@ public class StockerView extends javax.swing.JFrame {
             bufferedReader.readLine();
             bufferedReader.readLine();
 
-            vpointEnable = jCheckBoxVpoint.isSelected();
-            vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
-            tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
-            tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
-
+//            vpointEnable = jCheckBoxVpoint.isSelected();
+//            vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+//            tpointValue1 = Integer.parseInt(jTextFieldTpoint1.getText());
+//            tpointValue2 = Integer.parseInt(jTextFieldTpoint2.getText());
             do {
                 if ((s = bufferedReader.readLine()) != null) {
                     ss = s.split("\t");
                     if ((ss[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (ss[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
                         updateMarket(s);
-                        doModeComputing();
-                        doLivermoreAnalysis(brm);
+                        doModeComputing(lm);
+
+                        doLivermoreAnalysis(lm, brm);
                     }
                 }
             } while (((s != null) && ss[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
-            parseStatus();
-            updateTable();
+            parseStatus(lm.Status);
+            updateTable(lm);
 
             bufferedReader.close();
             fileReader.close();
@@ -417,8 +418,8 @@ public class StockerView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemImportActionPerformed
 
     private void jComboBoxStartStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStartStatusActionPerformed
-        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
-        parseStatus();
+        String status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+        parseStatus(status);
     }//GEN-LAST:event_jComboBoxStartStatusActionPerformed
 
     private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
@@ -523,27 +524,13 @@ public class StockerView extends javax.swing.JFrame {
     }
 
     protected void reset() {
-        riseKeyHead = 0;
-        riseKeyFoot = 0;
-        mainRiseVal = 0;
-        normalRiseUVal = 0;
-        normalFallUVal = 0;
-        minorRiseUVal = 0;
-        minorFallUVal = 0;
-        fallKeyHead = 0;
-        fallKeyFoot = 0;
-        mainFallVal = 0;
-        normalRiseDVal = 0;
-        normalFallDVal = 0;
-        minorRiseDVal = 0;
-        minorFallDVal = 0;
-        updateTable();
 
-        formerStatus = "";
-
-        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
-        parseStatus();
-
+//        updateTable();
+//
+//        formerStatus = "";
+//
+//        Status = (jComboBoxStartStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+//        parseStatus();
         if (fileOpened) {
             try {
                 bufferedReader.close();
@@ -557,57 +544,62 @@ public class StockerView extends javax.swing.JFrame {
         jTextAreaMain.setText("");
     }
 
-    protected void doModeComputing() {
-        double data;
+    protected void doModeComputing(Livermore lm) {
+        double price;
+        String msg = "";
         switch (jComboBoxMode.getSelectedIndex()) {
             case 0:
-                data = Double.parseDouble(strClose);
-                Livermore(data);
+                price = Double.parseDouble(strClose);
+                msg = lm.arithmetic(price);
                 break;
             case 1:
-                data = Double.parseDouble(strMA2);
-                Livermore(data);
+                price = Double.parseDouble(strMA2);
+                msg = lm.arithmetic(price);
                 break;
             case 2:
-                data = Double.parseDouble(strMA3);
-                Livermore(data);
+                price = Double.parseDouble(strMA3);
+                msg = lm.arithmetic(price);
                 break;
             case 3:
-                data = Double.parseDouble(strMA5);
-                Livermore(data);
+                price = Double.parseDouble(strMA5);
+                msg = lm.arithmetic(price);
                 break;
             case 4:
-                data = Double.parseDouble(strOpen);
-                Livermore(data);
-                data = Double.parseDouble(strClose);
-                Livermore(data);
+                price = Double.parseDouble(strOpen);
+                msg = lm.arithmetic(price);
+                price = Double.parseDouble(strClose);
+                msg = lm.arithmetic(price);
                 break;
             case 5:
-                data = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strLow : strHigh);
-                Livermore(data);
-                data = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strHigh : strLow);
-                Livermore(data);
+                price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strLow : strHigh);
+                msg = lm.arithmetic(price);
+                price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strHigh : strLow);
+                msg = lm.arithmetic(price);
                 break;
             default:
-                data = Double.parseDouble(strClose);
-                Livermore(data);
+                price = Double.parseDouble(strClose);
+                msg = lm.arithmetic(price);
                 break;
+        }
+
+        if (msg.equals("") != true) {
+            statusRecord(lm, msg);
         }
     }
 
-    protected void doLivermoreAnalysis(BRM brm) {
-        if (Status.equals(formerStatus) == false) {
+    protected void doLivermoreAnalysis(Livermore lm, BRM brm) {
+        if (lm.Status.equals(lm.formerStatus) == false) {
             double price = Double.parseDouble(strClose);
-            switch (Status) {
+            switch (lm.Status) {
                 case "mainRiseStatus":
-                    if (formerStatus.equals("")) {
+                    if (lm.formerStatus.equals("")) {
                         brm.propertyOrig = price;
-                        msgLogger("首次买入" + price + "\t当前资产：0\n");
+                        msgLogger("首次买入" + price + "\t当前资产：0");
                     } else {
                         brm.quota(true, price);
                         msgLogger("买入价：" + price + "\t剩余资金：" + brm.asset);
                     }
-                    formerStatus = Status;
+                    lm.formerStatus = lm.Status;
                     break;
                 case "normalFallUStatus":
                     break;
@@ -621,7 +613,7 @@ public class StockerView extends javax.swing.JFrame {
                 case "mainFallStatus":
                     brm.quota(false, price);
                     msgLogger("卖出价：" + price + "\t总资产：" + brm.asset);
-                    formerStatus = Status;
+                    lm.formerStatus = lm.Status;
                     break;
                 case "normalRiseDStatus":
                     break;
@@ -637,8 +629,8 @@ public class StockerView extends javax.swing.JFrame {
         }
     }
 
-    protected void parseStatus() {
-        switch (Status) {
+    protected void parseStatus(String status) {
+        switch (status) {
             case "mainRiseStatus":
                 jLabelStatus.setText("主上升！");
                 jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
@@ -711,313 +703,42 @@ public class StockerView extends javax.swing.JFrame {
         jLabelMA4.setText("MA60：" + strMA60);
     }
 
-    protected void updateTable() {
-        jTablePoint.setValueAt(riseKeyHead, 0, 1);
-        jTablePoint.setValueAt(riseKeyFoot, 1, 1);
-        jTablePoint.setValueAt(mainRiseVal, 2, 1);
-        jTablePoint.setValueAt(normalFallUVal, 3, 1);
-        jTablePoint.setValueAt(normalRiseUVal, 4, 1);
-        jTablePoint.setValueAt(minorFallUVal, 5, 1);
-        jTablePoint.setValueAt(minorRiseUVal, 6, 1);
+    protected void updateTable(Livermore lm) {
+        jTablePoint.setValueAt(lm.riseKeyHead, 0, 1);
+        jTablePoint.setValueAt(lm.riseKeyFoot, 1, 1);
+        jTablePoint.setValueAt(lm.mainRiseVal, 2, 1);
+        jTablePoint.setValueAt(lm.normalFallUVal, 3, 1);
+        jTablePoint.setValueAt(lm.normalRiseUVal, 4, 1);
+        jTablePoint.setValueAt(lm.minorFallUVal, 5, 1);
+        jTablePoint.setValueAt(lm.minorRiseUVal, 6, 1);
 
-        jTablePoint.setValueAt(fallKeyHead, 0, 3);
-        jTablePoint.setValueAt(fallKeyFoot, 1, 3);
-        jTablePoint.setValueAt(mainFallVal, 2, 3);
-        jTablePoint.setValueAt(normalFallDVal, 3, 3);
-        jTablePoint.setValueAt(normalRiseDVal, 4, 3);
-        jTablePoint.setValueAt(minorFallDVal, 5, 3);
-        jTablePoint.setValueAt(minorRiseDVal, 6, 3);
+        jTablePoint.setValueAt(lm.fallKeyHead, 0, 3);
+        jTablePoint.setValueAt(lm.fallKeyFoot, 1, 3);
+        jTablePoint.setValueAt(lm.mainFallVal, 2, 3);
+        jTablePoint.setValueAt(lm.normalFallDVal, 3, 3);
+        jTablePoint.setValueAt(lm.normalRiseDVal, 4, 3);
+        jTablePoint.setValueAt(lm.minorFallDVal, 5, 3);
+        jTablePoint.setValueAt(lm.minorRiseDVal, 6, 3);
     }
 
-    protected void statusRecord(String status) {
-        msgLogger(status);
-        fileLogger("[" + strDate + "] " + status);
-        if (!status.contains("趋势可能改变")) {
-            fileLogger("上关键点：" + riseKeyHead
-                    + "\t\t上关键点：" + fallKeyHead
-                    + "\r\n下关键点：" + riseKeyFoot
-                    + "\t\t下关键点：" + fallKeyFoot
-                    + "\r\n主上升值：" + mainRiseVal
-                    + "\t\t主下降值：" + mainFallVal
-                    + "\r\n自然回撤：" + normalFallUVal
-                    + "\t\t自然回撤：" + normalFallDVal
-                    + "\r\n自然回升：" + normalRiseUVal
-                    + "\t\t自然回升：" + normalRiseDVal
-                    + "\r\n次级回撤：" + minorFallUVal
-                    + "\t\t次级回撤：" + minorFallDVal
-                    + "\r\n次级回升：" + minorRiseUVal
-                    + "\t\t次级回升：" + minorRiseDVal);
-        }
-    }
-
-    protected void resetTrendValue() {
-        switch (Status) {
-            case "mainRiseStatus":
-                riseKeyHead = 0;
-                riseKeyFoot = 0;
-                mainRiseVal = 0;
-                normalRiseUVal = 0;
-                normalFallUVal = 0;
-                minorRiseUVal = 0;
-                minorFallUVal = 0;
-                break;
-            case "mainFallStatus":
-                fallKeyHead = 0;
-                fallKeyFoot = 0;
-                mainFallVal = 0;
-                normalRiseDVal = 0;
-                normalFallDVal = 0;
-                minorRiseDVal = 0;
-                minorFallDVal = 0;
-                break;
-            default:
-                break;
-        }
-    }
-
-    protected void Livermore(double d) {
-        switch (Status) {
-            case "mainRiseStatus":
-                if (d > mainRiseVal) {
-                    mainRiseVal = d;
-                } else if (d < (mainRiseVal * (100 - tpointValue1) / 100)) {
-                    Status = "normalFallUStatus";
-                    normalFallUVal = d;
-                    riseKeyHead = mainRiseVal;
-                    statusRecord("↗ 进入自然回撤");
-                }
-                break;
-            case "normalFallUStatus":
-                if (d < fallKeyFoot) {
-                    Status = "mainFallStatus";
-                    resetTrendValue();
-                    mainFallVal = d;
-                    statusRecord("↘↘↘↘ 恢复下降趋势");
-                } else if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
-                    Status = "mainFallStatus";
-                    resetTrendValue();
-                    mainFallVal = d;
-                    statusRecord("↘↘↘↘↘↘ 进入下降趋势");
-                } else if (d < normalFallUVal) {
-                    if ((vpointEnable) && (d < riseKeyHead * (100 - vpointValue) / 100)) {
-                        Status = "mainFallStatus";
-                        resetTrendValue();
-                        mainFallVal = d;
-                        statusRecord("↘↘↘↘ 进入下降趋势V");
-                    } else {
-                        normalFallUVal = d;
-                    }
-                } else if (d > (normalFallUVal * (100 + tpointValue1) / 100)) {
-                    Status = "normalRiseUStatus";
-                    normalRiseUVal = d;
-                    riseKeyFoot = normalFallUVal;
-                    statusRecord("↗ 进入自然回升");
-                }
-                break;
-            case "normalRiseUStatus":
-                if (d > mainRiseVal) {
-                    Status = "mainRiseStatus";
-                    mainRiseVal = d;
-                    statusRecord("↗↗↗ 恢复上升趋势");
-                } else if (d > normalRiseUVal) {
-                    normalRiseUVal = d;
-                } else if ((d >= (normalRiseUVal * (100 - tpointValue1) / 100)) && (d < (normalRiseUVal * (100 - tpointValue2) / 100))) {
-                    statusRecord("↗ 上升趋势可能改变");
-                } else if (d < (normalRiseUVal * (100 - tpointValue1) / 100)) {
-                    if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
-                        Status = "mainFallStatus";
-                        resetTrendValue();
-                        mainFallVal = d;
-                        statusRecord("↘↘↘↘↘↘ 进入下降趋势");
-                    } else if (d < normalFallUVal) {
-                        Status = "normalFallUStatus";
-                        normalFallUVal = d;
-                        statusRecord("↗ 进入自然回撤");
-                    } else {
-                        Status = "minorFallUStatus";
-                        minorFallUVal = d;
-                        statusRecord("↗ 进入次级回撤");
-                    }
-                }
-                break;
-            case "minorFallUStatus":
-                if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
-                    Status = "mainFallStatus";
-                    resetTrendValue();
-                    mainFallVal = d;
-                    statusRecord("↘↘↘↘↘↘ 进入下降趋势");
-                } else if (d < normalFallUVal) {
-                    Status = "normalFallUStatus";
-                    normalFallUVal = d;
-                    statusRecord("↗ 进入自然回撤");
-                } else if (d < minorFallUVal) {
-                    minorFallUVal = d;
-                } else if (d > minorFallUVal * (100 + tpointValue1) / 100) {
-                    if (d > mainRiseVal) {
-                        Status = "mainRiseStatus";
-                        mainRiseVal = d;
-                        statusRecord("↗↗↗ 恢复上升趋势");
-                    } else if (d > normalRiseUVal) {
-                        Status = "normalRiseUStatus";
-                        normalRiseUVal = d;
-                        statusRecord("↗ 进入自然回升");
-                    } else {
-                        Status = "minorRiseUStatus";
-                        minorRiseUVal = d;
-                        statusRecord("↗ 进入次级回升");
-                    }
-                }
-                break;
-            case "minorRiseUStatus":
-                if (d > mainRiseVal) {
-                    Status = "mainRiseStatus";
-                    mainRiseVal = d;
-                    statusRecord("↗↗↗ 恢复上升趋势");
-                } else if (d > normalRiseUVal) {
-                    Status = "normalRiseUStatus";
-                    normalRiseUVal = d;
-                    statusRecord("↗ 进入自然回升");
-                } else if (d > minorRiseUVal) {
-                    minorRiseUVal = d;
-                } else if (d < minorRiseUVal * (100 - tpointValue1) / 100) {
-                    if (d < riseKeyFoot * (100 - tpointValue2) / 100) {
-                        Status = "mainFallStatus";
-                        resetTrendValue();
-                        mainFallVal = d;
-                        statusRecord("↘↘↘↘↘↘ 进入下降趋势");
-                    } else if (d < normalFallUVal) {
-                        Status = "normalFallUStatus";
-                        normalFallUVal = d;
-                        statusRecord("↗ 进入自然回撤");
-                    } else {
-                        Status = "minorFallUStatus";
-                        minorFallUVal = d;
-                        statusRecord("↗ 进入次级回撤");
-                    }
-                }
-                break;
-
-            case "mainFallStatus":
-                if ((d < mainFallVal) || (mainFallVal == 0)) {
-                    mainFallVal = d;
-                } else if (d > (mainFallVal * (100 + tpointValue1) / 100)) {
-                    Status = "normalRiseDStatus";
-                    normalRiseDVal = d;
-                    fallKeyFoot = mainFallVal;
-                    statusRecord("↘ 进入自然回升");
-                }
-                break;
-            case "normalRiseDStatus":
-                if ((riseKeyHead != 0) && (d > riseKeyHead)) {
-                    Status = "mainRiseStatus";
-                    resetTrendValue();
-                    mainRiseVal = d;
-                    statusRecord("↗↗↗↗ 恢复上升趋势");
-                } else if ((fallKeyHead != 0) && (d > fallKeyHead * (100 + tpointValue2) / 100)) {
-                    Status = "mainRiseStatus";
-                    resetTrendValue();
-                    mainRiseVal = d;
-                    statusRecord("↗↗↗↗↗↗ 进入上升趋势");
-                } else if (d > normalRiseDVal) {
-                    if ((vpointEnable) && (d > fallKeyFoot * (100 + vpointValue) / 100)) {
-                        Status = "mainRiseStatus";
-                        resetTrendValue();
-                        mainRiseVal = d;
-                        statusRecord("↗↗↗↗ 进入上升趋势V");
-                    } else {
-                        normalRiseDVal = d;
-                    }
-                } else if (d < (normalRiseDVal * (100 - tpointValue1) / 100)) {
-                    Status = "normalFallDStatus";
-                    normalFallDVal = d;
-                    fallKeyHead = normalRiseDVal;
-                    statusRecord("↘ 进入自然回撤");
-                }
-                break;
-            case "normalFallDStatus":
-                if (d < mainFallVal) {
-                    Status = "mainFallStatus";
-                    mainFallVal = d;
-                    statusRecord("↘↘↘ 恢复下降趋势");
-                } else if (d < normalFallDVal) {
-                    normalFallDVal = d;
-                } else if ((d <= (normalFallDVal * (100 + tpointValue1) / 100)) && (d > (normalFallDVal * (100 + tpointValue2) / 100))) {
-                    statusRecord("↘ 下降趋势可能改变");
-                } else if (d > (normalFallDVal * (100 + tpointValue1) / 100)) {
-                    if (d > fallKeyHead * (100 + tpointValue2) / 100) {
-                        Status = "mainRiseStatus";
-                        resetTrendValue();
-                        mainRiseVal = d;
-                        statusRecord("↗↗↗↗↗↗ 进入上升趋势");
-                    } else if (d > normalRiseDVal) {
-                        Status = "normalRiseDStatus";
-                        normalRiseDVal = d;
-                        statusRecord("↘ 进入自然回升");
-                    } else {
-                        Status = "minorRiseDStatus";
-                        minorRiseDVal = d;
-                        statusRecord("↘ 进入次级回升");
-                    }
-                }
-                break;
-            case "minorRiseDStatus":
-                if (d > fallKeyHead * (100 + tpointValue2) / 100) {
-                    Status = "mainRiseStatus";
-                    resetTrendValue();
-                    mainRiseVal = d;
-                    statusRecord("↗↗↗↗↗↗ 进入上升趋势");
-                } else if (d > normalRiseDVal) {
-                    Status = "normalRiseDStatus";
-                    normalRiseDVal = d;
-                    statusRecord("↘ 进入自然回升");
-                } else if (d > minorRiseDVal) {
-                    minorRiseDVal = d;
-                } else if (d < minorRiseDVal * (100 - tpointValue1) / 100) {
-                    if (d < mainFallVal) {
-                        Status = "mainFallStatus";
-                        mainFallVal = d;
-                        statusRecord("↘↘↘ 恢复下降趋势");
-                    } else if (d < normalFallDVal) {
-                        Status = "normalFallDStatus";
-                        normalFallDVal = d;
-                        statusRecord("↘ 进入自然回撤");
-                    } else {
-                        Status = "minorFallDStatus";
-                        minorFallDVal = d;
-                        statusRecord("↘ 进入次级回撤");
-                    }
-                }
-                break;
-            case "minorFallDStatus":
-                if (d < mainFallVal) {
-                    Status = "mainFallStatus";
-                    mainFallVal = d;
-                    statusRecord("↘↘↘ 恢复下降趋势");
-                } else if (d < normalFallDVal) {
-                    Status = "normalFallDStatus";
-                    normalFallDVal = d;
-                    statusRecord("↘ 进入自然回撤");
-                } else if (d < minorFallDVal) {
-                    minorFallDVal = d;
-                } else if (d > minorFallDVal * (100 + tpointValue1) / 100) {
-                    if (d > fallKeyHead * (100 + tpointValue2) / 100) {
-                        Status = "mainRiseStatus";
-                        resetTrendValue();
-                        mainRiseVal = d;
-                        statusRecord("↗↗↗↗↗↗ 进入上升趋势");
-                    } else if (d > normalRiseDVal) {
-                        Status = "normalRiseDStatus";
-                        normalRiseDVal = d;
-                        statusRecord("↘ 进入自然回升");
-                    } else {
-                        Status = "minorRiseDStatus";
-                        minorRiseDVal = d;
-                        statusRecord("↘ 进入次级回升");
-                    }
-                }
-                break;
-            default:
-                break;
+    protected void statusRecord(Livermore lm, String msg) {
+        msgLogger(msg);
+        fileLogger("[" + strDate + "] " + msg);
+        if (!msg.contains("趋势可能改变")) {
+            fileLogger("上关键点：" + lm.riseKeyHead
+                    + "\t\t上关键点：" + lm.fallKeyHead
+                    + "\r\n下关键点：" + lm.riseKeyFoot
+                    + "\t\t下关键点：" + lm.fallKeyFoot
+                    + "\r\n主上升值：" + lm.mainRiseVal
+                    + "\t\t主下降值：" + lm.mainFallVal
+                    + "\r\n自然回撤：" + lm.normalFallUVal
+                    + "\t\t自然回撤：" + lm.normalFallDVal
+                    + "\r\n自然回升：" + lm.normalRiseUVal
+                    + "\t\t自然回升：" + lm.normalRiseDVal
+                    + "\r\n次级回撤：" + lm.minorFallUVal
+                    + "\t\t次级回撤：" + lm.minorFallDVal
+                    + "\r\n次级回升：" + lm.minorRiseUVal
+                    + "\t\t次级回升：" + lm.minorRiseDVal);
         }
     }
 
@@ -1070,30 +791,6 @@ public class StockerView extends javax.swing.JFrame {
             }
         }
     }
-
-    private double mainRiseVal = 0;
-    private double mainFallVal = 0;
-    private double normalRiseUVal = 0;
-    private double normalFallUVal = 0;
-    private double normalRiseDVal = 0;
-    private double normalFallDVal = 0;
-    private double minorRiseUVal = 0;
-    private double minorFallUVal = 0;
-    private double minorRiseDVal = 0;
-    private double minorFallDVal = 0;
-
-    private double riseKeyHead = 0;
-    private double riseKeyFoot = 0;
-    private double fallKeyHead = 0;
-    private double fallKeyFoot = 0;
-
-    private String Status = "mainRiseStatus";
-    private String formerStatus = "";
-
-    boolean vpointEnable = false;
-    int vpointValue = 20;
-    int tpointValue1 = 10;
-    int tpointValue2 = 5;
 
     private String strDate = "";
     private String strOpen = "";
