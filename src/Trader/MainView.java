@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stocker;
+package Trader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,12 +22,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author zhangxr
  */
-public class StockerView extends javax.swing.JFrame {
+public class MainView extends javax.swing.JFrame {
 
     /**
      * Creates new form StockerView
      */
-    public StockerView() {
+    public MainView() {
         initComponents();
         setLocationRelativeTo(null);
 

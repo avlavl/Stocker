@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stocker;
+package Trader;
 
 import javax.swing.UIManager;
 
@@ -11,7 +11,7 @@ import javax.swing.UIManager;
  *
  * @author zhangxr
  */
-public class Stocker {
+public class Main {
 
     /**
      * @param args the command line arguments
@@ -39,7 +39,7 @@ public class Stocker {
         }
         //</editor-fold>
 
-        StockerView sv = new StockerView();
-        sv.setVisible(true);
+        MainView mv = new MainView();
+        mv.setVisible(true);
     }
 }
