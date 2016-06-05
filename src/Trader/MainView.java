@@ -372,6 +372,10 @@ public class MainView extends javax.swing.JFrame {
         MACD macd = new MACD(12, 26, 9);
         BRM brm = new BRM(0);
 
+        gainPositionDaysArray = new ArrayList<>();
+        lossPositionDaysArray = new ArrayList<>();
+        postionDaysNumber = 0;
+
         try {
             fileReader = new FileReader(fileIn);
             bufferedReader = new BufferedReader(fileReader);
@@ -388,6 +392,9 @@ public class MainView extends javax.swing.JFrame {
             } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
             updateTable(brm);
+            System.out.println(gainPositionDaysArray);
+            System.out.println(lossPositionDaysArray);
+            totalDaysNumber = 0;
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e1) {
@@ -578,7 +585,6 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
 
         jTablePoint.setValueAt((float) brm.getEarningRate(), 0, 3);
-        System.out.println("cycleDaysNumber:" + cycleDaysNumber + "totalDaysNumber:" + totalDaysNumber);
         jTablePoint.setValueAt((float) brm.getAnnualRate((double) cycleDaysNumber / 245), 1, 3);
         jTablePoint.setValueAt((float) getPositionDaysRate(), 2, 3);
         jTablePoint.setValueAt((float) getMeanPositionDays(brm), 3, 3);
@@ -741,8 +747,8 @@ public class MainView extends javax.swing.JFrame {
     public int totalDaysNumber = 0;
     public int cycleDaysNumber = 0;
     public int postionDaysNumber = 0;
-    public ArrayList<Integer> gainPositionDaysArray = new ArrayList<>();
-    public ArrayList<Integer> lossPositionDaysArray = new ArrayList<>();
+    public ArrayList<Integer> gainPositionDaysArray;
+    public ArrayList<Integer> lossPositionDaysArray;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;
