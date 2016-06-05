@@ -374,7 +374,7 @@ public class MainView extends javax.swing.JFrame {
 
         gainPositionDaysArray = new ArrayList<>();
         lossPositionDaysArray = new ArrayList<>();
-        postionDaysNumber = 0;
+        positionDays = 0;
 
         try {
             fileReader = new FileReader(fileIn);
@@ -384,7 +384,7 @@ public class MainView extends javax.swing.JFrame {
 
             do {
                 if ((line = bufferedReader.readLine()) != null) {
-                    totalDaysNumber++;
+                    tradingDays++;
                     words = line.split("\t");
                     updateMarket(line);
                     doMACDAnalysis(macd, brm);
@@ -394,7 +394,7 @@ public class MainView extends javax.swing.JFrame {
             updateTable(brm);
             System.out.println(gainPositionDaysArray);
             System.out.println(lossPositionDaysArray);
-            totalDaysNumber = 0;
+            tradingDays = 0;
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e1) {
@@ -585,7 +585,7 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
 
         jTablePoint.setValueAt((float) brm.getEarningRate(), 0, 3);
-        jTablePoint.setValueAt((float) brm.getAnnualRate((double) cycleDaysNumber / 244), 1, 3);
+        jTablePoint.setValueAt((float) brm.getAnnualRate(cycleYears), 1, 3);
         jTablePoint.setValueAt((float) brm.getMaxGain(), 2, 3);
         jTablePoint.setValueAt((float) brm.getMaxLoss(), 3, 3);
         jTablePoint.setValueAt((float) brm.getExpectation(), 4, 3);
@@ -603,7 +603,7 @@ public class MainView extends javax.swing.JFrame {
         for (Integer days : lossPositionDaysArray) {
             positionDays += days;
         }
-        double rate = (double) positionDays / totalDaysNumber;
+        double rate = (double) positionDays / tradingDays;
         return rate;
     }
 
@@ -664,8 +664,8 @@ public class MainView extends javax.swing.JFrame {
 
     protected void doMACDAnalysis(MACD macd, BRM brm) {
         double price = Double.parseDouble(strClose);
-        if (postionDaysNumber > 0) {
-            postionDaysNumber++;
+        if (positionDays > 0) {
+            positionDays++;
         }
         macd.arithmetic(price);
         if (!macd.STFY && macd.STFT) {
@@ -679,7 +679,7 @@ public class MainView extends javax.swing.JFrame {
 //            quota(position, price);
 
             brm.quota(true, price);
-            postionDaysNumber++;
+            positionDays++;
             msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
         } else if (macd.STFY && !macd.STFT) {
 //            if (position == 1) {
@@ -697,13 +697,13 @@ public class MainView extends javax.swing.JFrame {
 //            }
             if (brm.initAsset != 0) {
                 if (price > brm.buyPrice) {
-                    gainPositionDaysArray.add(postionDaysNumber);
+                    gainPositionDaysArray.add(positionDays);
                 } else {
-                    lossPositionDaysArray.add(postionDaysNumber);
+                    lossPositionDaysArray.add(positionDays);
                 }
-                postionDaysNumber = 0;
+                positionDays = 0;
                 brm.quota(false, price);
-                cycleDaysNumber = totalDaysNumber;
+                cycleYears = (double) tradingDays / 244;
                 msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
             }
         } else if ((macd.DIFY > 0) && (macd.DIFT < 0)) {
@@ -744,9 +744,9 @@ public class MainView extends javax.swing.JFrame {
     public FileWriter fileWriter;
     public BufferedReader bufferedReader;
 
-    public int totalDaysNumber = 0;
-    public int cycleDaysNumber = 0;
-    public int postionDaysNumber = 0;
+    public int tradingDays = 0;
+    public int positionDays = 0;
+    public double cycleYears = 0;
     public ArrayList<Integer> gainPositionDaysArray;
     public ArrayList<Integer> lossPositionDaysArray;
 
