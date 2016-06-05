@@ -596,47 +596,47 @@ public class MainView extends javax.swing.JFrame {
     }
 
     public double getPositionDaysRate() {
-        int positionDays = 0;
+        int sumDays = 0;
         for (Integer days : gainPositionDaysArray) {
-            positionDays += days;
+            sumDays += days;
         }
         for (Integer days : lossPositionDaysArray) {
-            positionDays += days;
+            sumDays += days;
         }
-        double rate = (double) positionDays / tradingDays;
+        double rate = (double) sumDays / tradingDays;
         return rate;
     }
 
     public double getMeanPositionDays(BRM brm) {
-        int positionDays = 0;
+        int sumDays = 0;
         for (Integer days : gainPositionDaysArray) {
-            positionDays += days;
+            sumDays += days;
         }
         for (Integer days : lossPositionDaysArray) {
-            positionDays += days;
+            sumDays += days;
         }
         int tradingTimes = brm.getGainTimes() + brm.getLossTimes();
-        return (double) positionDays / tradingTimes;
+        return (double) sumDays / tradingTimes;
     }
 
     public double getMeanGainDays(BRM brm) {
-        int positionDays = 0;
+        int sumDays = 0;
         for (Integer days : gainPositionDaysArray) {
-            positionDays += days;
+            sumDays += days;
         }
 
         int tradingTimes = brm.getGainTimes();
-        return (double) positionDays / tradingTimes;
+        return (double) sumDays / tradingTimes;
     }
 
     public double getMeanLossDays(BRM brm) {
-        int positionDays = 0;
+        int sumDays = 0;
         for (Integer days : lossPositionDaysArray) {
-            positionDays += days;
+            sumDays += days;
         }
 
         int tradingTimes = brm.getLossTimes();
-        return (double) positionDays / tradingTimes;
+        return (double) sumDays / tradingTimes;
     }
 
     protected void statusRecord(Livermore lm, String msg) {
@@ -668,33 +668,11 @@ public class MainView extends javax.swing.JFrame {
             positionDays++;
         }
         macd.arithmetic(price);
-        if (!macd.STFY && macd.STFT) {
-//            if (position == 0) {
-//                position = 1;
-//            } else if ((position == 1) || (position == 11)) {
-//                position = 2;
-//            } else if ((position == 2) || (position == 22)) {
-//                position = 3;
-//            }
-//            quota(position, price);
-
+        if (macd.isGoldCross(true)) {
             brm.quota(true, price);
             positionDays++;
             msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
-        } else if (macd.STFY && !macd.STFT) {
-//            if (position == 1) {
-//                position = 11;
-//                quota(-1, price);
-//            } else if (position == 2) {
-//                position = 22;
-//                quota(-1, price);
-//            } else if (position == 3) {
-//                position = 33;
-//                quota(-1, price);
-//            } else if ((position == 11) || (position == 22) || (position == 33)) {
-//                position = 0;
-//                quota(0, price);
-//            }
+        } else if (macd.isDeadCross(true)) {
             if (brm.initAsset != 0) {
                 if (price > brm.buyPrice) {
                     gainPositionDaysArray.add(positionDays);
@@ -706,9 +684,6 @@ public class MainView extends javax.swing.JFrame {
                 cycleYears = (double) tradingDays / 244;
                 msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
             }
-        } else if ((macd.DIFY > 0) && (macd.DIFT < 0)) {
-//            position = 0;
-//            quota(position, price);
         }
     }
 

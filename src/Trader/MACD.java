@@ -50,6 +50,22 @@ public class MACD {
         LTFT = (DIFT >= 0);
     }
 
+    public boolean isGoldCross(boolean shortFlag) {
+        if (shortFlag) {
+            return (STFY == false) && (STFT == true);
+        } else {
+            return (LTFY == false) && (LTFT == true);
+        }
+    }
+
+    public boolean isDeadCross(boolean shortFlag) {
+        if (shortFlag) {
+            return (STFY == true) && (STFT == false);
+        } else {
+            return (LTFY == true) && (LTFT == false);
+        }
+    }
+
     public double EMASY = 0;
     public double EMAST = 0;
     public double EMALY = 0;
