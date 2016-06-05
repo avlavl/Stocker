@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -89,7 +90,7 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemMACD = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("交易系统");
+        setTitle("证券交易系统");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,21 +119,29 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTablePoint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"上关键点", null, "上关键点", null},
-                {"下关键点", null, "下关键点", null},
-                {"上升趋势", null, "下降趋势", null},
-                {"自然回撤", null, "自然回撤", null},
-                {"自然回升", null, "自然回升", null},
-                {"次级回撤", null, "次级回撤", null},
-                {"次级回升", null, "次级回升", null}
+                {"净利润", null, "收益率", ""},
+                {"总盈利", null, "年化收益", null},
+                {"总亏损", null, "持仓时间比", ""},
+                {"盈利次数", null, "平均持仓期", null},
+                {"亏损次数", null, "平均盈利期", null},
+                {"胜率(P)", null, "平均亏损期", ""},
+                {"平均盈利", "", "最大盈利", null},
+                {"平均亏损", null, "最大亏损", null},
+                {"赔率(R)", "", "数学期望", null}
             },
             new String [] {
-                "上升趋势", "值", "下降趋势", "值"
+                "统计指标", "全部交易", "统计指标", "全部交易"
             }
         ));
         jScrollPane1.setViewportView(jTablePoint);
+        if (jTablePoint.getColumnModel().getColumnCount() > 0) {
+            jTablePoint.getColumnModel().getColumn(0).setPreferredWidth(70);
+            jTablePoint.getColumnModel().getColumn(0).setMaxWidth(70);
+            jTablePoint.getColumnModel().getColumn(2).setPreferredWidth(70);
+            jTablePoint.getColumnModel().getColumn(2).setMaxWidth(70);
+        }
 
-        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 330, 142));
+        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 330, 174));
 
         jPanelPrice.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "行情", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelPrice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -169,7 +178,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelMA4.setText("MA60：");
         jPanelPrice.add(jLabelMA4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
 
-        jPanelMain.add(jPanelPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 300, 110));
+        jPanelMain.add(jPanelPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 300, 110));
 
         jButtonImport.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonImport.setText("导入");
@@ -260,7 +269,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelConfig.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
 
-        jPanelMain.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 320, 170));
+        jPanelMain.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 320, 170));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 420));
 
@@ -340,7 +349,7 @@ public class MainView extends javax.swing.JFrame {
             } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
             parseStatus(lm.Status);
-            updateTable(lm);
+            updateTable(brm);
 
             bufferedReader.close();
             fileReader.close();
@@ -371,12 +380,14 @@ public class MainView extends javax.swing.JFrame {
 
             do {
                 if ((line = bufferedReader.readLine()) != null) {
+                    totalDaysNumber++;
                     words = line.split("\t");
                     updateMarket(line);
                     doMACDAnalysis(macd, brm);
                 }
             } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
+            updateTable(brm);
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e1) {
@@ -457,37 +468,25 @@ public class MainView extends javax.swing.JFrame {
             double price = Double.parseDouble(strClose);
             switch (lm.Status) {
                 case "mainRiseStatus":
-                    if (lm.formerStatus.equals("")) {
-                        brm.propertyOrig = price;
-                        msgLogger("首次买入" + price + "\t当前资产：0");
-                    } else {
-                        brm.quota(true, price);
-                        msgLogger("买入价：" + price + "\t剩余资金：" + brm.asset);
-                    }
+                    brm.quota(true, price);
+                    msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
                     lm.formerStatus = lm.Status;
                     break;
                 case "normalFallUStatus":
-                    break;
                 case "normalRiseUStatus":
-                    break;
                 case "minorFallUStatus":
-                    break;
                 case "minorRiseUStatus":
                     break;
 
                 case "mainFallStatus":
                     brm.quota(false, price);
-                    msgLogger("卖出价：" + price + "\t总资产：" + brm.asset);
+                    msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
                     lm.formerStatus = lm.Status;
                     break;
                 case "normalRiseDStatus":
-                    break;
                 case "normalFallDStatus":
-                    break;
                 case "minorRiseDStatus":
-                    break;
                 case "minorFallDStatus":
-                    break;
                 default:
                     break;
             }
@@ -567,22 +566,71 @@ public class MainView extends javax.swing.JFrame {
         jLabelMA4.setText("MA60：" + strMA60);
     }
 
-    protected void updateTable(Livermore lm) {
-        jTablePoint.setValueAt(lm.riseKeyHead, 0, 1);
-        jTablePoint.setValueAt(lm.riseKeyFoot, 1, 1);
-        jTablePoint.setValueAt(lm.mainRiseVal, 2, 1);
-        jTablePoint.setValueAt(lm.normalFallUVal, 3, 1);
-        jTablePoint.setValueAt(lm.normalRiseUVal, 4, 1);
-        jTablePoint.setValueAt(lm.minorFallUVal, 5, 1);
-        jTablePoint.setValueAt(lm.minorRiseUVal, 6, 1);
+    protected void updateTable(BRM brm) {
+        jTablePoint.setValueAt((float) brm.getNetProfit(), 0, 1);
+        jTablePoint.setValueAt((float) brm.getGainProfit(), 1, 1);
+        jTablePoint.setValueAt((float) brm.getLossProfit(), 2, 1);
+        jTablePoint.setValueAt(brm.getGainTimes(), 3, 1);
+        jTablePoint.setValueAt(brm.getLossTimes(), 4, 1);
+        jTablePoint.setValueAt((float) brm.getWinRate(), 5, 1);
+        jTablePoint.setValueAt((float) brm.getMeanGain(), 6, 1);
+        jTablePoint.setValueAt((float) brm.getMeanLoss(), 7, 1);
+        jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
 
-        jTablePoint.setValueAt(lm.fallKeyHead, 0, 3);
-        jTablePoint.setValueAt(lm.fallKeyFoot, 1, 3);
-        jTablePoint.setValueAt(lm.mainFallVal, 2, 3);
-        jTablePoint.setValueAt(lm.normalFallDVal, 3, 3);
-        jTablePoint.setValueAt(lm.normalRiseDVal, 4, 3);
-        jTablePoint.setValueAt(lm.minorFallDVal, 5, 3);
-        jTablePoint.setValueAt(lm.minorRiseDVal, 6, 3);
+        jTablePoint.setValueAt((float) brm.getEarningRate(), 0, 3);
+        System.out.println("cycleDaysNumber:" + cycleDaysNumber + "totalDaysNumber:" + totalDaysNumber);
+        jTablePoint.setValueAt((float) brm.getAnnualRate((double) cycleDaysNumber / 245), 1, 3);
+        jTablePoint.setValueAt((float) getPositionDaysRate(), 2, 3);
+        jTablePoint.setValueAt((float) getMeanPositionDays(brm), 3, 3);
+        jTablePoint.setValueAt((float) getMeanGainDays(brm), 4, 3);
+        jTablePoint.setValueAt((float) getMeanLossDays(brm), 5, 3);
+        jTablePoint.setValueAt((float) brm.getMaxGain(), 6, 3);
+        jTablePoint.setValueAt((float) brm.getMaxLoss(), 7, 3);
+        jTablePoint.setValueAt((float) brm.getExpectation(), 8, 3);
+    }
+
+    public double getPositionDaysRate() {
+        int positionDays = 0;
+        for (Integer days : gainPositionDaysArray) {
+            positionDays += days;
+        }
+        for (Integer days : lossPositionDaysArray) {
+            positionDays += days;
+        }
+        double rate = (double) positionDays / totalDaysNumber;
+        return rate;
+    }
+
+    public double getMeanPositionDays(BRM brm) {
+        int positionDays = 0;
+        for (Integer days : gainPositionDaysArray) {
+            positionDays += days;
+        }
+        for (Integer days : lossPositionDaysArray) {
+            positionDays += days;
+        }
+        int tradingTimes = brm.getGainTimes() + brm.getLossTimes();
+        return (double) positionDays / tradingTimes;
+    }
+
+    public double getMeanGainDays(BRM brm) {
+        int positionDays = 0;
+        for (Integer days : gainPositionDaysArray) {
+            positionDays += days;
+        }
+
+        int tradingTimes = brm.getGainTimes();
+        return (double) positionDays / tradingTimes;
+    }
+
+    public double getMeanLossDays(BRM brm) {
+        int positionDays = 0;
+        for (Integer days : lossPositionDaysArray) {
+            positionDays += days;
+        }
+
+        int tradingTimes = brm.getLossTimes();
+        return (double) positionDays / tradingTimes;
     }
 
     protected void statusRecord(Livermore lm, String msg) {
@@ -610,6 +658,9 @@ public class MainView extends javax.swing.JFrame {
 
     protected void doMACDAnalysis(MACD macd, BRM brm) {
         double price = Double.parseDouble(strClose);
+        if (postionDaysNumber > 0) {
+            postionDaysNumber++;
+        }
         macd.arithmetic(price);
         if (!macd.STFY && macd.STFT) {
 //            if (position == 0) {
@@ -620,8 +671,10 @@ public class MainView extends javax.swing.JFrame {
 //                position = 3;
 //            }
 //            quota(position, price);
+
             brm.quota(true, price);
-            msgLogger("买入价：" + price + "\t剩余资金：" + brm.asset);
+            postionDaysNumber++;
+            msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
         } else if (macd.STFY && !macd.STFT) {
 //            if (position == 1) {
 //                position = 11;
@@ -636,8 +689,17 @@ public class MainView extends javax.swing.JFrame {
 //                position = 0;
 //                quota(0, price);
 //            }
-            brm.quota(false, price);
-            msgLogger("卖出价：" + price + "\t总资产：" + brm.asset);
+            if (brm.initAsset != 0) {
+                if (price > brm.buyPrice) {
+                    gainPositionDaysArray.add(postionDaysNumber);
+                } else {
+                    lossPositionDaysArray.add(postionDaysNumber);
+                }
+                postionDaysNumber = 0;
+                brm.quota(false, price);
+                cycleDaysNumber = totalDaysNumber;
+                msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
+            }
         } else if ((macd.DIFY > 0) && (macd.DIFT < 0)) {
 //            position = 0;
 //            quota(position, price);
@@ -675,6 +737,12 @@ public class MainView extends javax.swing.JFrame {
     public FileReader fileReader;
     public FileWriter fileWriter;
     public BufferedReader bufferedReader;
+
+    public int totalDaysNumber = 0;
+    public int cycleDaysNumber = 0;
+    public int postionDaysNumber = 0;
+    public ArrayList<Integer> gainPositionDaysArray = new ArrayList<>();
+    public ArrayList<Integer> lossPositionDaysArray = new ArrayList<>();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;

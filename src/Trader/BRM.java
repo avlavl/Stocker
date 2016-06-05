@@ -5,6 +5,9 @@
  */
 package Trader;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author zhangxr
@@ -16,10 +19,23 @@ public class BRM {
     }
 
     protected void quota(boolean bs, double price) {
+        bs_flag = bs;
         if (bs) {
-            asset -= price;
-        } else {
+            if (initAsset == 0) {
+                initAsset = price;
+            } else {
+                asset -= price;
+            }
+            buyPrice = price;
+        } else if (initAsset != 0) {
             asset += price;
+            sellPrice = price;
+            double agio = sellPrice - buyPrice;
+            if (agio > 0) {
+                gainAgioArray.add(agio);
+            } else {
+                lossAgioArray.add(agio);
+            }
         }
     }
 
@@ -109,6 +125,93 @@ public class BRM {
         }
     }
 
+    public double getNetProfit() {
+        double profit = 0;
+        for (Double gain : gainAgioArray) {
+            profit += gain;
+        }
+        for (Double loss : lossAgioArray) {
+            profit += loss;
+        }
+        return profit;
+    }
+
+    public double getGainProfit() {
+        double profit = 0;
+        for (Double gain : gainAgioArray) {
+            profit += gain;
+        }
+        return profit;
+    }
+
+    public double getLossProfit() {
+        double profit = 0;
+        for (Double loss : lossAgioArray) {
+            profit += loss;
+        }
+        return profit;
+    }
+
+    public int getGainTimes() {
+        return gainAgioArray.size();
+    }
+
+    public int getLossTimes() {
+        return lossAgioArray.size();
+    }
+
+    public double getWinRate() {
+        int gainTimes = gainAgioArray.size();
+        int lossTimes = lossAgioArray.size();
+        return (double) gainTimes / (gainTimes + lossTimes);
+    }
+
+    public double getMeanGain() {
+        double profit = 0;
+        for (Double gain : gainAgioArray) {
+            profit += gain;
+        }
+        return (double) profit / gainAgioArray.size();
+    }
+
+    public double getMeanLoss() {
+        double profit = 0;
+        for (Double loss : lossAgioArray) {
+            profit += loss;
+        }
+        return (double) profit / lossAgioArray.size();
+    }
+
+    public double getOdds() {
+        double gain = getMeanGain();
+        double loss = getMeanLoss();
+        return (double) gain / (-loss);
+    }
+
+    public double getEarningRate() {
+        double profit = getNetProfit();
+        return (double) 100 * profit / initAsset;
+    }
+
+    public double getAnnualRate(double years) {
+        System.out.println("year:" + years);
+        double rate = (initAsset + getNetProfit()) / initAsset;
+        return (double) 100 * (Math.pow(rate, (double) 1 / years) - 1);
+    }
+
+    public double getMaxGain() {
+        return (double) Collections.max(gainAgioArray);
+    }
+
+    public double getMaxLoss() {
+        return (double) Collections.min(lossAgioArray);
+    }
+
+    public double getExpectation() {
+        double winRate = getWinRate();
+        double odds = getOdds();
+        return (double) (winRate * odds - (1 - winRate));
+    }
     public double asset = 10000000;
     private double moneyAsset = 10000000;
     private double stockAsset = 0;
@@ -121,6 +224,15 @@ public class BRM {
     private double addPrice2 = 0;
     private int position = 0;
 
-    public double propertyOrig = 0;
+    public double initAsset = 0;
     private double ratio = 1;
+
+    public double buyPrice = 0;
+    public double sellPrice = 0;
+
+    public ArrayList<Double> gainAgioArray = new ArrayList<>();
+    public ArrayList<Double> lossAgioArray = new ArrayList<>();
+
+    private boolean bs_flag = false;
+
 }

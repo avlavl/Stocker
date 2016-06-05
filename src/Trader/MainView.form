@@ -44,7 +44,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="&#x4ea4;&#x6613;&#x7cfb;&#x7edf;"/>
+    <Property name="title" type="java.lang.String" value="&#x8bc1;&#x5238;&#x4ea4;&#x6613;&#x7cfb;&#x7edf;"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar"/>
@@ -151,7 +151,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="170" width="330" height="142"/>
+              <AbsoluteConstraints x="10" y="150" width="330" height="174"/>
             </Constraint>
           </Constraints>
 
@@ -163,32 +163,56 @@
                   <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="7">
-                    <Column editable="true" title="&#x4e0a;&#x5347;&#x8d8b;&#x52bf;" type="java.lang.Object">
-                      <Data value="&#x4e0a;&#x5173;&#x952e;&#x70b9;"/>
-                      <Data value="&#x4e0b;&#x5173;&#x952e;&#x70b9;"/>
-                      <Data value="&#x4e0a;&#x5347;&#x8d8b;&#x52bf;"/>
-                      <Data value="&#x81ea;&#x7136;&#x56de;&#x64a4;"/>
-                      <Data value="&#x81ea;&#x7136;&#x56de;&#x5347;"/>
-                      <Data value="&#x6b21;&#x7ea7;&#x56de;&#x64a4;"/>
-                      <Data value="&#x6b21;&#x7ea7;&#x56de;&#x5347;"/>
+                  <Table columnCount="4" rowCount="9">
+                    <Column editable="true" title="&#x7edf;&#x8ba1;&#x6307;&#x6807;" type="java.lang.Object">
+                      <Data value="&#x51c0;&#x5229;&#x6da6;"/>
+                      <Data value="&#x603b;&#x76c8;&#x5229;"/>
+                      <Data value="&#x603b;&#x4e8f;&#x635f;"/>
+                      <Data value="&#x76c8;&#x5229;&#x6b21;&#x6570;"/>
+                      <Data value="&#x4e8f;&#x635f;&#x6b21;&#x6570;"/>
+                      <Data value="&#x80dc;&#x7387;(P)"/>
+                      <Data value="&#x5e73;&#x5747;&#x76c8;&#x5229;"/>
+                      <Data value="&#x5e73;&#x5747;&#x4e8f;&#x635f;"/>
+                      <Data value="&#x8d54;&#x7387;(R)"/>
                     </Column>
-                    <Column editable="true" title="&#x503c;" type="java.lang.Object"/>
-                    <Column editable="true" title="&#x4e0b;&#x964d;&#x8d8b;&#x52bf;" type="java.lang.Object">
-                      <Data value="&#x4e0a;&#x5173;&#x952e;&#x70b9;"/>
-                      <Data value="&#x4e0b;&#x5173;&#x952e;&#x70b9;"/>
-                      <Data value="&#x4e0b;&#x964d;&#x8d8b;&#x52bf;"/>
-                      <Data value="&#x81ea;&#x7136;&#x56de;&#x64a4;"/>
-                      <Data value="&#x81ea;&#x7136;&#x56de;&#x5347;"/>
-                      <Data value="&#x6b21;&#x7ea7;&#x56de;&#x64a4;"/>
-                      <Data value="&#x6b21;&#x7ea7;&#x56de;&#x5347;"/>
+                    <Column editable="true" title="&#x5168;&#x90e8;&#x4ea4;&#x6613;" type="java.lang.Object">
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value=""/>
+                      <Data value="null"/>
+                      <Data value=""/>
                     </Column>
-                    <Column editable="true" title="&#x503c;" type="java.lang.Object"/>
+                    <Column editable="true" title="&#x7edf;&#x8ba1;&#x6307;&#x6807;" type="java.lang.Object">
+                      <Data value="&#x6536;&#x76ca;&#x7387;"/>
+                      <Data value="&#x5e74;&#x5316;&#x6536;&#x76ca;"/>
+                      <Data value="&#x6301;&#x4ed3;&#x65f6;&#x95f4;&#x6bd4;"/>
+                      <Data value="&#x5e73;&#x5747;&#x6301;&#x4ed3;&#x671f;"/>
+                      <Data value="&#x5e73;&#x5747;&#x76c8;&#x5229;&#x671f;"/>
+                      <Data value="&#x5e73;&#x5747;&#x4e8f;&#x635f;&#x671f;"/>
+                      <Data value="&#x6700;&#x5927;&#x76c8;&#x5229;"/>
+                      <Data value="&#x6700;&#x5927;&#x4e8f;&#x635f;"/>
+                      <Data value="&#x6570;&#x5b66;&#x671f;&#x671b;"/>
+                    </Column>
+                    <Column editable="true" title="&#x5168;&#x90e8;&#x4ea4;&#x6613;" type="java.lang.Object">
+                      <Data value=""/>
+                      <Data value="null"/>
+                      <Data value=""/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value=""/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                      <Data value="null"/>
+                    </Column>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="70" minWidth="-1" prefWidth="70" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -198,7 +222,7 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="70" minWidth="-1" prefWidth="70" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -232,7 +256,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="50" width="300" height="110"/>
+              <AbsoluteConstraints x="360" y="50" width="300" height="110"/>
             </Constraint>
           </Constraints>
 
@@ -394,7 +418,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="350" y="140" width="320" height="170"/>
+              <AbsoluteConstraints x="350" y="160" width="320" height="170"/>
             </Constraint>
           </Constraints>
 
