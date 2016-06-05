@@ -121,13 +121,13 @@ public class MainView extends javax.swing.JFrame {
             new Object [][] {
                 {"净利润", null, "收益率", ""},
                 {"总盈利", null, "年化收益", null},
-                {"总亏损", null, "持仓时间比", ""},
-                {"盈利次数", null, "平均持仓期", null},
-                {"亏损次数", null, "平均盈利期", null},
-                {"胜率(P)", null, "平均亏损期", ""},
-                {"平均盈利", "", "最大盈利", null},
-                {"平均亏损", null, "最大亏损", null},
-                {"赔率(R)", "", "数学期望", null}
+                {"总亏损", null, "最大盈利", ""},
+                {"盈利次数", null, "最大亏损", null},
+                {"亏损次数", null, "数学期望", null},
+                {"胜率(P)", null, "持仓时间比", ""},
+                {"平均盈利", "", "平均持仓期", null},
+                {"平均亏损", null, "平均盈利期", null},
+                {"赔率(R)", "", "平均亏损期", null}
             },
             new String [] {
                 "统计指标", "全部交易", "统计指标", "全部交易"
@@ -585,14 +585,14 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
 
         jTablePoint.setValueAt((float) brm.getEarningRate(), 0, 3);
-        jTablePoint.setValueAt((float) brm.getAnnualRate((double) cycleDaysNumber / 245), 1, 3);
-        jTablePoint.setValueAt((float) getPositionDaysRate(), 2, 3);
-        jTablePoint.setValueAt((float) getMeanPositionDays(brm), 3, 3);
-        jTablePoint.setValueAt((float) getMeanGainDays(brm), 4, 3);
-        jTablePoint.setValueAt((float) getMeanLossDays(brm), 5, 3);
-        jTablePoint.setValueAt((float) brm.getMaxGain(), 6, 3);
-        jTablePoint.setValueAt((float) brm.getMaxLoss(), 7, 3);
-        jTablePoint.setValueAt((float) brm.getExpectation(), 8, 3);
+        jTablePoint.setValueAt((float) brm.getAnnualRate((double) cycleDaysNumber / 244), 1, 3);
+        jTablePoint.setValueAt((float) brm.getMaxGain(), 2, 3);
+        jTablePoint.setValueAt((float) brm.getMaxLoss(), 3, 3);
+        jTablePoint.setValueAt((float) brm.getExpectation(), 4, 3);
+        jTablePoint.setValueAt((float) getPositionDaysRate(), 5, 3);
+        jTablePoint.setValueAt((float) getMeanPositionDays(brm), 6, 3);
+        jTablePoint.setValueAt((float) getMeanGainDays(brm), 7, 3);
+        jTablePoint.setValueAt((float) getMeanLossDays(brm), 8, 3);
     }
 
     public double getPositionDaysRate() {
