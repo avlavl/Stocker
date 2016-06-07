@@ -8,11 +8,11 @@ package Trader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -35,6 +35,8 @@ public class MainView extends javax.swing.JFrame {
         if (filename != null) {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
         }
+
+        importFile(fileIn);
     }
 
     /**
@@ -94,14 +96,14 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelStockName.setFont(new java.awt.Font("华文行楷", 0, 18)); // NOI18N
-        jLabelStockName.setForeground(new java.awt.Color(0, 0, 255));
+        jLabelStockName.setFont(new java.awt.Font("华文新魏", 0, 18)); // NOI18N
+        jLabelStockName.setForeground(new java.awt.Color(0, 0, 204));
         jLabelStockName.setText("上证指数");
         jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabelStockCode.setFont(new java.awt.Font("黑体", 0, 16)); // NOI18N
-        jLabelStockCode.setForeground(new java.awt.Color(0, 0, 255));
+        jLabelStockCode.setForeground(new java.awt.Color(0, 0, 204));
         jLabelStockCode.setText("(000001)");
         jPanelMain.add(jLabelStockCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
@@ -306,15 +308,14 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportActionPerformed
-        dataImport();
+        importFile(null);
     }//GEN-LAST:event_jMenuItemImportActionPerformed
 
     private void jButtonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
-        dataImport();
+        importFile(null);
     }//GEN-LAST:event_jButtonImportActionPerformed
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestActionPerformed
-        String line;
         String[] words = null;
 
         if ((jTextFieldEndDate.getText().compareTo(jTextFieldStartDate.getText()) < 0)) {
@@ -332,27 +333,20 @@ public class MainView extends javax.swing.JFrame {
 
         try {
             fileWriter = new FileWriter(fileOut);
-            fileReader = new FileReader(fileIn);
-            bufferedReader = new BufferedReader(fileReader);
-            bufferedReader.readLine();
-            bufferedReader.readLine();
 
-            do {
-                if ((line = bufferedReader.readLine()) != null) {
-                    words = line.split("\t");
-                    if ((words[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (words[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
-                        updateMarket(line);
-                        doModeComputing(lm);
-                        doLivermoreAnalysis(lm, brm);
-                    }
+            for (String line : dataLineArrayList) {
+                words = line.split("\t");
+                if ((words[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (words[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
+                    updateMarket(line);
+                    doModeComputing(lm);
+                    doLivermoreAnalysis(lm, brm);
+                } else if (words[0].compareTo(jTextFieldEndDate.getText()) > 0) {
+                    break;
                 }
-            } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
-
+            }
             parseStatus(lm.Status);
             //updateTable(brm);
 
-            bufferedReader.close();
-            fileReader.close();
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e1) {
@@ -366,7 +360,6 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
-        String line;
         String[] words = null;
 
         MACD macd = new MACD(12, 26, 9);
@@ -374,51 +367,51 @@ public class MainView extends javax.swing.JFrame {
         Strategy strategy = new Strategy(this, brm);
         strategy.macd = macd;
 
-        try {
-            fileReader = new FileReader(fileIn);
-            bufferedReader = new BufferedReader(fileReader);
-            bufferedReader.readLine();
-            bufferedReader.readLine();
-
-            do {
-                if ((line = bufferedReader.readLine()) != null) {
-                    words = line.split("\t");
-                    updateMarket(line);
-                    double price = Double.parseDouble(strClose);
-                    strategy.macdCrossTrade(price);
-                }
-            } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
-
-            updateTable(brm, strategy);
-            bufferedReader.close();
-            fileReader.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        for (String line : dataLineArrayList) {
+            words = line.split("\t");
+            updateMarket(line);
+            double price = Double.parseDouble(strClose);
+            strategy.macdCrossTrade(price);
         }
+        updateTable(brm, strategy);
     }//GEN-LAST:event_jMenuItemMACDActionPerformed
 
-    protected void dataImport() {
-        JFileChooser chooser = new JFileChooser("data/");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Stock Data File (*.txt)", "txt");
-        chooser.setFileFilter(filter);
-        chooser.setDialogTitle("Select Stock Data File");
-        int ret = chooser.showOpenDialog(this);
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            fileIn = chooser.getSelectedFile().getPath();
-            fileOut = fileIn.substring(0, fileIn.length() - 4) + "_out.txt";
-
-            try {
-                File file = new File(fileIn);
-                InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
-                BufferedReader br = new BufferedReader(isr);
-                String[] s = br.readLine().split("\t");
-                jLabelStockCode.setText("(" + s[0].replaceAll("[\\pP\\p{Punct}]", "") + ")");
-                jLabelStockName.setText(s[1]);
-                br.close();
-                isr.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+    protected void importFile(String fileName) {
+        if (fileName == null) {
+            JFileChooser chooser = new JFileChooser("data/");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Data File (*.txt)", "txt");
+            chooser.setFileFilter(filter);
+            chooser.setDialogTitle("Select Data File");
+            int ret = chooser.showOpenDialog(this);
+            if (ret == JFileChooser.APPROVE_OPTION) {
+                fileIn = chooser.getSelectedFile().getPath();
+                fileOut = fileIn.substring(0, fileIn.length() - 4) + "_测试日志.txt";
+            } else {
+                return;
             }
+        } else {
+            fileIn = fileName;
+            fileOut = fileIn.substring(0, fileIn.length() - 4) + "_测试日志.txt";
+        }
+
+        try {
+            File file = new File(fileIn);
+            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
+            BufferedReader br = new BufferedReader(isr);
+            String[] words = br.readLine().split("\t");
+            jLabelStockName.setText(words[1]);
+            jLabelStockCode.setText("(" + words[0].replaceAll("[\\pP\\p{Punct}]", "") + ")");
+            words = br.readLine().split("\t");
+            column = words.length;
+            String line;
+            dataLineArrayList = new ArrayList<>();
+            while ((line = br.readLine()) != null) {
+                dataLineArrayList.add(line);
+            }
+            br.close();
+            isr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -641,10 +634,11 @@ public class MainView extends javax.swing.JFrame {
     private String strMA60 = "";
 
     private String fileIn = "data\\上证指数.txt";
-    private String fileOut = "data\\上证指数_out.txt";
-    public FileReader fileReader;
+    private String fileOut = "data\\上证指数_测试日志.txt";
     public FileWriter fileWriter;
-    public BufferedReader bufferedReader;
+
+    public int column = 15;
+    public ArrayList<String> dataLineArrayList;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;
