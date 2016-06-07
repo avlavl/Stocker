@@ -51,7 +51,7 @@ public class Strategy {
         for (Integer days : lossPositionDaysArray) {
             sumDays += days;
         }
-        double rate = (double) sumDays / tradingDays;
+        double rate = (double) 100 * sumDays / tradingDays;
         return rate;
     }
 

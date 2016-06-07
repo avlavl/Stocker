@@ -118,15 +118,16 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTablePoint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"净利润", null, "收益率", ""},
-                {"总盈利", null, "年化收益", null},
-                {"总亏损", null, "最大盈利", ""},
-                {"盈利次数", null, "最大亏损", null},
-                {"亏损次数", null, "数学期望", null},
+                {"净利润", null, "测试周期", ""},
+                {"总盈利", null, "收益率", null},
+                {"总亏损", null, "年化收益", ""},
+                {"盈利次数", null, "最大盈利", null},
+                {"亏损次数", null, "最大亏损", null},
                 {"胜率(P)", null, "持仓时间比", ""},
                 {"平均盈利", "", "平均持仓期", null},
                 {"平均亏损", null, "平均盈利期", null},
-                {"赔率(R)", "", "平均亏损期", null}
+                {"赔率(R)", "", "平均亏损期", null},
+                {"数学期望", null, null, null}
             },
             new String [] {
                 "统计指标", "全部交易", "统计指标", "全部交易"
@@ -140,7 +141,7 @@ public class MainView extends javax.swing.JFrame {
             jTablePoint.getColumnModel().getColumn(2).setMaxWidth(70);
         }
 
-        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 330, 174));
+        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 330, 190));
 
         jPanelPrice.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "行情", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelPrice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -577,16 +578,17 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getMeanGain(), 6, 1);
         jTablePoint.setValueAt((float) brm.getMeanLoss(), 7, 1);
         jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
+        jTablePoint.setValueAt((float) brm.getExpectation(), 9, 1);
 
-        jTablePoint.setValueAt((float) brm.getEarningRate(), 0, 3);
-        jTablePoint.setValueAt((float) brm.getAnnualRate(stg.cycleYears), 1, 3);
-        jTablePoint.setValueAt((float) brm.getMaxGain(), 2, 3);
-        jTablePoint.setValueAt((float) brm.getMaxLoss(), 3, 3);
-        jTablePoint.setValueAt((float) brm.getExpectation(), 4, 3);
-        jTablePoint.setValueAt((float) stg.getPositionDaysRate(), 5, 3);
-        jTablePoint.setValueAt((float) stg.getMeanPositionDays(brm), 6, 3);
-        jTablePoint.setValueAt((float) stg.getMeanGainDays(brm), 7, 3);
-        jTablePoint.setValueAt((float) stg.getMeanLossDays(brm), 8, 3);
+        jTablePoint.setValueAt((float) stg.cycleYears + "年", 0, 3);
+        jTablePoint.setValueAt((float) brm.getEarningRate() + "%", 1, 3);
+        jTablePoint.setValueAt((float) brm.getAnnualRate(stg.cycleYears) + "%", 2, 3);
+        jTablePoint.setValueAt((float) brm.getMaxGain(), 3, 3);
+        jTablePoint.setValueAt((float) brm.getMaxLoss(), 4, 3);
+        jTablePoint.setValueAt((float) stg.getPositionDaysRate() + "%", 5, 3);
+        jTablePoint.setValueAt((float) stg.getMeanPositionDays(brm) + "天", 6, 3);
+        jTablePoint.setValueAt((float) stg.getMeanGainDays(brm) + "天", 7, 3);
+        jTablePoint.setValueAt((float) stg.getMeanLossDays(brm) + "天", 8, 3);
     }
 
     protected void statusRecord(Livermore lm, String msg) {

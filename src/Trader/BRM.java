@@ -194,7 +194,6 @@ public class BRM {
     }
 
     public double getAnnualRate(double years) {
-        System.out.println("year:" + years);
         double rate = (initAsset + getNetProfit()) / initAsset;
         return (double) 100 * (Math.pow(rate, (double) 1 / years) - 1);
     }
