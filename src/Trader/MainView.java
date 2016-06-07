@@ -13,7 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -349,7 +348,7 @@ public class MainView extends javax.swing.JFrame {
             } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
             parseStatus(lm.Status);
-            updateTable(brm);
+            //updateTable(brm);
 
             bufferedReader.close();
             fileReader.close();
@@ -371,10 +370,8 @@ public class MainView extends javax.swing.JFrame {
 
         MACD macd = new MACD(12, 26, 9);
         BRM brm = new BRM(0);
-
-        gainPositionDaysArray = new ArrayList<>();
-        lossPositionDaysArray = new ArrayList<>();
-        positionDays = 0;
+        Strategy strategy = new Strategy(this, brm);
+        strategy.macd = macd;
 
         try {
             fileReader = new FileReader(fileIn);
@@ -384,17 +381,14 @@ public class MainView extends javax.swing.JFrame {
 
             do {
                 if ((line = bufferedReader.readLine()) != null) {
-                    tradingDays++;
                     words = line.split("\t");
                     updateMarket(line);
-                    doMACDAnalysis(macd, brm);
+                    double price = Double.parseDouble(strClose);
+                    strategy.macdCrossTrade(price);
                 }
             } while (((line != null) && words[0].compareTo(jTextFieldEndDate.getText()) < 0));
 
-            updateTable(brm);
-            System.out.println(gainPositionDaysArray);
-            System.out.println(lossPositionDaysArray);
-            tradingDays = 0;
+            updateTable(brm, strategy);
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e1) {
@@ -573,7 +567,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelMA4.setText("MA60：" + strMA60);
     }
 
-    protected void updateTable(BRM brm) {
+    protected void updateTable(BRM brm, Strategy stg) {
         jTablePoint.setValueAt((float) brm.getNetProfit(), 0, 1);
         jTablePoint.setValueAt((float) brm.getGainProfit(), 1, 1);
         jTablePoint.setValueAt((float) brm.getLossProfit(), 2, 1);
@@ -585,58 +579,14 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
 
         jTablePoint.setValueAt((float) brm.getEarningRate(), 0, 3);
-        jTablePoint.setValueAt((float) brm.getAnnualRate(cycleYears), 1, 3);
+        jTablePoint.setValueAt((float) brm.getAnnualRate(stg.cycleYears), 1, 3);
         jTablePoint.setValueAt((float) brm.getMaxGain(), 2, 3);
         jTablePoint.setValueAt((float) brm.getMaxLoss(), 3, 3);
         jTablePoint.setValueAt((float) brm.getExpectation(), 4, 3);
-        jTablePoint.setValueAt((float) getPositionDaysRate(), 5, 3);
-        jTablePoint.setValueAt((float) getMeanPositionDays(brm), 6, 3);
-        jTablePoint.setValueAt((float) getMeanGainDays(brm), 7, 3);
-        jTablePoint.setValueAt((float) getMeanLossDays(brm), 8, 3);
-    }
-
-    public double getPositionDaysRate() {
-        int sumDays = 0;
-        for (Integer days : gainPositionDaysArray) {
-            sumDays += days;
-        }
-        for (Integer days : lossPositionDaysArray) {
-            sumDays += days;
-        }
-        double rate = (double) sumDays / tradingDays;
-        return rate;
-    }
-
-    public double getMeanPositionDays(BRM brm) {
-        int sumDays = 0;
-        for (Integer days : gainPositionDaysArray) {
-            sumDays += days;
-        }
-        for (Integer days : lossPositionDaysArray) {
-            sumDays += days;
-        }
-        int tradingTimes = brm.getGainTimes() + brm.getLossTimes();
-        return (double) sumDays / tradingTimes;
-    }
-
-    public double getMeanGainDays(BRM brm) {
-        int sumDays = 0;
-        for (Integer days : gainPositionDaysArray) {
-            sumDays += days;
-        }
-
-        int tradingTimes = brm.getGainTimes();
-        return (double) sumDays / tradingTimes;
-    }
-
-    public double getMeanLossDays(BRM brm) {
-        int sumDays = 0;
-        for (Integer days : lossPositionDaysArray) {
-            sumDays += days;
-        }
-
-        int tradingTimes = brm.getLossTimes();
-        return (double) sumDays / tradingTimes;
+        jTablePoint.setValueAt((float) stg.getPositionDaysRate(), 5, 3);
+        jTablePoint.setValueAt((float) stg.getMeanPositionDays(brm), 6, 3);
+        jTablePoint.setValueAt((float) stg.getMeanGainDays(brm), 7, 3);
+        jTablePoint.setValueAt((float) stg.getMeanLossDays(brm), 8, 3);
     }
 
     protected void statusRecord(Livermore lm, String msg) {
@@ -658,31 +608,6 @@ public class MainView extends javax.swing.JFrame {
                         + "\t\t次级回撤：" + lm.minorFallDVal
                         + "\r\n次级回升：" + lm.minorRiseUVal
                         + "\t\t次级回升：" + lm.minorRiseDVal);
-            }
-        }
-    }
-
-    protected void doMACDAnalysis(MACD macd, BRM brm) {
-        double price = Double.parseDouble(strClose);
-        if (positionDays > 0) {
-            positionDays++;
-        }
-        macd.arithmetic(price);
-        if (macd.isGoldCross(true)) {
-            brm.quota(true, price);
-            positionDays++;
-            msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
-        } else if (macd.isDeadCross(true)) {
-            if (brm.initAsset != 0) {
-                if (price > brm.buyPrice) {
-                    gainPositionDaysArray.add(positionDays);
-                } else {
-                    lossPositionDaysArray.add(positionDays);
-                }
-                positionDays = 0;
-                brm.quota(false, price);
-                cycleYears = (double) tradingDays / 244;
-                msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
             }
         }
     }
@@ -718,12 +643,6 @@ public class MainView extends javax.swing.JFrame {
     public FileReader fileReader;
     public FileWriter fileWriter;
     public BufferedReader bufferedReader;
-
-    public int tradingDays = 0;
-    public int positionDays = 0;
-    public double cycleYears = 0;
-    public ArrayList<Integer> gainPositionDaysArray;
-    public ArrayList<Integer> lossPositionDaysArray;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;
