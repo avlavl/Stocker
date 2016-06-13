@@ -23,7 +23,6 @@ public class Strategy {
         if (positionDays > 0) {
             positionDays++;
         }
-        macd.arithmetic(price);
         if (macd.isGoldCross(true)) {
             brm.quota(true, price);
             positionDays++;

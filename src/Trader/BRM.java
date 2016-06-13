@@ -199,11 +199,17 @@ public class BRM {
     }
 
     public double getMaxGain() {
-        return (double) Collections.max(gainAgioArray);
+        if (gainAgioArray.size() > 0) {
+            return (double) Collections.max(gainAgioArray);
+        }
+        return 0;
     }
 
     public double getMaxLoss() {
-        return (double) Collections.min(lossAgioArray);
+        if (lossAgioArray.size() > 0) {
+            return (double) Collections.min(lossAgioArray);
+        }
+        return 0;
     }
 
     public double getExpectation() {

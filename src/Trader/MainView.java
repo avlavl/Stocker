@@ -360,6 +360,8 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
+        String start = jTextFieldStartDate.getText();
+        String end = jTextFieldEndDate.getText();
         MACD macd = new MACD(12, 26, 9);
         BRM brm = new BRM(0);
         Strategy strategy = new Strategy(this, brm);
@@ -368,7 +370,10 @@ public class MainView extends javax.swing.JFrame {
         for (String line : dataLineArrayList) {
             updateMarket(line);
             double price = Double.parseDouble(strClose);
-            strategy.macdCrossTrade(price);
+            macd.arithmetic(price);
+            if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
+                strategy.macdCrossTrade(price);
+            }
         }
         updateTable(brm, strategy);
     }//GEN-LAST:event_jMenuItemMACDActionPerformed
