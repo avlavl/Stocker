@@ -96,7 +96,7 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelStockName.setFont(new java.awt.Font("华文新魏", 0, 18)); // NOI18N
+        jLabelStockName.setFont(new java.awt.Font("华文新魏", 0, 19)); // NOI18N
         jLabelStockName.setForeground(new java.awt.Color(0, 0, 204));
         jLabelStockName.setText("上证指数");
         jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -110,11 +110,11 @@ public class MainView extends javax.swing.JFrame {
         jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
         jLabelStatus.setText("主上升!");
-        jPanelMain.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+        jPanelMain.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
         jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
         jLabelDate.setText("日期：----/--/--");
-        jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+        jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         jTablePoint.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -189,7 +189,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonImportActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, -1, -1));
+        jPanelMain.add(jButtonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
 
         jTextAreaMain.setColumns(20);
         jTextAreaMain.setRows(5);
@@ -360,15 +360,12 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
-        String[] words = null;
-
         MACD macd = new MACD(12, 26, 9);
         BRM brm = new BRM(0);
         Strategy strategy = new Strategy(this, brm);
         strategy.macd = macd;
 
         for (String line : dataLineArrayList) {
-            words = line.split("\t");
             updateMarket(line);
             double price = Double.parseDouble(strClose);
             strategy.macdCrossTrade(price);
@@ -425,19 +422,25 @@ public class MainView extends javax.swing.JFrame {
                 statusRecord(lm, msg);
                 break;
             case 1:
-                price = Double.parseDouble(strMA2);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                if (!strMA2.isEmpty()) {
+                    price = Double.parseDouble(strMA2);
+                    msg = lm.arithmetic(price);
+                    statusRecord(lm, msg);
+                }
                 break;
             case 2:
-                price = Double.parseDouble(strMA3);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                if (!strMA3.isEmpty()) {
+                    price = Double.parseDouble(strMA3);
+                    msg = lm.arithmetic(price);
+                    statusRecord(lm, msg);
+                }
                 break;
             case 3:
-                price = Double.parseDouble(strMA5);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                if (!strMA5.isEmpty()) {
+                    price = Double.parseDouble(strMA5);
+                    msg = lm.arithmetic(price);
+                    statusRecord(lm, msg);
+                }
                 break;
             case 4:
                 price = Double.parseDouble(strOpen);
@@ -537,18 +540,21 @@ public class MainView extends javax.swing.JFrame {
 
     protected void updateMarket(String line) {
         String[] words = line.split("\t");
-        int len = words.length;
         strDate = words[0];
         strOpen = words[1];
         strHigh = words[2];
         strLow = words[3];
         strClose = words[4];
-        strMA2 = words[len - 6];
-        strMA3 = words[len - 5];
-        strMA5 = words[len - 4];
-        strMA10 = words[len - 3];
-        strMA20 = words[len - 2];
-        strMA60 = words[len - 1];
+
+        try {
+            strMA2 = words[column - 6];
+            strMA3 = words[column - 5];
+            strMA5 = words[column - 4];
+            strMA10 = words[column - 3];
+            strMA20 = words[column - 2];
+            strMA60 = words[column - 1];
+        } catch (Exception e) {
+        }
 
         jLabelDate.setText("日期：" + strDate);
         jLabelOpen.setText("开盘：" + strOpen);
