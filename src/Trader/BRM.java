@@ -198,6 +198,18 @@ public class BRM {
         return (double) 100 * (Math.pow(rate, (double) 1 / years) - 1);
     }
 
+    public double getObjectRate(double price) {
+        return (double) 100 * (price - initAsset) / initAsset;
+    }
+
+    public double getCurrentAsset(double price) {
+        if (bs_flag) {
+            return asset + price;
+        } else {
+            return asset;
+        }
+    }
+
     public double getMaxGain() {
         if (gainAgioArray.size() > 0) {
             return (double) Collections.max(gainAgioArray);
