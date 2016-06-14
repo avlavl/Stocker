@@ -51,22 +51,17 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain = new javax.swing.JPanel();
         jLabelStockName = new javax.swing.JLabel();
         jLabelStockCode = new javax.swing.JLabel();
-        jLabelStatus = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePoint = new javax.swing.JTable();
-        jPanelPrice = new javax.swing.JPanel();
-        jLabelOpen = new javax.swing.JLabel();
-        jLabelClose = new javax.swing.JLabel();
-        jLabelHigh = new javax.swing.JLabel();
-        jLabelLow = new javax.swing.JLabel();
-        jLabelMA1 = new javax.swing.JLabel();
-        jLabelMA2 = new javax.swing.JLabel();
-        jLabelMA3 = new javax.swing.JLabel();
-        jLabelMA4 = new javax.swing.JLabel();
-        jButtonImport = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaMain = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldStartDate = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFieldEndDate = new javax.swing.JTextField();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanelTrend = new javax.swing.JPanel();
         jPanelConfig = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxStatus = new javax.swing.JComboBox<>();
@@ -78,11 +73,15 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldVpoint = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jComboBoxMode = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jTextFieldStartDate = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextFieldEndDate = new javax.swing.JTextField();
         jButtonTest = new javax.swing.JButton();
+        jLabelStatus = new javax.swing.JLabel();
+        jPanelMACD = new javax.swing.JPanel();
+        jPanelMA = new javax.swing.JPanel();
+        jLabelOpen = new javax.swing.JLabel();
+        jLabelHigh = new javax.swing.JLabel();
+        jLabelClose = new javax.swing.JLabel();
+        jLabelLow = new javax.swing.JLabel();
+        jButtonImport = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -100,21 +99,16 @@ public class MainView extends javax.swing.JFrame {
         jLabelStockName.setForeground(new java.awt.Color(0, 0, 204));
         jLabelStockName.setText("上证指数");
         jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabelStockCode.setFont(new java.awt.Font("黑体", 0, 16)); // NOI18N
         jLabelStockCode.setForeground(new java.awt.Color(0, 0, 204));
         jLabelStockCode.setText("(000001)");
-        jPanelMain.add(jLabelStockCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
-
-        jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
-        jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelStatus.setText("主上升!");
-        jPanelMain.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
+        jPanelMain.add(jLabelStockCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
         jLabelDate.setText("日期：----/--/--");
-        jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
         jTablePoint.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -144,66 +138,41 @@ public class MainView extends javax.swing.JFrame {
             jTablePoint.getColumnModel().getColumn(2).setMaxWidth(70);
         }
 
-        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 330, 210));
-
-        jPanelPrice.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "行情", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
-        jPanelPrice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelOpen.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelOpen.setText("开盘：");
-        jPanelPrice.add(jLabelOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelClose.setText("收盘：");
-        jPanelPrice.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
-
-        jLabelHigh.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelHigh.setText("最高：");
-        jPanelPrice.add(jLabelHigh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-
-        jLabelLow.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelLow.setText("最低：");
-        jPanelPrice.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
-
-        jLabelMA1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelMA1.setText("MA5：");
-        jPanelPrice.add(jLabelMA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
-
-        jLabelMA2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelMA2.setText("MA10：");
-        jPanelPrice.add(jLabelMA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
-
-        jLabelMA3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelMA3.setText("MA20：");
-        jPanelPrice.add(jLabelMA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        jLabelMA4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelMA4.setText("MA60：");
-        jPanelPrice.add(jLabelMA4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
-
-        jPanelMain.add(jPanelPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 300, 110));
-
-        jButtonImport.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonImport.setText("导入");
-        jButtonImport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImportActionPerformed(evt);
-            }
-        });
-        jPanelMain.add(jButtonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
+        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 340, 206));
 
         jTextAreaMain.setColumns(20);
+        jTextAreaMain.setFont(new java.awt.Font("仿宋", 0, 11)); // NOI18N
         jTextAreaMain.setRows(5);
         jScrollPane2.setViewportView(jTextAreaMain);
 
-        jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 650, 80));
+        jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 340, 80));
+
+        jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabel7.setText("起始日期：");
+        jPanelMain.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+
+        jTextFieldStartDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldStartDate.setText("1990/05/14");
+        jPanelMain.add(jTextFieldStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 80, -1));
+
+        jLabel8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabel8.setText("结束日期：");
+        jPanelMain.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+
+        jTextFieldEndDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldEndDate.setText("2016/05/31");
+        jPanelMain.add(jTextFieldEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 80, -1));
+
+        jTabbedPane1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+
+        jPanelTrend.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelConfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel1.setText("起始状态：");
-        jPanelConfig.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        jPanelConfig.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         jComboBoxStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
@@ -212,31 +181,31 @@ public class MainView extends javax.swing.JFrame {
                 jComboBoxStatusActionPerformed(evt);
             }
         });
-        jPanelConfig.add(jComboBoxStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        jPanelConfig.add(jComboBoxStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel2.setText("弹抽点：");
-        jPanelConfig.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jPanelConfig.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jTextFieldTpoint1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldTpoint1.setText("10");
-        jPanelConfig.add(jTextFieldTpoint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 30, -1));
+        jPanelConfig.add(jTextFieldTpoint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 30, -1));
 
         jLabel3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel3.setText("反转点：");
-        jPanelConfig.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
+        jPanelConfig.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
 
         jTextFieldTpoint2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldTpoint2.setText("5");
-        jPanelConfig.add(jTextFieldTpoint2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 30, -1));
+        jPanelConfig.add(jTextFieldTpoint2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 30, -1));
 
         jCheckBoxVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBoxVpoint.setText("使能V形反转");
-        jPanelConfig.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPanelConfig.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jTextFieldVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldVpoint.setText("20");
-        jPanelConfig.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 30, -1));
+        jPanelConfig.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 30, -1));
 
         jLabel9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel9.setText("模式：");
@@ -247,21 +216,7 @@ public class MainView extends javax.swing.JFrame {
         jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "5日均线", "K线实体", "K线引线" }));
         jPanelConfig.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabel7.setText("起始日期：");
-        jPanelConfig.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
-
-        jTextFieldStartDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldStartDate.setText("1990/05/14");
-        jPanelConfig.add(jTextFieldStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 80, -1));
-
-        jLabel8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabel8.setText("结束日期：");
-        jPanelConfig.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
-
-        jTextFieldEndDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldEndDate.setText("2016/05/31");
-        jPanelConfig.add(jTextFieldEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 80, -1));
+        jPanelTrend.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, 130));
 
         jButtonTest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTest.setText("测试");
@@ -270,11 +225,49 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTestActionPerformed(evt);
             }
         });
-        jPanelConfig.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
+        jPanelTrend.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, -1));
 
-        jPanelMain.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 320, 170));
+        jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
+        jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelStatus.setText("主上升!");
+        jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
-        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 420));
+        jTabbedPane1.addTab("趋势", jPanelTrend);
+
+        jPanelMACD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane1.addTab("MACD", jPanelMACD);
+
+        jPanelMA.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane1.addTab("均线", jPanelMA);
+
+        jPanelMain.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 340, 330));
+
+        jLabelOpen.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelOpen.setText("开盘：");
+        jPanelMain.add(jLabelOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 38, -1, -1));
+
+        jLabelHigh.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelHigh.setText("最高：");
+        jPanelMain.add(jLabelHigh, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 55, -1, -1));
+
+        jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelClose.setText("收盘：");
+        jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 38, -1, -1));
+
+        jLabelLow.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelLow.setText("最低：");
+        jPanelMain.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 55, -1, -1));
+
+        jButtonImport.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonImport.setText("导入");
+        jButtonImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImportActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
+
+        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 440));
 
         jMenuFile.setText("文件");
 
@@ -567,10 +560,6 @@ public class MainView extends javax.swing.JFrame {
         jLabelHigh.setText("最高：" + strHigh);
         jLabelLow.setText("最低：" + strLow);
         jLabelClose.setText("收盘：" + strClose);
-        jLabelMA1.setText("MA5：" + strMA5);
-        jLabelMA2.setText("MA10：" + strMA10);
-        jLabelMA3.setText("MA20：" + strMA20);
-        jLabelMA4.setText("MA60：" + strMA60);
     }
 
     protected void updateTable(BRM brm, Strategy stg) {
@@ -671,10 +660,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelHigh;
     private javax.swing.JLabel jLabelLow;
-    private javax.swing.JLabel jLabelMA1;
-    private javax.swing.JLabel jLabelMA2;
-    private javax.swing.JLabel jLabelMA3;
-    private javax.swing.JLabel jLabelMA4;
     private javax.swing.JLabel jLabelOpen;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStockCode;
@@ -686,10 +671,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemMACD;
     private javax.swing.JMenu jMenuTestSystem;
     private javax.swing.JPanel jPanelConfig;
+    private javax.swing.JPanel jPanelMA;
+    private javax.swing.JPanel jPanelMACD;
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JPanel jPanelPrice;
+    private javax.swing.JPanel jPanelTrend;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTablePoint;
     private javax.swing.JTextArea jTextAreaMain;
     private javax.swing.JTextField jTextFieldEndDate;
