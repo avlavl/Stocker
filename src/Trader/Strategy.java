@@ -42,6 +42,30 @@ public class Strategy {
         }
     }
 
+    public void livermoreTrade(double price) {
+        tradingDays++;
+        if (positionDays > 0) {
+            positionDays++;
+        }
+        if (livermore.enterRiseStatus() || ((brm.initAsset == 0) && livermore.Status.equals("mainRiseStatus"))) {
+            brm.quota(true, price);
+            positionDays++;
+            mainView.msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
+        } else if (livermore.enterFallStatus()) {
+            if (brm.initAsset != 0) {
+                if (price > brm.buyPrice) {
+                    gainPositionDaysArray.add(positionDays);
+                } else {
+                    lossPositionDaysArray.add(positionDays);
+                }
+                positionDays = 0;
+                brm.quota(false, price);
+                cycleYears = (double) tradingDays / 244;
+                mainView.msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
+            }
+        }
+    }
+
     public double getPositionDaysRate() {
         int sumDays = 0;
         for (Integer days : gainPositionDaysArray) {
@@ -92,7 +116,8 @@ public class Strategy {
     public ArrayList<Integer> gainPositionDaysArray = new ArrayList<>();
     public ArrayList<Integer> lossPositionDaysArray = new ArrayList<>();
 
-    MACD macd;
-    BRM brm;
     protected MainView mainView;
+    public BRM brm;
+    public MACD macd;
+    public Livermore livermore;
 }

@@ -19,6 +19,7 @@ public class Livermore {
 
     protected String arithmetic(double price) {
         String msg = "";
+        formerStatus = Status;
         switch (Status) {
             case "mainRiseStatus":
                 if (price > mainRiseVal) {
@@ -290,6 +291,14 @@ public class Livermore {
         }
     }
 
+    public boolean enterRiseStatus() {
+        return (formerStatus.contains("DStatus")) && Status.equals("mainRiseStatus");
+    }
+
+    public boolean enterFallStatus() {
+        return (formerStatus.contains("UStatus")) && Status.equals("mainFallStatus");
+    }
+
     public double riseKeyHead = 0;
     public double riseKeyFoot = 0;
     public double fallKeyHead = 0;
@@ -306,7 +315,7 @@ public class Livermore {
     public double minorFallDVal = 0;
 
     public String Status = "mainRiseStatus";
-    public String formerStatus = "";
+    public String formerStatus = "DStatus";
 
     boolean vpointEnable = false;
     int vpointValue = 20;

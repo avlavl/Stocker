@@ -335,9 +335,9 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonImportActionPerformed
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestActionPerformed
-        String[] words = null;
-
-        if ((jTextFieldEndDate.getText().compareTo(jTextFieldStartDate.getText()) < 0)) {
+        String start = jTextFieldStartDate.getText();
+        String end = jTextFieldEndDate.getText();
+        if ((end.compareTo(start) < 0)) {
             JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
             return;
         }
@@ -345,26 +345,28 @@ public class MainView extends javax.swing.JFrame {
         boolean status = (jComboBoxStatus.getSelectedIndex() == 0);
         int t1 = Integer.parseInt(jTextFieldTpoint1.getText());
         int t2 = Integer.parseInt(jTextFieldTpoint2.getText());
-        Livermore lm = new Livermore(status, t1, t2);
-        lm.vpointEnable = jCheckBoxVpoint.isSelected();
-        lm.vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
+        Livermore livermore = new Livermore(status, t1, t2);
+        livermore.vpointEnable = jCheckBoxVpoint.isSelected();
+        livermore.vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
         BRM brm = new BRM(0);
+        Strategy strategy = new Strategy(this, brm);
+        strategy.livermore = livermore;
 
         try {
             fileWriter = new FileWriter(fileOut);
 
             for (String line : dataLineArrayList) {
-                words = line.split("\t");
-                if ((words[0].compareTo(jTextFieldStartDate.getText()) >= 0) && (words[0].compareTo(jTextFieldEndDate.getText()) <= 0)) {
-                    updateMarket(line);
-                    doModeComputing(lm);
-                    doLivermoreAnalysis(lm, brm);
-                } else if (words[0].compareTo(jTextFieldEndDate.getText()) > 0) {
+                updateMarket(line);
+                doModeComputing(livermore);
+                if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
+                    double price = Double.parseDouble(strClose);
+                    strategy.livermoreTrade(price);
+                } else if (strDate.compareTo(end) > 0) {
                     break;
                 }
             }
-            parseStatus(lm.Status);
-            //updateTable(brm);
+            parseStatus(livermore.Status);
+            updateTable(brm, strategy);
 
             fileWriter.flush();
             fileWriter.close();
@@ -381,6 +383,11 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
         String start = jTextFieldStartDate.getText();
         String end = jTextFieldEndDate.getText();
+        if ((end.compareTo(start) < 0)) {
+            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+            return;
+        }
+
         MACD macd = new MACD(12, 26, 9);
         BRM brm = new BRM(0);
         Strategy strategy = new Strategy(this, brm);
@@ -392,6 +399,8 @@ public class MainView extends javax.swing.JFrame {
             macd.arithmetic(price);
             if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
                 strategy.macdCrossTrade(price);
+            } else if (strDate.compareTo(end) > 0) {
+                break;
             }
         }
         updateTable(brm, strategy);
@@ -451,82 +460,52 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    protected void doModeComputing(Livermore lm) {
+    protected void doModeComputing(Livermore livermore) {
         double price;
         String msg = "";
         switch (jComboBoxMode.getSelectedIndex()) {
             case 0:
                 price = Double.parseDouble(strClose);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                msg = livermore.arithmetic(price);
+                statusRecord(livermore, msg);
                 break;
             case 1:
                 if (!strMA2.isEmpty()) {
                     price = Double.parseDouble(strMA2);
-                    msg = lm.arithmetic(price);
-                    statusRecord(lm, msg);
+                    msg = livermore.arithmetic(price);
+                    statusRecord(livermore, msg);
                 }
                 break;
             case 2:
                 if (!strMA3.isEmpty()) {
                     price = Double.parseDouble(strMA3);
-                    msg = lm.arithmetic(price);
-                    statusRecord(lm, msg);
+                    msg = livermore.arithmetic(price);
+                    statusRecord(livermore, msg);
                 }
                 break;
             case 3:
                 if (!strMA5.isEmpty()) {
                     price = Double.parseDouble(strMA5);
-                    msg = lm.arithmetic(price);
-                    statusRecord(lm, msg);
+                    msg = livermore.arithmetic(price);
+                    statusRecord(livermore, msg);
                 }
                 break;
             case 4:
                 price = Double.parseDouble(strOpen);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                msg = livermore.arithmetic(price);
+                statusRecord(livermore, msg);
                 price = Double.parseDouble(strClose);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                msg = livermore.arithmetic(price);
+                statusRecord(livermore, msg);
                 break;
             case 5:
                 price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strLow : strHigh);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                msg = livermore.arithmetic(price);
+                statusRecord(livermore, msg);
                 price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strHigh : strLow);
-                msg = lm.arithmetic(price);
-                statusRecord(lm, msg);
+                msg = livermore.arithmetic(price);
+                statusRecord(livermore, msg);
                 break;
-        }
-    }
-
-    protected void doLivermoreAnalysis(Livermore lm, BRM brm) {
-        if (lm.Status.equals(lm.formerStatus) == false) {
-            double price = Double.parseDouble(strClose);
-            switch (lm.Status) {
-                case "mainRiseStatus":
-                    brm.quota(true, price);
-                    msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
-                    lm.formerStatus = lm.Status;
-                    break;
-                case "normalFallUStatus":
-                case "normalRiseUStatus":
-                case "minorFallUStatus":
-                case "minorRiseUStatus":
-                    break;
-
-                case "mainFallStatus":
-                    brm.quota(false, price);
-                    msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
-                    lm.formerStatus = lm.Status;
-                    break;
-                case "normalRiseDStatus":
-                case "normalFallDStatus":
-                case "minorRiseDStatus":
-                case "minorFallDStatus":
-                default:
-                    break;
-            }
         }
     }
 
