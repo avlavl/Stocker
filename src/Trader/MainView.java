@@ -48,6 +48,9 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItemCopy = new javax.swing.JMenuItem();
+        jMenuItemClear = new javax.swing.JMenuItem();
         jPanelMain = new javax.swing.JPanel();
         jLabelStockName = new javax.swing.JLabel();
         jLabelStockCode = new javax.swing.JLabel();
@@ -64,7 +67,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelTrend = new javax.swing.JPanel();
         jPanelConfig = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBoxStatus = new javax.swing.JComboBox<>();
+        jComboBoxStatus = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldTpoint1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -72,7 +75,7 @@ public class MainView extends javax.swing.JFrame {
         jCheckBoxVpoint = new javax.swing.JCheckBox();
         jTextFieldVpoint = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jComboBoxMode = new javax.swing.JComboBox<>();
+        jComboBoxMode = new javax.swing.JComboBox<String>();
         jButtonTest = new javax.swing.JButton();
         jLabelStatus = new javax.swing.JLabel();
         jPanelMACD = new javax.swing.JPanel();
@@ -88,6 +91,22 @@ public class MainView extends javax.swing.JFrame {
         jMenuAdd = new javax.swing.JMenu();
         jMenuTestSystem = new javax.swing.JMenu();
         jMenuItemMACD = new javax.swing.JMenuItem();
+
+        jMenuItemCopy.setText("复制");
+        jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCopyActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItemCopy);
+
+        jMenuItemClear.setText("清除");
+        jMenuItemClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClearActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItemClear);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("证券交易系统");
@@ -143,6 +162,12 @@ public class MainView extends javax.swing.JFrame {
         jTextAreaMain.setColumns(20);
         jTextAreaMain.setFont(new java.awt.Font("仿宋", 0, 11)); // NOI18N
         jTextAreaMain.setRows(5);
+        jTextAreaMain.setComponentPopupMenu(jPopupMenu1);
+        jTextAreaMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTextAreaMainMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTextAreaMain);
 
         jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 340, 80));
@@ -175,7 +200,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelConfig.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         jComboBoxStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "主上升", "主下降" }));
         jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxStatusActionPerformed(evt);
@@ -213,7 +238,7 @@ public class MainView extends javax.swing.JFrame {
 
         jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxMode.setMaximumRowCount(9);
-        jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "5日均线", "K线实体", "K线引线" }));
+        jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "收盘价", "2日均线", "3日均线", "5日均线", "K线实体", "K线引线" }));
         jPanelConfig.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jPanelTrend.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, 130));
@@ -371,6 +396,21 @@ public class MainView extends javax.swing.JFrame {
         }
         updateTable(brm, strategy);
     }//GEN-LAST:event_jMenuItemMACDActionPerformed
+
+    private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenu1.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTextAreaMainMouseReleased
+
+    private void jMenuItemClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearActionPerformed
+        jTextAreaMain.setText("");
+    }//GEN-LAST:event_jMenuItemClearActionPerformed
+
+    private void jMenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCopyActionPerformed
+        jTextAreaMain.selectAll();
+        jTextAreaMain.copy();
+    }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
     protected void importFile(String fileName) {
         if (fileName == null) {
@@ -667,6 +707,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAdd;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenuItem jMenuItemClear;
+    private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemImport;
     private javax.swing.JMenuItem jMenuItemMACD;
     private javax.swing.JMenu jMenuTestSystem;
@@ -675,6 +717,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMACD;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelTrend;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
