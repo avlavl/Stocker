@@ -75,8 +75,8 @@ public class MainView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jComboBoxMode = new javax.swing.JComboBox<>();
         jCheckBoxRecord = new javax.swing.JCheckBox();
-        jButtonTest = new javax.swing.JButton();
         jLabelStatus = new javax.swing.JLabel();
+        jButtonTest = new javax.swing.JButton();
         jPanelMACD = new javax.swing.JPanel();
         jPanelMA = new javax.swing.JPanel();
         jLabelOpen = new javax.swing.JLabel();
@@ -241,7 +241,12 @@ public class MainView extends javax.swing.JFrame {
         jCheckBoxRecord.setText("生成交易日志");
         jPanelConfig.add(jCheckBoxRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jPanelTrend.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, 190));
+        jPanelTrend.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 310, 210));
+
+        jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
+        jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelStatus.setText("主上升!");
+        jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jButtonTest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTest.setText("测试");
@@ -250,12 +255,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTestActionPerformed(evt);
             }
         });
-        jPanelTrend.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
-
-        jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
-        jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelStatus.setText("主上升!");
-        jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        jPanelTrend.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
 
         jTabbedPane1.addTab("趋势", jPanelTrend);
 
@@ -446,7 +446,29 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
     private void jMenuItemMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMAActionPerformed
-        // TODO add your handling code here:
+        String start = jTextFieldStartDate.getText();
+        String end = jTextFieldEndDate.getText();
+        if ((end.compareTo(start) < 0)) {
+            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+            return;
+        }
+
+        MA ma = new MA();
+        BRM brm = new BRM(0);
+        Strategy strategy = new Strategy(this, brm);
+        strategy.ma = ma;
+
+        for (String line : dataLineArrayList) {
+            updateMarket(line);
+            ma.updateData(line, column);
+            double price = Double.parseDouble(strClose);
+            if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
+                strategy.maCrossTrade(price);
+            } else if (strDate.compareTo(end) > 0) {
+                break;
+            }
+        }
+        updateTable(brm, strategy);
     }//GEN-LAST:event_jMenuItemMAActionPerformed
 
     private void jMenuItemTrendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTrendActionPerformed
