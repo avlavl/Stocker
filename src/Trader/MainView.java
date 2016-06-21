@@ -74,6 +74,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldVpoint = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jComboBoxMode = new javax.swing.JComboBox<>();
+        jCheckBoxRecord = new javax.swing.JCheckBox();
         jButtonTest = new javax.swing.JButton();
         jLabelStatus = new javax.swing.JLabel();
         jPanelMACD = new javax.swing.JPanel();
@@ -88,7 +89,9 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemImport = new javax.swing.JMenuItem();
         jMenuAdd = new javax.swing.JMenu();
         jMenuTestSystem = new javax.swing.JMenu();
+        jMenuItemTrend = new javax.swing.JMenuItem();
         jMenuItemMACD = new javax.swing.JMenuItem();
+        jMenuItemMA = new javax.swing.JMenuItem();
 
         jMenuItemCopy.setText("复制");
         jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +237,11 @@ public class MainView extends javax.swing.JFrame {
         jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "5日均线", "K线实体", "K线引线" }));
         jPanelConfig.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        jPanelTrend.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, 140));
+        jCheckBoxRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBoxRecord.setText("生成交易日志");
+        jPanelConfig.add(jCheckBoxRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jPanelTrend.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, 190));
 
         jButtonTest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTest.setText("测试");
@@ -243,12 +250,12 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTestActionPerformed(evt);
             }
         });
-        jPanelTrend.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+        jPanelTrend.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
 
         jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
         jLabelStatus.setText("主上升!");
-        jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         jTabbedPane1.addTab("趋势", jPanelTrend);
 
@@ -308,6 +315,14 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuTestSystem.setText("测试系统");
 
+        jMenuItemTrend.setText("趋势");
+        jMenuItemTrend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTrendActionPerformed(evt);
+            }
+        });
+        jMenuTestSystem.add(jMenuItemTrend);
+
         jMenuItemMACD.setText("MACD");
         jMenuItemMACD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,6 +330,14 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jMenuTestSystem.add(jMenuItemMACD);
+
+        jMenuItemMA.setText("均线");
+        jMenuItemMA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMAActionPerformed(evt);
+            }
+        });
+        jMenuTestSystem.add(jMenuItemMA);
 
         jMenuBar.add(jMenuTestSystem);
 
@@ -350,11 +373,13 @@ public class MainView extends javax.swing.JFrame {
         strategy.livermore = livermore;
 
         try {
-            fileWriter = new FileWriter(fileOut);
+            if (jCheckBoxRecord.isSelected()) {
+                fileWriter = new FileWriter(fileOut);
+            }
 
             for (String line : dataLineArrayList) {
                 updateMarket(line);
-                doModeComputing(livermore);
+                doLivermore(livermore);
                 if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
                     double price = Double.parseDouble(strClose);
                     strategy.livermoreTrade(price);
@@ -365,8 +390,10 @@ public class MainView extends javax.swing.JFrame {
             parseStatus(livermore.Status);
             updateTable(brm, strategy);
 
-            fileWriter.flush();
-            fileWriter.close();
+            if (jCheckBoxRecord.isSelected()) {
+                fileWriter.flush();
+                fileWriter.close();
+            }
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -418,6 +445,14 @@ public class MainView extends javax.swing.JFrame {
         jTextAreaMain.copy();
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
+    private void jMenuItemMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemMAActionPerformed
+
+    private void jMenuItemTrendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTrendActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemTrendActionPerformed
+
     protected void importFile(String fileName) {
         if (fileName == null) {
             JFileChooser chooser = new JFileChooser("data/");
@@ -456,51 +491,51 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    protected void doModeComputing(Livermore livermore) {
+    protected void doLivermore(Livermore livermore) {
         double price;
-        String msg = "";
+        String message;
         switch (jComboBoxMode.getSelectedIndex()) {
             case 0:
                 price = Double.parseDouble(strClose);
-                msg = livermore.arithmetic(price);
-                statusRecord(livermore, msg);
+                message = livermore.arithmetic(price);
+                livermoreLogger(livermore, message);
                 break;
             case 1:
                 if (!strMA2.isEmpty()) {
                     price = Double.parseDouble(strMA2);
-                    msg = livermore.arithmetic(price);
-                    statusRecord(livermore, msg);
+                    message = livermore.arithmetic(price);
+                    livermoreLogger(livermore, message);
                 }
                 break;
             case 2:
                 if (!strMA3.isEmpty()) {
                     price = Double.parseDouble(strMA3);
-                    msg = livermore.arithmetic(price);
-                    statusRecord(livermore, msg);
+                    message = livermore.arithmetic(price);
+                    livermoreLogger(livermore, message);
                 }
                 break;
             case 3:
                 if (!strMA5.isEmpty()) {
                     price = Double.parseDouble(strMA5);
-                    msg = livermore.arithmetic(price);
-                    statusRecord(livermore, msg);
+                    message = livermore.arithmetic(price);
+                    livermoreLogger(livermore, message);
                 }
                 break;
             case 4:
                 price = Double.parseDouble(strOpen);
-                msg = livermore.arithmetic(price);
-                statusRecord(livermore, msg);
+                message = livermore.arithmetic(price);
+                livermoreLogger(livermore, message);
                 price = Double.parseDouble(strClose);
-                msg = livermore.arithmetic(price);
-                statusRecord(livermore, msg);
+                message = livermore.arithmetic(price);
+                livermoreLogger(livermore, message);
                 break;
             case 5:
                 price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strLow : strHigh);
-                msg = livermore.arithmetic(price);
-                statusRecord(livermore, msg);
+                message = livermore.arithmetic(price);
+                livermoreLogger(livermore, message);
                 price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strHigh : strLow);
-                msg = livermore.arithmetic(price);
-                statusRecord(livermore, msg);
+                message = livermore.arithmetic(price);
+                livermoreLogger(livermore, message);
                 break;
         }
     }
@@ -603,8 +638,8 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) stg.getMeanLossDays(brm) + "天", 10, 3);
     }
 
-    protected void statusRecord(Livermore lm, String msg) {
-        if (msg.equals("") != true) {
+    protected void livermoreLogger(Livermore lm, String msg) {
+        if (!msg.equals("") && jCheckBoxRecord.isSelected()) {
             msgLogger(msg);
             fileLogger("[" + strDate + "] " + msg);
             if (!msg.contains("趋势可能改变")) {
@@ -662,6 +697,7 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;
     private javax.swing.JButton jButtonTest;
+    private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JCheckBox jCheckBoxVpoint;
     private javax.swing.JComboBox<String> jComboBoxMode;
     private javax.swing.JComboBox<String> jComboBoxStatus;
@@ -684,7 +720,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemImport;
+    private javax.swing.JMenuItem jMenuItemMA;
     private javax.swing.JMenuItem jMenuItemMACD;
+    private javax.swing.JMenuItem jMenuItemTrend;
     private javax.swing.JMenu jMenuTestSystem;
     private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelMA;
