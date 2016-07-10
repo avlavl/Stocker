@@ -377,13 +377,12 @@ public class MainView extends javax.swing.JFrame {
                 fileWriter = new FileWriter(fileOut);
             }
 
-            for (String line : dataLineArrayList) {
-                updateMarket(line);
+            for (int i = 0; i < rows; i++) {
+                updateMarket(i);
                 doLivermore(livermore);
-                if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
-                    double price = Double.parseDouble(strClose);
-                    strategy.livermoreTrade(price);
-                } else if (strDate.compareTo(end) > 0) {
+                if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                    strategy.livermoreTrade(CLOSE);
+                } else if (DATE.compareTo(end) > 0) {
                     break;
                 }
             }
@@ -417,13 +416,12 @@ public class MainView extends javax.swing.JFrame {
         Strategy strategy = new Strategy(this, brm);
         strategy.macd = macd;
 
-        for (String line : dataLineArrayList) {
-            updateMarket(line);
-            double price = Double.parseDouble(strClose);
-            macd.arithmetic(price);
-            if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
-                strategy.macdCrossTrade(price);
-            } else if (strDate.compareTo(end) > 0) {
+        for (int i = 0; i < rows; i++) {
+            updateMarket(i);
+            macd.arithmetic(CLOSE);
+            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                strategy.macdCrossTrade(CLOSE);
+            } else if (DATE.compareTo(end) > 0) {
                 break;
             }
         }
@@ -458,13 +456,12 @@ public class MainView extends javax.swing.JFrame {
         Strategy strategy = new Strategy(this, brm);
         strategy.ma = ma;
 
-        for (String line : dataLineArrayList) {
-            updateMarket(line);
-            ma.updateData(line, column);
-            double price = Double.parseDouble(strClose);
-            if ((strDate.compareTo(start) >= 0) && (strDate.compareTo(end) <= 0)) {
-                strategy.maCrossTrade(price);
-            } else if (strDate.compareTo(end) > 0) {
+        for (int i = 0; i < rows; i++) {
+            updateMarket(i);
+            ///ma.updateData(line, column);
+            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                strategy.maCrossTrade(CLOSE);
+            } else if (DATE.compareTo(end) > 0) {
                 break;
             }
         }
@@ -501,11 +498,21 @@ public class MainView extends javax.swing.JFrame {
             jLabelStockName.setText(words[1] + "(" + words[0].replaceAll("[\\pP\\p{Punct}]", "") + ")");
             words = br.readLine().split("\t");
             column = words.length;
+            dateArrayList = new ArrayList<>();
+            openArrayList = new ArrayList<>();
+            highArrayList = new ArrayList<>();
+            lowArrayList = new ArrayList<>();
+            closeArrayList = new ArrayList<>();
             String line;
-            dataLineArrayList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
-                dataLineArrayList.add(line);
+                words = line.split("\t");
+                dateArrayList.add(words[0]);
+                openArrayList.add(Double.parseDouble(words[1]));
+                highArrayList.add(Double.parseDouble(words[2]));
+                lowArrayList.add(Double.parseDouble(words[3]));
+                closeArrayList.add(Double.parseDouble(words[4]));
             }
+            rows = dateArrayList.size();
             br.close();
             isr.close();
         } catch (Exception e) {
@@ -518,44 +525,44 @@ public class MainView extends javax.swing.JFrame {
         String message;
         switch (jComboBoxMode.getSelectedIndex()) {
             case 0:
-                price = Double.parseDouble(strClose);
+                price = CLOSE;
                 message = livermore.arithmetic(price);
                 livermoreLogger(livermore, message);
                 break;
-            case 1:
-                if (!strMA2.isEmpty()) {
-                    price = Double.parseDouble(strMA2);
-                    message = livermore.arithmetic(price);
-                    livermoreLogger(livermore, message);
-                }
-                break;
-            case 2:
-                if (!strMA3.isEmpty()) {
-                    price = Double.parseDouble(strMA3);
-                    message = livermore.arithmetic(price);
-                    livermoreLogger(livermore, message);
-                }
-                break;
-            case 3:
-                if (!strMA5.isEmpty()) {
-                    price = Double.parseDouble(strMA5);
-                    message = livermore.arithmetic(price);
-                    livermoreLogger(livermore, message);
-                }
-                break;
+//            case 1:
+//                if (!strMA2.isEmpty()) {
+//                    price = Double.parseDouble(strMA2);
+//                    message = livermore.arithmetic(price);
+//                    livermoreLogger(livermore, message);
+//                }
+//                break;
+//            case 2:
+//                if (!strMA3.isEmpty()) {
+//                    price = Double.parseDouble(strMA3);
+//                    message = livermore.arithmetic(price);
+//                    livermoreLogger(livermore, message);
+//                }
+//                break;
+//            case 3:
+//                if (!strMA5.isEmpty()) {
+//                    price = Double.parseDouble(strMA5);
+//                    message = livermore.arithmetic(price);
+//                    livermoreLogger(livermore, message);
+//                }
+//                break;
             case 4:
-                price = Double.parseDouble(strOpen);
+                price = OPEN;
                 message = livermore.arithmetic(price);
                 livermoreLogger(livermore, message);
-                price = Double.parseDouble(strClose);
+                price = CLOSE;
                 message = livermore.arithmetic(price);
                 livermoreLogger(livermore, message);
                 break;
             case 5:
-                price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strLow : strHigh);
+                price = CLOSE > OPEN ? LOW : HIGH;
                 message = livermore.arithmetic(price);
                 livermoreLogger(livermore, message);
-                price = Double.parseDouble(strClose.compareTo(strOpen) > 0 ? strHigh : strLow);
+                price = CLOSE > OPEN ? HIGH : LOW;
                 message = livermore.arithmetic(price);
                 livermoreLogger(livermore, message);
                 break;
@@ -609,29 +616,27 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    protected void updateMarket(String line) {
-        String[] words = line.split("\t");
-        strDate = words[0];
-        strOpen = words[1];
-        strHigh = words[2];
-        strLow = words[3];
-        strClose = words[4];
+    protected void updateMarket(int index) {
+        DATE = dateArrayList.get(index);
+        OPEN = openArrayList.get(index);
+        HIGH = highArrayList.get(index);
+        LOW = lowArrayList.get(index);
+        CLOSE = closeArrayList.get(index);
 
-        try {
-            strMA2 = words[column - 6];
-            strMA3 = words[column - 5];
-            strMA5 = words[column - 4];
-            strMA10 = words[column - 3];
-            strMA20 = words[column - 2];
-            strMA60 = words[column - 1];
-        } catch (Exception e) {
-        }
-
-        jLabelDate.setText("日期：" + strDate);
-        jLabelOpen.setText("开盘：" + strOpen);
-        jLabelHigh.setText("最高：" + strHigh);
-        jLabelLow.setText("最低：" + strLow);
-        jLabelClose.setText("收盘：" + strClose);
+//        try {
+//            strMA2 = words[column - 6];
+//            strMA3 = words[column - 5];
+//            strMA5 = words[column - 4];
+//            strMA10 = words[column - 3];
+//            strMA20 = words[column - 2];
+//            strMA60 = words[column - 1];
+//        } catch (Exception e) {
+//        }
+        jLabelDate.setText("日期：" + DATE);
+        jLabelOpen.setText("开盘：" + OPEN);
+        jLabelHigh.setText("最高：" + HIGH);
+        jLabelLow.setText("最低：" + LOW);
+        jLabelClose.setText("收盘：" + CLOSE);
     }
 
     protected void updateTable(BRM brm, Strategy stg) {
@@ -649,9 +654,9 @@ public class MainView extends javax.swing.JFrame {
 
         jTablePoint.setValueAt((float) brm.getEarningRate() + "%", 0, 3);
         jTablePoint.setValueAt((float) brm.getAnnualRate(stg.cycleYears) + "%", 1, 3);
-        jTablePoint.setValueAt((float) brm.getObjectRate(Double.parseDouble(strClose)) + "%", 2, 3);
+        jTablePoint.setValueAt((float) brm.getObjectRate(CLOSE) + "%", 2, 3);
         jTablePoint.setValueAt((float) brm.initAsset, 3, 3);
-        jTablePoint.setValueAt((float) brm.getCurrentAsset(Double.parseDouble(strClose)), 4, 3);
+        jTablePoint.setValueAt((float) brm.getCurrentAsset(CLOSE), 4, 3);
         jTablePoint.setValueAt((float) brm.getMaxGain(), 5, 3);
         jTablePoint.setValueAt((float) brm.getMaxLoss(), 6, 3);
         jTablePoint.setValueAt((float) stg.getPositionDaysRate() + "%", 7, 3);
@@ -663,7 +668,7 @@ public class MainView extends javax.swing.JFrame {
     protected void livermoreLogger(Livermore lm, String msg) {
         if (!msg.equals("") && jCheckBoxRecord.isSelected()) {
             msgLogger(msg);
-            fileLogger("[" + strDate + "] " + msg);
+            fileLogger("[" + DATE + "] " + msg);
             if (!msg.contains("趋势可能改变")) {
                 fileLogger("上关键点：" + lm.riseKeyHead
                         + "\t\t上关键点：" + lm.fallKeyHead
@@ -684,7 +689,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     public void msgLogger(String str) {
-        jTextAreaMain.append("[" + strDate + "] " + str + System.getProperty("line.separator"));
+        jTextAreaMain.append("[" + DATE + "] " + str + System.getProperty("line.separator"));
     }
 
     public void fileLogger(String str) {
@@ -697,24 +702,22 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    private String strDate = "";
-    private String strOpen = "";
-    private String strClose = "";
-    private String strHigh = "";
-    private String strLow = "";
-    private String strMA2 = "";
-    private String strMA3 = "";
-    private String strMA5 = "";
-    private String strMA10 = "";
-    private String strMA20 = "";
-    private String strMA60 = "";
-
     private String fileIn = "data\\上证指数.txt";
     private String fileOut = "data\\上证指数_测试日志.txt";
     public FileWriter fileWriter;
 
     public int column = 15;
-    public ArrayList<String> dataLineArrayList;
+    public int rows = 0;
+    public ArrayList<String> dateArrayList;
+    public ArrayList<Double> openArrayList;
+    public ArrayList<Double> highArrayList;
+    public ArrayList<Double> lowArrayList;
+    public ArrayList<Double> closeArrayList;
+    private String DATE = "";
+    private double OPEN = 0;
+    private double HIGH = 0;
+    private double LOW = 0;
+    private double CLOSE = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;
