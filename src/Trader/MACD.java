@@ -5,84 +5,57 @@
  */
 package Trader;
 
+import static Trader.FormulaLib.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author zhangxr
  */
 public class MACD {
 
-    public MACD(int s, int l, int m) {
-        sho = s;
-        lon = l;
-        mid = m;
+    public MACD(ArrayList<Double> list, int s, int l, int m) {
+        priceList = list;
+        this.s = s;
+        this.l = l;
+        this.m = m;
     }
 
-    protected void arithmetic(double price) {
-        EMASY = EMAST;
-        EMALY = EMALT;
-        DIFY = DIFT;
-        DEAY = DEAT;
-        BARY = BART;
-        STFY = STFT;
-        LTFY = LTFT;
-
-        if (EMASY == 0) {
-            EMAST = price;
-        } else {
-            EMAST = EMASY * (sho - 1) / (sho + 1) + price * 2 / (sho + 1);
-        }
-        if (EMALY == 0) {
-            EMALT = price;
-        } else {
-            EMALT = EMALY * (lon - 1) / (lon + 1) + price * 2 / (lon + 1);
-        }
-
-        DIFT = EMAST - EMALT;
-
-        if (DEAY == 10000) {
-            DEAT = DIFT * 2 / (mid + 1);
-        } else {
-            DEAT = DEAY * (mid - 1) / (mid + 1) + DIFT * 2 / (mid + 1);
-        }
-
-        BART = 2 * (DIFT - DEAT);
-        STFT = (BART >= 0);
-        LTFT = (DIFT >= 0);
-    }
-
-    public boolean isGoldCross(boolean shortFlag) {
-        if (shortFlag) {
-            return (STFY == false) && (STFT == true);
-        } else {
-            return (LTFY == false) && (LTFT == true);
+    public void init() {
+        int size = priceList.size();
+        for (int i = 0; i < size; i++) {
+            arithmetic(i);
         }
     }
 
-    public boolean isDeadCross(boolean shortFlag) {
-        if (shortFlag) {
-            return (STFY == true) && (STFT == false);
+    protected void arithmetic(int i) {
+        if (i == 0) {
+            emasList.add(priceList.get(0));
+            emalList.add(priceList.get(0));
+            difList.add((double) 0);
+            deaList.add((double) 0);
+            barList.add((double) 0);
         } else {
-            return (LTFY == true) && (LTFT == false);
+            double emas = EMA(emasList.get(i - 1), priceList.get(i), s);
+            double emal = EMA(emalList.get(i - 1), priceList.get(i), l);
+            double dif = emas - emal;
+            double dea = EMA(deaList.get(i - 1), dif, m);
+            double bar = 2 * (dif - dea);
+            emasList.add(emas);
+            emalList.add(emal);
+            difList.add(dif);
+            deaList.add(dea);
+            barList.add(bar);
         }
     }
 
-    public double EMASY = 0;
-    public double EMAST = 0;
-    public double EMALY = 0;
-    public double EMALT = 0;
-    public double DIFY = 0;
-    public double DIFT = 0;
-    public double DEAY = 10000;
-    public double DEAT = 0;
-    public double BARY = 0;
-    public double BART = 0;
-    public boolean STFY = true;
-    public boolean STFT = true;
-    public boolean LTFY = true;
-    public boolean LTFT = true;
-
-    private final int sho;
-    private final int lon;
-    private final int mid;
-
+    private final int s;
+    private final int l;
+    private final int m;
+    public ArrayList<Double> priceList = new ArrayList<>();
+    public ArrayList<Double> emasList = new ArrayList<>();
+    public ArrayList<Double> emalList = new ArrayList<>();
+    public ArrayList<Double> difList = new ArrayList<>();
+    public ArrayList<Double> deaList = new ArrayList<>();
+    public ArrayList<Double> barList = new ArrayList<>();
 }

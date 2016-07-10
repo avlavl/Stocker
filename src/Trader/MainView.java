@@ -5,6 +5,7 @@
  */
 package Trader;
 
+import static Trader.FormulaLib.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -379,7 +380,7 @@ public class MainView extends javax.swing.JFrame {
 
             for (int i = 0; i < rows; i++) {
                 updateMarket(i);
-                doLivermore(livermore);
+                doLivermore(livermore, i);
                 if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
                     strategy.livermoreTrade(CLOSE);
                 } else if (DATE.compareTo(end) > 0) {
@@ -411,16 +412,16 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
 
-        MACD macd = new MACD(12, 26, 9);
+        MACD macd = new MACD(closeList, 12, 26, 9);
+        macd.init();
         BRM brm = new BRM(0);
         Strategy strategy = new Strategy(this, brm);
         strategy.macd = macd;
 
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
-            macd.arithmetic(CLOSE);
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                strategy.macdCrossTrade(CLOSE);
+                strategy.macdCrossTrade(i);
             } else if (DATE.compareTo(end) > 0) {
                 break;
             }
@@ -451,16 +452,16 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
 
-        MA ma = new MA();
+        MALine ma = new MALine(closeList);
         BRM brm = new BRM(0);
         Strategy strategy = new Strategy(this, brm);
         strategy.ma = ma;
+        ArrayList<Double> ma10List = ma.getMAList(10);
 
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
-            ///ma.updateData(line, column);
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                strategy.maCrossTrade(CLOSE);
+                strategy.maCrossTrade(ma10List, i);
             } else if (DATE.compareTo(end) > 0) {
                 break;
             }
@@ -498,21 +499,21 @@ public class MainView extends javax.swing.JFrame {
             jLabelStockName.setText(words[1] + "(" + words[0].replaceAll("[\\pP\\p{Punct}]", "") + ")");
             words = br.readLine().split("\t");
             column = words.length;
-            dateArrayList = new ArrayList<>();
-            openArrayList = new ArrayList<>();
-            highArrayList = new ArrayList<>();
-            lowArrayList = new ArrayList<>();
-            closeArrayList = new ArrayList<>();
+            dateList = new ArrayList<>();
+            openList = new ArrayList<>();
+            highList = new ArrayList<>();
+            lowList = new ArrayList<>();
+            closeList = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {
                 words = line.split("\t");
-                dateArrayList.add(words[0]);
-                openArrayList.add(Double.parseDouble(words[1]));
-                highArrayList.add(Double.parseDouble(words[2]));
-                lowArrayList.add(Double.parseDouble(words[3]));
-                closeArrayList.add(Double.parseDouble(words[4]));
+                dateList.add(words[0]);
+                openList.add(Double.parseDouble(words[1]));
+                highList.add(Double.parseDouble(words[2]));
+                lowList.add(Double.parseDouble(words[3]));
+                closeList.add(Double.parseDouble(words[4]));
             }
-            rows = dateArrayList.size();
+            rows = dateList.size();
             br.close();
             isr.close();
         } catch (Exception e) {
@@ -520,7 +521,7 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    protected void doLivermore(Livermore livermore) {
+    protected void doLivermore(Livermore livermore, int idx) {
         double price;
         String message;
         switch (jComboBoxMode.getSelectedIndex()) {
@@ -529,27 +530,27 @@ public class MainView extends javax.swing.JFrame {
                 message = livermore.arithmetic(price);
                 livermoreLogger(livermore, message);
                 break;
-//            case 1:
-//                if (!strMA2.isEmpty()) {
-//                    price = Double.parseDouble(strMA2);
-//                    message = livermore.arithmetic(price);
-//                    livermoreLogger(livermore, message);
-//                }
-//                break;
-//            case 2:
-//                if (!strMA3.isEmpty()) {
-//                    price = Double.parseDouble(strMA3);
-//                    message = livermore.arithmetic(price);
-//                    livermoreLogger(livermore, message);
-//                }
-//                break;
-//            case 3:
-//                if (!strMA5.isEmpty()) {
-//                    price = Double.parseDouble(strMA5);
-//                    message = livermore.arithmetic(price);
-//                    livermoreLogger(livermore, message);
-//                }
-//                break;
+            case 1:
+                if (idx > 0) {
+                    price = MA(closeList, idx, 2);
+                    message = livermore.arithmetic(price);
+                    livermoreLogger(livermore, message);
+                }
+                break;
+            case 2:
+                if (idx > 1) {
+                    price = MA(closeList, idx, 3);
+                    message = livermore.arithmetic(price);
+                    livermoreLogger(livermore, message);
+                }
+                break;
+            case 3:
+                if (idx > 3) {
+                    price = MA(closeList, idx, 5);
+                    message = livermore.arithmetic(price);
+                    livermoreLogger(livermore, message);
+                }
+                break;
             case 4:
                 price = OPEN;
                 message = livermore.arithmetic(price);
@@ -617,21 +618,12 @@ public class MainView extends javax.swing.JFrame {
     }
 
     protected void updateMarket(int index) {
-        DATE = dateArrayList.get(index);
-        OPEN = openArrayList.get(index);
-        HIGH = highArrayList.get(index);
-        LOW = lowArrayList.get(index);
-        CLOSE = closeArrayList.get(index);
+        DATE = dateList.get(index);
+        OPEN = openList.get(index);
+        HIGH = highList.get(index);
+        LOW = lowList.get(index);
+        CLOSE = closeList.get(index);
 
-//        try {
-//            strMA2 = words[column - 6];
-//            strMA3 = words[column - 5];
-//            strMA5 = words[column - 4];
-//            strMA10 = words[column - 3];
-//            strMA20 = words[column - 2];
-//            strMA60 = words[column - 1];
-//        } catch (Exception e) {
-//        }
         jLabelDate.setText("日期：" + DATE);
         jLabelOpen.setText("开盘：" + OPEN);
         jLabelHigh.setText("最高：" + HIGH);
@@ -708,11 +700,11 @@ public class MainView extends javax.swing.JFrame {
 
     public int column = 15;
     public int rows = 0;
-    public ArrayList<String> dateArrayList;
-    public ArrayList<Double> openArrayList;
-    public ArrayList<Double> highArrayList;
-    public ArrayList<Double> lowArrayList;
-    public ArrayList<Double> closeArrayList;
+    public ArrayList<String> dateList;
+    public ArrayList<Double> openList;
+    public ArrayList<Double> highList;
+    public ArrayList<Double> lowList;
+    public ArrayList<Double> closeList;
     private String DATE = "";
     private double OPEN = 0;
     private double HIGH = 0;

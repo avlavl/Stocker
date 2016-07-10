@@ -5,6 +5,7 @@
  */
 package Trader;
 
+import static Trader.FormulaLib.*;
 import java.util.ArrayList;
 
 /**
@@ -42,50 +43,50 @@ public class Strategy {
         }
     }
 
-    public void macdCrossTrade(double price) {
+    public void macdCrossTrade(int idx) {
         tradingDays++;
         if (positionDays > 0) {
             positionDays++;
         }
-        if (macd.isGoldCross(true)) {
-            brm.quota(true, price);
+        if (CROSS(idx, macd.difList, macd.deaList)) {
+            brm.quota(true, macd.priceList.get(idx));
             positionDays++;
-            mainView.msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
-        } else if (macd.isDeadCross(true)) {
+            mainView.msgLogger("买入价：" + macd.priceList.get(idx) + "\t剩余款：" + (float) brm.asset);
+        } else if (CROSS(idx, macd.deaList, macd.difList)) {
             if (brm.initAsset != 0) {
-                if (price > brm.buyPrice) {
+                if (macd.priceList.get(idx) > brm.buyPrice) {
                     gainPositionDaysArray.add(positionDays);
                 } else {
                     lossPositionDaysArray.add(positionDays);
                 }
                 positionDays = 0;
-                brm.quota(false, price);
+                brm.quota(false, macd.priceList.get(idx));
                 cycleYears = (double) tradingDays / 244;
-                mainView.msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
+                mainView.msgLogger("卖出价：" + macd.priceList.get(idx) + "\t总资产：" + (float) brm.asset);
             }
         }
     }
 
-    public void maCrossTrade(double price) {
+    public void maCrossTrade(ArrayList<Double> list, int idx) {
         tradingDays++;
         if (positionDays > 0) {
             positionDays++;
         }
-        if (ma.isBreakUp(5)) {
-            brm.quota(true, price);
+        if (CROSS(idx, ma.priceList, list)) {
+            brm.quota(true, ma.priceList.get(idx));
             positionDays++;
-            mainView.msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
-        } else if (ma.isBreakDown(5)) {
+            mainView.msgLogger("买入价：" + ma.priceList.get(idx) + "\t剩余款：" + (float) brm.asset);
+        } else if (CROSS(idx, list, ma.priceList)) {
             if (brm.initAsset != 0) {
-                if (price > brm.buyPrice) {
+                if (ma.priceList.get(idx) > brm.buyPrice) {
                     gainPositionDaysArray.add(positionDays);
                 } else {
                     lossPositionDaysArray.add(positionDays);
                 }
                 positionDays = 0;
-                brm.quota(false, price);
+                brm.quota(false, ma.priceList.get(idx));
                 cycleYears = (double) tradingDays / 244;
-                mainView.msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
+                mainView.msgLogger("卖出价：" + ma.priceList.get(idx) + "\t总资产：" + (float) brm.asset);
             }
         }
     }
@@ -144,5 +145,5 @@ public class Strategy {
     public BRM brm;
     public Livermore livermore;
     public MACD macd;
-    public MA ma;
+    public MALine ma;
 }
