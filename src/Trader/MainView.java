@@ -85,6 +85,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelClose = new javax.swing.JLabel();
         jLabelLow = new javax.swing.JLabel();
         jButtonImport = new javax.swing.JButton();
+        jButtonTechChart = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -297,6 +298,15 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelMain.add(jButtonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, -1));
 
+        jButtonTechChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonTechChart.setText("技术分析");
+        jButtonTechChart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTechChartActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonTechChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 440));
 
         jMenuFile.setText("文件");
@@ -472,6 +482,10 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemTrendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTrendActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemTrendActionPerformed
+
+    private void jButtonTechChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTechChartActionPerformed
+        TechChart pc = new TechChart(this, false, closeList, this);
+    }//GEN-LAST:event_jButtonTechChartActionPerformed
 
     protected void importFile(String fileName) {
         if (fileName == null) {
@@ -713,6 +727,7 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonImport;
+    private javax.swing.JButton jButtonTechChart;
     private javax.swing.JButton jButtonTest;
     private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JCheckBox jCheckBoxVpoint;
