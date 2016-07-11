@@ -84,12 +84,19 @@ public class MainView extends javax.swing.JFrame {
         jLabelHigh = new javax.swing.JLabel();
         jLabelClose = new javax.swing.JLabel();
         jLabelLow = new javax.swing.JLabel();
-        jButtonImport = new javax.swing.JButton();
         jButtonTechChart = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
-        jMenuAdd = new javax.swing.JMenu();
+        jMenuIndex = new javax.swing.JMenu();
+        jMenuItemSZZS = new javax.swing.JMenuItem();
+        jMenuItemSZCZ = new javax.swing.JMenuItem();
+        jMenuItemCYBZ = new javax.swing.JMenuItem();
+        jMenuItemHS300 = new javax.swing.JMenuItem();
+        jMenuItemZXBZ = new javax.swing.JMenuItem();
+        jMenuItemSZ50 = new javax.swing.JMenuItem();
+        jMenuItemHSZS = new javax.swing.JMenuItem();
+        jMenuItemBSHJ = new javax.swing.JMenuItem();
         jMenuTestSystem = new javax.swing.JMenu();
         jMenuItemTrend = new javax.swing.JMenuItem();
         jMenuItemMACD = new javax.swing.JMenuItem();
@@ -183,7 +190,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
 
         jTextFieldEndDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldEndDate.setText("2016/05/31");
+        jTextFieldEndDate.setText("2016/07/31");
         jPanelMain.add(jTextFieldEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 80, -1));
 
         jTabbedPane1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -289,15 +296,6 @@ public class MainView extends javax.swing.JFrame {
         jLabelLow.setText("最低：");
         jPanelMain.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
 
-        jButtonImport.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonImport.setText("导入");
-        jButtonImport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImportActionPerformed(evt);
-            }
-        });
-        jPanelMain.add(jButtonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, -1));
-
         jButtonTechChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTechChart.setText("技术分析");
         jButtonTechChart.addActionListener(new java.awt.event.ActionListener() {
@@ -321,8 +319,73 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuFile);
 
-        jMenuAdd.setText("添加");
-        jMenuBar.add(jMenuAdd);
+        jMenuIndex.setText("常用指数");
+
+        jMenuItemSZZS.setText("上证指数");
+        jMenuItemSZZS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSZZSActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemSZZS);
+
+        jMenuItemSZCZ.setText("深证成指");
+        jMenuItemSZCZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSZCZActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemSZCZ);
+
+        jMenuItemCYBZ.setText("创业板指");
+        jMenuItemCYBZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCYBZActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemCYBZ);
+
+        jMenuItemHS300.setText("沪深300");
+        jMenuItemHS300.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHS300ActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemHS300);
+
+        jMenuItemZXBZ.setText("中小板指");
+        jMenuItemZXBZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemZXBZActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemZXBZ);
+
+        jMenuItemSZ50.setText("上证50");
+        jMenuItemSZ50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSZ50ActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemSZ50);
+
+        jMenuItemHSZS.setText("恒生指数");
+        jMenuItemHSZS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHSZSActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemHSZS);
+
+        jMenuItemBSHJ.setText("博时黄金");
+        jMenuItemBSHJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBSHJActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemBSHJ);
+
+        jMenuBar.add(jMenuIndex);
 
         jMenuTestSystem.setText("测试系统");
 
@@ -360,10 +423,6 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportActionPerformed
         importFile(null);
     }//GEN-LAST:event_jMenuItemImportActionPerformed
-
-    private void jButtonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportActionPerformed
-        importFile(null);
-    }//GEN-LAST:event_jButtonImportActionPerformed
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestActionPerformed
         String start = jTextFieldStartDate.getText();
@@ -486,6 +545,38 @@ public class MainView extends javax.swing.JFrame {
     private void jButtonTechChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTechChartActionPerformed
         TechChart pc = new TechChart(this, false, closeList, this);
     }//GEN-LAST:event_jButtonTechChartActionPerformed
+
+    private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
+        importFile("data\\上证指数.txt");
+    }//GEN-LAST:event_jMenuItemSZZSActionPerformed
+
+    private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
+        importFile("data\\深证成指.txt");
+    }//GEN-LAST:event_jMenuItemSZCZActionPerformed
+
+    private void jMenuItemCYBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCYBZActionPerformed
+        importFile("data\\创业板指.txt");
+    }//GEN-LAST:event_jMenuItemCYBZActionPerformed
+
+    private void jMenuItemHS300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHS300ActionPerformed
+        importFile("data\\沪深300.txt");
+    }//GEN-LAST:event_jMenuItemHS300ActionPerformed
+
+    private void jMenuItemZXBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZXBZActionPerformed
+        importFile("data\\中小板指.txt");
+    }//GEN-LAST:event_jMenuItemZXBZActionPerformed
+
+    private void jMenuItemSZ50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZ50ActionPerformed
+        importFile("data\\上证50.txt");
+    }//GEN-LAST:event_jMenuItemSZ50ActionPerformed
+
+    private void jMenuItemHSZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHSZSActionPerformed
+        importFile("data\\恒生指数.txt");
+    }//GEN-LAST:event_jMenuItemHSZSActionPerformed
+
+    private void jMenuItemBSHJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBSHJActionPerformed
+        importFile("data\\博时黄金.txt");
+    }//GEN-LAST:event_jMenuItemBSHJActionPerformed
 
     protected void importFile(String fileName) {
         if (fileName == null) {
@@ -726,7 +817,6 @@ public class MainView extends javax.swing.JFrame {
     private double CLOSE = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonImport;
     private javax.swing.JButton jButtonTechChart;
     private javax.swing.JButton jButtonTest;
     private javax.swing.JCheckBox jCheckBoxRecord;
@@ -746,15 +836,23 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelOpen;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStockName;
-    private javax.swing.JMenu jMenuAdd;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuIndex;
+    private javax.swing.JMenuItem jMenuItemBSHJ;
+    private javax.swing.JMenuItem jMenuItemCYBZ;
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
+    private javax.swing.JMenuItem jMenuItemHS300;
+    private javax.swing.JMenuItem jMenuItemHSZS;
     private javax.swing.JMenuItem jMenuItemImport;
     private javax.swing.JMenuItem jMenuItemMA;
     private javax.swing.JMenuItem jMenuItemMACD;
+    private javax.swing.JMenuItem jMenuItemSZ50;
+    private javax.swing.JMenuItem jMenuItemSZCZ;
+    private javax.swing.JMenuItem jMenuItemSZZS;
     private javax.swing.JMenuItem jMenuItemTrend;
+    private javax.swing.JMenuItem jMenuItemZXBZ;
     private javax.swing.JMenu jMenuTestSystem;
     private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelMA;
