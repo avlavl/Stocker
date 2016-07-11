@@ -105,7 +105,7 @@ public class TechChart extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel_xyCan = new javax.swing.JPanel();
-        jRadioButtonWeek = new javax.swing.JRadioButton();
+        jRadioButtonDay = new javax.swing.JRadioButton();
         jRadioButtonMonth = new javax.swing.JRadioButton();
         jRadioButtonQuar = new javax.swing.JRadioButton();
         jRadioButtonYear = new javax.swing.JRadioButton();
@@ -141,15 +141,15 @@ public class TechChart extends javax.swing.JDialog {
 
         getContentPane().add(jPanel_xyCan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1004, 504));
 
-        buttonGroup1.add(jRadioButtonWeek);
-        jRadioButtonWeek.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonWeek.setText("周");
-        jRadioButtonWeek.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jRadioButtonDay);
+        jRadioButtonDay.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonDay.setText("日");
+        jRadioButtonDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonWeekActionPerformed(evt);
+                jRadioButtonDayActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButtonWeek, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 538, -1, -1));
+        getContentPane().add(jRadioButtonDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 538, -1, -1));
 
         buttonGroup1.add(jRadioButtonMonth);
         jRadioButtonMonth.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -218,9 +218,9 @@ public class TechChart extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jPanel_xyCanMouseWheelMoved
 
-    private void jRadioButtonWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonWeekActionPerformed
-        step = 5;
-    }//GEN-LAST:event_jRadioButtonWeekActionPerformed
+    private void jRadioButtonDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDayActionPerformed
+        step = 1;
+    }//GEN-LAST:event_jRadioButtonDayActionPerformed
 
     private void jRadioButtonMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMonthActionPerformed
         step = 21;
@@ -245,9 +245,9 @@ public class TechChart extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBoxScale;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel_xyCan;
+    private javax.swing.JRadioButton jRadioButtonDay;
     private javax.swing.JRadioButton jRadioButtonMonth;
     private javax.swing.JRadioButton jRadioButtonQuar;
-    private javax.swing.JRadioButton jRadioButtonWeek;
     private javax.swing.JRadioButton jRadioButtonYear;
     // End of variables declaration//GEN-END:variables
 
