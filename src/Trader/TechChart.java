@@ -42,12 +42,14 @@ public class TechChart extends javax.swing.JDialog {
                 super.paintComponent(g);
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, xplots, yplots);
-                g.setColor(new Color(50, 50, 0));
+                g.setColor(new Color(0, 50, 50));
                 for (int i = 0; i < 10; i++) {
                     g.drawLine(0, (yplots / 10) * i, xplots, (yplots / 10) * i);
                     g.drawLine((xplots / 10) * i, 0, (xplots / 10) * i, yplots);
                 }
 
+                g.setColor(Color.LIGHT_GRAY);
+                g.drawString(mainView.stockName, 0, 15);
                 double high = Collections.max(priceList.subList(index, index + xplots));
                 double low = Collections.min(priceList.subList(index, index + xplots));
                 g.setColor(Color.RED);
@@ -55,7 +57,7 @@ public class TechChart extends javax.swing.JDialog {
                 g.setColor(Color.GREEN);
                 g.drawString(String.format("Low:%4.2f", low), 200, 15);
 
-                g.setColor(Color.RED);
+                g.setColor(Color.WHITE);
                 for (int i = 0, j = 0; i < xplots - 1; i++) {
                     int ystart = yplots - (int) Math.round(priceList.get(index + j++) / scalar);
                     int yend = yplots - (int) Math.round(priceList.get(index + j) / scalar);
@@ -67,12 +69,10 @@ public class TechChart extends javax.swing.JDialog {
                     }
                     g.drawLine(i, ystart, i + 1, yend);
                 }
-
-                g.setColor(Color.WHITE);
                 for (int i = 0; i < 10; i++) {
                     g.drawString(mainView.dateList.get(index + i * 100), i * 100, yplots);
                 }
-                g.setColor(Color.MAGENTA);
+                g.setColor(new Color(250, 20, 5));
                 for (int i = 0; i < 10; i++) {
                     g.drawString(String.format("%d", (int) (scalar * 50 * (10 - i))), 0, i * 50);
                 }

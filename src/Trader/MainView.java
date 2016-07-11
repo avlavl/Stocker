@@ -601,7 +601,8 @@ public class MainView extends javax.swing.JFrame {
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
             BufferedReader br = new BufferedReader(isr);
             String[] words = br.readLine().split("\t");
-            jLabelStockName.setText(words[1] + "(" + words[0].replaceAll("[\\pP\\p{Punct}]", "") + ")");
+            stockName = words[1];
+            jLabelStockName.setText(stockName + "(" + words[0].replaceAll("[\\pP\\p{Punct}]", "") + ")");
             words = br.readLine().split("\t");
             column = words.length;
             dateList = new ArrayList<>();
@@ -803,6 +804,7 @@ public class MainView extends javax.swing.JFrame {
     private String fileOut = "data\\上证指数_测试日志.txt";
     public FileWriter fileWriter;
 
+    public String stockName = "上证指数";
     public int column = 15;
     public int rows = 0;
     public ArrayList<String> dateList;
