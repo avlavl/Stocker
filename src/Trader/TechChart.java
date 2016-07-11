@@ -21,7 +21,7 @@ public class TechChart extends javax.swing.JDialog {
     /**
      * Creates new form PriceChart
      */
-    public TechChart(java.awt.Frame parent, boolean modal, ArrayList<Double> list, MainView mv) {
+    public TechChart(java.awt.Frame parent, boolean modal, MainView mv) {
         super(parent, modal);
         initComponents();
 
@@ -32,8 +32,9 @@ public class TechChart extends javax.swing.JDialog {
         }
         setVisible(true);
 
-        priceList = list;
         mainView = mv;
+        priceList = mainView.closeList;
+        units = priceList.size();
 
         jPanel_xyChart = new javax.swing.JPanel() {
 
@@ -50,17 +51,18 @@ public class TechChart extends javax.swing.JDialog {
 
                 g.setColor(Color.LIGHT_GRAY);
                 g.drawString(mainView.stockName, 0, 15);
-                double high = Collections.max(priceList.subList(index, index + xplots));
-                double low = Collections.min(priceList.subList(index, index + xplots));
+                int counts = (units > xplots) ? xplots : units;
+                double high = Collections.max(priceList.subList(offset, offset + counts));
+                double low = Collections.min(priceList.subList(offset, offset + counts));
                 g.setColor(Color.RED);
                 g.drawString(String.format("High:%4.2f", high), 100, 15);
                 g.setColor(Color.GREEN);
                 g.drawString(String.format("Low:%4.2f", low), 200, 15);
 
                 g.setColor(Color.WHITE);
-                for (int i = 0, j = 0; i < xplots - 1; i++) {
-                    int ystart = yplots - (int) Math.round(priceList.get(index + j++) / scalar);
-                    int yend = yplots - (int) Math.round(priceList.get(index + j) / scalar);
+                for (int i = 0, j = 0; i < counts - 1; i++) {
+                    int ystart = yplots - (int) Math.round(priceList.get(offset + j++) / scalar);
+                    int yend = yplots - (int) Math.round(priceList.get(offset + j) / scalar);
                     if (ystart >= yplots - 2) {
                         ystart = yplots - 2;
                     }
@@ -70,7 +72,9 @@ public class TechChart extends javax.swing.JDialog {
                     g.drawLine(i, ystart, i + 1, yend);
                 }
                 for (int i = 0; i < 10; i++) {
-                    g.drawString(mainView.dateList.get(index + i * 100), i * 100, yplots);
+                    if (offset + i * 100 < units) {
+                        g.drawString(mainView.dateList.get(offset + i * 100), i * 100, yplots);
+                    }
                 }
                 g.setColor(new Color(250, 20, 5));
                 for (int i = 0; i < 10; i++) {
@@ -81,7 +85,9 @@ public class TechChart extends javax.swing.JDialog {
 
         xplots = jPanel_xyCan.getWidth() - 4;
         yplots = jPanel_xyCan.getHeight() - 4;
-        index = priceList.size() - xplots;
+        if (units > xplots) {
+            offset = units - xplots;
+        }
         jPanel_xyChart.setBounds(2, 2, xplots, yplots);
         jPanel_xyCan.add(jPanel_xyChart);
         jPanel_xyChart.updateUI();
@@ -194,20 +200,22 @@ public class TechChart extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel_xyCanMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel_xyCanMouseWheelMoved
-        if (evt.getWheelRotation() > 0) {
-            index += step;
-            if (index > priceList.size() - xplots) {
-                index = priceList.size() - xplots;
+        if (units > xplots) {
+            if (evt.getWheelRotation() > 0) {
+                offset += step;
+                if (offset > units - xplots) {
+                    offset = units - xplots;
+                }
+            } else {
+                offset -= step;
+                if (offset < 0) {
+                    offset = 0;
+                }
             }
-        } else {
-            index -= step;
-            if (index < 0) {
-                index = 0;
-            }
-        }
 
-        jPanel_xyChart.updateUI();
-        jPanel_xyCan.updateUI();
+            jPanel_xyChart.updateUI();
+            jPanel_xyCan.updateUI();
+        }
     }//GEN-LAST:event_jPanel_xyCanMouseWheelMoved
 
     private void jRadioButtonWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonWeekActionPerformed
@@ -247,13 +255,11 @@ public class TechChart extends javax.swing.JDialog {
     public int xplots = 0;
     public int yplots = 0;
     public double scalar = 12;
-
-    private int index = 0;
-
-    public ArrayList<Double> priceList = new ArrayList<>();
-    protected MainView mainView;
-
-    private int step = 63;
-
     private final double[] scalar_buf = {0.02, 0.04, 0.1, 0.2, 0.5, 1, 2, 4, 6, 8, 10, 12, 16, 20, 30, 40, 60};
+
+    protected MainView mainView;
+    public ArrayList<Double> priceList = new ArrayList<>();
+    private int units = 0;
+    private int offset = 0;
+    private int step = 63;
 }

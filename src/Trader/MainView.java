@@ -543,7 +543,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemTrendActionPerformed
 
     private void jButtonTechChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTechChartActionPerformed
-        TechChart pc = new TechChart(this, false, closeList, this);
+        TechChart pc = new TechChart(this, false, this);
     }//GEN-LAST:event_jButtonTechChartActionPerformed
 
     private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
