@@ -19,7 +19,7 @@ public class BRM {
     }
 
     protected void quota(boolean bs, double price) {
-        bs_flag = bs;
+        bsFlag = bs;
         if (bs) {
             if (initAsset == 0) {
                 initAsset = price;
@@ -203,7 +203,7 @@ public class BRM {
     }
 
     public double getCurrentAsset(double price) {
-        if (bs_flag) {
+        if (bsFlag) {
             return asset + price;
         } else {
             return asset;
@@ -250,6 +250,6 @@ public class BRM {
     public ArrayList<Double> gainAgioArray = new ArrayList<>();
     public ArrayList<Double> lossAgioArray = new ArrayList<>();
 
-    private boolean bs_flag = false;
+    public boolean bsFlag = false;
 
 }

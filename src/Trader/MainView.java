@@ -51,6 +51,7 @@ public class MainView extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItemCopy = new javax.swing.JMenuItem();
         jMenuItemClear = new javax.swing.JMenuItem();
+        buttonGroupMACD = new javax.swing.ButtonGroup();
         jPanelMain = new javax.swing.JPanel();
         jLabelStockName = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
@@ -77,8 +78,11 @@ public class MainView extends javax.swing.JFrame {
         jComboBoxMode = new javax.swing.JComboBox<>();
         jCheckBoxRecord = new javax.swing.JCheckBox();
         jLabelStatus = new javax.swing.JLabel();
-        jButtonTest = new javax.swing.JButton();
+        jButtonTrendEva = new javax.swing.JButton();
         jPanelMACD = new javax.swing.JPanel();
+        jRadioButtonMACDCross = new javax.swing.JRadioButton();
+        jRadioButtonMACDDIF = new javax.swing.JRadioButton();
+        jButtonMACDEva = new javax.swing.JButton();
         jPanelMA = new javax.swing.JPanel();
         jLabelOpen = new javax.swing.JLabel();
         jLabelHigh = new javax.swing.JLabel();
@@ -257,18 +261,39 @@ public class MainView extends javax.swing.JFrame {
         jLabelStatus.setText("主上升!");
         jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jButtonTest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonTest.setText("测试");
-        jButtonTest.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTrendEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonTrendEva.setText("评测");
+        jButtonTrendEva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTestActionPerformed(evt);
+                jButtonTrendEvaActionPerformed(evt);
             }
         });
-        jPanelTrend.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
+        jPanelTrend.add(jButtonTrendEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
 
         jTabbedPane1.addTab("趋势", jPanelTrend);
 
         jPanelMACD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroupMACD.add(jRadioButtonMACDCross);
+        jRadioButtonMACDCross.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonMACDCross.setSelected(true);
+        jRadioButtonMACDCross.setText("金叉死叉交易");
+        jPanelMACD.add(jRadioButtonMACDCross, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        buttonGroupMACD.add(jRadioButtonMACDDIF);
+        jRadioButtonMACDDIF.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonMACDDIF.setText("DIF突破交易");
+        jPanelMACD.add(jRadioButtonMACDDIF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        jButtonMACDEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonMACDEva.setText("评测");
+        jButtonMACDEva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMACDEvaActionPerformed(evt);
+            }
+        });
+        jPanelMACD.add(jButtonMACDEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
+
         jTabbedPane1.addTab("MACD", jPanelMACD);
 
         jPanelMA.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -424,7 +449,7 @@ public class MainView extends javax.swing.JFrame {
         importFile(null);
     }//GEN-LAST:event_jMenuItemImportActionPerformed
 
-    private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestActionPerformed
+    private void jButtonTrendEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrendEvaActionPerformed
         String start = jTextFieldStartDate.getText();
         String end = jTextFieldEndDate.getText();
         if ((end.compareTo(start) < 0)) {
@@ -466,7 +491,7 @@ public class MainView extends javax.swing.JFrame {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-    }//GEN-LAST:event_jButtonTestActionPerformed
+    }//GEN-LAST:event_jButtonTrendEvaActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
         String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
@@ -486,6 +511,7 @@ public class MainView extends javax.swing.JFrame {
         BRM brm = new BRM(0);
         Strategy strategy = new Strategy(this, brm);
         strategy.macd = macd;
+        fundList = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
@@ -494,6 +520,7 @@ public class MainView extends javax.swing.JFrame {
             } else if (DATE.compareTo(end) > 0) {
                 break;
             }
+            fundList.add(brm.getCurrentAsset(CLOSE));
         }
         updateTable(brm, strategy);
     }//GEN-LAST:event_jMenuItemMACDActionPerformed
@@ -578,6 +605,38 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\博时黄金.txt");
     }//GEN-LAST:event_jMenuItemBSHJActionPerformed
 
+    private void jButtonMACDEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMACDEvaActionPerformed
+        String start = jTextFieldStartDate.getText();
+        String end = jTextFieldEndDate.getText();
+        if ((end.compareTo(start) < 0)) {
+            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+            return;
+        }
+
+        MACD macd = new MACD(closeList, 12, 26, 9);
+        macd.init();
+        BRM brm = new BRM(0);
+        Strategy strategy = new Strategy(this, brm);
+        strategy.macd = macd;
+        fundList = new ArrayList<>();
+
+        for (int i = 0; i < rows; i++) {
+            updateMarket(i);
+            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                if (jRadioButtonMACDCross.isSelected()) {
+                    strategy.macdCrossTrade(i);
+                } else {
+                    strategy.difCrossTrade(i, 40);
+                }
+            } else if (DATE.compareTo(end) > 0) {
+                break;
+            }
+            fundList.add(brm.getCurrentAsset(CLOSE));
+        }
+        updateTable(brm, strategy);
+        evaluated = true;
+    }//GEN-LAST:event_jButtonMACDEvaActionPerformed
+
     protected void importFile(String fileName) {
         if (fileName == null) {
             JFileChooser chooser = new JFileChooser("data/");
@@ -625,6 +684,7 @@ public class MainView extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        evaluated = false;
     }
 
     protected void doLivermore(Livermore livermore, int idx) {
@@ -812,15 +872,20 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<Double> highList;
     public ArrayList<Double> lowList;
     public ArrayList<Double> closeList;
+    public ArrayList<Double> fundList;
     private String DATE = "";
     private double OPEN = 0;
     private double HIGH = 0;
     private double LOW = 0;
     private double CLOSE = 0;
 
+    public boolean evaluated = false;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupMACD;
+    private javax.swing.JButton jButtonMACDEva;
     private javax.swing.JButton jButtonTechChart;
-    private javax.swing.JButton jButtonTest;
+    private javax.swing.JButton jButtonTrendEva;
     private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JCheckBox jCheckBoxVpoint;
     private javax.swing.JComboBox<String> jComboBoxMode;
@@ -862,6 +927,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelTrend;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButton jRadioButtonMACDCross;
+    private javax.swing.JRadioButton jRadioButtonMACDDIF;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

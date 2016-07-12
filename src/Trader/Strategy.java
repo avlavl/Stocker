@@ -67,6 +67,30 @@ public class Strategy {
         }
     }
 
+    public void difCrossTrade(int idx, double value) {
+        tradingDays++;
+        if (positionDays > 0) {
+            positionDays++;
+        }
+        if (CROSS(idx, macd.difList, value)) {
+            brm.quota(true, macd.priceList.get(idx));
+            positionDays++;
+            mainView.msgLogger("买入价：" + macd.priceList.get(idx) + "\t剩余款：" + (float) brm.asset);
+        } else if (CROSS(idx, value, macd.difList)) {
+            if (brm.initAsset != 0) {
+                if (macd.priceList.get(idx) > brm.buyPrice) {
+                    gainPositionDaysArray.add(positionDays);
+                } else {
+                    lossPositionDaysArray.add(positionDays);
+                }
+                positionDays = 0;
+                brm.quota(false, macd.priceList.get(idx));
+                cycleYears = (double) tradingDays / 244;
+                mainView.msgLogger("卖出价：" + macd.priceList.get(idx) + "\t总资产：" + (float) brm.asset);
+            }
+        }
+    }
+
     public void maCrossTrade(ArrayList<Double> list, int idx) {
         tradingDays++;
         if (positionDays > 0) {

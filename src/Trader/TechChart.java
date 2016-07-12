@@ -34,6 +34,7 @@ public class TechChart extends javax.swing.JDialog {
 
         mainView = mv;
         priceList = mainView.closeList;
+        fundList = mainView.fundList;
         units = priceList.size();
 
         jPanel_xyChart = new javax.swing.JPanel() {
@@ -55,9 +56,9 @@ public class TechChart extends javax.swing.JDialog {
                 double high = Collections.max(priceList.subList(offset, offset + counts));
                 double low = Collections.min(priceList.subList(offset, offset + counts));
                 g.setColor(Color.RED);
-                g.drawString(String.format("High:%4.2f", high), 100, 15);
+                g.drawString(String.format("最高:%4.2f", high), 100, 15);
                 g.setColor(Color.GREEN);
-                g.drawString(String.format("Low:%4.2f", low), 200, 15);
+                g.drawString(String.format("最低:%4.2f", low), 200, 15);
 
                 g.setColor(Color.WHITE);
                 for (int i = 0, j = 0; i < counts - 1; i++) {
@@ -71,6 +72,21 @@ public class TechChart extends javax.swing.JDialog {
                     }
                     g.drawLine(i, ystart, i + 1, yend);
                 }
+                if (mainView.evaluated) {
+                    g.setColor(Color.RED);
+                    for (int i = 0, j = 0; i < counts - 1; i++) {
+                        int ystart = yplots - (int) Math.round(fundList.get(offset + j++) / scalar);
+                        int yend = yplots - (int) Math.round(fundList.get(offset + j) / scalar);
+                        if (ystart >= yplots - 2) {
+                            ystart = yplots - 2;
+                        }
+                        if (yend >= yplots - 2) {
+                            yend = yplots - 2;
+                        }
+                        g.drawLine(i, ystart, i + 1, yend);
+                    }
+                }
+                g.setColor(Color.YELLOW);
                 for (int i = 0; i < 10; i++) {
                     if (offset + i * 100 < units) {
                         g.drawString(mainView.dateList.get(offset + i * 100), i * 100, yplots);
@@ -259,6 +275,7 @@ public class TechChart extends javax.swing.JDialog {
 
     protected MainView mainView;
     public ArrayList<Double> priceList = new ArrayList<>();
+    public ArrayList<Double> fundList = new ArrayList<>();
     private int units = 0;
     private int offset = 0;
     private int step = 63;
