@@ -552,15 +552,19 @@ public class MainView extends javax.swing.JFrame {
                 fileWriter = new FileWriter(fileOut);
             }
 
+            int endIdx = 0;
             for (int i = 0; i < rows; i++) {
                 updateMarket(i);
                 doLivermore(livermore, i);
                 if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                    endIdx = i;
                     strategy.livermoreTrade(CLOSE);
-                } else if (DATE.compareTo(end) > 0) {
-                    break;
                 }
-                fundList.add(brm.getCurrentAsset(CLOSE));
+                if (i <= endIdx) {
+                    fundList.add(brm.getCurrentAsset(CLOSE));
+                } else {
+                    fundList.add(fundList.get(endIdx));
+                }
             }
             parseStatus(livermore.Status);
             updateTable(brm, strategy);
@@ -590,19 +594,24 @@ public class MainView extends javax.swing.JFrame {
         strategy.macd = macd;
         fundList = new ArrayList<>();
 
+        int endIdx = 0;
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                endIdx = i;
                 if (jRadioButtonMACDCross.isSelected()) {
                     strategy.barCrossTrade(i, 0);
                 } else {
                     strategy.difCrossTrade(i, 40);
                 }
-            } else if (DATE.compareTo(end) > 0) {
-                break;
             }
-            fundList.add(brm.getCurrentAsset(CLOSE));
+            if (i <= endIdx) {
+                fundList.add(brm.getCurrentAsset(CLOSE));
+            } else {
+                fundList.add(fundList.get(endIdx));
+            }
         }
+
         updateTable(brm, strategy);
         evaluated = true;
     }//GEN-LAST:event_jButtonMACDEvaActionPerformed
@@ -622,14 +631,18 @@ public class MainView extends javax.swing.JFrame {
         ArrayList<Double> ma10List = ma.getMAList(10);
         fundList = new ArrayList<>();
 
+        int endIdx = 0;
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                endIdx = i;
                 strategy.maCrossTrade(ma10List, i);
-            } else if (DATE.compareTo(end) > 0) {
-                break;
             }
-            fundList.add(brm.getCurrentAsset(CLOSE));
+            if (i <= endIdx) {
+                fundList.add(brm.getCurrentAsset(CLOSE));
+            } else {
+                fundList.add(fundList.get(endIdx));
+            }
         }
         updateTable(brm, strategy);
         evaluated = true;
