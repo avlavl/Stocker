@@ -545,6 +545,7 @@ public class MainView extends javax.swing.JFrame {
         BRM brm = new BRM(0);
         Strategy strategy = new Strategy(this, brm);
         strategy.livermore = livermore;
+        fundList = new ArrayList<>();
 
         try {
             if (jCheckBoxRecord.isSelected()) {
@@ -559,9 +560,11 @@ public class MainView extends javax.swing.JFrame {
                 } else if (DATE.compareTo(end) > 0) {
                     break;
                 }
+                fundList.add(brm.getCurrentAsset(CLOSE));
             }
             parseStatus(livermore.Status);
             updateTable(brm, strategy);
+            evaluated = true;
 
             if (jCheckBoxRecord.isSelected()) {
                 fileWriter.flush();
@@ -617,6 +620,7 @@ public class MainView extends javax.swing.JFrame {
         Strategy strategy = new Strategy(this, brm);
         strategy.ma = ma;
         ArrayList<Double> ma10List = ma.getMAList(10);
+        fundList = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
@@ -625,8 +629,10 @@ public class MainView extends javax.swing.JFrame {
             } else if (DATE.compareTo(end) > 0) {
                 break;
             }
+            fundList.add(brm.getCurrentAsset(CLOSE));
         }
         updateTable(brm, strategy);
+        evaluated = true;
     }//GEN-LAST:event_jButtonMAEvaActionPerformed
 
     protected void importFile(String fileName) {
