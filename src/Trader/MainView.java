@@ -84,6 +84,7 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonMACDDIF = new javax.swing.JRadioButton();
         jButtonMACDEva = new javax.swing.JButton();
         jPanelMA = new javax.swing.JPanel();
+        jButtonMAEva = new javax.swing.JButton();
         jLabelOpen = new javax.swing.JLabel();
         jLabelHigh = new javax.swing.JLabel();
         jLabelClose = new javax.swing.JLabel();
@@ -297,6 +298,16 @@ public class MainView extends javax.swing.JFrame {
         jTabbedPane1.addTab("MACD", jPanelMACD);
 
         jPanelMA.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonMAEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonMAEva.setText("评测");
+        jButtonMAEva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMAEvaActionPerformed(evt);
+            }
+        });
+        jPanelMA.add(jButtonMAEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
+
         jTabbedPane1.addTab("均线", jPanelMA);
 
         jPanelMain.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 340, 330));
@@ -449,6 +460,74 @@ public class MainView extends javax.swing.JFrame {
         importFile(null);
     }//GEN-LAST:event_jMenuItemImportActionPerformed
 
+    private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
+        importFile("data\\上证指数.txt");
+    }//GEN-LAST:event_jMenuItemSZZSActionPerformed
+
+    private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
+        importFile("data\\深证成指.txt");
+    }//GEN-LAST:event_jMenuItemSZCZActionPerformed
+
+    private void jMenuItemCYBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCYBZActionPerformed
+        importFile("data\\创业板指.txt");
+    }//GEN-LAST:event_jMenuItemCYBZActionPerformed
+
+    private void jMenuItemHS300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHS300ActionPerformed
+        importFile("data\\沪深300.txt");
+    }//GEN-LAST:event_jMenuItemHS300ActionPerformed
+
+    private void jMenuItemZXBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZXBZActionPerformed
+        importFile("data\\中小板指.txt");
+    }//GEN-LAST:event_jMenuItemZXBZActionPerformed
+
+    private void jMenuItemSZ50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZ50ActionPerformed
+        importFile("data\\上证50.txt");
+    }//GEN-LAST:event_jMenuItemSZ50ActionPerformed
+
+    private void jMenuItemHSZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHSZSActionPerformed
+        importFile("data\\恒生指数.txt");
+    }//GEN-LAST:event_jMenuItemHSZSActionPerformed
+
+    private void jMenuItemBSHJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBSHJActionPerformed
+        importFile("data\\博时黄金.txt");
+    }//GEN-LAST:event_jMenuItemBSHJActionPerformed
+
+    private void jMenuItemTrendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTrendActionPerformed
+        System.out.println("TODO");
+    }//GEN-LAST:event_jMenuItemTrendActionPerformed
+
+    private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
+        System.out.println("TODO");
+    }//GEN-LAST:event_jMenuItemMACDActionPerformed
+
+    private void jMenuItemMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMAActionPerformed
+        System.out.println("TODO");
+    }//GEN-LAST:event_jMenuItemMAActionPerformed
+
+    private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenu1.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTextAreaMainMouseReleased
+
+    private void jMenuItemClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearActionPerformed
+        jTextAreaMain.setText("");
+    }//GEN-LAST:event_jMenuItemClearActionPerformed
+
+    private void jMenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCopyActionPerformed
+        jTextAreaMain.selectAll();
+        jTextAreaMain.copy();
+    }//GEN-LAST:event_jMenuItemCopyActionPerformed
+
+    private void jButtonTechChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTechChartActionPerformed
+        TechChart pc = new TechChart(this, false, this);
+    }//GEN-LAST:event_jButtonTechChartActionPerformed
+
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+        parseStatus(status);
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
+
     private void jButtonTrendEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrendEvaActionPerformed
         String start = jTextFieldStartDate.getText();
         String end = jTextFieldEndDate.getText();
@@ -493,118 +572,6 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonTrendEvaActionPerformed
 
-    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
-        String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
-        parseStatus(status);
-    }//GEN-LAST:event_jComboBoxStatusActionPerformed
-
-    private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
-        String start = jTextFieldStartDate.getText();
-        String end = jTextFieldEndDate.getText();
-        if ((end.compareTo(start) < 0)) {
-            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
-            return;
-        }
-
-        MACD macd = new MACD(closeList, 12, 26, 9);
-        macd.init();
-        BRM brm = new BRM(0);
-        Strategy strategy = new Strategy(this, brm);
-        strategy.macd = macd;
-        fundList = new ArrayList<>();
-
-        for (int i = 0; i < rows; i++) {
-            updateMarket(i);
-            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                strategy.barCrossTrade(i, 0);
-            } else if (DATE.compareTo(end) > 0) {
-                break;
-            }
-            fundList.add(brm.getCurrentAsset(CLOSE));
-        }
-        updateTable(brm, strategy);
-    }//GEN-LAST:event_jMenuItemMACDActionPerformed
-
-    private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
-        if (evt.isPopupTrigger()) {
-            jPopupMenu1.show(this, evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_jTextAreaMainMouseReleased
-
-    private void jMenuItemClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearActionPerformed
-        jTextAreaMain.setText("");
-    }//GEN-LAST:event_jMenuItemClearActionPerformed
-
-    private void jMenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCopyActionPerformed
-        jTextAreaMain.selectAll();
-        jTextAreaMain.copy();
-    }//GEN-LAST:event_jMenuItemCopyActionPerformed
-
-    private void jMenuItemMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMAActionPerformed
-        String start = jTextFieldStartDate.getText();
-        String end = jTextFieldEndDate.getText();
-        if ((end.compareTo(start) < 0)) {
-            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
-            return;
-        }
-
-        MALine ma = new MALine(closeList);
-        BRM brm = new BRM(0);
-        Strategy strategy = new Strategy(this, brm);
-        strategy.ma = ma;
-        ArrayList<Double> ma10List = ma.getMAList(10);
-
-        for (int i = 0; i < rows; i++) {
-            updateMarket(i);
-            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                strategy.maCrossTrade(ma10List, i);
-            } else if (DATE.compareTo(end) > 0) {
-                break;
-            }
-        }
-        updateTable(brm, strategy);
-    }//GEN-LAST:event_jMenuItemMAActionPerformed
-
-    private void jMenuItemTrendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTrendActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemTrendActionPerformed
-
-    private void jButtonTechChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTechChartActionPerformed
-        TechChart pc = new TechChart(this, false, this);
-    }//GEN-LAST:event_jButtonTechChartActionPerformed
-
-    private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
-        importFile("data\\上证指数.txt");
-    }//GEN-LAST:event_jMenuItemSZZSActionPerformed
-
-    private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
-        importFile("data\\深证成指.txt");
-    }//GEN-LAST:event_jMenuItemSZCZActionPerformed
-
-    private void jMenuItemCYBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCYBZActionPerformed
-        importFile("data\\创业板指.txt");
-    }//GEN-LAST:event_jMenuItemCYBZActionPerformed
-
-    private void jMenuItemHS300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHS300ActionPerformed
-        importFile("data\\沪深300.txt");
-    }//GEN-LAST:event_jMenuItemHS300ActionPerformed
-
-    private void jMenuItemZXBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZXBZActionPerformed
-        importFile("data\\中小板指.txt");
-    }//GEN-LAST:event_jMenuItemZXBZActionPerformed
-
-    private void jMenuItemSZ50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZ50ActionPerformed
-        importFile("data\\上证50.txt");
-    }//GEN-LAST:event_jMenuItemSZ50ActionPerformed
-
-    private void jMenuItemHSZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHSZSActionPerformed
-        importFile("data\\恒生指数.txt");
-    }//GEN-LAST:event_jMenuItemHSZSActionPerformed
-
-    private void jMenuItemBSHJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBSHJActionPerformed
-        importFile("data\\博时黄金.txt");
-    }//GEN-LAST:event_jMenuItemBSHJActionPerformed
-
     private void jButtonMACDEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMACDEvaActionPerformed
         String start = jTextFieldStartDate.getText();
         String end = jTextFieldEndDate.getText();
@@ -636,6 +603,31 @@ public class MainView extends javax.swing.JFrame {
         updateTable(brm, strategy);
         evaluated = true;
     }//GEN-LAST:event_jButtonMACDEvaActionPerformed
+
+    private void jButtonMAEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMAEvaActionPerformed
+        String start = jTextFieldStartDate.getText();
+        String end = jTextFieldEndDate.getText();
+        if ((end.compareTo(start) < 0)) {
+            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+            return;
+        }
+
+        MALine ma = new MALine(closeList);
+        BRM brm = new BRM(0);
+        Strategy strategy = new Strategy(this, brm);
+        strategy.ma = ma;
+        ArrayList<Double> ma10List = ma.getMAList(10);
+
+        for (int i = 0; i < rows; i++) {
+            updateMarket(i);
+            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
+                strategy.maCrossTrade(ma10List, i);
+            } else if (DATE.compareTo(end) > 0) {
+                break;
+            }
+        }
+        updateTable(brm, strategy);
+    }//GEN-LAST:event_jButtonMAEvaActionPerformed
 
     protected void importFile(String fileName) {
         if (fileName == null) {
@@ -884,6 +876,7 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupMACD;
     private javax.swing.JButton jButtonMACDEva;
+    private javax.swing.JButton jButtonMAEva;
     private javax.swing.JButton jButtonTechChart;
     private javax.swing.JButton jButtonTrendEva;
     private javax.swing.JCheckBox jCheckBoxRecord;
