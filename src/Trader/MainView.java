@@ -554,7 +554,9 @@ public class MainView extends javax.swing.JFrame {
 
             int endIdx = 0;
             for (int i = 0; i < rows; i++) {
-                updateMarket(i);
+                if (((endIdx > 0) && (i > endIdx + 1)) == false) {
+                    updateMarket(i);
+                }
                 doLivermore(livermore, i);
                 if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
                     endIdx = i;
@@ -596,7 +598,9 @@ public class MainView extends javax.swing.JFrame {
 
         int endIdx = 0;
         for (int i = 0; i < rows; i++) {
-            updateMarket(i);
+            if (((endIdx > 0) && (i > endIdx + 1)) == false) {
+                updateMarket(i);
+            }
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
                 endIdx = i;
                 if (jRadioButtonMACDCross.isSelected()) {
@@ -633,7 +637,9 @@ public class MainView extends javax.swing.JFrame {
 
         int endIdx = 0;
         for (int i = 0; i < rows; i++) {
-            updateMarket(i);
+            if (((endIdx > 0) && (i > endIdx + 1)) == false) {
+                updateMarket(i);
+            }
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
                 endIdx = i;
                 strategy.maCrossTrade(ma10List, i);
