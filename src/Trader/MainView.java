@@ -520,7 +520,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
     private void jButtonTechChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTechChartActionPerformed
-        TechChart pc = new TechChart(this, false, this);
+        TechChart tc = new TechChart(this, false, this);
     }//GEN-LAST:event_jButtonTechChartActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
@@ -635,6 +635,9 @@ public class MainView extends javax.swing.JFrame {
         evaluated = true;
     }//GEN-LAST:event_jButtonMAEvaActionPerformed
 
+    /**
+     ********************* Start of User-defined function ********************
+     */
     protected void importFile(String fileName) {
         if (fileName == null) {
             JFileChooser chooser = new JFileChooser("data/");

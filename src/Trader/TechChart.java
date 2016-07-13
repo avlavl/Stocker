@@ -42,6 +42,8 @@ public class TechChart extends javax.swing.JDialog {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
+                int counts = (units > xplots) ? xplots : units;
+
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, xplots, yplots);
                 g.setColor(new Color(0, 50, 50));
@@ -52,15 +54,24 @@ public class TechChart extends javax.swing.JDialog {
 
                 g.setColor(Color.LIGHT_GRAY);
                 g.drawString(mainView.stockName, 0, 15);
-                int counts = (units > xplots) ? xplots : units;
-                double high = Collections.max(priceList.subList(offset, offset + counts));
-                double low = Collections.min(priceList.subList(offset, offset + counts));
-                g.setColor(Color.RED);
-                g.drawString(String.format("最高:%4.2f", high), 100, 15);
-                g.setColor(Color.GREEN);
-                g.drawString(String.format("最低:%4.2f", low), 200, 15);
 
+                g.setColor(Color.MAGENTA);
+                g.drawString(String.format("开始:"), 100, 15);
+                g.drawString(String.format("结束:"), 250, 15);
+                g.drawString(String.format("最高:"), 400, 15);
+                g.drawString(String.format("最低:"), 550, 15);
+                g.drawString(String.format("涨幅:"), 700, 15);
+                double si = priceList.get(offset);
+                double ei = priceList.get(offset + counts - 1);
+                double hi = Collections.max(priceList.subList(offset, offset + counts));
+                double li = Collections.min(priceList.subList(offset, offset + counts));
+                double ri = (ei / si - 1) * 100;
                 g.setColor(Color.WHITE);
+                g.drawString(String.format("%4.2f", si), 130, 15);
+                g.drawString(String.format("%4.2f", ei), 280, 15);
+                g.drawString(String.format("%4.2f", hi), 430, 15);
+                g.drawString(String.format("%4.2f", li), 580, 15);
+                g.drawString(String.format("%4.2f%%", ri), 730, 15);
                 for (int i = 0, j = 0; i < counts - 1; i++) {
                     int ystart = yplots - (int) Math.round(priceList.get(offset + j++) / scalar);
                     int yend = yplots - (int) Math.round(priceList.get(offset + j) / scalar);
@@ -73,7 +84,17 @@ public class TechChart extends javax.swing.JDialog {
                     g.drawLine(i, ystart, i + 1, yend);
                 }
                 if (mainView.evaluated) {
+                    double sf = fundList.get(offset);
+                    double ef = fundList.get(offset + counts - 1);
+                    double hf = Collections.max(fundList.subList(offset, offset + counts));
+                    double lf = Collections.min(fundList.subList(offset, offset + counts));
+                    double rf = (ef / sf - 1) * 100;
                     g.setColor(Color.RED);
+                    g.drawString(String.format("%4.2f", sf), 180, 15);
+                    g.drawString(String.format("%4.2f", ef), 330, 15);
+                    g.drawString(String.format("%4.2f", hf), 480, 15);
+                    g.drawString(String.format("%4.2f", lf), 630, 15);
+                    g.drawString(String.format("%4.2f%%", rf), 780, 15);
                     for (int i = 0, j = 0; i < counts - 1; i++) {
                         int ystart = yplots - (int) Math.round(fundList.get(offset + j++) / scalar);
                         int yend = yplots - (int) Math.round(fundList.get(offset + j) / scalar);
