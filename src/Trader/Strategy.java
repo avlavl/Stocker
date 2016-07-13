@@ -20,119 +20,76 @@ public class Strategy {
     }
 
     public void livermoreTrade(double price) {
-        tradingDays++;
-        if (positionDays > 0) {
-            positionDays++;
-        }
-        if (livermore.enterRiseStatus() || ((brm.initAsset == 0) && livermore.Status.equals("mainRiseStatus"))) {
-            brm.quota(true, price);
-            positionDays++;
-            mainView.msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
-        } else if (livermore.enterFallStatus()) {
-            if (brm.initAsset != 0) {
-                if (price > brm.buyPrice) {
-                    gainPositionDaysArray.add(positionDays);
-                } else {
-                    lossPositionDaysArray.add(positionDays);
-                }
-                positionDays = 0;
-                brm.quota(false, price);
-                cycleYears = (double) tradingDays / 244;
-                mainView.msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset);
-            }
-        }
+        boolean b = livermore.enterRiseStatus() || ((brm.initAsset == 0) && livermore.Status.equals("mainRiseStatus"));
+        boolean s = livermore.enterFallStatus();
+
+        trade(price, b, s);
     }
 
-    public void macdCrossTrade(int idx) {
-        tradingDays++;
-        if (positionDays > 0) {
-            positionDays++;
-        }
-        if (CROSS(idx, macd.difList, macd.deaList)) {
-            brm.quota(true, macd.priceList.get(idx));
-            positionDays++;
-            mainView.msgLogger("买入价：" + macd.priceList.get(idx) + "\t剩余款：" + (float) brm.asset);
-        } else if (CROSS(idx, macd.deaList, macd.difList)) {
-            if (brm.initAsset != 0) {
-                if (macd.priceList.get(idx) > brm.buyPrice) {
-                    gainPositionDaysArray.add(positionDays);
-                } else {
-                    lossPositionDaysArray.add(positionDays);
-                }
-                positionDays = 0;
-                brm.quota(false, macd.priceList.get(idx));
-                cycleYears = (double) tradingDays / 244;
-                mainView.msgLogger("卖出价：" + macd.priceList.get(idx) + "\t总资产：" + (float) brm.asset);
-            }
-        }
+    public void barCrossTrade(int idx, double value) {
+        boolean b = CROSS(idx, macd.barList, value);
+        boolean s = CROSS(idx, value, macd.barList);
+
+        trade(mainView.CLOSE, b, s);
     }
 
     public void difCrossTrade(int idx, double value) {
-        tradingDays++;
-        if (positionDays > 0) {
-            positionDays++;
-        }
-        if (CROSS(idx, macd.difList, value)) {
-            brm.quota(true, macd.priceList.get(idx));
-            positionDays++;
-            mainView.msgLogger("买入价：" + macd.priceList.get(idx) + "\t剩余款：" + (float) brm.asset);
-        } else if (CROSS(idx, value, macd.difList)) {
-            if (brm.initAsset != 0) {
-                if (macd.priceList.get(idx) > brm.buyPrice) {
-                    gainPositionDaysArray.add(positionDays);
-                } else {
-                    lossPositionDaysArray.add(positionDays);
-                }
-                positionDays = 0;
-                brm.quota(false, macd.priceList.get(idx));
-                cycleYears = (double) tradingDays / 244;
-                mainView.msgLogger("卖出价：" + macd.priceList.get(idx) + "\t总资产：" + (float) brm.asset);
-            }
-        }
+        boolean b = CROSS(idx, macd.difList, value);
+        boolean s = CROSS(idx, value, macd.difList);
+
+        trade(mainView.CLOSE, b, s);
     }
 
     public void maCrossTrade(ArrayList<Double> list, int idx) {
-        tradingDays++;
+        boolean b = CROSS(idx, ma.priceList, list);
+        boolean s = CROSS(idx, list, ma.priceList);
+
+        trade(mainView.CLOSE, b, s);
+    }
+
+    public void trade(double price, boolean buy, boolean sell) {
+        tradeDays++;
+        tradeYears = (double) tradeDays / 244;
         if (positionDays > 0) {
             positionDays++;
         }
-        if (CROSS(idx, ma.priceList, list)) {
-            brm.quota(true, ma.priceList.get(idx));
+        if (buy) {
+            brm.quota(true, price);
             positionDays++;
-            mainView.msgLogger("买入价：" + ma.priceList.get(idx) + "\t剩余款：" + (float) brm.asset);
-        } else if (CROSS(idx, list, ma.priceList)) {
+            mainView.msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
+        } else if (sell) {
             if (brm.initAsset != 0) {
-                if (ma.priceList.get(idx) > brm.buyPrice) {
-                    gainPositionDaysArray.add(positionDays);
+                double agio = price - brm.buyPrice;
+                if (agio > 0) {
+                    gainPositionDaysList.add(positionDays);
                 } else {
-                    lossPositionDaysArray.add(positionDays);
+                    lossPositionDaysList.add(positionDays);
                 }
                 positionDays = 0;
-                brm.quota(false, ma.priceList.get(idx));
-                cycleYears = (double) tradingDays / 244;
-                mainView.msgLogger("卖出价：" + ma.priceList.get(idx) + "\t总资产：" + (float) brm.asset);
+                brm.quota(false, price);
+                mainView.msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset + "\t" + ((agio > 0) ? "赢利：" : "亏损：") + (float) Math.abs(agio));
             }
         }
     }
 
     public double getPositionDaysRate() {
         int sumDays = 0;
-        for (Integer days : gainPositionDaysArray) {
+        for (Integer days : gainPositionDaysList) {
             sumDays += days;
         }
-        for (Integer days : lossPositionDaysArray) {
+        for (Integer days : lossPositionDaysList) {
             sumDays += days;
         }
-        double rate = (double) 100 * sumDays / tradingDays;
+        double rate = (double) 100 * sumDays / tradeDays;
         return rate;
     }
 
     public double getMeanPositionDays(BRM brm) {
         int sumDays = 0;
-        for (Integer days : gainPositionDaysArray) {
+        for (Integer days : gainPositionDaysList) {
             sumDays += days;
         }
-        for (Integer days : lossPositionDaysArray) {
+        for (Integer days : lossPositionDaysList) {
             sumDays += days;
         }
         int tradingTimes = brm.getGainTimes() + brm.getLossTimes();
@@ -141,7 +98,7 @@ public class Strategy {
 
     public double getMeanGainDays(BRM brm) {
         int sumDays = 0;
-        for (Integer days : gainPositionDaysArray) {
+        for (Integer days : gainPositionDaysList) {
             sumDays += days;
         }
 
@@ -151,7 +108,7 @@ public class Strategy {
 
     public double getMeanLossDays(BRM brm) {
         int sumDays = 0;
-        for (Integer days : lossPositionDaysArray) {
+        for (Integer days : lossPositionDaysList) {
             sumDays += days;
         }
 
@@ -159,11 +116,11 @@ public class Strategy {
         return (double) sumDays / tradingTimes;
     }
 
-    public int tradingDays = 0;
+    public int tradeDays = 0;
+    public double tradeYears = 0;
     public int positionDays = 0;
-    public double cycleYears = 0;
-    public ArrayList<Integer> gainPositionDaysArray = new ArrayList<>();
-    public ArrayList<Integer> lossPositionDaysArray = new ArrayList<>();
+    public ArrayList<Integer> gainPositionDaysList = new ArrayList<>();
+    public ArrayList<Integer> lossPositionDaysList = new ArrayList<>();
 
     protected MainView mainView;
     public BRM brm;

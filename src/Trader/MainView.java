@@ -516,7 +516,7 @@ public class MainView extends javax.swing.JFrame {
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                strategy.macdCrossTrade(i);
+                strategy.barCrossTrade(i, 0);
             } else if (DATE.compareTo(end) > 0) {
                 break;
             }
@@ -624,7 +624,7 @@ public class MainView extends javax.swing.JFrame {
             updateMarket(i);
             if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
                 if (jRadioButtonMACDCross.isSelected()) {
-                    strategy.macdCrossTrade(i);
+                    strategy.barCrossTrade(i, 0);
                 } else {
                     strategy.difCrossTrade(i, 40);
                 }
@@ -808,10 +808,10 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getMeanLoss(), 7, 1);
         jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
         jTablePoint.setValueAt((float) brm.getExpectation(), 9, 1);
-        jTablePoint.setValueAt((float) stg.cycleYears + "年", 10, 1);
+        jTablePoint.setValueAt((float) stg.tradeYears + "年", 10, 1);
 
         jTablePoint.setValueAt((float) brm.getEarningRate() + "%", 0, 3);
-        jTablePoint.setValueAt((float) brm.getAnnualRate(stg.cycleYears) + "%", 1, 3);
+        jTablePoint.setValueAt((float) brm.getAnnualRate(stg.tradeYears) + "%", 1, 3);
         jTablePoint.setValueAt((float) brm.getObjectRate(CLOSE) + "%", 2, 3);
         jTablePoint.setValueAt((float) brm.initAsset, 3, 3);
         jTablePoint.setValueAt((float) brm.getCurrentAsset(CLOSE), 4, 3);
@@ -873,11 +873,11 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<Double> lowList;
     public ArrayList<Double> closeList;
     public ArrayList<Double> fundList;
-    private String DATE = "";
-    private double OPEN = 0;
-    private double HIGH = 0;
-    private double LOW = 0;
-    private double CLOSE = 0;
+    public String DATE = "";
+    public double OPEN = 0;
+    public double HIGH = 0;
+    public double LOW = 0;
+    public double CLOSE = 0;
 
     public boolean evaluated = false;
 
