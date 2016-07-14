@@ -560,13 +560,16 @@ public class MainView extends javax.swing.JFrame {
                 doLivermore(livermore, i);
                 if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
                     endIdx = i;
-                    strategy.livermoreTrade(CLOSE);
+                    strategy.livermoreTrade(i);
                 }
                 if (i <= endIdx) {
                     fundList.add(brm.getCurrentAsset(CLOSE));
                 } else {
                     fundList.add(fundList.get(endIdx));
                 }
+            }
+            for (int i = 0; i < strategy.bIndexList.get(0); i++) {
+                fundList.set(i, brm.initAsset);
             }
             parseStatus(livermore.Status);
             updateTable(brm, strategy);
@@ -615,6 +618,9 @@ public class MainView extends javax.swing.JFrame {
                 fundList.add(fundList.get(endIdx));
             }
         }
+        for (int i = 0; i < strategy.bIndexList.get(0); i++) {
+            fundList.set(i, brm.initAsset);
+        }
 
         updateTable(brm, strategy);
         evaluated = true;
@@ -649,6 +655,9 @@ public class MainView extends javax.swing.JFrame {
             } else {
                 fundList.add(fundList.get(endIdx));
             }
+        }
+        for (int i = 0; i < strategy.bIndexList.get(0); i++) {
+            fundList.set(i, brm.initAsset);
         }
         updateTable(brm, strategy);
         evaluated = true;

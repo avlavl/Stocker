@@ -16,49 +16,53 @@ public class Strategy {
 
     public Strategy(MainView mv, BRM b) {
         mainView = mv;
+        priceList = mv.closeList;
         brm = b;
     }
 
-    public void livermoreTrade(double price) {
+    public void livermoreTrade(int idx) {
         boolean b = livermore.enterRiseStatus() || ((brm.initAsset == 0) && livermore.Status.equals("mainRiseStatus"));
         boolean s = livermore.enterFallStatus();
 
-        trade(price, b, s);
+        trade(idx, b, s);
     }
 
     public void barCrossTrade(int idx, double value) {
         boolean b = CROSS(idx, macd.barList, value);
         boolean s = CROSS(idx, value, macd.barList);
 
-        trade(mainView.CLOSE, b, s);
+        trade(idx, b, s);
     }
 
     public void difCrossTrade(int idx, double value) {
         boolean b = CROSS(idx, macd.difList, value);
         boolean s = CROSS(idx, value, macd.difList);
 
-        trade(mainView.CLOSE, b, s);
+        trade(idx, b, s);
     }
 
     public void maCrossTrade(ArrayList<Double> list, int idx) {
         boolean b = CROSS(idx, ma.priceList, list);
         boolean s = CROSS(idx, list, ma.priceList);
 
-        trade(mainView.CLOSE, b, s);
+        trade(idx, b, s);
     }
 
-    public void trade(double price, boolean buy, boolean sell) {
+    public void trade(int idx, boolean buy, boolean sell) {
+        double price = priceList.get(idx);
         tradeDays++;
         tradeYears = (double) tradeDays / 244;
         if (positionDays > 0) {
             positionDays++;
         }
         if (buy) {
+            bIndexList.add(idx);
             brm.quota(true, price);
             positionDays++;
             mainView.msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
         } else if (sell) {
             if (brm.initAsset != 0) {
+                sIndexList.add(idx);
                 double agio = price - brm.buyPrice;
                 if (agio > 0) {
                     gainPositionDaysList.add(positionDays);
@@ -121,8 +125,11 @@ public class Strategy {
     public int positionDays = 0;
     public ArrayList<Integer> gainPositionDaysList = new ArrayList<>();
     public ArrayList<Integer> lossPositionDaysList = new ArrayList<>();
+    public ArrayList<Integer> bIndexList = new ArrayList<>();
+    public ArrayList<Integer> sIndexList = new ArrayList<>();
 
     protected MainView mainView;
+    private ArrayList<Double> priceList = new ArrayList<>();
     public BRM brm;
     public Livermore livermore;
     public MACD macd;
