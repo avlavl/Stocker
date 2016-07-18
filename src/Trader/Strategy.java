@@ -21,114 +21,84 @@ public class Strategy {
     }
 
     public void livermoreTrade(int idx) {
-        boolean b = livermore.enterRiseStatus() || ((brm.initAsset == 0) && livermore.Status.equals("mainRiseStatus"));
+        boolean b = livermore.enterRiseStatus();
         boolean s = livermore.enterFallStatus();
-
         trade(idx, b, s);
     }
 
     public void barCrossTrade(int idx, double value) {
         boolean b = CROSS(idx, macd.barList, value);
         boolean s = CROSS(idx, value, macd.barList);
-
         trade(idx, b, s);
     }
 
     public void difCrossTrade(int idx, double value) {
         boolean b = CROSS(idx, macd.difList, value);
         boolean s = CROSS(idx, value, macd.difList);
-
         trade(idx, b, s);
     }
 
     public void maCrossTrade(ArrayList<Double> list, int idx) {
         boolean b = CROSS(idx, ma.priceList, list);
         boolean s = CROSS(idx, list, ma.priceList);
-
         trade(idx, b, s);
     }
 
     public void trade(int idx, boolean buy, boolean sell) {
-        double price = priceList.get(idx);
-        tradeDays++;
-        tradeYears = (double) tradeDays / 244;
-        if (positionDays > 0) {
-            positionDays++;
-        }
         if (buy) {
-            bIndexList.add(idx);
-            brm.quota(true, price);
-            positionDays++;
-            mainView.msgLogger("买入价：" + price + "\t剩余款：" + (float) brm.asset);
-        } else if (sell) {
-            if (brm.initAsset != 0) {
-                sIndexList.add(idx);
-                double agio = price - brm.buyPrice;
-                if (agio > 0) {
-                    gainPositionDaysList.add(positionDays);
-                } else {
-                    lossPositionDaysList.add(positionDays);
-                }
-                positionDays = 0;
-                brm.quota(false, price);
-                mainView.msgLogger("卖出价：" + price + "\t总资产：" + (float) brm.asset + "\t" + ((agio > 0) ? "赢利：" : "亏损：") + (float) Math.abs(agio));
-            }
+            bpIndexList.add(idx);
+        }
+        if (sell & (bpIndexList.size() > 0)) {
+            spIndexList.add(idx);
         }
     }
 
     public double getPositionDaysRate() {
-        int sumDays = 0;
-        for (Integer days : gainPositionDaysList) {
-            sumDays += days;
+        int days = 0;
+        for (int i = 0; i < bpIndexList.size(); i++) {
+            days += spIndexList.get(i) - bpIndexList.get(i);
         }
-        for (Integer days : lossPositionDaysList) {
-            sumDays += days;
-        }
-        double rate = (double) 100 * sumDays / tradeDays;
+
+        double rate = (double) 100 * days / mainView.tradeDays;
         return rate;
     }
 
-    public double getMeanPositionDays(BRM brm) {
-        int sumDays = 0;
-        for (Integer days : gainPositionDaysList) {
-            sumDays += days;
+    public double getMeanPositionDays() {
+        int days = 0;
+        for (int i = 0; i < bpIndexList.size(); i++) {
+            days += spIndexList.get(i) - bpIndexList.get(i);
         }
-        for (Integer days : lossPositionDaysList) {
-            sumDays += days;
-        }
-        int tradingTimes = brm.getGainTimes() + brm.getLossTimes();
-        return (double) sumDays / tradingTimes;
+        return (double) days / bpIndexList.size();
     }
 
-    public double getMeanGainDays(BRM brm) {
-        int sumDays = 0;
-        for (Integer days : gainPositionDaysList) {
-            sumDays += days;
+    public double getMeanGainDays() {
+        int days = 0;
+        int times = 0;
+        for (int i = 0; i < bpIndexList.size(); i++) {
+            if (priceList.get(spIndexList.get(i)) > priceList.get(bpIndexList.get(i))) {
+                days += spIndexList.get(i) - bpIndexList.get(i);
+                times++;
+            }
         }
-
-        int tradingTimes = brm.getGainTimes();
-        return (double) sumDays / tradingTimes;
+        return (double) days / times;
     }
 
-    public double getMeanLossDays(BRM brm) {
-        int sumDays = 0;
-        for (Integer days : lossPositionDaysList) {
-            sumDays += days;
+    public double getMeanLossDays() {
+        int days = 0;
+        int times = 0;
+        for (int i = 0; i < bpIndexList.size(); i++) {
+            if (priceList.get(spIndexList.get(i)) <= priceList.get(bpIndexList.get(i))) {
+                days += spIndexList.get(i) - bpIndexList.get(i);
+                times++;
+            }
         }
-
-        int tradingTimes = brm.getLossTimes();
-        return (double) sumDays / tradingTimes;
+        return (double) days / times;
     }
 
-    public int tradeDays = 0;
-    public double tradeYears = 0;
-    public int positionDays = 0;
-    public ArrayList<Integer> gainPositionDaysList = new ArrayList<>();
-    public ArrayList<Integer> lossPositionDaysList = new ArrayList<>();
-    public ArrayList<Integer> bIndexList = new ArrayList<>();
-    public ArrayList<Integer> sIndexList = new ArrayList<>();
+    public ArrayList<Integer> bpIndexList = new ArrayList<>();
+    public ArrayList<Integer> spIndexList = new ArrayList<>();
 
-    protected MainView mainView;
+    private MainView mainView;
     private ArrayList<Double> priceList = new ArrayList<>();
     public BRM brm;
     public Livermore livermore;

@@ -529,10 +529,8 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     private void jButtonTrendEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrendEvaActionPerformed
-        String start = jTextFieldStartDate.getText();
-        String end = jTextFieldEndDate.getText();
-        if ((end.compareTo(start) < 0)) {
-            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+        tradeDays = dateProcess();
+        if (tradeDays == 0) {
             return;
         }
 
@@ -542,7 +540,7 @@ public class MainView extends javax.swing.JFrame {
         Livermore livermore = new Livermore(status, t1, t2);
         livermore.vpointEnable = jCheckBoxVpoint.isSelected();
         livermore.vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
-        BRM brm = new BRM(0);
+        BRM brm = new BRM(this);
         Strategy strategy = new Strategy(this, brm);
         strategy.livermore = livermore;
         fundList = new ArrayList<>();
@@ -552,25 +550,20 @@ public class MainView extends javax.swing.JFrame {
                 fileWriter = new FileWriter(fileOut);
             }
 
-            int endIdx = 0;
             for (int i = 0; i < rows; i++) {
-                if (((endIdx > 0) && (i > endIdx + 1)) == false) {
-                    updateMarket(i);
-                }
+                updateMarket(i);
                 doLivermore(livermore, i);
-                if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                    endIdx = i;
+                if ((i >= sIdx) && (i <= eIdx)) {
                     strategy.livermoreTrade(i);
                 }
-                if (i <= endIdx) {
-                    fundList.add(brm.getCurrentAsset(CLOSE));
-                } else {
-                    fundList.add(fundList.get(endIdx));
+                if (i > eIdx) {
+                    break;
                 }
             }
-            for (int i = 0; i < strategy.bIndexList.get(0); i++) {
-                fundList.set(i, brm.initAsset);
+            if (strategy.bpIndexList.size() > strategy.spIndexList.size()) {
+                strategy.spIndexList.add(eIdx);
             }
+            fundList = brm.synthesize(strategy);
             parseStatus(livermore.Status);
             updateTable(brm, strategy);
             evaluated = true;
@@ -585,80 +578,67 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTrendEvaActionPerformed
 
     private void jButtonMACDEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMACDEvaActionPerformed
-        String start = jTextFieldStartDate.getText();
-        String end = jTextFieldEndDate.getText();
-        if ((end.compareTo(start) < 0)) {
-            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+        tradeDays = dateProcess();
+        if (tradeDays == 0) {
             return;
         }
 
         MACD macd = new MACD(closeList, 12, 26, 9);
         macd.init();
-        BRM brm = new BRM(0);
+        BRM brm = new BRM(this);
         Strategy strategy = new Strategy(this, brm);
         strategy.macd = macd;
         fundList = new ArrayList<>();
 
-        int endIdx = 0;
         for (int i = 0; i < rows; i++) {
-            if (((endIdx > 0) && (i > endIdx + 1)) == false) {
-                updateMarket(i);
-            }
-            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                endIdx = i;
+            updateMarket(i);
+            if ((i >= sIdx) && (i <= eIdx)) {
                 if (jRadioButtonMACDCross.isSelected()) {
                     strategy.barCrossTrade(i, 0);
                 } else {
-                    strategy.difCrossTrade(i, 40);
+                    strategy.difCrossTrade(i, 50);
                 }
             }
-            if (i <= endIdx) {
-                fundList.add(brm.getCurrentAsset(CLOSE));
-            } else {
-                fundList.add(fundList.get(endIdx));
+            if (i > eIdx) {
+                break;
             }
         }
-        for (int i = 0; i < strategy.bIndexList.get(0); i++) {
-            fundList.set(i, brm.initAsset);
+        if (strategy.bpIndexList.size() > strategy.spIndexList.size()) {
+            strategy.spIndexList.add(eIdx);
         }
+        fundList = brm.synthesize(strategy);
 
         updateTable(brm, strategy);
         evaluated = true;
     }//GEN-LAST:event_jButtonMACDEvaActionPerformed
 
     private void jButtonMAEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMAEvaActionPerformed
-        String start = jTextFieldStartDate.getText();
-        String end = jTextFieldEndDate.getText();
-        if ((end.compareTo(start) < 0)) {
-            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+        tradeDays = dateProcess();
+        if (tradeDays == 0) {
             return;
         }
 
         MALine ma = new MALine(closeList);
-        BRM brm = new BRM(0);
+        BRM brm = new BRM(this);
         Strategy strategy = new Strategy(this, brm);
         strategy.ma = ma;
         ArrayList<Double> ma10List = ma.getMAList(10);
         fundList = new ArrayList<>();
 
-        int endIdx = 0;
         for (int i = 0; i < rows; i++) {
-            if (((endIdx > 0) && (i > endIdx + 1)) == false) {
-                updateMarket(i);
-            }
-            if ((DATE.compareTo(start) >= 0) && (DATE.compareTo(end) <= 0)) {
-                endIdx = i;
+            updateMarket(i);
+            if ((i >= sIdx) && (i <= eIdx)) {
                 strategy.maCrossTrade(ma10List, i);
             }
-            if (i <= endIdx) {
-                fundList.add(brm.getCurrentAsset(CLOSE));
-            } else {
-                fundList.add(fundList.get(endIdx));
+            if (i > eIdx) {
+                break;
             }
         }
-        for (int i = 0; i < strategy.bIndexList.get(0); i++) {
-            fundList.set(i, brm.initAsset);
+        if (strategy.bpIndexList.size() > strategy.spIndexList.size()) {
+            strategy.spIndexList.add(eIdx);
         }
+        fundList = brm.synthesize(strategy);
+
         updateTable(brm, strategy);
         evaluated = true;
     }//GEN-LAST:event_jButtonMAEvaActionPerformed
@@ -714,6 +694,28 @@ public class MainView extends javax.swing.JFrame {
             e.printStackTrace();
         }
         evaluated = false;
+    }
+
+    private int dateProcess() {
+        String start = jTextFieldStartDate.getText();
+        String end = jTextFieldEndDate.getText();
+        if ((end.compareTo(start) <= 0)) {
+            JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
+            return 0;
+        }
+
+        sIdx = -1;
+        eIdx = 0;
+        for (int i = 0; i < rows; i++) {
+            if ((dateList.get(i).compareTo(start) >= 0) && (dateList.get(i).compareTo(end) <= 0)) {
+                if (sIdx == -1) {
+                    sIdx = i;
+                }
+                eIdx = i;
+            }
+        }
+        int len = eIdx - sIdx + 1;
+        return len;
     }
 
     protected void doLivermore(Livermore livermore, int idx) {
@@ -837,19 +839,19 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getMeanLoss(), 7, 1);
         jTablePoint.setValueAt((float) brm.getOdds(), 8, 1);
         jTablePoint.setValueAt((float) brm.getExpectation(), 9, 1);
-        jTablePoint.setValueAt((float) stg.tradeYears + "年", 10, 1);
+        jTablePoint.setValueAt((float) tradeDays / 244 + "年", 10, 1);
 
         jTablePoint.setValueAt((float) brm.getEarningRate() + "%", 0, 3);
-        jTablePoint.setValueAt((float) brm.getAnnualRate(stg.tradeYears) + "%", 1, 3);
+        jTablePoint.setValueAt((float) brm.getAnnualRate((double) tradeDays / 244) + "%", 1, 3);
         jTablePoint.setValueAt((float) brm.getObjectRate(CLOSE) + "%", 2, 3);
         jTablePoint.setValueAt((float) brm.initAsset, 3, 3);
         jTablePoint.setValueAt((float) brm.getCurrentAsset(CLOSE), 4, 3);
         jTablePoint.setValueAt((float) brm.getMaxGain(), 5, 3);
         jTablePoint.setValueAt((float) brm.getMaxLoss(), 6, 3);
         jTablePoint.setValueAt((float) stg.getPositionDaysRate() + "%", 7, 3);
-        jTablePoint.setValueAt((float) stg.getMeanPositionDays(brm) + "天", 8, 3);
-        jTablePoint.setValueAt((float) stg.getMeanGainDays(brm) + "天", 9, 3);
-        jTablePoint.setValueAt((float) stg.getMeanLossDays(brm) + "天", 10, 3);
+        jTablePoint.setValueAt((float) stg.getMeanPositionDays() + "天", 8, 3);
+        jTablePoint.setValueAt((float) stg.getMeanGainDays() + "天", 9, 3);
+        jTablePoint.setValueAt((float) stg.getMeanLossDays() + "天", 10, 3);
     }
 
     protected void livermoreLogger(Livermore lm, String msg) {
@@ -876,7 +878,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     public void msgLogger(String str) {
-        jTextAreaMain.append("[" + DATE + "] " + str + System.getProperty("line.separator"));
+        jTextAreaMain.append(str + System.getProperty("line.separator"));
     }
 
     public void fileLogger(String str) {
@@ -907,6 +909,9 @@ public class MainView extends javax.swing.JFrame {
     public double HIGH = 0;
     public double LOW = 0;
     public double CLOSE = 0;
+    public int sIdx = -1;
+    public int eIdx = 0;
+    public int tradeDays = 0;
 
     public boolean evaluated = false;
 

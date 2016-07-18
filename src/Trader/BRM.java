@@ -14,28 +14,21 @@ import java.util.Collections;
  */
 public class BRM {
 
-    public BRM(double ast) {
-        asset = ast;
+    public BRM(MainView mv) {
+        mainView = mv;
+        priceList = mv.closeList;
+        dateList = mv.dateList;
     }
 
     protected void quota(boolean bs, double price) {
         bsFlag = bs;
         if (bs) {
-            if (initAsset == 0) {
-                initAsset = price;
-            } else {
-                asset -= price;
-            }
+            asset -= price;
             buyPrice = price;
         } else if (initAsset != 0) {
             asset += price;
             sellPrice = price;
-            double agio = sellPrice - buyPrice;
-            if (agio > 0) {
-                gainAgioArray.add(agio);
-            } else {
-                lossAgioArray.add(agio);
-            }
+            agioList.add(sellPrice - buyPrice);
         }
     }
 
@@ -47,139 +40,95 @@ public class BRM {
         }
     }
 
-    protected void BRMC(boolean bs, double scale, double price) {
-        if (bs) {
-            int count = (int) (asset * scale / (int) (price * 100));
-            stockCount += count;
-            moneyAsset -= price * 100 * count;
-
-//            jTextAreaMain.append("[" + dateString + "] 买入" + scale * 10 + "成仓位， 买入价：" + price + "买入数量：" + count + "手 ");
-//            jTextAreaMain.append("股票数量" + stockCount + " 市值：" + (price * 100 * stockCount) + "总资产：" + (moneyAsset + price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
-        } else if ((bs == false) && (stockCount > 0)) {
-            int count = stockCount - (int) (stockCount * (1 - scale));
-            stockCount -= count;
-            moneyAsset += price * 100 * count;
-            if (scale != 1) {
-                //jTextAreaMain.append("[" + dateString + "] 卖出" + scale * 10 + "成仓位， 卖出价：" + price + "买出数量：" + count + "手 ");
-                //jTextAreaMain.append("股票数量" + stockCount + " 市值：" + (price * 100 * stockCount) + "总资产：" + (moneyAsset + price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
+    public ArrayList<Double> synthesize(Strategy stg) {
+        initAsset = priceList.get(stg.bpIndexList.get(0));
+        asset = initAsset;
+        int times = stg.bpIndexList.size();
+        int startIdx = stg.bpIndexList.get(0);
+        int endIdx = stg.spIndexList.get(times - 1);
+        for (int i = 0; i < priceList.size(); i++) {
+            if (i < startIdx) {
+                fundList.add(initAsset);
+            } else if (i <= endIdx) {
+                if (stg.bpIndexList.contains(i)) {
+                    quota(true, priceList.get(i));
+                    mainView.msgLogger("[" + dateList.get(i) + "] 买入价：" + priceList.get(i) + "\t剩余款：" + (float) asset);
+                } else if (stg.spIndexList.contains(i)) {
+                    quota(false, priceList.get(i));
+                    mainView.msgLogger("[" + dateList.get(i) + "] 卖出价：" + priceList.get(i) + "\t总资产：" + (float) asset + "\t" + ((sellPrice - buyPrice > 0) ? "赢利：" : "亏损：") + (float) Math.abs(sellPrice - buyPrice));
+                }
+                fundList.add(getCurrentAsset(priceList.get(i)));
             } else {
-                asset = moneyAsset;
-                //jTextAreaMain.append("[" + dateString + "] 清仓! 卖出价：" + price + "买出数量：" + count + "手 ");
-                //jTextAreaMain.append("总资产：" + asset + "可用资金：" + moneyAsset + "\n");
+                fundList.add(fundList.get(endIdx));
             }
         }
-    }
 
-    protected void BRMD(int status, double price) {
-        switch (status) {
-            case 1:     //开仓
-                openCount = (int) (asset * 0.4 / (int) (price * 100));
-                openPrice = price;
-                stockCount = openCount;
-                moneyAsset -= price * 100 * openCount;
-
-                //jTextAreaMain.append("[" + dateString + "] 开仓！买入价：" + price + "，买入数量：" + openCount + "手 ");
-                //jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
-                break;
-            case 2:     //加仓1
-                addCount1 = (int) (asset * 0.4 / (int) (price * 100));
-                addPrice1 = price;
-                stockCount += addCount1;
-                moneyAsset -= price * 100 * addCount1;
-
-                //jTextAreaMain.append("[" + dateString + "] 首次加仓，买入价：" + price + "，买入数量：" + addCount1 + "手 ");
-                //jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
-                break;
-            case 3:     //加仓2
-                addCount2 = (int) (asset * 0.2 / (int) (price * 100));
-                addPrice2 = price;
-                stockCount += addCount2;
-                moneyAsset -= price * 100 * addCount2;
-
-                //jTextAreaMain.append("[" + dateString + "] 二次加仓，买入价：" + price + "，买入数量：" + addCount2 + "手 ");
-                //jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
-                break;
-            case -1:    //减仓
-                if (stockCount > 0) {
-                    int count = stockCount - (int) (stockCount * 0.5);
-                    stockCount -= count;
-                    moneyAsset += price * 100 * count;
-
-                    //jTextAreaMain.append("[" + dateString + "] 减仓，卖出价：" + price + "，买出数量：" + count + "手 ");
-                    //jTextAreaMain.append("总资产：" + (moneyAsset + price * 100 * stockCount) + "，股票总量" + stockCount + "手，市值：" + (price * 100 * stockCount) + "可用资金：" + moneyAsset + "\n");
-                }
-                break;
-            case 0: //清仓
-                if (stockCount > 0) {
-                    int count = stockCount;
-                    stockCount = 0;
-                    moneyAsset += price * 100 * count;
-                    asset = moneyAsset;
-
-                    //jTextAreaMain.append("[" + dateString + "] 清仓！卖出价：" + price + "，买出数量：" + count + "手 ");
-                    //jTextAreaMain.append("总资产：" + asset + "可用资金：" + moneyAsset + "\n");
-                }
-                break;
-            default:
-                break;
-        }
+        return fundList;
     }
 
     public double getNetProfit() {
         double profit = 0;
-        for (Double gain : gainAgioArray) {
-            profit += gain;
-        }
-        for (Double loss : lossAgioArray) {
-            profit += loss;
+        for (Double agio : agioList) {
+            profit += agio;
         }
         return profit;
     }
 
     public double getGainProfit() {
         double profit = 0;
-        for (Double gain : gainAgioArray) {
-            profit += gain;
+        for (Double agio : agioList) {
+            if (agio > 0) {
+                profit += agio;
+            }
         }
         return profit;
     }
 
     public double getLossProfit() {
         double profit = 0;
-        for (Double loss : lossAgioArray) {
-            profit += loss;
+        for (Double agio : agioList) {
+            if (agio <= 0) {
+                profit += agio;
+            }
         }
         return profit;
     }
 
     public int getGainTimes() {
-        return gainAgioArray.size();
+        int times = 0;
+        for (Double agio : agioList) {
+            if (agio > 0) {
+                times++;
+            }
+        }
+        return times;
     }
 
     public int getLossTimes() {
-        return lossAgioArray.size();
+        int times = 0;
+        for (Double agio : agioList) {
+            if (agio <= 0) {
+                times++;
+            }
+        }
+        return times;
     }
 
     public double getWinRate() {
-        int gainTimes = gainAgioArray.size();
-        int lossTimes = lossAgioArray.size();
-        return (double) gainTimes / (gainTimes + lossTimes);
+        int gainTimes = getGainTimes();
+        return (double) gainTimes / agioList.size();
     }
 
     public double getMeanGain() {
-        double profit = 0;
-        for (Double gain : gainAgioArray) {
-            profit += gain;
-        }
-        return (double) profit / gainAgioArray.size();
+        double profit = getGainProfit();
+        int times = getGainTimes();
+        return (double) profit / times;
     }
 
     public double getMeanLoss() {
-        double profit = 0;
-        for (Double loss : lossAgioArray) {
-            profit += loss;
-        }
-        return (double) profit / lossAgioArray.size();
+        double profit = getLossProfit();
+        int times = getLossTimes();
+        return (double) profit / times;
     }
 
     public double getOdds() {
@@ -211,15 +160,15 @@ public class BRM {
     }
 
     public double getMaxGain() {
-        if (gainAgioArray.size() > 0) {
-            return (double) Collections.max(gainAgioArray);
+        if (agioList.size() > 0) {
+            return (double) Collections.max(agioList);
         }
         return 0;
     }
 
     public double getMaxLoss() {
-        if (lossAgioArray.size() > 0) {
-            return (double) Collections.min(lossAgioArray);
+        if (agioList.size() > 0) {
+            return (double) Collections.min(agioList);
         }
         return 0;
     }
@@ -229,27 +178,20 @@ public class BRM {
         double odds = getOdds();
         return (double) (winRate * odds - (1 - winRate));
     }
-    public double asset = 10000000;
-    private double moneyAsset = 10000000;
-    private double stockAsset = 0;
-    private int stockCount = 0;
-    private int openCount = 0;
-    private int addCount1 = 0;
-    private int addCount2 = 0;
-    private double openPrice = 0;
-    private double addPrice1 = 0;
-    private double addPrice2 = 0;
-    private int position = 0;
 
+    private MainView mainView;
+    private ArrayList<Double> priceList = new ArrayList<>();
+    private ArrayList<String> dateList = new ArrayList<>();
+    public double asset = 10000000;
     public double initAsset = 0;
     private double ratio = 1;
 
     public double buyPrice = 0;
     public double sellPrice = 0;
 
-    public ArrayList<Double> gainAgioArray = new ArrayList<>();
-    public ArrayList<Double> lossAgioArray = new ArrayList<>();
+    public ArrayList<Double> agioList = new ArrayList<>();
 
     public boolean bsFlag = false;
 
+    ArrayList<Double> fundList = new ArrayList<>();
 }
