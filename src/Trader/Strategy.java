@@ -53,6 +53,14 @@ public class Strategy {
         }
     }
 
+    public int getPositionDays() {
+        int days = 0;
+        for (int i = 0; i < bpIndexList.size(); i++) {
+            days += spIndexList.get(i) - bpIndexList.get(i);
+        }
+        return days;
+    }
+
     public double getPositionDaysRate() {
         int days = 0;
         for (int i = 0; i < bpIndexList.size(); i++) {

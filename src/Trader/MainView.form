@@ -227,7 +227,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="100" width="340" height="206"/>
+              <AbsoluteConstraints x="10" y="86" width="340" height="220"/>
             </Constraint>
           </Constraints>
 
@@ -239,19 +239,20 @@
                   <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="11">
+                  <Table columnCount="4" rowCount="12">
                     <Column editable="true" title="&#x7edf;&#x8ba1;&#x6307;&#x6807;" type="java.lang.Object">
+                      <Data value="&#x8d77;&#x59cb;&#x8d44;&#x91d1;"/>
+                      <Data value="&#x5f53;&#x524d;&#x8d44;&#x4ea7;"/>
                       <Data value="&#x51c0;&#x5229;&#x6da6;"/>
+                      <Data value="&#x6807;&#x7684;&#x6536;&#x76ca;&#x7387;"/>
+                      <Data value="&#x7cfb;&#x7edf;&#x6536;&#x76ca;&#x7387;"/>
+                      <Data value="&#x5e74;&#x5316;&#x6536;&#x76ca;"/>
                       <Data value="&#x603b;&#x76c8;&#x5229;"/>
                       <Data value="&#x603b;&#x4e8f;&#x635f;"/>
-                      <Data value="&#x76c8;&#x5229;&#x6b21;&#x6570;"/>
-                      <Data value="&#x4e8f;&#x635f;&#x6b21;&#x6570;"/>
-                      <Data value="&#x80dc;&#x7387;(P)"/>
-                      <Data value="&#x5e73;&#x5747;&#x76c8;&#x5229;"/>
-                      <Data value="&#x5e73;&#x5747;&#x4e8f;&#x635f;"/>
-                      <Data value="&#x8d54;&#x7387;(R)"/>
-                      <Data value="&#x6570;&#x5b66;&#x671f;&#x671b;"/>
-                      <Data value="&#x6d4b;&#x8bd5;&#x5468;&#x671f;"/>
+                      <Data value="&#x6700;&#x5927;&#x76c8;&#x5229;"/>
+                      <Data value="&#x6700;&#x5927;&#x4e8f;&#x635f;"/>
+                      <Data value="&#x6301;&#x4ed3;&#x5e74;&#x5316;&#x7387;"/>
+                      <Data value="&#x4ea4;&#x6613;&#x6536;&#x76ca;&#x7387;"/>
                     </Column>
                     <Column editable="true" title="&#x5168;&#x90e8;&#x4ea4;&#x6613;" type="java.lang.Object">
                       <Data value="null"/>
@@ -265,15 +266,17 @@
                       <Data value=""/>
                       <Data value="null"/>
                       <Data value="null"/>
+                      <Data value="null"/>
                     </Column>
                     <Column editable="true" title="&#x7edf;&#x8ba1;&#x6307;&#x6807;" type="java.lang.Object">
-                      <Data value="&#x6536;&#x76ca;&#x7387;"/>
-                      <Data value="&#x5e74;&#x5316;&#x6536;&#x76ca;"/>
-                      <Data value="&#x6807;&#x7684;&#x6536;&#x76ca;&#x7387;"/>
-                      <Data value="&#x8d77;&#x59cb;&#x8d44;&#x91d1;"/>
-                      <Data value="&#x5f53;&#x524d;&#x8d44;&#x4ea7;"/>
-                      <Data value="&#x6700;&#x5927;&#x76c8;&#x5229;"/>
-                      <Data value="&#x6700;&#x5927;&#x4e8f;&#x635f;"/>
+                      <Data value="&#x4ea4;&#x6613;&#x6b21;&#x6570;"/>
+                      <Data value="&#x76c8;&#x5229;&#x6b21;&#x6570;"/>
+                      <Data value="&#x80dc;&#x7387;(P)"/>
+                      <Data value="&#x5e73;&#x5747;&#x76c8;&#x5229;"/>
+                      <Data value="&#x5e73;&#x5747;&#x4e8f;&#x635f;"/>
+                      <Data value="&#x8d54;&#x7387;(R)"/>
+                      <Data value="&#x6570;&#x5b66;&#x671f;&#x671b;"/>
+                      <Data value="&#x6d4b;&#x8bd5;&#x5468;&#x671f;"/>
                       <Data value="&#x6301;&#x4ed3;&#x65f6;&#x95f4;&#x6bd4;"/>
                       <Data value="&#x5e73;&#x5747;&#x6301;&#x4ed3;&#x671f;"/>
                       <Data value="&#x5e73;&#x5747;&#x76c8;&#x5229;&#x671f;"/>
@@ -286,6 +289,7 @@
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value=""/>
+                      <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
                       <Data value="null"/>
@@ -417,7 +421,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="360" y="100" width="340" height="330"/>
+              <AbsoluteConstraints x="360" y="90" width="340" height="340"/>
             </Constraint>
           </Constraints>
 
@@ -858,7 +862,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="60" width="-1" height="-1"/>
+              <AbsoluteConstraints x="10" y="40" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

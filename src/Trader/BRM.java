@@ -66,12 +66,38 @@ public class BRM {
         return fundList;
     }
 
+    public double getInitAsset() {
+        return initAsset;
+    }
+
+    public double getCurrentAsset(double price) {
+        if (bsFlag) {
+            return asset + price;
+        } else {
+            return asset;
+        }
+    }
+
     public double getNetProfit() {
         double profit = 0;
         for (Double agio : agioList) {
             profit += agio;
         }
         return profit;
+    }
+
+    public double getObjectRate(double price) {
+        return (double) 100 * (price - initAsset) / initAsset;
+    }
+
+    public double getEarningRate() {
+        double profit = getNetProfit();
+        return (double) 100 * profit / initAsset;
+    }
+
+    public double getAnnualRate(double years) {
+        double rate = (initAsset + getNetProfit()) / initAsset;
+        return (double) 100 * (Math.pow(rate, (double) 1 / years) - 1);
     }
 
     public double getGainProfit() {
@@ -94,20 +120,32 @@ public class BRM {
         return profit;
     }
 
+    public double getMaxGain() {
+        if (agioList.size() > 0) {
+            return (double) Collections.max(agioList);
+        }
+        return 0;
+    }
+
+    public double getMaxLoss() {
+        if (agioList.size() > 0) {
+            return (double) Collections.min(agioList);
+        }
+        return 0;
+    }
+
+    public double getEvenEarningRate() {
+        return getEarningRate() / getTradeTimes();
+    }
+
+    public int getTradeTimes() {
+        return agioList.size();
+    }
+
     public int getGainTimes() {
         int times = 0;
         for (Double agio : agioList) {
             if (agio > 0) {
-                times++;
-            }
-        }
-        return times;
-    }
-
-    public int getLossTimes() {
-        int times = 0;
-        for (Double agio : agioList) {
-            if (agio <= 0) {
                 times++;
             }
         }
@@ -127,7 +165,7 @@ public class BRM {
 
     public double getMeanLoss() {
         double profit = getLossProfit();
-        int times = getLossTimes();
+        int times = getTradeTimes() - getGainTimes();
         return (double) profit / times;
     }
 
@@ -135,42 +173,6 @@ public class BRM {
         double gain = getMeanGain();
         double loss = getMeanLoss();
         return (double) gain / (-loss);
-    }
-
-    public double getEarningRate() {
-        double profit = getNetProfit();
-        return (double) 100 * profit / initAsset;
-    }
-
-    public double getAnnualRate(double years) {
-        double rate = (initAsset + getNetProfit()) / initAsset;
-        return (double) 100 * (Math.pow(rate, (double) 1 / years) - 1);
-    }
-
-    public double getObjectRate(double price) {
-        return (double) 100 * (price - initAsset) / initAsset;
-    }
-
-    public double getCurrentAsset(double price) {
-        if (bsFlag) {
-            return asset + price;
-        } else {
-            return asset;
-        }
-    }
-
-    public double getMaxGain() {
-        if (agioList.size() > 0) {
-            return (double) Collections.max(agioList);
-        }
-        return 0;
-    }
-
-    public double getMaxLoss() {
-        if (agioList.size() > 0) {
-            return (double) Collections.min(agioList);
-        }
-        return 0;
     }
 
     public double getExpectation() {
