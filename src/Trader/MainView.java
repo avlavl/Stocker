@@ -64,6 +64,12 @@ public class MainView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextFieldEndDate = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanelMACD = new javax.swing.JPanel();
+        jRadioButtonMacdBar = new javax.swing.JRadioButton();
+        jRadioButtonMacdDif = new javax.swing.JRadioButton();
+        jButtonMacdEva = new javax.swing.JButton();
+        jLabelbp = new javax.swing.JLabel();
+        jTextFieldbp = new javax.swing.JTextField();
         jPanelTrend = new javax.swing.JPanel();
         jPanelConfig = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -79,10 +85,6 @@ public class MainView extends javax.swing.JFrame {
         jCheckBoxRecord = new javax.swing.JCheckBox();
         jLabelStatus = new javax.swing.JLabel();
         jButtonTrendEva = new javax.swing.JButton();
-        jPanelMACD = new javax.swing.JPanel();
-        jRadioButtonMACDCross = new javax.swing.JRadioButton();
-        jRadioButtonMACDDIF = new javax.swing.JRadioButton();
-        jButtonMACDEva = new javax.swing.JButton();
         jPanelMA = new javax.swing.JPanel();
         jButtonMAEva = new javax.swing.JButton();
         jLabelOpen = new javax.swing.JLabel();
@@ -200,6 +202,38 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPane1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
 
+        jPanelMACD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroupMACD.add(jRadioButtonMacdBar);
+        jRadioButtonMacdBar.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonMacdBar.setSelected(true);
+        jRadioButtonMacdBar.setText("BAR突破交易");
+        jPanelMACD.add(jRadioButtonMacdBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        buttonGroupMACD.add(jRadioButtonMacdDif);
+        jRadioButtonMacdDif.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonMacdDif.setText("DIF突破交易");
+        jPanelMACD.add(jRadioButtonMacdDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        jButtonMacdEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonMacdEva.setText("评测");
+        jButtonMacdEva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMacdEvaActionPerformed(evt);
+            }
+        });
+        jPanelMACD.add(jButtonMacdEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
+
+        jLabelbp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelbp.setText("突破点：");
+        jPanelMACD.add(jLabelbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+
+        jTextFieldbp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldbp.setText("0");
+        jPanelMACD.add(jTextFieldbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 40, -1));
+
+        jTabbedPane1.addTab("MACD", jPanelMACD);
+
         jPanelTrend.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelConfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
@@ -272,30 +306,6 @@ public class MainView extends javax.swing.JFrame {
         jPanelTrend.add(jButtonTrendEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
 
         jTabbedPane1.addTab("趋势", jPanelTrend);
-
-        jPanelMACD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        buttonGroupMACD.add(jRadioButtonMACDCross);
-        jRadioButtonMACDCross.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonMACDCross.setSelected(true);
-        jRadioButtonMACDCross.setText("金叉死叉交易");
-        jPanelMACD.add(jRadioButtonMACDCross, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-
-        buttonGroupMACD.add(jRadioButtonMACDDIF);
-        jRadioButtonMACDDIF.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonMACDDIF.setText("DIF突破交易");
-        jPanelMACD.add(jRadioButtonMACDDIF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-
-        jButtonMACDEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonMACDEva.setText("评测");
-        jButtonMACDEva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMACDEvaActionPerformed(evt);
-            }
-        });
-        jPanelMACD.add(jButtonMACDEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
-
-        jTabbedPane1.addTab("MACD", jPanelMACD);
 
         jPanelMA.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -577,7 +587,7 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonTrendEvaActionPerformed
 
-    private void jButtonMACDEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMACDEvaActionPerformed
+    private void jButtonMacdEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMacdEvaActionPerformed
         tradeDays = dateProcess();
         if (tradeDays == 0) {
             return;
@@ -589,14 +599,15 @@ public class MainView extends javax.swing.JFrame {
         Strategy strategy = new Strategy(this, brm);
         strategy.macd = macd;
         fundList = new ArrayList<>();
+        double bp = Double.parseDouble(jTextFieldbp.getText());
 
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
             if ((i >= sIdx) && (i <= eIdx)) {
-                if (jRadioButtonMACDCross.isSelected()) {
-                    strategy.barCrossTrade(i, 0);
+                if (jRadioButtonMacdBar.isSelected()) {
+                    strategy.barCrossTrade(i, bp);
                 } else {
-                    strategy.difCrossTrade(i, 50);
+                    strategy.difCrossTrade(i, bp);
                 }
             }
             if (i > eIdx) {
@@ -610,7 +621,7 @@ public class MainView extends javax.swing.JFrame {
 
         updateTable(brm, strategy);
         evaluated = true;
-    }//GEN-LAST:event_jButtonMACDEvaActionPerformed
+    }//GEN-LAST:event_jButtonMacdEvaActionPerformed
 
     private void jButtonMAEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMAEvaActionPerformed
         tradeDays = dateProcess();
@@ -917,8 +928,8 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupMACD;
-    private javax.swing.JButton jButtonMACDEva;
     private javax.swing.JButton jButtonMAEva;
+    private javax.swing.JButton jButtonMacdEva;
     private javax.swing.JButton jButtonTechChart;
     private javax.swing.JButton jButtonTrendEva;
     private javax.swing.JCheckBox jCheckBoxRecord;
@@ -938,6 +949,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelOpen;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStockName;
+    private javax.swing.JLabel jLabelbp;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuIndex;
@@ -962,8 +974,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelTrend;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JRadioButton jRadioButtonMACDCross;
-    private javax.swing.JRadioButton jRadioButtonMACDDIF;
+    private javax.swing.JRadioButton jRadioButtonMacdBar;
+    private javax.swing.JRadioButton jRadioButtonMacdDif;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -974,5 +986,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTpoint1;
     private javax.swing.JTextField jTextFieldTpoint2;
     private javax.swing.JTextField jTextFieldVpoint;
+    private javax.swing.JTextField jTextFieldbp;
     // End of variables declaration//GEN-END:variables
 }
