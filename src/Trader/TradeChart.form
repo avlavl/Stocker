@@ -7,7 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="&#x6280;&#x672f;&#x5206;&#x6790;"/>
+    <Property name="title" type="java.lang.String" value="&#x4ea4;&#x6613;&#x66f2;&#x7ebf;"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1024, 570]"/>
     </Property>

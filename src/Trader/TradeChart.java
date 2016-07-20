@@ -16,12 +16,12 @@ import javax.swing.ImageIcon;
  *
  * @author zhangxr
  */
-public class TechChart extends javax.swing.JDialog {
+public class TradeChart extends javax.swing.JDialog {
 
     /**
      * Creates new form PriceChart
      */
-    public TechChart(java.awt.Frame parent, boolean modal, MainView mv) {
+    public TradeChart(java.awt.Frame parent, boolean modal, MainView mv) {
         super(parent, modal);
         initComponents();
 
@@ -150,7 +150,7 @@ public class TechChart extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("技术分析");
+        setTitle("交易曲线");
         setMinimumSize(new java.awt.Dimension(1024, 570));
         setPreferredSize(new java.awt.Dimension(1030, 600));
         setResizable(false);

@@ -91,7 +91,8 @@ public class MainView extends javax.swing.JFrame {
         jLabelHigh = new javax.swing.JLabel();
         jLabelClose = new javax.swing.JLabel();
         jLabelLow = new javax.swing.JLabel();
-        jButtonTechChart = new javax.swing.JButton();
+        jButtonTradeChart = new javax.swing.JButton();
+        jButtonTradeRecord = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -343,14 +344,23 @@ public class MainView extends javax.swing.JFrame {
         jLabelLow.setText("最低：");
         jPanelMain.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
 
-        jButtonTechChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonTechChart.setText("技术分析");
-        jButtonTechChart.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTradeChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonTradeChart.setText("交易曲线");
+        jButtonTradeChart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTechChartActionPerformed(evt);
+                jButtonTradeChartActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTechChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        jButtonTradeRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonTradeRecord.setText("交易记录");
+        jButtonTradeRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTradeRecordActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 440));
 
@@ -530,9 +540,17 @@ public class MainView extends javax.swing.JFrame {
         jTextAreaMain.copy();
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
-    private void jButtonTechChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTechChartActionPerformed
-        TechChart tc = new TechChart(this, false, this);
-    }//GEN-LAST:event_jButtonTechChartActionPerformed
+    private void jButtonTradeChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTradeChartActionPerformed
+        TradeChart tc = new TradeChart(this, false, this);
+    }//GEN-LAST:event_jButtonTradeChartActionPerformed
+
+    private void jButtonTradeRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTradeRecordActionPerformed
+        if (evaluated) {
+            TradeTable tradeTable = new TradeTable(this, false, this);
+        } else {
+            JOptionPane.showMessageDialog(this, "请先进行评测再查看交易记录");
+        }
+    }//GEN-LAST:event_jButtonTradeRecordActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
         String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
@@ -575,6 +593,8 @@ public class MainView extends javax.swing.JFrame {
                 strategy.spIndexList.add(eIdx);
             }
             fundList = brm.synthesize(strategy);
+            bpIndexList = strategy.bpIndexList;
+            spIndexList = strategy.spIndexList;
             parseStatus(livermore.Status);
             updateTable(brm, strategy);
             evaluated = true;
@@ -619,6 +639,8 @@ public class MainView extends javax.swing.JFrame {
             strategy.spIndexList.add(eIdx);
         }
         fundList = brm.synthesize(strategy);
+        bpIndexList = strategy.bpIndexList;
+        spIndexList = strategy.spIndexList;
 
         updateTable(brm, strategy);
         evaluated = true;
@@ -650,6 +672,8 @@ public class MainView extends javax.swing.JFrame {
             strategy.spIndexList.add(eIdx);
         }
         fundList = brm.synthesize(strategy);
+        bpIndexList = strategy.bpIndexList;
+        spIndexList = strategy.spIndexList;
 
         updateTable(brm, strategy);
         evaluated = true;
@@ -702,7 +726,7 @@ public class MainView extends javax.swing.JFrame {
             rows = dateList.size();
             br.close();
             isr.close();
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         }
         evaluated = false;
@@ -918,6 +942,8 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<Double> lowList;
     public ArrayList<Double> closeList;
     public ArrayList<Double> fundList;
+    public ArrayList<Integer> bpIndexList;
+    public ArrayList<Integer> spIndexList;
     public String DATE = "";
     public double OPEN = 0;
     public double HIGH = 0;
@@ -933,7 +959,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupMACD;
     private javax.swing.JButton jButtonMAEva;
     private javax.swing.JButton jButtonMacdEva;
-    private javax.swing.JButton jButtonTechChart;
+    private javax.swing.JButton jButtonTradeChart;
+    private javax.swing.JButton jButtonTradeRecord;
     private javax.swing.JButton jButtonTrendEva;
     private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JCheckBox jCheckBoxVpoint;

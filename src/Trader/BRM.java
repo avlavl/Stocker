@@ -53,10 +53,8 @@ public class BRM {
             } else if (i <= endIdx) {
                 if (stg.bpIndexList.contains(i)) {
                     quota(true, priceList.get(i));
-                    mainView.msgLogger("[" + dateList.get(i) + "] 买入价：" + priceList.get(i) + "\t剩余款：" + (float) asset);
                 } else if (stg.spIndexList.contains(i)) {
                     quota(false, priceList.get(i));
-                    mainView.msgLogger("[" + dateList.get(i) + "] 卖出价：" + priceList.get(i) + "\t总资产：" + (float) asset + "\t" + ((sPrice > bPrice) ? "赢利：" : "亏损：") + (float) (100 * (sPrice - bPrice) / bPrice) + "% (" + (float) Math.abs(sPrice - bPrice) + ")");
                 }
                 fundList.add(getCurrentAsset(priceList.get(i)));
             } else {
