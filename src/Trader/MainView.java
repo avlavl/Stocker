@@ -156,7 +156,7 @@ public class MainView extends javax.swing.JFrame {
                 {"最大盈利", "", "持仓时间比", null},
                 {"最大亏损", null, "平均持仓期", null},
                 {"持仓年化率", null, "平均盈利期", null},
-                {"交易收益率", null, "平均亏损期", null}
+                {"单次均收益", null, "平均亏损期", null}
             },
             new String [] {
                 "统计指标", "全部交易", "统计指标", "全部交易"

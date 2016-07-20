@@ -24,11 +24,12 @@ public class BRM {
         bsFlag = bs;
         if (bs) {
             asset -= price;
-            buyPrice = price;
+            bPrice = price;
         } else if (initAsset != 0) {
             asset += price;
-            sellPrice = price;
-            agioList.add(sellPrice - buyPrice);
+            sPrice = price;
+            agioList.add(sPrice - bPrice);
+            yieldList.add(100 * (sPrice - bPrice) / bPrice);
         }
     }
 
@@ -55,7 +56,7 @@ public class BRM {
                     mainView.msgLogger("[" + dateList.get(i) + "] 买入价：" + priceList.get(i) + "\t剩余款：" + (float) asset);
                 } else if (stg.spIndexList.contains(i)) {
                     quota(false, priceList.get(i));
-                    mainView.msgLogger("[" + dateList.get(i) + "] 卖出价：" + priceList.get(i) + "\t总资产：" + (float) asset + "\t" + ((sellPrice - buyPrice > 0) ? "赢利：" : "亏损：") + (float) Math.abs(sellPrice - buyPrice));
+                    mainView.msgLogger("[" + dateList.get(i) + "] 卖出价：" + priceList.get(i) + "\t总资产：" + (float) asset + "\t" + ((sPrice > bPrice) ? "赢利：" : "亏损：") + (float) (100 * (sPrice - bPrice) / bPrice) + "% (" + (float) Math.abs(sPrice - bPrice) + ")");
                 }
                 fundList.add(getCurrentAsset(priceList.get(i)));
             } else {
@@ -135,7 +136,11 @@ public class BRM {
     }
 
     public double getEvenEarningRate() {
-        return getEarningRate() / getTradeTimes();
+        double totalYield = 0;
+        for (Double yield : yieldList) {
+            totalYield += yield;
+        }
+        return totalYield / yieldList.size();
     }
 
     public int getTradeTimes() {
@@ -188,11 +193,11 @@ public class BRM {
     public double initAsset = 0;
     private double ratio = 1;
 
-    public double buyPrice = 0;
-    public double sellPrice = 0;
+    public double bPrice = 0;
+    public double sPrice = 0;
 
     public ArrayList<Double> agioList = new ArrayList<>();
-
+    public ArrayList<Double> yieldList = new ArrayList<>();
     public boolean bsFlag = false;
 
     ArrayList<Double> fundList = new ArrayList<>();
