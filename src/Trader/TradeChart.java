@@ -72,9 +72,27 @@ public class TradeChart extends javax.swing.JDialog {
                 g.drawString(String.format("%4.2f", hi), 430, 15);
                 g.drawString(String.format("%4.2f", li), 580, 15);
                 g.drawString(String.format("%4.2f%%", ri), 730, 15);
-                for (int i = 0, j = 0; i < counts - 1; i++) {
-                    int ystart = yplots - (int) Math.round(priceList.get(offset + j++) / scalar);
-                    int yend = yplots - (int) Math.round(priceList.get(offset + j) / scalar);
+
+                if (mainView.evaluated) {
+                    g.setColor(Color.GREEN);
+                    for (int i = 0; i < mainView.bpIndexList.size(); i++) {
+                        if ((offset >= mainView.bpIndexList.get(i)) && (offset < mainView.spIndexList.get(i))) {
+                            g.setColor(Color.RED);
+                            break;
+                        }
+                    }
+                }
+                for (int i = 0; i < counts - 1; i++) {
+                    if (mainView.evaluated) {
+                        if (mainView.bpIndexList.contains(offset + i)) {
+                            g.setColor(Color.RED);
+                        }
+                        if (mainView.spIndexList.contains(offset + i)) {
+                            g.setColor(Color.GREEN);
+                        }
+                    }
+                    int ystart = yplots - (int) Math.round(priceList.get(offset + i) / scalar);
+                    int yend = yplots - (int) Math.round(priceList.get(offset + i + 1) / scalar);
                     if (ystart >= yplots - 2) {
                         ystart = yplots - 2;
                     }
@@ -89,15 +107,15 @@ public class TradeChart extends javax.swing.JDialog {
                     double hf = Collections.max(fundList.subList(offset, offset + counts));
                     double lf = Collections.min(fundList.subList(offset, offset + counts));
                     double rf = (ef / sf - 1) * 100;
-                    g.setColor(Color.RED);
+                    g.setColor(new Color(255, 255, 150));
                     g.drawString(String.format("%4.2f", sf), 180, 15);
                     g.drawString(String.format("%4.2f", ef), 330, 15);
                     g.drawString(String.format("%4.2f", hf), 480, 15);
                     g.drawString(String.format("%4.2f", lf), 630, 15);
                     g.drawString(String.format("%4.2f%%", rf), 780, 15);
-                    for (int i = 0, j = 0; i < counts - 1; i++) {
-                        int ystart = yplots - (int) Math.round(fundList.get(offset + j++) / scalar);
-                        int yend = yplots - (int) Math.round(fundList.get(offset + j) / scalar);
+                    for (int i = 0; i < counts - 1; i++) {
+                        int ystart = yplots - (int) Math.round(fundList.get(offset + i) / scalar);
+                        int yend = yplots - (int) Math.round(fundList.get(offset + i + 1) / scalar);
                         if (ystart >= yplots - 2) {
                             ystart = yplots - 2;
                         }
@@ -107,6 +125,7 @@ public class TradeChart extends javax.swing.JDialog {
                         g.drawLine(i, ystart, i + 1, yend);
                     }
                 }
+
                 g.setColor(Color.YELLOW);
                 for (int i = 0; i < 10; i++) {
                     if (offset + i * 100 < units) {
