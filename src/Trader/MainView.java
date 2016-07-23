@@ -998,23 +998,15 @@ public class MainView extends javax.swing.JFrame {
 
     protected void livermoreLogger(Livermore lm, String msg) {
         if (!msg.equals("") && jCheckBoxRecord.isSelected()) {
-            msgLogger(msg);
             fileLogger("[" + DATE + "] " + msg);
             if (!msg.contains("趋势可能改变")) {
-                fileLogger("上关键点：" + lm.riseKeyHead
-                        + "\t\t上关键点：" + lm.fallKeyHead
-                        + "\r\n下关键点：" + lm.riseKeyFoot
-                        + "\t\t下关键点：" + lm.fallKeyFoot
-                        + "\r\n主上升值：" + lm.mainRiseVal
-                        + "\t\t主下降值：" + lm.mainFallVal
-                        + "\r\n自然回撤：" + lm.normalFallUVal
-                        + "\t\t自然回撤：" + lm.normalFallDVal
-                        + "\r\n自然回升：" + lm.normalRiseUVal
-                        + "\t\t自然回升：" + lm.normalRiseDVal
-                        + "\r\n次级回撤：" + lm.minorFallUVal
-                        + "\t\t次级回撤：" + lm.minorFallDVal
-                        + "\r\n次级回升：" + lm.minorRiseUVal
-                        + "\t\t次级回升：" + lm.minorRiseDVal);
+                fileLogger(String.format("上关键点：%-8.2f\t\t上关键点：%-8.2f", lm.riseKeyHead, lm.fallKeyHead));
+                fileLogger(String.format("下关键点：%-8.2f\t\t下关键点：%-8.2f", lm.riseKeyFoot, lm.fallKeyFoot));
+                fileLogger(String.format("主上升值：%-8.2f\t\t主下降值：%-8.2f", lm.mainRiseVal, lm.mainFallVal));
+                fileLogger(String.format("自然回撤：%-8.2f\t\t自然回撤：%-8.2f", lm.normalFallUVal, lm.normalFallDVal));
+                fileLogger(String.format("自然回升：%-8.2f\t\t自然回升：%-8.2f", lm.normalRiseUVal, lm.normalRiseDVal));
+                fileLogger(String.format("次级回撤：%-8.2f\t\t次级回撤：%-8.2f", lm.minorFallUVal, lm.minorFallDVal));
+                fileLogger(String.format("次级回升：%-8.2f\t\t次级回升：%-8.2f", lm.minorRiseUVal, lm.minorRiseDVal));
             }
         }
     }
