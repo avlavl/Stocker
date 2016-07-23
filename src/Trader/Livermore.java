@@ -43,14 +43,7 @@ public class Livermore {
                     mainFallVal = price;
                     msg = "↘↘↘↘↘↘ 进入下降趋势";
                 } else if (price < normalFallUVal) {
-                    if ((vpointEnable) && (price < riseKeyHead * (100 - vpointValue) / 100)) {
-                        Status = "mainFallStatus";
-                        resetTrendValue();
-                        mainFallVal = price;
-                        msg = "↘↘↘↘ 进入下降趋势V";
-                    } else {
-                        normalFallUVal = price;
-                    }
+                    normalFallUVal = price;
                 } else if (price > (normalFallUVal * (100 + tpointValue1) / 100)) {
                     Status = "normalRiseUStatus";
                     normalRiseUVal = price;
@@ -163,14 +156,7 @@ public class Livermore {
                     mainRiseVal = price;
                     msg = "↗↗↗↗↗↗ 进入上升趋势";
                 } else if (price > normalRiseDVal) {
-                    if ((vpointEnable) && (price > fallKeyFoot * (100 + vpointValue) / 100)) {
-                        Status = "mainRiseStatus";
-                        resetTrendValue();
-                        mainRiseVal = price;
-                        msg = "↗↗↗↗ 进入上升趋势V";
-                    } else {
-                        normalRiseDVal = price;
-                    }
+                    normalRiseDVal = price;
                 } else if (price < (normalRiseDVal * (100 - tpointValue1) / 100)) {
                     Status = "normalFallDStatus";
                     normalFallDVal = price;
@@ -317,8 +303,6 @@ public class Livermore {
     public String Status = "mainRiseStatus";
     public String formerStatus = "DStatus";
 
-    boolean vpointEnable = false;
-    int vpointValue = 20;
     int tpointValue1 = 10;
     int tpointValue2 = 5;
 

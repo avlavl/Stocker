@@ -88,8 +88,6 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldTpoint1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldTpoint2 = new javax.swing.JTextField();
-        jCheckBoxVpoint = new javax.swing.JCheckBox();
-        jTextFieldVpoint = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jComboBoxMode = new javax.swing.JComboBox<>();
         jCheckBoxRecord = new javax.swing.JCheckBox();
@@ -325,14 +323,6 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldTpoint2.setText("5");
         jPanelConfig.add(jTextFieldTpoint2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 30, -1));
 
-        jCheckBoxVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jCheckBoxVpoint.setText("使能V形反转");
-        jPanelConfig.add(jCheckBoxVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        jTextFieldVpoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldVpoint.setText("20");
-        jPanelConfig.add(jTextFieldVpoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 30, -1));
-
         jLabel9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel9.setText("模式：");
         jPanelConfig.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
@@ -344,7 +334,7 @@ public class MainView extends javax.swing.JFrame {
 
         jCheckBoxRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBoxRecord.setText("生成交易日志");
-        jPanelConfig.add(jCheckBoxRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
+        jPanelConfig.add(jCheckBoxRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jPanelTrend.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 310, 160));
 
@@ -802,8 +792,6 @@ public class MainView extends javax.swing.JFrame {
 
     private void sysTrendEva(boolean status, int t1, int t2) {
         Livermore livermore = new Livermore(status, t1, t2);
-        livermore.vpointEnable = jCheckBoxVpoint.isSelected();
-        livermore.vpointValue = Integer.parseInt(jTextFieldVpoint.getText());
         BRM brm = new BRM(this);
         Strategy strategy = new Strategy(this, brm);
         strategy.livermore = livermore;
@@ -1074,7 +1062,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;
     private javax.swing.JCheckBox jCheckBoxRecord;
-    private javax.swing.JCheckBox jCheckBoxVpoint;
     private javax.swing.JComboBox<String> jComboBoxMode;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JLabel jLabel1;
@@ -1147,7 +1134,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldStartDate;
     private javax.swing.JTextField jTextFieldTpoint1;
     private javax.swing.JTextField jTextFieldTpoint2;
-    private javax.swing.JTextField jTextFieldVpoint;
     private javax.swing.JTextField jTextFieldbp;
     // End of variables declaration//GEN-END:variables
 }
