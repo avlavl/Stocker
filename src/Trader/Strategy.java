@@ -38,9 +38,15 @@ public class Strategy {
         trade(idx, b, s);
     }
 
-    public void maCrossTrade(ArrayList<Double> list, int idx) {
-        boolean b = CROSS(idx, ma.priceList, list);
-        boolean s = CROSS(idx, list, ma.priceList);
+    public void maCrossTrade(int idx, ArrayList<Double> list) {
+        boolean b = CROSS(idx, priceList, list);
+        boolean s = CROSS(idx, list, priceList);
+        trade(idx, b, s);
+    }
+
+    public void maCrossTrade(int idx, ArrayList<Double> sList, ArrayList<Double> lList) {
+        boolean b = CROSS(idx, sList, lList);
+        boolean s = CROSS(idx, lList, sList);
         trade(idx, b, s);
     }
 
