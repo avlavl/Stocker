@@ -5,6 +5,9 @@
  */
 package Trader;
 
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author Aioros
@@ -76,8 +79,8 @@ public class TradeTable extends javax.swing.JDialog {
 
         jScrollPaneTrade.setViewportView(jTableTrade);
         if (jTableTrade.getColumnModel().getColumnCount() > 0) {
-            jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTableTrade.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(75);
+            jTableTrade.getColumnModel().getColumn(0).setMaxWidth(75);
             jTableTrade.getColumnModel().getColumn(1).setPreferredWidth(40);
             jTableTrade.getColumnModel().getColumn(1).setMaxWidth(40);
             jTableTrade.getColumnModel().getColumn(3).setPreferredWidth(40);
@@ -85,7 +88,7 @@ public class TradeTable extends javax.swing.JDialog {
         }
 
         pack();
-        setLocation(parent.getX() + 10, parent.getY() + 10);
+        setLocationRelativeTo(parent);
         setVisible(true);
     }
 
@@ -107,12 +110,24 @@ public class TradeTable extends javax.swing.JDialog {
 
         jScrollPaneTrade.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        jTableTrade.setDefaultRenderer(Object.class,   r);
         jTableTrade.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTableTrade.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTableTrade.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTableTrade.getTableHeader().setFont(new java.awt.Font("Dialog", 0, 11));
         jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -129,7 +144,7 @@ public class TradeTable extends javax.swing.JDialog {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -139,15 +154,15 @@ public class TradeTable extends javax.swing.JDialog {
         jTableTrade.setRowHeight(20);
         jScrollPaneTrade.setViewportView(jTableTrade);
         if (jTableTrade.getColumnModel().getColumnCount() > 0) {
-            jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTableTrade.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(75);
+            jTableTrade.getColumnModel().getColumn(0).setMaxWidth(75);
             jTableTrade.getColumnModel().getColumn(1).setPreferredWidth(40);
             jTableTrade.getColumnModel().getColumn(1).setMaxWidth(40);
             jTableTrade.getColumnModel().getColumn(3).setPreferredWidth(40);
             jTableTrade.getColumnModel().getColumn(3).setMaxWidth(40);
         }
 
-        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 230));
+        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 428));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
