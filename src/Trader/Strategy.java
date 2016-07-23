@@ -51,25 +51,25 @@ public class Strategy {
 
     public void trade(int idx, boolean buy, boolean sell) {
         if (buy) {
-            bpIndexList.add(idx);
+            bpIdxList.add(idx);
         }
-        if (sell & (bpIndexList.size() > 0)) {
-            spIndexList.add(idx);
+        if (sell & (bpIdxList.size() > 0)) {
+            spIdxList.add(idx);
         }
     }
 
     public int getPositionDays() {
         int days = 0;
-        for (int i = 0; i < bpIndexList.size(); i++) {
-            days += spIndexList.get(i) - bpIndexList.get(i);
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            days += spIdxList.get(i) - bpIdxList.get(i);
         }
         return days;
     }
 
     public double getPositionDaysRate() {
         int days = 0;
-        for (int i = 0; i < bpIndexList.size(); i++) {
-            days += spIndexList.get(i) - bpIndexList.get(i);
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            days += spIdxList.get(i) - bpIdxList.get(i);
         }
 
         double rate = (double) 100 * days / mainView.tradeDays;
@@ -78,18 +78,18 @@ public class Strategy {
 
     public double getMeanPositionDays() {
         int days = 0;
-        for (int i = 0; i < bpIndexList.size(); i++) {
-            days += spIndexList.get(i) - bpIndexList.get(i);
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            days += spIdxList.get(i) - bpIdxList.get(i);
         }
-        return (double) days / bpIndexList.size();
+        return (double) days / bpIdxList.size();
     }
 
     public double getMeanGainDays() {
         int days = 0;
         int times = 0;
-        for (int i = 0; i < bpIndexList.size(); i++) {
-            if (priceList.get(spIndexList.get(i)) > priceList.get(bpIndexList.get(i))) {
-                days += spIndexList.get(i) - bpIndexList.get(i);
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            if (priceList.get(spIdxList.get(i)) > priceList.get(bpIdxList.get(i))) {
+                days += spIdxList.get(i) - bpIdxList.get(i);
                 times++;
             }
         }
@@ -99,21 +99,20 @@ public class Strategy {
     public double getMeanLossDays() {
         int days = 0;
         int times = 0;
-        for (int i = 0; i < bpIndexList.size(); i++) {
-            if (priceList.get(spIndexList.get(i)) <= priceList.get(bpIndexList.get(i))) {
-                days += spIndexList.get(i) - bpIndexList.get(i);
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            if (priceList.get(spIdxList.get(i)) <= priceList.get(bpIdxList.get(i))) {
+                days += spIdxList.get(i) - bpIdxList.get(i);
                 times++;
             }
         }
         return (double) days / times;
     }
 
-    public ArrayList<Integer> bpIndexList = new ArrayList<>();
-    public ArrayList<Integer> spIndexList = new ArrayList<>();
-
     private MainView mainView;
     private ArrayList<Double> priceList = new ArrayList<>();
-    public Livermore livermore;
+    public ArrayList<Integer> bpIdxList = new ArrayList<>();
+    public ArrayList<Integer> spIdxList = new ArrayList<>();
     public MACD macd;
     public MALine ma;
+    public Livermore livermore;
 }

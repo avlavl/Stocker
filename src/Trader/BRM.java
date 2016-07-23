@@ -17,7 +17,8 @@ public class BRM {
     public BRM(MainView mv) {
         mainView = mv;
         priceList = mv.closeList;
-        dateList = mv.dateList;
+        bpIdxList = mv.bpIndexList;
+        spIdxList = mv.spIndexList;
     }
 
     protected void quota(boolean bs, double price) {
@@ -41,19 +42,19 @@ public class BRM {
         }
     }
 
-    public ArrayList<Double> synthesize(Strategy stg) {
-        initAsset = priceList.get(stg.bpIndexList.get(0));
+    public ArrayList<Double> synthesize() {
+        initAsset = priceList.get(bpIdxList.get(0));
         asset = initAsset;
-        int times = stg.bpIndexList.size();
-        int startIdx = stg.bpIndexList.get(0);
-        int endIdx = stg.spIndexList.get(times - 1);
+        int times = bpIdxList.size();
+        int startIdx = bpIdxList.get(0);
+        int endIdx = spIdxList.get(times - 1);
         for (int i = 0; i < priceList.size(); i++) {
             if (i < startIdx) {
                 fundList.add(initAsset);
             } else if (i <= endIdx) {
-                if (stg.bpIndexList.contains(i)) {
+                if (bpIdxList.contains(i)) {
                     quota(true, priceList.get(i));
-                } else if (stg.spIndexList.contains(i)) {
+                } else if (spIdxList.contains(i)) {
                     quota(false, priceList.get(i));
                 }
                 fundList.add(getCurrentAsset(priceList.get(i)));
@@ -61,7 +62,6 @@ public class BRM {
                 fundList.add(fundList.get(endIdx));
             }
         }
-
         return fundList;
     }
 
@@ -186,17 +186,15 @@ public class BRM {
 
     private MainView mainView;
     private ArrayList<Double> priceList = new ArrayList<>();
-    private ArrayList<String> dateList = new ArrayList<>();
+    private ArrayList<Integer> bpIdxList = new ArrayList<>();
+    private ArrayList<Integer> spIdxList = new ArrayList<>();
+    public ArrayList<Double> agioList = new ArrayList<>();
+    public ArrayList<Double> yieldList = new ArrayList<>();
+    public ArrayList<Double> fundList = new ArrayList<>();
     public double asset = 10000000;
     public double initAsset = 0;
     private double ratio = 1;
-
+    public boolean bsFlag = false;
     public double bPrice = 0;
     public double sPrice = 0;
-
-    public ArrayList<Double> agioList = new ArrayList<>();
-    public ArrayList<Double> yieldList = new ArrayList<>();
-    public boolean bsFlag = false;
-
-    ArrayList<Double> fundList = new ArrayList<>();
 }

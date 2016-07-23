@@ -341,7 +341,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
         jLabelStatus.setText("主上升!");
-        jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanelTrend.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
         jTabbedPaneSys.addTab("趋势", jPanelTrend);
 
@@ -658,6 +658,10 @@ public class MainView extends javax.swing.JFrame {
                 sysTrendEva(status, tp1, tp2);
                 break;
         }
+
+        updateTable(strategy, brm);
+        updateReport(strategy, brm);
+        evaluated = true;
     }//GEN-LAST:event_jButtonTradeEvaActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
@@ -721,10 +725,8 @@ public class MainView extends javax.swing.JFrame {
     private void sysMACDEva(int mode, double bp) {
         MACD macd = new MACD(closeList, 12, 26, 9);
         macd.init();
-        BRM brm = new BRM(this);
-        Strategy strategy = new Strategy(this);
+        strategy = new Strategy(this);
         strategy.macd = macd;
-        fundList = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
@@ -739,23 +741,21 @@ public class MainView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (strategy.bpIndexList.size() > strategy.spIndexList.size()) {
-            strategy.spIndexList.add(eIdx);
+        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+            strategy.spIdxList.add(eIdx);
         }
-        fundList = brm.synthesize(strategy);
-        bpIndexList = strategy.bpIndexList;
-        spIndexList = strategy.spIndexList;
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
 
-        updateTable(brm, strategy);
-        evaluated = true;
+        brm = new BRM(this);
+        fundList = brm.synthesize();
     }
 
     private void sysMAEva(int mode, int mas, int mal, int mam) {
         MALine ma = new MALine(closeList);
-        BRM brm = new BRM(this);
-        Strategy strategy = new Strategy(this);
+        strategy = new Strategy(this);
         strategy.ma = ma;
-        fundList = new ArrayList<>();
+
         ArrayList<Double> masList = new ArrayList<>();
         ArrayList<Double> malList = new ArrayList<>();
         ArrayList<Double> mamList = new ArrayList<>();
@@ -779,23 +779,20 @@ public class MainView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (strategy.bpIndexList.size() > strategy.spIndexList.size()) {
-            strategy.spIndexList.add(eIdx);
+        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+            strategy.spIdxList.add(eIdx);
         }
-        fundList = brm.synthesize(strategy);
-        bpIndexList = strategy.bpIndexList;
-        spIndexList = strategy.spIndexList;
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
 
-        updateTable(brm, strategy);
-        evaluated = true;
+        brm = new BRM(this);
+        fundList = brm.synthesize();
     }
 
     private void sysTrendEva(boolean status, int t1, int t2) {
         Livermore livermore = new Livermore(status, t1, t2);
-        BRM brm = new BRM(this);
-        Strategy strategy = new Strategy(this);
+        strategy = new Strategy(this);
         strategy.livermore = livermore;
-        fundList = new ArrayList<>();
 
         try {
             if (jCheckBoxRecord.isSelected()) {
@@ -812,15 +809,15 @@ public class MainView extends javax.swing.JFrame {
                     break;
                 }
             }
-            if (strategy.bpIndexList.size() > strategy.spIndexList.size()) {
-                strategy.spIndexList.add(eIdx);
+            if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+                strategy.spIdxList.add(eIdx);
             }
-            fundList = brm.synthesize(strategy);
-            bpIndexList = strategy.bpIndexList;
-            spIndexList = strategy.spIndexList;
+            bpIndexList = strategy.bpIdxList;
+            spIndexList = strategy.spIdxList;
+
+            brm = new BRM(this);
+            fundList = brm.synthesize();
             parseStatus(livermore.Status);
-            updateTable(brm, strategy);
-            evaluated = true;
 
             if (jCheckBoxRecord.isSelected()) {
                 fileWriter.flush();
@@ -963,7 +960,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelClose.setText("收盘：" + CLOSE);
     }
 
-    protected void updateTable(BRM brm, Strategy stg) {
+    protected void updateTable(Strategy stg, BRM brm) {
         jTablePoint.setValueAt((float) brm.getInitAsset(), 0, 1);
         jTablePoint.setValueAt((float) brm.getCurrentAsset(CLOSE), 1, 1);
         jTablePoint.setValueAt((float) brm.getNetProfit(), 2, 1);
@@ -989,6 +986,14 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) stg.getMeanPositionDays() + "天", 9, 3);
         jTablePoint.setValueAt((float) stg.getMeanGainDays() + "天", 10, 3);
         jTablePoint.setValueAt((float) stg.getMeanLossDays() + "天", 11, 3);
+    }
+
+    protected void updateReport(Strategy stg, BRM brm) {
+        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", brm.getCurrentAsset(CLOSE)));
+        jTextAreaMain.append(String.format("年化率:%5.2f%%  ", brm.getAnnualRate((double) tradeDays / 244)));
+        jTextAreaMain.append(String.format("持仓年化:%5.2f%%  ", brm.getAnnualRate((double) stg.getPositionDays() / 244)));
+        jTextAreaMain.append(String.format("单次均收益:%5.2f%%", brm.getEvenEarningRate()));
+        jTextAreaMain.append(System.getProperty("line.separator"));
     }
 
     protected void livermoreLogger(Livermore lm, String msg) {
@@ -1052,6 +1057,8 @@ public class MainView extends javax.swing.JFrame {
     public int eIdx = 0;
     public int tradeDays = 0;
 
+    public Strategy strategy;
+    public BRM brm;
     public boolean evaluated = false;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
