@@ -722,7 +722,7 @@ public class MainView extends javax.swing.JFrame {
         MACD macd = new MACD(closeList, 12, 26, 9);
         macd.init();
         BRM brm = new BRM(this);
-        Strategy strategy = new Strategy(this, brm);
+        Strategy strategy = new Strategy(this);
         strategy.macd = macd;
         fundList = new ArrayList<>();
 
@@ -753,7 +753,7 @@ public class MainView extends javax.swing.JFrame {
     private void sysMAEva(int mode, int mas, int mal, int mam) {
         MALine ma = new MALine(closeList);
         BRM brm = new BRM(this);
-        Strategy strategy = new Strategy(this, brm);
+        Strategy strategy = new Strategy(this);
         strategy.ma = ma;
         fundList = new ArrayList<>();
         ArrayList<Double> masList = new ArrayList<>();
@@ -793,7 +793,7 @@ public class MainView extends javax.swing.JFrame {
     private void sysTrendEva(boolean status, int t1, int t2) {
         Livermore livermore = new Livermore(status, t1, t2);
         BRM brm = new BRM(this);
-        Strategy strategy = new Strategy(this, brm);
+        Strategy strategy = new Strategy(this);
         strategy.livermore = livermore;
         fundList = new ArrayList<>();
 

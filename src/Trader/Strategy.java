@@ -14,10 +14,9 @@ import java.util.ArrayList;
  */
 public class Strategy {
 
-    public Strategy(MainView mv, BRM b) {
+    public Strategy(MainView mv) {
         mainView = mv;
         priceList = mv.closeList;
-        brm = b;
     }
 
     public void livermoreTrade(int idx) {
@@ -114,7 +113,6 @@ public class Strategy {
 
     private MainView mainView;
     private ArrayList<Double> priceList = new ArrayList<>();
-    public BRM brm;
     public Livermore livermore;
     public MACD macd;
     public MALine ma;
