@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -131,10 +132,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemSZ50 = new javax.swing.JMenuItem();
         jMenuItemHSZS = new javax.swing.JMenuItem();
         jMenuItemBSHJ = new javax.swing.JMenuItem();
-        jMenuTestSystem = new javax.swing.JMenu();
-        jMenuItemTrend = new javax.swing.JMenuItem();
-        jMenuItemMACD = new javax.swing.JMenuItem();
-        jMenuItemMA = new javax.swing.JMenuItem();
+        jMenuRun = new javax.swing.JMenu();
+        jMenuItemDZH = new javax.swing.JMenuItem();
+        jMenuItemTDX = new javax.swing.JMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuItemAbout = new javax.swing.JMenuItem();
 
         jMenuItemCopy.setText("复制");
         jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
@@ -491,6 +493,7 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuFile.setText("文件");
 
+        jMenuItemImport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemImport.setText("导入...");
         jMenuItemImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -577,33 +580,39 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuIndex);
 
-        jMenuTestSystem.setText("测试系统");
+        jMenuRun.setText("运行");
 
-        jMenuItemTrend.setText("趋势");
-        jMenuItemTrend.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDZH.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemDZH.setText("大智慧");
+        jMenuItemDZH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTrendActionPerformed(evt);
+                jMenuItemDZHActionPerformed(evt);
             }
         });
-        jMenuTestSystem.add(jMenuItemTrend);
+        jMenuRun.add(jMenuItemDZH);
 
-        jMenuItemMACD.setText("MACD");
-        jMenuItemMACD.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemTDX.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemTDX.setText("通达信");
+        jMenuItemTDX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemMACDActionPerformed(evt);
+                jMenuItemTDXActionPerformed(evt);
             }
         });
-        jMenuTestSystem.add(jMenuItemMACD);
+        jMenuRun.add(jMenuItemTDX);
 
-        jMenuItemMA.setText("均线");
-        jMenuItemMA.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar.add(jMenuRun);
+
+        jMenuHelp.setText("帮助");
+
+        jMenuItemAbout.setText("关于");
+        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemMAActionPerformed(evt);
+                jMenuItemAboutActionPerformed(evt);
             }
         });
-        jMenuTestSystem.add(jMenuItemMA);
+        jMenuHelp.add(jMenuItemAbout);
 
-        jMenuBar.add(jMenuTestSystem);
+        jMenuBar.add(jMenuHelp);
 
         setJMenuBar(jMenuBar);
 
@@ -646,17 +655,17 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\博时黄金.txt");
     }//GEN-LAST:event_jMenuItemBSHJActionPerformed
 
-    private void jMenuItemTrendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTrendActionPerformed
-        System.out.println("TODO");
-    }//GEN-LAST:event_jMenuItemTrendActionPerformed
+    private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
+        runExeFile("C:\\dzh365\\dzh2.exe");
+    }//GEN-LAST:event_jMenuItemDZHActionPerformed
 
-    private void jMenuItemMACDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMACDActionPerformed
-        System.out.println("TODO");
-    }//GEN-LAST:event_jMenuItemMACDActionPerformed
+    private void jMenuItemTDXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTDXActionPerformed
+        runExeFile("C:\\new_tdx\\TdxW.exe");
+    }//GEN-LAST:event_jMenuItemTDXActionPerformed
 
-    private void jMenuItemMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMAActionPerformed
-        System.out.println("TODO");
-    }//GEN-LAST:event_jMenuItemMAActionPerformed
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+        JOptionPane.showMessageDialog(new JFrame(), "智能证券交易系统 V16.0.7\n版权所有(C) 张向荣(Aioros Zhang)");
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
         if (evt.isPopupTrigger()) {
@@ -716,11 +725,6 @@ public class MainView extends javax.swing.JFrame {
         updateReport(strategy, brm);
         evaluated = true;
     }//GEN-LAST:event_jButtonTradeEvaActionPerformed
-
-    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
-        String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
-        parseStatus(status);
-    }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     private void jButtonSysFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSysFilterActionPerformed
         tradeDays = dateProcess();
@@ -793,6 +797,11 @@ public class MainView extends javax.swing.JFrame {
             priceList.set(i, zoomPrice);
         }
     }//GEN-LAST:event_jComboBoxPriceFactorActionPerformed
+
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+        parseStatus(status);
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     /**
      ********************* Start of User-defined function ********************
@@ -1156,6 +1165,21 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
+    public void runExeFile(String file) {
+        try {
+            Runtime rt = Runtime.getRuntime();
+            File exeFile = new File(file);
+            if (exeFile.exists()) {
+                String cmd = "cmd.exe /c " + file;
+                rt.exec(cmd);
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "请先安装相关软件到根目录！");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private String fileIn = "data\\上证指数.txt";
     private String fileOut = "data\\上证指数_测试日志.txt";
     public FileWriter fileWriter;
@@ -1226,22 +1250,23 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelbp;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuIndex;
+    private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemBSHJ;
     private javax.swing.JMenuItem jMenuItemCYBZ;
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
+    private javax.swing.JMenuItem jMenuItemDZH;
     private javax.swing.JMenuItem jMenuItemHS300;
     private javax.swing.JMenuItem jMenuItemHSZS;
     private javax.swing.JMenuItem jMenuItemImport;
-    private javax.swing.JMenuItem jMenuItemMA;
-    private javax.swing.JMenuItem jMenuItemMACD;
     private javax.swing.JMenuItem jMenuItemSZ50;
     private javax.swing.JMenuItem jMenuItemSZCZ;
     private javax.swing.JMenuItem jMenuItemSZZS;
-    private javax.swing.JMenuItem jMenuItemTrend;
+    private javax.swing.JMenuItem jMenuItemTDX;
     private javax.swing.JMenuItem jMenuItemZXBZ;
-    private javax.swing.JMenu jMenuTestSystem;
+    private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelMA;
     private javax.swing.JPanel jPanelMACD;
