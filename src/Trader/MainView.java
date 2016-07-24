@@ -5,7 +5,6 @@
  */
 package Trader;
 
-import static Trader.FormulaLib.*;
 import java.awt.Cursor;
 import java.io.BufferedReader;
 import java.io.File;
@@ -91,7 +90,7 @@ public class MainView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldTpoint2 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jComboBoxMode = new javax.swing.JComboBox<>();
+        jComboBoxLMMode = new javax.swing.JComboBox<>();
         jCheckBoxRecord = new javax.swing.JCheckBox();
         jLabelStatus = new javax.swing.JLabel();
         jLabelOpen = new javax.swing.JLabel();
@@ -336,10 +335,10 @@ public class MainView extends javax.swing.JFrame {
         jLabel9.setText("模式：");
         jPanelConfig.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jComboBoxMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBoxMode.setMaximumRowCount(9);
-        jComboBoxMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "5日均线", "K线实体", "K线引线" }));
-        jPanelConfig.add(jComboBoxMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jComboBoxLMMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBoxLMMode.setMaximumRowCount(9);
+        jComboBoxLMMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "4日均线", "5日均线" }));
+        jPanelConfig.add(jComboBoxLMMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jCheckBoxRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBoxRecord.setText("生成交易日志");
@@ -714,10 +713,11 @@ public class MainView extends javax.swing.JFrame {
                 sysMAEva(mode, mas, mal, mam);
                 break;
             case 2:
+                mode = jComboBoxLMMode.getSelectedIndex();
                 boolean status = (jComboBoxStatus.getSelectedIndex() == 0);
                 int tp1 = Integer.parseInt(jTextFieldTpoint1.getText());
                 int tp2 = Integer.parseInt(jTextFieldTpoint2.getText());
-                sysTrendEva(status, tp1, tp2);
+                sysTrendEva(mode, status, tp1, tp2);
                 break;
         }
 
@@ -756,22 +756,22 @@ public class MainView extends javax.swing.JFrame {
                     for (int i = mass; i <= mase; i++) {
                         for (int j = mals; j <= male; j++) {
                             if (j >= i * 2) {
-                                sysMAEva(0, i, j, 0);
+                                sysMAEva(mode, i, j, 0);
                                 jTextAreaMain.append(String.format("参数:%2d | %-3d  ", i, j));
                                 updateReport(strategy, brm);
                             }
                         }
                     }
                 } else {
-                    sysMAEva(1, 0, 0, 0);
                     for (int i = mams; i <= mame; i++) {
-                        sysMAEva(1, 0, 0, i);
+                        sysMAEva(mode, 0, 0, i);
                         jTextAreaMain.append(String.format("参数:%-3d  ", i));
                         updateReport(strategy, brm);
                     }
                 }
                 break;
             case 2:
+                mode = jComboBoxLMMode.getSelectedIndex();
                 boolean status = (jComboBoxStatus.getSelectedIndex() == 0);
                 int tps1 = Integer.parseInt(jTextFieldPS1.getText());
                 int tpe1 = Integer.parseInt(jTextFieldPE1.getText());
@@ -780,7 +780,7 @@ public class MainView extends javax.swing.JFrame {
                 for (int i = tps1; i <= tpe1; i++) {
                     for (int j = tps2; j <= tpe2; j++) {
                         if (j <= (i / 2 + 1)) {
-                            sysTrendEva(status, i, j);
+                            sysTrendEva(mode, status, i, j);
                             jTextAreaMain.append(String.format("参数:%2d | %-3d  ", i, j));
                             updateReport(strategy, brm);
                         }
@@ -925,7 +925,9 @@ public class MainView extends javax.swing.JFrame {
         fundList = brm.synthesize();
     }
 
-    private void sysTrendEva(boolean status, int t1, int t2) {
+    private void sysTrendEva(int mode, boolean status, int t1, int t2) {
+        MALine ma = new MALine(priceList);
+        ArrayList<Double> maList = ma.getMAList(mode + 1);
         Livermore livermore = new Livermore(status, t1, t2);
         strategy = new Strategy(this);
         strategy.livermore = livermore;
@@ -937,7 +939,8 @@ public class MainView extends javax.swing.JFrame {
 
             for (int i = 0; i < rows; i++) {
                 updateMarket(i);
-                doLivermore(livermore, i);
+                String message = livermore.arithmetic(maList.get(i));
+                livermoreLogger(livermore, message);
                 if ((i >= sIdx) && (i <= eIdx)) {
                     strategy.livermoreTrade(i);
                 }
@@ -984,55 +987,6 @@ public class MainView extends javax.swing.JFrame {
         }
         int len = eIdx - sIdx + 1;
         return len;
-    }
-
-    protected void doLivermore(Livermore livermore, int idx) {
-        double price;
-        String message;
-        switch (jComboBoxMode.getSelectedIndex()) {
-            case 0:
-                price = CLOSE;
-                message = livermore.arithmetic(price);
-                livermoreLogger(livermore, message);
-                break;
-            case 1:
-                if (idx > 0) {
-                    price = MA(priceList, idx, 2);
-                    message = livermore.arithmetic(price);
-                    livermoreLogger(livermore, message);
-                }
-                break;
-            case 2:
-                if (idx > 1) {
-                    price = MA(priceList, idx, 3);
-                    message = livermore.arithmetic(price);
-                    livermoreLogger(livermore, message);
-                }
-                break;
-            case 3:
-                if (idx > 3) {
-                    price = MA(priceList, idx, 5);
-                    message = livermore.arithmetic(price);
-                    livermoreLogger(livermore, message);
-                }
-                break;
-            case 4:
-                price = OPEN;
-                message = livermore.arithmetic(price);
-                livermoreLogger(livermore, message);
-                price = CLOSE;
-                message = livermore.arithmetic(price);
-                livermoreLogger(livermore, message);
-                break;
-            case 5:
-                price = CLOSE > OPEN ? LOW : HIGH;
-                message = livermore.arithmetic(price);
-                livermoreLogger(livermore, message);
-                price = CLOSE > OPEN ? HIGH : LOW;
-                message = livermore.arithmetic(price);
-                livermoreLogger(livermore, message);
-                break;
-        }
     }
 
     protected void parseStatus(String status) {
@@ -1216,7 +1170,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;
     private javax.swing.JCheckBox jCheckBoxRecord;
-    private javax.swing.JComboBox<String> jComboBoxMode;
+    private javax.swing.JComboBox<String> jComboBoxLMMode;
     private javax.swing.JComboBox<String> jComboBoxPriceFactor;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JLabel jLabel1;
