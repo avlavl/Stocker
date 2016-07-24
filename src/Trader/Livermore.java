@@ -12,235 +12,235 @@ package Trader;
 public class Livermore {
 
     public Livermore(boolean status, int t1, int t2) {
-        Status = status ? "mainRiseStatus" : "mainFallStatus";
-        tpointValue1 = t1;
-        tpointValue2 = t2;
+        STATUST = status ? 1 : -1;
+        TP1 = t1;
+        TP2 = t2;
     }
 
     protected String arithmetic(double price) {
         String msg = "";
-        formerStatus = Status;
-        switch (Status) {
-            case "mainRiseStatus":
+        STATUSY = STATUST;
+        switch (STATUST) {
+            case 1: // 主上升
                 if (price > mainRiseVal) {
                     mainRiseVal = price;
-                } else if (price < (mainRiseVal * (100 - tpointValue1) / 100)) {
-                    Status = "normalFallUStatus";
+                } else if (price < (mainRiseVal * (100 - TP1) / 100)) {
+                    STATUST = 2;
                     normalFallUVal = price;
                     riseKeyHead = mainRiseVal;
                     msg = "↗ 进入自然回撤";
                 }
                 break;
-            case "normalFallUStatus":
+            case 2: // 自然回撤
                 if (price < fallKeyFoot) {
-                    Status = "mainFallStatus";
+                    STATUST = -1;
                     resetTrendValue();
                     mainFallVal = price;
                     msg = "↘↘↘↘ 恢复下降趋势";
-                } else if (price < riseKeyFoot * (100 - tpointValue2) / 100) {
-                    Status = "mainFallStatus";
+                } else if (price < riseKeyFoot * (100 - TP2) / 100) {
+                    STATUST = -1;
                     resetTrendValue();
                     mainFallVal = price;
                     msg = "↘↘↘↘↘↘ 进入下降趋势";
                 } else if (price < normalFallUVal) {
                     normalFallUVal = price;
-                } else if (price > (normalFallUVal * (100 + tpointValue1) / 100)) {
-                    Status = "normalRiseUStatus";
+                } else if (price > (normalFallUVal * (100 + TP1) / 100)) {
+                    STATUST = 3;
                     normalRiseUVal = price;
                     riseKeyFoot = normalFallUVal;
                     msg = "↗ 进入自然回升";
                 }
                 break;
-            case "normalRiseUStatus":
+            case 3: // 自然回升
                 if (price > mainRiseVal) {
-                    Status = "mainRiseStatus";
+                    STATUST = 1;
                     mainRiseVal = price;
                     msg = "↗↗↗ 恢复上升趋势";
                 } else if (price > normalRiseUVal) {
                     normalRiseUVal = price;
-                } else if ((price >= (normalRiseUVal * (100 - tpointValue1) / 100)) && (price < (normalRiseUVal * (100 - tpointValue2) / 100))) {
+                } else if ((price >= (normalRiseUVal * (100 - TP1) / 100)) && (price < (normalRiseUVal * (100 - TP2) / 100))) {
                     msg = "↗ 上升趋势可能改变";
-                } else if (price < (normalRiseUVal * (100 - tpointValue1) / 100)) {
-                    if (price < riseKeyFoot * (100 - tpointValue2) / 100) {
-                        Status = "mainFallStatus";
+                } else if (price < (normalRiseUVal * (100 - TP1) / 100)) {
+                    if (price < riseKeyFoot * (100 - TP2) / 100) {
+                        STATUST = -1;
                         resetTrendValue();
                         mainFallVal = price;
                         msg = "↘↘↘↘↘↘ 进入下降趋势";
                     } else if (price < normalFallUVal) {
-                        Status = "normalFallUStatus";
+                        STATUST = 2;
                         normalFallUVal = price;
                         msg = "↗ 进入自然回撤";
                     } else {
-                        Status = "minorFallUStatus";
+                        STATUST = 4;
                         minorFallUVal = price;
                         msg = "↗ 进入次级回撤";
                     }
                 }
                 break;
-            case "minorFallUStatus":
-                if (price < riseKeyFoot * (100 - tpointValue2) / 100) {
-                    Status = "mainFallStatus";
+            case 4: // 次级回撤
+                if (price < riseKeyFoot * (100 - TP2) / 100) {
+                    STATUST = -1;
                     resetTrendValue();
                     mainFallVal = price;
                     msg = "↘↘↘↘↘↘ 进入下降趋势";
                 } else if (price < normalFallUVal) {
-                    Status = "normalFallUStatus";
+                    STATUST = 2;
                     normalFallUVal = price;
                     msg = "↗ 进入自然回撤";
                 } else if (price < minorFallUVal) {
                     minorFallUVal = price;
-                } else if (price > minorFallUVal * (100 + tpointValue1) / 100) {
+                } else if (price > minorFallUVal * (100 + TP1) / 100) {
                     if (price > mainRiseVal) {
-                        Status = "mainRiseStatus";
+                        STATUST = 1;
                         mainRiseVal = price;
                         msg = "↗↗↗ 恢复上升趋势";
                     } else if (price > normalRiseUVal) {
-                        Status = "normalRiseUStatus";
+                        STATUST = 3;
                         normalRiseUVal = price;
                         msg = "↗ 进入自然回升";
                     } else {
-                        Status = "minorRiseUStatus";
+                        STATUST = 5;
                         minorRiseUVal = price;
                         msg = "↗ 进入次级回升";
                     }
                 }
                 break;
-            case "minorRiseUStatus":
+            case 5: // 次级回升
                 if (price > mainRiseVal) {
-                    Status = "mainRiseStatus";
+                    STATUST = 1;
                     mainRiseVal = price;
                     msg = "↗↗↗ 恢复上升趋势";
                 } else if (price > normalRiseUVal) {
-                    Status = "normalRiseUStatus";
+                    STATUST = 3;
                     normalRiseUVal = price;
                     msg = "↗ 进入自然回升";
                 } else if (price > minorRiseUVal) {
                     minorRiseUVal = price;
-                } else if (price < minorRiseUVal * (100 - tpointValue1) / 100) {
-                    if (price < riseKeyFoot * (100 - tpointValue2) / 100) {
-                        Status = "mainFallStatus";
+                } else if (price < minorRiseUVal * (100 - TP1) / 100) {
+                    if (price < riseKeyFoot * (100 - TP2) / 100) {
+                        STATUST = -1;
                         resetTrendValue();
                         mainFallVal = price;
                         msg = "↘↘↘↘↘↘ 进入下降趋势";
                     } else if (price < normalFallUVal) {
-                        Status = "normalFallUStatus";
+                        STATUST = 2;
                         normalFallUVal = price;
                         msg = "↗ 进入自然回撤";
                     } else {
-                        Status = "minorFallUStatus";
+                        STATUST = 4;
                         minorFallUVal = price;
                         msg = "↗ 进入次级回撤";
                     }
                 }
                 break;
 
-            case "mainFallStatus":
+            case -1:    // 主下降
                 if ((price < mainFallVal) || (mainFallVal == 0)) {
                     mainFallVal = price;
-                } else if (price > (mainFallVal * (100 + tpointValue1) / 100)) {
-                    Status = "normalRiseDStatus";
+                } else if (price > (mainFallVal * (100 + TP1) / 100)) {
+                    STATUST = -2;
                     normalRiseDVal = price;
                     fallKeyFoot = mainFallVal;
                     msg = "↘ 进入自然回升";
                 }
                 break;
-            case "normalRiseDStatus":
+            case -2:    // 自然回升
                 if ((riseKeyHead != 0) && (price > riseKeyHead)) {
-                    Status = "mainRiseStatus";
+                    STATUST = 1;
                     resetTrendValue();
                     mainRiseVal = price;
                     msg = "↗↗↗↗ 恢复上升趋势";
-                } else if ((fallKeyHead != 0) && (price > fallKeyHead * (100 + tpointValue2) / 100)) {
-                    Status = "mainRiseStatus";
+                } else if ((fallKeyHead != 0) && (price > fallKeyHead * (100 + TP2) / 100)) {
+                    STATUST = 1;
                     resetTrendValue();
                     mainRiseVal = price;
                     msg = "↗↗↗↗↗↗ 进入上升趋势";
                 } else if (price > normalRiseDVal) {
                     normalRiseDVal = price;
-                } else if (price < (normalRiseDVal * (100 - tpointValue1) / 100)) {
-                    Status = "normalFallDStatus";
+                } else if (price < (normalRiseDVal * (100 - TP1) / 100)) {
+                    STATUST = -3;
                     normalFallDVal = price;
                     fallKeyHead = normalRiseDVal;
                     msg = "↘ 进入自然回撤";
                 }
                 break;
-            case "normalFallDStatus":
+            case -3:    // 自然回撤
                 if (price < mainFallVal) {
-                    Status = "mainFallStatus";
+                    STATUST = -1;
                     mainFallVal = price;
                     msg = "↘↘↘ 恢复下降趋势";
                 } else if (price < normalFallDVal) {
                     normalFallDVal = price;
-                } else if ((price <= (normalFallDVal * (100 + tpointValue1) / 100)) && (price > (normalFallDVal * (100 + tpointValue2) / 100))) {
+                } else if ((price <= (normalFallDVal * (100 + TP1) / 100)) && (price > (normalFallDVal * (100 + TP2) / 100))) {
                     msg = "↘ 下降趋势可能改变";
-                } else if (price > (normalFallDVal * (100 + tpointValue1) / 100)) {
-                    if (price > fallKeyHead * (100 + tpointValue2) / 100) {
-                        Status = "mainRiseStatus";
+                } else if (price > (normalFallDVal * (100 + TP1) / 100)) {
+                    if (price > fallKeyHead * (100 + TP2) / 100) {
+                        STATUST = 1;
                         resetTrendValue();
                         mainRiseVal = price;
                         msg = "↗↗↗↗↗↗ 进入上升趋势";
                     } else if (price > normalRiseDVal) {
-                        Status = "normalRiseDStatus";
+                        STATUST = -2;
                         normalRiseDVal = price;
                         msg = "↘ 进入自然回升";
                     } else {
-                        Status = "minorRiseDStatus";
+                        STATUST = -4;
                         minorRiseDVal = price;
                         msg = "↘ 进入次级回升";
                     }
                 }
                 break;
-            case "minorRiseDStatus":
-                if (price > fallKeyHead * (100 + tpointValue2) / 100) {
-                    Status = "mainRiseStatus";
+            case -4:    // 次级回升
+                if (price > fallKeyHead * (100 + TP2) / 100) {
+                    STATUST = 1;
                     resetTrendValue();
                     mainRiseVal = price;
                     msg = "↗↗↗↗↗↗ 进入上升趋势";
                 } else if (price > normalRiseDVal) {
-                    Status = "normalRiseDStatus";
+                    STATUST = -2;
                     normalRiseDVal = price;
                     msg = "↘ 进入自然回升";
                 } else if (price > minorRiseDVal) {
                     minorRiseDVal = price;
-                } else if (price < minorRiseDVal * (100 - tpointValue1) / 100) {
+                } else if (price < minorRiseDVal * (100 - TP1) / 100) {
                     if (price < mainFallVal) {
-                        Status = "mainFallStatus";
+                        STATUST = -1;
                         mainFallVal = price;
                         msg = "↘↘↘ 恢复下降趋势";
                     } else if (price < normalFallDVal) {
-                        Status = "normalFallDStatus";
+                        STATUST = -3;
                         normalFallDVal = price;
                         msg = "↘ 进入自然回撤";
                     } else {
-                        Status = "minorFallDStatus";
+                        STATUST = -5;
                         minorFallDVal = price;
                         msg = "↘ 进入次级回撤";
                     }
                 }
                 break;
-            case "minorFallDStatus":
+            case -5:    // 次级回撤
                 if (price < mainFallVal) {
-                    Status = "mainFallStatus";
+                    STATUST = -1;
                     mainFallVal = price;
                     msg = "↘↘↘ 恢复下降趋势";
                 } else if (price < normalFallDVal) {
-                    Status = "normalFallDStatus";
+                    STATUST = -3;
                     normalFallDVal = price;
                     msg = "↘ 进入自然回撤";
                 } else if (price < minorFallDVal) {
                     minorFallDVal = price;
-                } else if (price > minorFallDVal * (100 + tpointValue1) / 100) {
-                    if (price > fallKeyHead * (100 + tpointValue2) / 100) {
-                        Status = "mainRiseStatus";
+                } else if (price > minorFallDVal * (100 + TP1) / 100) {
+                    if (price > fallKeyHead * (100 + TP2) / 100) {
+                        STATUST = 1;
                         resetTrendValue();
                         mainRiseVal = price;
                         msg = "↗↗↗↗↗↗ 进入上升趋势";
                     } else if (price > normalRiseDVal) {
-                        Status = "normalRiseDStatus";
+                        STATUST = -2;
                         normalRiseDVal = price;
                         msg = "↘ 进入自然回升";
                     } else {
-                        Status = "minorRiseDStatus";
+                        STATUST = -4;
                         minorRiseDVal = price;
                         msg = "↘ 进入次级回升";
                     }
@@ -253,8 +253,8 @@ public class Livermore {
     }
 
     protected void resetTrendValue() {
-        switch (Status) {
-            case "mainRiseStatus":
+        switch (STATUST) {
+            case 1:
                 riseKeyHead = 0;
                 riseKeyFoot = 0;
                 mainRiseVal = 0;
@@ -263,7 +263,7 @@ public class Livermore {
                 minorRiseUVal = 0;
                 minorFallUVal = 0;
                 break;
-            case "mainFallStatus":
+            case -1:
                 fallKeyHead = 0;
                 fallKeyFoot = 0;
                 mainFallVal = 0;
@@ -278,11 +278,11 @@ public class Livermore {
     }
 
     public boolean enterRiseStatus() {
-        return (formerStatus.contains("DStatus")) && Status.equals("mainRiseStatus");
+        return (STATUSY < 0) && (STATUST > 0);
     }
 
     public boolean enterFallStatus() {
-        return (formerStatus.contains("UStatus")) && Status.equals("mainFallStatus");
+        return (STATUSY > 0) && (STATUST < 0);
     }
 
     public double riseKeyHead = 0;
@@ -300,10 +300,9 @@ public class Livermore {
     public double minorRiseDVal = 0;
     public double minorFallDVal = 0;
 
-    public String Status = "mainRiseStatus";
-    public String formerStatus = "DStatus";
-
-    int tpointValue1 = 10;
-    int tpointValue2 = 5;
+    public int STATUST = 1;
+    public int STATUSY = -1;
+    public int TP1 = 10;
+    public int TP2 = 5;
 
 }

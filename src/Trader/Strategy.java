@@ -49,6 +49,38 @@ public class Strategy {
         trade(idx, b, s);
     }
 
+    public void barMACrossTrade(int idx, double value, ArrayList<Double> sList, ArrayList<Double> lList) {
+        boolean c1 = (REFD(macd.barList, idx, 1) > value) && (REFD(sList, idx, 1) > REFD(lList, idx, 1));
+        boolean c2 = (macd.barList.get(idx) > value) && (sList.get(idx) > lList.get(idx));
+        boolean b = (!c1) && c2;
+        boolean s = c1 && (!c2);
+        trade(idx, b, s);
+    }
+
+    public void difMACrossTrade(int idx, double value, ArrayList<Double> sList, ArrayList<Double> lList) {
+        boolean c1 = (REFD(macd.difList, idx, 1) > value) && (REFD(sList, idx, 1) > REFD(lList, idx, 1));
+        boolean c2 = (macd.difList.get(idx) > value) && (sList.get(idx) > lList.get(idx));
+        boolean b = (!c1) && c2;
+        boolean s = c1 && (!c2);
+        trade(idx, b, s);
+    }
+
+    public void barTrendCrossTrade(int idx, double value) {
+        boolean c1 = (REFD(macd.barList, idx, 1) > value) && (livermore.STATUSY > 0);
+        boolean c2 = (macd.barList.get(idx) > value) && (livermore.STATUST > 0);
+        boolean b = (!c1) && c2;
+        boolean s = c1 && (!c2);
+        trade(idx, b, s);
+    }
+
+    public void difTrendCrossTrade(int idx, double value) {
+        boolean c1 = (REFD(macd.difList, idx, 1) > value) && (livermore.STATUSY > 0);
+        boolean c2 = (macd.difList.get(idx) > value) && (livermore.STATUST > 0);
+        boolean b = (!c1) && c2;
+        boolean s = c1 && (!c2);
+        trade(idx, b, s);
+    }
+
     public void trade(int idx, boolean buy, boolean sell) {
         if (buy) {
             bpIdxList.add(idx);

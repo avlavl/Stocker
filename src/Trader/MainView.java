@@ -54,6 +54,7 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemClear = new javax.swing.JMenuItem();
         buttonGroupMACD = new javax.swing.ButtonGroup();
         buttonGroupMA = new javax.swing.ButtonGroup();
+        buttonGroupMacdAdd = new javax.swing.ButtonGroup();
         jPanelMain = new javax.swing.JPanel();
         jLabelStockName = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
@@ -71,6 +72,9 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonMacdDif = new javax.swing.JRadioButton();
         jLabelbp = new javax.swing.JLabel();
         jTextFieldbp = new javax.swing.JTextField();
+        jCheckBoxAddSys = new javax.swing.JCheckBox();
+        jRadioButtonAddMa = new javax.swing.JRadioButton();
+        jRadioButtonAddTrend = new javax.swing.JRadioButton();
         jPanelMA = new javax.swing.JPanel();
         jRadioButtonMAM = new javax.swing.JRadioButton();
         jRadioButtonMAP = new javax.swing.JRadioButton();
@@ -237,20 +241,35 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonMacdBar.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jRadioButtonMacdBar.setSelected(true);
         jRadioButtonMacdBar.setText("BAR突破交易");
-        jPanelMACD.add(jRadioButtonMacdBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanelMACD.add(jRadioButtonMacdBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         buttonGroupMACD.add(jRadioButtonMacdDif);
         jRadioButtonMacdDif.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jRadioButtonMacdDif.setText("DIF突破交易");
-        jPanelMACD.add(jRadioButtonMacdDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jPanelMACD.add(jRadioButtonMacdDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jLabelbp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelbp.setText("突破点：");
-        jPanelMACD.add(jLabelbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+        jPanelMACD.add(jLabelbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
         jTextFieldbp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldbp.setText("0");
-        jPanelMACD.add(jTextFieldbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 40, -1));
+        jPanelMACD.add(jTextFieldbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 40, -1));
+
+        jCheckBoxAddSys.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBoxAddSys.setText("叠加均线或趋势参考");
+        jPanelMACD.add(jCheckBoxAddSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        buttonGroupMacdAdd.add(jRadioButtonAddMa);
+        jRadioButtonAddMa.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonAddMa.setSelected(true);
+        jRadioButtonAddMa.setText("叠加均线系统");
+        jPanelMACD.add(jRadioButtonAddMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 115, -1, -1));
+
+        buttonGroupMacdAdd.add(jRadioButtonAddTrend);
+        jRadioButtonAddTrend.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonAddTrend.setText("叠加趋势系统");
+        jPanelMACD.add(jRadioButtonAddTrend, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 115, -1, -1));
 
         jTabbedPaneSys.addTab("MACD", jPanelMACD);
 
@@ -703,7 +722,21 @@ public class MainView extends javax.swing.JFrame {
             case 0:
                 mode = jRadioButtonMacdBar.isSelected() ? 0 : 1;
                 double breakPoint = Double.parseDouble(jTextFieldbp.getText());
-                sysMACDEva(mode, breakPoint);
+                if (jCheckBoxAddSys.isSelected()) {
+                    if (jRadioButtonAddMa.isSelected()) {
+                        int mas = Integer.parseInt(jTextFieldMAS.getText());
+                        int mal = Integer.parseInt(jTextFieldMAL.getText());
+                        sysMACDMAEva(mode, breakPoint, mas, mal);
+                    } else {
+                        int mode1 = jComboBoxLMMode.getSelectedIndex();
+                        boolean status = (jComboBoxStatus.getSelectedIndex() == 0);
+                        int tp1 = Integer.parseInt(jTextFieldTpoint1.getText());
+                        int tp2 = Integer.parseInt(jTextFieldTpoint2.getText());
+                        sysMACDTrendEva(mode, breakPoint, mode1, status, tp1, tp2);
+                    }
+                } else {
+                    sysMACDEva(mode, breakPoint);
+                }
                 break;
             case 1:
                 mode = jRadioButtonMAM.isSelected() ? 0 : 1;
@@ -799,7 +832,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxPriceFactorActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
-        String status = (jComboBoxStatus.getSelectedIndex() == 0) ? "mainRiseStatus" : "mainFallStatus";
+        int status = (jComboBoxStatus.getSelectedIndex() == 0) ? 1 : -1;
         parseStatus(status);
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
@@ -956,7 +989,7 @@ public class MainView extends javax.swing.JFrame {
 
             brm = new BRM(this);
             fundList = brm.synthesize();
-            parseStatus(livermore.Status);
+            parseStatus(livermore.STATUST);
 
             if (jCheckBoxRecord.isSelected()) {
                 fileWriter.flush();
@@ -965,6 +998,74 @@ public class MainView extends javax.swing.JFrame {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    private void sysMACDMAEva(int mode, double bp, int mas, int mal) {
+        MACD macd = new MACD(priceList, 12, 26, 9);
+        macd.init();
+        MALine ma = new MALine(priceList);
+        strategy = new Strategy(this);
+        strategy.macd = macd;
+        strategy.ma = ma;
+
+        ArrayList<Double> masList = ma.getMAList(mas);
+        ArrayList<Double> malList = ma.getMAList(mal);
+
+        for (int i = 0; i < rows; i++) {
+            updateMarket(i);
+            if ((i >= sIdx) && (i <= eIdx)) {
+                if (mode == 0) {
+                    strategy.barMACrossTrade(i, bp, masList, malList);
+                } else {
+                    strategy.difMACrossTrade(i, bp, masList, malList);
+                }
+            }
+            if (i > eIdx) {
+                break;
+            }
+        }
+        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+            strategy.spIdxList.add(eIdx);
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+
+        brm = new BRM(this);
+        fundList = brm.synthesize();
+    }
+
+    private void sysMACDTrendEva(int mm, double bp, int tm, boolean status, int t1, int t2) {
+        MACD macd = new MACD(priceList, 12, 26, 9);
+        macd.init();
+        MALine ma = new MALine(priceList);
+        ArrayList<Double> maList = ma.getMAList(tm + 1);
+        Livermore livermore = new Livermore(status, t1, t2);
+        strategy = new Strategy(this);
+        strategy.macd = macd;
+        strategy.livermore = livermore;
+
+        for (int i = 0; i < rows; i++) {
+            updateMarket(i);
+            livermore.arithmetic(maList.get(i));
+            if ((i >= sIdx) && (i <= eIdx)) {
+                if (mm == 0) {
+                    strategy.barTrendCrossTrade(i, bp);
+                } else {
+                    strategy.difTrendCrossTrade(i, bp);
+                }
+            }
+            if (i > eIdx) {
+                break;
+            }
+        }
+        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+            strategy.spIdxList.add(eIdx);
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+
+        brm = new BRM(this);
+        fundList = brm.synthesize();
     }
 
     private int dateProcess() {
@@ -989,45 +1090,45 @@ public class MainView extends javax.swing.JFrame {
         return len;
     }
 
-    protected void parseStatus(String status) {
+    protected void parseStatus(int status) {
         switch (status) {
-            case "mainRiseStatus":
+            case 1:
                 jLabelStatus.setText("主上升！");
                 jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
                 break;
-            case "normalFallUStatus":
+            case 2:
                 jLabelStatus.setText("自然回撤");
                 jLabelStatus.setForeground(new java.awt.Color(255, 51, 51));
                 break;
-            case "normalRiseUStatus":
+            case 3:
                 jLabelStatus.setText("自然回升");
                 jLabelStatus.setForeground(new java.awt.Color(255, 51, 51));
                 break;
-            case "minorFallUStatus":
+            case 4:
                 jLabelStatus.setText("次级回撤");
                 jLabelStatus.setForeground(new java.awt.Color(255, 153, 153));
                 break;
-            case "minorRiseUStatus":
+            case 5:
                 jLabelStatus.setText("次级回升");
                 jLabelStatus.setForeground(new java.awt.Color(255, 153, 153));
                 break;
-            case "mainFallStatus":
+            case -1:
                 jLabelStatus.setText("主下降！");
                 jLabelStatus.setForeground(new java.awt.Color(0, 153, 0));
                 break;
-            case "normalRiseDStatus":
+            case -2:
                 jLabelStatus.setText("自然回升");
                 jLabelStatus.setForeground(new java.awt.Color(51, 255, 51));
                 break;
-            case "normalFallDStatus":
+            case -3:
                 jLabelStatus.setText("自然回撤");
                 jLabelStatus.setForeground(new java.awt.Color(51, 255, 51));
                 break;
-            case "minorRiseDStatus":
+            case -4:
                 jLabelStatus.setText("次级回升");
                 jLabelStatus.setForeground(new java.awt.Color(153, 255, 153));
                 break;
-            case "minorFallDStatus":
+            case -5:
                 jLabelStatus.setText("次级回撤");
                 jLabelStatus.setForeground(new java.awt.Color(153, 255, 153));
                 break;
@@ -1165,10 +1266,12 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupMA;
     private javax.swing.ButtonGroup buttonGroupMACD;
+    private javax.swing.ButtonGroup buttonGroupMacdAdd;
     private javax.swing.JButton jButtonSysFilter;
     private javax.swing.JButton jButtonTradeChart;
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;
+    private javax.swing.JCheckBox jCheckBoxAddSys;
     private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JComboBox<String> jComboBoxLMMode;
     private javax.swing.JComboBox<String> jComboBoxPriceFactor;
@@ -1225,6 +1328,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelTrend;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButton jRadioButtonAddMa;
+    private javax.swing.JRadioButton jRadioButtonAddTrend;
     private javax.swing.JRadioButton jRadioButtonMAM;
     private javax.swing.JRadioButton jRadioButtonMAP;
     private javax.swing.JRadioButton jRadioButtonMacdBar;
