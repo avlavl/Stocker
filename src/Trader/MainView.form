@@ -54,6 +54,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSZZS">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x4e0a;&#x8bc1;&#x6307;&#x6570;"/>
               </Properties>
               <Events>
@@ -62,6 +65,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSZCZ">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+2"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x6df1;&#x8bc1;&#x6210;&#x6307;"/>
               </Properties>
               <Events>
@@ -70,6 +76,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCYBZ">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x521b;&#x4e1a;&#x677f;&#x6307;"/>
               </Properties>
               <Events>
@@ -78,6 +87,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHS300">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+4"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x6caa;&#x6df1;300"/>
               </Properties>
               <Events>
@@ -86,6 +98,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZXBZ">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+5"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x4e2d;&#x5c0f;&#x677f;&#x6307;"/>
               </Properties>
               <Events>
@@ -94,6 +109,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSZ50">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+6"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x4e0a;&#x8bc1;50"/>
               </Properties>
               <Events>
@@ -102,6 +120,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHSZS">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+7"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x6052;&#x751f;&#x6307;&#x6570;"/>
               </Properties>
               <Events>
@@ -110,6 +131,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBSHJ">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+8"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="&#x535a;&#x65f6;&#x9ec4;&#x91d1;"/>
               </Properties>
               <Events>
