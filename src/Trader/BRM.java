@@ -57,7 +57,7 @@ public class BRM {
                 } else if (spIdxList.contains(i)) {
                     quota(false, pList.get(i));
                 }
-                fundList.add(getCurrentAsset(pList.get(i)));
+                fundList.add(getCurrentAsset(i));
             } else {
                 fundList.add(fundList.get(endIdx));
             }
@@ -69,9 +69,9 @@ public class BRM {
         return initAsset;
     }
 
-    public double getCurrentAsset(double price) {
+    public double getCurrentAsset(int idx) {
         if (bsFlag) {
-            return asset + price;
+            return asset + pList.get(idx);
         } else {
             return asset;
         }
@@ -85,7 +85,8 @@ public class BRM {
         return profit;
     }
 
-    public double getObjectRate(double price) {
+    public double getObjectRate(int idx) {
+        double price = pList.get(idx);
         return (double) 100 * (price - initAsset) / initAsset;
     }
 

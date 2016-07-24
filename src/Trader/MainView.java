@@ -1088,7 +1088,6 @@ public class MainView extends javax.swing.JFrame {
         HIGH = highList.get(index);
         LOW = lowList.get(index);
         CLOSE = closeList.get(index);
-        PRICE = priceList.get(index);
 
         jLabelDate.setText("日期：" + DATE);
         jLabelOpen.setText("开盘：" + OPEN);
@@ -1099,9 +1098,9 @@ public class MainView extends javax.swing.JFrame {
 
     protected void updateTable(Strategy stg, BRM brm) {
         jTablePoint.setValueAt((float) brm.getInitAsset(), 0, 1);
-        jTablePoint.setValueAt((float) brm.getCurrentAsset(PRICE), 1, 1);
+        jTablePoint.setValueAt((float) brm.getCurrentAsset(eIdx), 1, 1);
         jTablePoint.setValueAt((float) brm.getNetProfit(), 2, 1);
-        jTablePoint.setValueAt((float) brm.getObjectRate(PRICE) + "%", 3, 1);
+        jTablePoint.setValueAt((float) brm.getObjectRate(eIdx) + "%", 3, 1);
         jTablePoint.setValueAt((float) brm.getEarningRate() + "%", 4, 1);
         jTablePoint.setValueAt((float) brm.getAnnualRate((double) tradeDays / 244) + "%", 5, 1);
         jTablePoint.setValueAt((float) brm.getGainProfit(), 6, 1);
@@ -1126,7 +1125,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     protected void updateReport(Strategy stg, BRM brm) {
-        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", brm.getCurrentAsset(PRICE)));
+        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", brm.getCurrentAsset(eIdx)));
         jTextAreaMain.append(String.format("年化率:%5.2f%%  ", brm.getAnnualRate((double) tradeDays / 244)));
         jTextAreaMain.append(String.format("持仓时间比:%5.2f%%  ", stg.getPositionDaysRate()));
         jTextAreaMain.append(String.format("持仓年化:%5.2f%%  ", brm.getAnnualRate((double) stg.getPositionDays() / 244)));
@@ -1201,7 +1200,6 @@ public class MainView extends javax.swing.JFrame {
     public double HIGH = 0;
     public double LOW = 0;
     public double CLOSE = 0;
-    public double PRICE = 0;
     public int sIdx = -1;
     public int eIdx = 0;
     public int tradeDays = 0;
