@@ -1110,9 +1110,9 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt((float) brm.getAnnualRate((double) stg.getPositionDays() / 244) + "%", 10, 1);
         jTablePoint.setValueAt((float) brm.getEvenEarningRate() + "%", 11, 1);
 
-        jTablePoint.setValueAt(brm.getTradeTimes(), 0, 3);
-        jTablePoint.setValueAt(brm.getGainTimes(), 1, 3);
-        jTablePoint.setValueAt((float) brm.getWinRate(), 2, 3);
+        jTablePoint.setValueAt(brm.getTradeTimes() + "次", 0, 3);
+        jTablePoint.setValueAt(brm.getGainTimes() + "次", 1, 3);
+        jTablePoint.setValueAt((float) brm.getWinRate() + "%", 2, 3);
         jTablePoint.setValueAt((float) brm.getMeanGain(), 3, 3);
         jTablePoint.setValueAt((float) brm.getMeanLoss(), 4, 3);
         jTablePoint.setValueAt((float) brm.getOdds(), 5, 3);

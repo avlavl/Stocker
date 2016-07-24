@@ -158,7 +158,7 @@ public class BRM {
 
     public double getWinRate() {
         int gainTimes = getGainTimes();
-        return (double) gainTimes / agioList.size();
+        return (double) 100 * gainTimes / agioList.size();
     }
 
     public double getMeanGain() {
@@ -180,7 +180,7 @@ public class BRM {
     }
 
     public double getExpectation() {
-        double winRate = getWinRate();
+        double winRate = getWinRate() / 100;
         double odds = getOdds();
         return (double) (winRate * odds - (1 - winRate));
     }
