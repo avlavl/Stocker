@@ -107,20 +107,18 @@ public class MainView extends javax.swing.JFrame {
         jLabelPara4 = new javax.swing.JLabel();
         jTextFieldPS1 = new javax.swing.JTextField();
         jTextFieldPE1 = new javax.swing.JTextField();
-        jTextFieldPU1 = new javax.swing.JTextField();
         jTextFieldPS2 = new javax.swing.JTextField();
         jTextFieldPE2 = new javax.swing.JTextField();
-        jTextFieldPU2 = new javax.swing.JTextField();
         jTextFieldPS3 = new javax.swing.JTextField();
         jTextFieldPE3 = new javax.swing.JTextField();
-        jTextFieldPU3 = new javax.swing.JTextField();
         jTextFieldPS4 = new javax.swing.JTextField();
         jTextFieldPE4 = new javax.swing.JTextField();
-        jTextFieldPU4 = new javax.swing.JTextField();
         jLabelDash1 = new javax.swing.JLabel();
         jLabelDash2 = new javax.swing.JLabel();
         jLabelDash3 = new javax.swing.JLabel();
         jLabelDash4 = new javax.swing.JLabel();
+        jLabelPriceFactor = new javax.swing.JLabel();
+        jComboBoxPriceFactor = new javax.swing.JComboBox<>();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -426,11 +424,11 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelPara3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPara3.setText("参数3");
-        jPanelMain.add(jLabelPara3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
+        jPanelMain.add(jLabelPara3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
 
         jLabelPara4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPara4.setText("参数4");
-        jPanelMain.add(jLabelPara4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 342, -1, -1));
+        jPanelMain.add(jLabelPara4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 342, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPS1.setText("0");
@@ -440,11 +438,6 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("100");
         jPanelMain.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 318, 30, -1));
 
-        jTextFieldPU1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPU1.setText("1");
-        jTextFieldPU1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelMain.add(jTextFieldPU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 318, 36, -1));
-
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPS2.setText("0");
         jPanelMain.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 30, -1));
@@ -453,36 +446,21 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE2.setText("100");
         jPanelMain.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 30, -1));
 
-        jTextFieldPU2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPU2.setText("1");
-        jTextFieldPU2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelMain.add(jTextFieldPU2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 36, -1));
-
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPS3.setText("0");
-        jPanelMain.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 318, 30, -1));
+        jPanelMain.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 318, 30, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPE3.setText("100");
-        jPanelMain.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 318, 30, -1));
-
-        jTextFieldPU3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPU3.setText("1");
-        jTextFieldPU3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelMain.add(jTextFieldPU3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 318, 36, -1));
+        jPanelMain.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 318, 30, -1));
 
         jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPS4.setText("0");
-        jPanelMain.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 30, -1));
+        jPanelMain.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 30, -1));
 
         jTextFieldPE4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPE4.setText("100");
-        jPanelMain.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, 30, -1));
-
-        jTextFieldPU4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPU4.setText("1");
-        jTextFieldPU4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelMain.add(jTextFieldPU4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 36, -1));
+        jPanelMain.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 30, -1));
 
         jLabelDash1.setText("-");
         jPanelMain.add(jLabelDash1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 320, -1, -1));
@@ -491,10 +469,23 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabelDash2, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 340, -1, -1));
 
         jLabelDash3.setText("-");
-        jPanelMain.add(jLabelDash3, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 320, -1, -1));
+        jPanelMain.add(jLabelDash3, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 320, -1, -1));
 
         jLabelDash4.setText("-");
-        jPanelMain.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 340, -1, -1));
+        jPanelMain.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 340, -1, -1));
+
+        jLabelPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelPriceFactor.setText("价格系数：");
+        jPanelMain.add(jLabelPriceFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 318, -1, -1));
+
+        jComboBoxPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBoxPriceFactor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "X1", "X10", "X100", "X1000" }));
+        jComboBoxPriceFactor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPriceFactorActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jComboBoxPriceFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 338, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 423));
 
@@ -788,6 +779,13 @@ public class MainView extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jButtonSysFilterActionPerformed
 
+    private void jComboBoxPriceFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPriceFactorActionPerformed
+        for (int i = 0; i < rows; i++) {
+            double zoomPrice = closeList.get(i) * Math.pow(10, jComboBoxPriceFactor.getSelectedIndex());
+            priceList.set(i, zoomPrice);
+        }
+    }//GEN-LAST:event_jComboBoxPriceFactorActionPerformed
+
     /**
      ********************* Start of User-defined function ********************
      */
@@ -823,6 +821,7 @@ public class MainView extends javax.swing.JFrame {
             highList = new ArrayList<>();
             lowList = new ArrayList<>();
             closeList = new ArrayList<>();
+            priceList = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {
                 words = line.split("\t");
@@ -831,6 +830,7 @@ public class MainView extends javax.swing.JFrame {
                 highList.add(Double.parseDouble(words[2]));
                 lowList.add(Double.parseDouble(words[3]));
                 closeList.add(Double.parseDouble(words[4]));
+                priceList.add(Double.parseDouble(words[4]));
             }
             rows = dateList.size();
             br.close();
@@ -842,7 +842,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     private void sysMACDEva(int mode, double bp) {
-        MACD macd = new MACD(closeList, 12, 26, 9);
+        MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         strategy = new Strategy(this);
         strategy.macd = macd;
@@ -871,7 +871,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     private void sysMAEva(int mode, int mas, int mal, int mam) {
-        MALine ma = new MALine(closeList);
+        MALine ma = new MALine(priceList);
         strategy = new Strategy(this);
         strategy.ma = ma;
 
@@ -980,21 +980,21 @@ public class MainView extends javax.swing.JFrame {
                 break;
             case 1:
                 if (idx > 0) {
-                    price = MA(closeList, idx, 2);
+                    price = MA(priceList, idx, 2);
                     message = livermore.arithmetic(price);
                     livermoreLogger(livermore, message);
                 }
                 break;
             case 2:
                 if (idx > 1) {
-                    price = MA(closeList, idx, 3);
+                    price = MA(priceList, idx, 3);
                     message = livermore.arithmetic(price);
                     livermoreLogger(livermore, message);
                 }
                 break;
             case 3:
                 if (idx > 3) {
-                    price = MA(closeList, idx, 5);
+                    price = MA(priceList, idx, 5);
                     message = livermore.arithmetic(price);
                     livermoreLogger(livermore, message);
                 }
@@ -1071,6 +1071,7 @@ public class MainView extends javax.swing.JFrame {
         HIGH = highList.get(index);
         LOW = lowList.get(index);
         CLOSE = closeList.get(index);
+        PRICE = priceList.get(index);
 
         jLabelDate.setText("日期：" + DATE);
         jLabelOpen.setText("开盘：" + OPEN);
@@ -1081,9 +1082,9 @@ public class MainView extends javax.swing.JFrame {
 
     protected void updateTable(Strategy stg, BRM brm) {
         jTablePoint.setValueAt((float) brm.getInitAsset(), 0, 1);
-        jTablePoint.setValueAt((float) brm.getCurrentAsset(CLOSE), 1, 1);
+        jTablePoint.setValueAt((float) brm.getCurrentAsset(PRICE), 1, 1);
         jTablePoint.setValueAt((float) brm.getNetProfit(), 2, 1);
-        jTablePoint.setValueAt((float) brm.getObjectRate(CLOSE) + "%", 3, 1);
+        jTablePoint.setValueAt((float) brm.getObjectRate(PRICE) + "%", 3, 1);
         jTablePoint.setValueAt((float) brm.getEarningRate() + "%", 4, 1);
         jTablePoint.setValueAt((float) brm.getAnnualRate((double) tradeDays / 244) + "%", 5, 1);
         jTablePoint.setValueAt((float) brm.getGainProfit(), 6, 1);
@@ -1108,7 +1109,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     protected void updateReport(Strategy stg, BRM brm) {
-        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", brm.getCurrentAsset(CLOSE)));
+        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", brm.getCurrentAsset(PRICE)));
         jTextAreaMain.append(String.format("年化率:%5.2f%%  ", brm.getAnnualRate((double) tradeDays / 244)));
         jTextAreaMain.append(String.format("持仓时间比:%5.2f%%  ", stg.getPositionDaysRate()));
         jTextAreaMain.append(String.format("持仓年化:%5.2f%%  ", brm.getAnnualRate((double) stg.getPositionDays() / 244)));
@@ -1159,6 +1160,7 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<Double> highList;
     public ArrayList<Double> lowList;
     public ArrayList<Double> closeList;
+    public ArrayList<Double> priceList;
     public ArrayList<Double> fundList;
     public ArrayList<Integer> bpIndexList;
     public ArrayList<Integer> spIndexList;
@@ -1167,6 +1169,7 @@ public class MainView extends javax.swing.JFrame {
     public double HIGH = 0;
     public double LOW = 0;
     public double CLOSE = 0;
+    public double PRICE = 0;
     public int sIdx = -1;
     public int eIdx = 0;
     public int tradeDays = 0;
@@ -1184,6 +1187,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTradeRecord;
     private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JComboBox<String> jComboBoxMode;
+    private javax.swing.JComboBox<String> jComboBoxPriceFactor;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1207,6 +1211,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPara2;
     private javax.swing.JLabel jLabelPara3;
     private javax.swing.JLabel jLabelPara4;
+    private javax.swing.JLabel jLabelPriceFactor;
     private javax.swing.JLabel jLabelStartDate;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStockName;
@@ -1256,10 +1261,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldPS2;
     private javax.swing.JTextField jTextFieldPS3;
     private javax.swing.JTextField jTextFieldPS4;
-    private javax.swing.JTextField jTextFieldPU1;
-    private javax.swing.JTextField jTextFieldPU2;
-    private javax.swing.JTextField jTextFieldPU3;
-    private javax.swing.JTextField jTextFieldPU4;
     private javax.swing.JTextField jTextFieldStartDate;
     private javax.swing.JTextField jTextFieldTpoint1;
     private javax.swing.JTextField jTextFieldTpoint2;

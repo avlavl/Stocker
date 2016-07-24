@@ -16,7 +16,7 @@ public class BRM {
 
     public BRM(MainView mv) {
         mainView = mv;
-        priceList = mv.closeList;
+        pList = mv.priceList;
         bpIdxList = mv.bpIndexList;
         spIdxList = mv.spIndexList;
     }
@@ -43,21 +43,21 @@ public class BRM {
     }
 
     public ArrayList<Double> synthesize() {
-        initAsset = priceList.get(bpIdxList.get(0));
+        initAsset = pList.get(bpIdxList.get(0));
         asset = initAsset;
         int times = bpIdxList.size();
         int startIdx = bpIdxList.get(0);
         int endIdx = spIdxList.get(times - 1);
-        for (int i = 0; i < priceList.size(); i++) {
+        for (int i = 0; i < pList.size(); i++) {
             if (i < startIdx) {
                 fundList.add(initAsset);
             } else if (i <= endIdx) {
                 if (bpIdxList.contains(i)) {
-                    quota(true, priceList.get(i));
+                    quota(true, pList.get(i));
                 } else if (spIdxList.contains(i)) {
-                    quota(false, priceList.get(i));
+                    quota(false, pList.get(i));
                 }
-                fundList.add(getCurrentAsset(priceList.get(i)));
+                fundList.add(getCurrentAsset(pList.get(i)));
             } else {
                 fundList.add(fundList.get(endIdx));
             }
@@ -185,7 +185,7 @@ public class BRM {
     }
 
     private MainView mainView;
-    private ArrayList<Double> priceList = new ArrayList<>();
+    private ArrayList<Double> pList = new ArrayList<>();
     private ArrayList<Integer> bpIdxList = new ArrayList<>();
     private ArrayList<Integer> spIdxList = new ArrayList<>();
     public ArrayList<Double> agioList = new ArrayList<>();

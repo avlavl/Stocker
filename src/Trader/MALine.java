@@ -15,17 +15,17 @@ import java.util.ArrayList;
 public class MALine {
 
     public MALine(ArrayList<Double> list) {
-        priceList = list;
+        pList = list;
     }
 
     public ArrayList<Double> getMAList(int num) {
         ArrayList<Double> maList = new ArrayList<>();
-        int size = priceList.size();
+        int size = pList.size();
         for (int i = 0; i < size; i++) {
-            maList.add(MA(priceList, i, num));
+            maList.add(MA(pList, i, num));
         }
         return maList;
     }
 
-    public ArrayList<Double> priceList = new ArrayList<>();
+    public ArrayList<Double> pList = new ArrayList<>();
 }

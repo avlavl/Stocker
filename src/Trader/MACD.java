@@ -15,14 +15,14 @@ import java.util.ArrayList;
 public class MACD {
 
     public MACD(ArrayList<Double> list, int s, int l, int m) {
-        priceList = list;
+        pList = list;
         this.s = s;
         this.l = l;
         this.m = m;
     }
 
     public void init() {
-        int size = priceList.size();
+        int size = pList.size();
         for (int i = 0; i < size; i++) {
             arithmetic(i);
         }
@@ -30,14 +30,14 @@ public class MACD {
 
     protected void arithmetic(int i) {
         if (i == 0) {
-            emasList.add(priceList.get(0));
-            emalList.add(priceList.get(0));
+            emasList.add(pList.get(0));
+            emalList.add(pList.get(0));
             difList.add((double) 0);
             deaList.add((double) 0);
             barList.add((double) 0);
         } else {
-            double emas = EMA(emasList.get(i - 1), priceList.get(i), s);
-            double emal = EMA(emalList.get(i - 1), priceList.get(i), l);
+            double emas = EMA(emasList.get(i - 1), pList.get(i), s);
+            double emal = EMA(emalList.get(i - 1), pList.get(i), l);
             double dif = emas - emal;
             double dea = EMA(deaList.get(i - 1), dif, m);
             double bar = 2 * (dif - dea);
@@ -52,7 +52,7 @@ public class MACD {
     private final int s;
     private final int l;
     private final int m;
-    public ArrayList<Double> priceList = new ArrayList<>();
+    public ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<Double> emasList = new ArrayList<>();
     public ArrayList<Double> emalList = new ArrayList<>();
     public ArrayList<Double> difList = new ArrayList<>();

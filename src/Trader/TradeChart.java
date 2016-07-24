@@ -33,9 +33,9 @@ public class TradeChart extends javax.swing.JDialog {
         setVisible(true);
 
         mainView = mv;
-        priceList = mainView.closeList;
+        pList = mainView.priceList;
         fundList = mainView.fundList;
-        units = priceList.size();
+        units = pList.size();
 
         jPanel_xyChart = new javax.swing.JPanel() {
 
@@ -61,10 +61,10 @@ public class TradeChart extends javax.swing.JDialog {
                 g.drawString(String.format("最高:"), 400, 15);
                 g.drawString(String.format("最低:"), 550, 15);
                 g.drawString(String.format("涨幅:"), 700, 15);
-                double si = priceList.get(offset);
-                double ei = priceList.get(offset + counts - 1);
-                double hi = Collections.max(priceList.subList(offset, offset + counts));
-                double li = Collections.min(priceList.subList(offset, offset + counts));
+                double si = pList.get(offset);
+                double ei = pList.get(offset + counts - 1);
+                double hi = Collections.max(pList.subList(offset, offset + counts));
+                double li = Collections.min(pList.subList(offset, offset + counts));
                 double ri = (ei / si - 1) * 100;
                 g.setColor(Color.WHITE);
                 g.drawString(String.format("%4.2f", si), 130, 15);
@@ -91,8 +91,8 @@ public class TradeChart extends javax.swing.JDialog {
                             g.setColor(Color.GREEN);
                         }
                     }
-                    int ystart = yplots - (int) Math.round(priceList.get(offset + i) / scalar);
-                    int yend = yplots - (int) Math.round(priceList.get(offset + i + 1) / scalar);
+                    int ystart = yplots - (int) Math.round(pList.get(offset + i) / scalar);
+                    int yend = yplots - (int) Math.round(pList.get(offset + i + 1) / scalar);
                     if (ystart >= yplots - 2) {
                         ystart = yplots - 2;
                     }
@@ -314,7 +314,7 @@ public class TradeChart extends javax.swing.JDialog {
     private final double[] scalar_buf = {0.02, 0.04, 0.1, 0.2, 0.5, 1, 2, 4, 6, 8, 10, 12, 16, 20, 30, 40, 60};
 
     protected MainView mainView;
-    public ArrayList<Double> priceList = new ArrayList<>();
+    public ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<Double> fundList = new ArrayList<>();
     private int units = 0;
     private int offset = 0;

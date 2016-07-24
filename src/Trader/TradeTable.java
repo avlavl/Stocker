@@ -29,8 +29,8 @@ public class TradeTable extends javax.swing.JDialog {
         for (int i = 0; i < times; i++) {
             String bDate = mv.dateList.get(mv.bpIndexList.get(i));
             String sDate = mv.dateList.get(mv.spIndexList.get(i));
-            double bPrice = mv.closeList.get(mv.bpIndexList.get(i));
-            double sPrice = mv.closeList.get(mv.spIndexList.get(i));
+            double bPrice = mv.priceList.get(mv.bpIndexList.get(i));
+            double sPrice = mv.priceList.get(mv.spIndexList.get(i));
             double agio = sPrice - bPrice;
             double yield = 100 * agio / bPrice;
             double sAsset = mv.fundList.get(mv.bpIndexList.get(i)) - bPrice;

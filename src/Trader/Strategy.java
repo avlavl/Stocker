@@ -16,7 +16,7 @@ public class Strategy {
 
     public Strategy(MainView mv) {
         mainView = mv;
-        priceList = mv.closeList;
+        pList = mv.priceList;
     }
 
     public void livermoreTrade(int idx) {
@@ -38,8 +38,8 @@ public class Strategy {
     }
 
     public void maCrossTrade(int idx, ArrayList<Double> list) {
-        boolean b = CROSS(idx, priceList, list);
-        boolean s = CROSS(idx, list, priceList);
+        boolean b = CROSS(idx, pList, list);
+        boolean s = CROSS(idx, list, pList);
         trade(idx, b, s);
     }
 
@@ -88,7 +88,7 @@ public class Strategy {
         int days = 0;
         int times = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
-            if (priceList.get(spIdxList.get(i)) > priceList.get(bpIdxList.get(i))) {
+            if (pList.get(spIdxList.get(i)) > pList.get(bpIdxList.get(i))) {
                 days += spIdxList.get(i) - bpIdxList.get(i);
                 times++;
             }
@@ -100,7 +100,7 @@ public class Strategy {
         int days = 0;
         int times = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
-            if (priceList.get(spIdxList.get(i)) <= priceList.get(bpIdxList.get(i))) {
+            if (pList.get(spIdxList.get(i)) <= pList.get(bpIdxList.get(i))) {
                 days += spIdxList.get(i) - bpIdxList.get(i);
                 times++;
             }
@@ -109,7 +109,7 @@ public class Strategy {
     }
 
     private MainView mainView;
-    private ArrayList<Double> priceList = new ArrayList<>();
+    private ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<Integer> bpIdxList = new ArrayList<>();
     public ArrayList<Integer> spIdxList = new ArrayList<>();
     public MACD macd;
