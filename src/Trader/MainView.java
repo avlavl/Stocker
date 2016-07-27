@@ -55,6 +55,7 @@ public class MainView extends javax.swing.JFrame {
         buttonGroupMACD = new javax.swing.ButtonGroup();
         buttonGroupMA = new javax.swing.ButtonGroup();
         buttonGroupMacdAdd = new javax.swing.ButtonGroup();
+        buttonGroupLM = new javax.swing.ButtonGroup();
         jPanelMain = new javax.swing.JPanel();
         jLabelStockName = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
@@ -87,16 +88,17 @@ public class MainView extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanelLM = new javax.swing.JPanel();
         jLabelStatus = new javax.swing.JLabel();
-        jPanelConfig = new javax.swing.JPanel();
-        jLabelLMMode = new javax.swing.JLabel();
-        jComboBoxLMMode = new javax.swing.JComboBox<>();
-        jLabelLMStatus = new javax.swing.JLabel();
-        jComboBoxLMStatus = new javax.swing.JComboBox<>();
-        jLabelTp1 = new javax.swing.JLabel();
-        jTextFieldTp1 = new javax.swing.JTextField();
-        jLabelTp2 = new javax.swing.JLabel();
-        jTextFieldTp2 = new javax.swing.JTextField();
         jCheckBoxRecord = new javax.swing.JCheckBox();
+        jTextFieldTp2 = new javax.swing.JTextField();
+        jLabelTp2 = new javax.swing.JLabel();
+        jTextFieldTp1 = new javax.swing.JTextField();
+        jLabelTp1 = new javax.swing.JLabel();
+        jComboBoxLMStatus = new javax.swing.JComboBox<>();
+        jLabelLMStatus = new javax.swing.JLabel();
+        jComboBoxLMDays = new javax.swing.JComboBox<>();
+        jLabelLMDays = new javax.swing.JLabel();
+        jRadioButtonLML = new javax.swing.JRadioButton();
+        jRadioButtonLMS = new javax.swing.JRadioButton();
         jLabelOpen = new javax.swing.JLabel();
         jLabelHigh = new javax.swing.JLabel();
         jLabelClose = new javax.swing.JLabel();
@@ -321,23 +323,27 @@ public class MainView extends javax.swing.JFrame {
         jLabelStatus.setFont(new java.awt.Font("隶书", 1, 30)); // NOI18N
         jLabelStatus.setForeground(new java.awt.Color(255, 0, 0));
         jLabelStatus.setText("主上升!");
-        jPanelLM.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 5, -1, -1));
+        jPanelLM.add(jLabelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 5, -1, -1));
 
-        jPanelConfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
-        jPanelConfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jCheckBoxRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBoxRecord.setText("生成交易日志");
+        jPanelLM.add(jCheckBoxRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, -1));
 
-        jLabelLMMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelLMMode.setText("模式：");
-        jPanelConfig.add(jLabelLMMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jTextFieldTp2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldTp2.setText("3");
+        jPanelLM.add(jTextFieldTp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 30, -1));
 
-        jComboBoxLMMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBoxLMMode.setMaximumRowCount(9);
-        jComboBoxLMMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "4日均线", "5日均线" }));
-        jPanelConfig.add(jComboBoxLMMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jLabelTp2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelTp2.setText("TP2:");
+        jPanelLM.add(jLabelTp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
 
-        jLabelLMStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelLMStatus.setText("起始状态：");
-        jPanelConfig.add(jLabelLMStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        jTextFieldTp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldTp1.setText("9");
+        jPanelLM.add(jTextFieldTp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 30, -1));
+
+        jLabelTp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelTp1.setText("TP1:");
+        jPanelLM.add(jLabelTp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
 
         jComboBoxLMStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxLMStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "主上升", "主下降" }));
@@ -346,29 +352,31 @@ public class MainView extends javax.swing.JFrame {
                 jComboBoxLMStatusActionPerformed(evt);
             }
         });
-        jPanelConfig.add(jComboBoxLMStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        jPanelLM.add(jComboBoxLMStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
 
-        jLabelTp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelTp1.setText("TP1:");
-        jPanelConfig.add(jLabelTp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jLabelLMStatus.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelLMStatus.setText("起始状态：");
+        jPanelLM.add(jLabelLMStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
-        jTextFieldTp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldTp1.setText("10");
-        jPanelConfig.add(jTextFieldTp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 58, 30, -1));
+        jComboBoxLMDays.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBoxLMDays.setMaximumRowCount(9);
+        jComboBoxLMDays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "4日均线", "5日均线" }));
+        jPanelLM.add(jComboBoxLMDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 50, -1, -1));
 
-        jLabelTp2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelTp2.setText("TP2:");
-        jPanelConfig.add(jLabelTp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
+        jLabelLMDays.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelLMDays.setText("样本：");
+        jPanelLM.add(jLabelLMDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 50, -1, -1));
 
-        jTextFieldTp2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldTp2.setText("5");
-        jPanelConfig.add(jTextFieldTp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 58, 30, -1));
+        buttonGroupLM.add(jRadioButtonLML);
+        jRadioButtonLML.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLML.setSelected(true);
+        jRadioButtonLML.setText("上升大趋势买卖");
+        jPanelLM.add(jRadioButtonLML, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 90, -1, -1));
 
-        jCheckBoxRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jCheckBoxRecord.setText("生成交易日志");
-        jPanelConfig.add(jCheckBoxRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        jPanelLM.add(jPanelConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 290, 140));
+        buttonGroupLM.add(jRadioButtonLMS);
+        jRadioButtonLMS.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLMS.setText("主升阶段买卖");
+        jPanelLM.add(jRadioButtonLMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 116, -1, -1));
 
         jTabbedPaneSys.addTab("趋势", jPanelLM);
 
@@ -382,17 +390,17 @@ public class MainView extends javax.swing.JFrame {
         jLabelHigh.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelHigh.setForeground(new java.awt.Color(255, 0, 0));
         jLabelHigh.setText("最高：");
-        jPanelMain.add(jLabelHigh, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
+        jPanelMain.add(jLabelHigh, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
         jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelClose.setForeground(new java.awt.Color(153, 51, 0));
         jLabelClose.setText("收盘：");
-        jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+        jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
 
         jLabelLow.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelLow.setForeground(new java.awt.Color(0, 153, 0));
         jLabelLow.setText("最低：");
-        jPanelMain.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
+        jPanelMain.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
 
         jButtonTradeChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeChart.setText("交易曲线");
@@ -402,7 +410,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeChartActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, -1, 30));
+        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 285, -1, 30));
 
         jButtonTradeRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeRecord.setText("交易记录");
@@ -412,7 +420,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeRecordActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, -1, 30));
+        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 285, -1, 30));
 
         jButtonTradeEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeEva.setText("交易评测");
@@ -422,7 +430,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeEvaActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, 30));
+        jPanelMain.add(jButtonTradeEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 285, -1, 30));
 
         jLabelPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPriceFactor.setText("系数：");
@@ -511,7 +519,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 60, 30));
 
-        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 320, 84));
+        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 325, 320, 84));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 423));
 
@@ -734,11 +742,12 @@ public class MainView extends javax.swing.JFrame {
                         int mal = Integer.parseInt(jTextFieldMAL.getText());
                         sysMACDMAEva(mode, bp, mas, mal);
                     } else {
-                        int mode1 = jComboBoxLMMode.getSelectedIndex();
+                        int mode1 = jRadioButtonLML.isSelected() ? 0 : 1;
+                        int days = jComboBoxLMDays.getSelectedIndex() + 1;
                         boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                         int tp1 = Integer.parseInt(jTextFieldTp1.getText());
                         int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                        sysMACDTrendEva(mode, bp, mode1, status, tp1, tp2);
+                        sysMACDLMEva(mode, bp, mode1, days, status, tp1, tp2);
                     }
                 } else {
                     sysMACDEva(mode, bp);
@@ -752,11 +761,12 @@ public class MainView extends javax.swing.JFrame {
                 sysMAEva(mode, mas, mal, mam);
                 break;
             case 2:
-                mode = jComboBoxLMMode.getSelectedIndex();
+                mode = jRadioButtonLML.isSelected() ? 0 : 1;
+                int days = jComboBoxLMDays.getSelectedIndex() + 1;
                 boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                 int tp1 = Integer.parseInt(jTextFieldTp1.getText());
                 int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                sysTrendEva(mode, status, tp1, tp2);
+                sysLMEva(mode, days, status, tp1, tp2);
                 break;
         }
 
@@ -796,7 +806,8 @@ public class MainView extends javax.swing.JFrame {
                             }
                         }
                     } else {
-                        int mode1 = jComboBoxLMMode.getSelectedIndex();
+                        int mode1 = jRadioButtonLML.isSelected() ? 0 : 1;
+                        int days = jComboBoxLMDays.getSelectedIndex() + 1;
                         boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                         int tps1 = Integer.parseInt(jTextFieldPS2.getText());
                         int tpe1 = Integer.parseInt(jTextFieldPE2.getText());
@@ -806,7 +817,7 @@ public class MainView extends javax.swing.JFrame {
                             for (int j = tps1; j <= tpe1; j++) {
                                 for (int k = tps2; k <= tpe2; k++) {
                                     if (k <= (j / 2 + 1)) {
-                                        sysMACDTrendEva(mode, i, mode1, status, j, k);
+                                        sysMACDLMEva(mode, i, mode1, days, status, j, k);
                                         jTextAreaMain.append(String.format("参数:%3d|%3d|%3d  ", i, j, k));
                                         updateReport(strategy, brm);
                                     }
@@ -850,7 +861,8 @@ public class MainView extends javax.swing.JFrame {
                 }
                 break;
             case 2:
-                mode = jComboBoxLMMode.getSelectedIndex();
+                mode = jRadioButtonLML.isSelected() ? 0 : 1;
+                int days = jComboBoxLMDays.getSelectedIndex() + 1;
                 boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                 int tps1 = Integer.parseInt(jTextFieldPS1.getText());
                 int tpe1 = Integer.parseInt(jTextFieldPE1.getText());
@@ -859,7 +871,7 @@ public class MainView extends javax.swing.JFrame {
                 for (int i = tps1; i <= tpe1; i++) {
                     for (int j = tps2; j <= tpe2; j++) {
                         if (j <= (i / 2 + 1)) {
-                            sysTrendEva(mode, status, i, j);
+                            sysLMEva(mode, days, status, i, j);
                             jTextAreaMain.append(String.format("参数:%2d | %-3d  ", i, j));
                             updateReport(strategy, brm);
                         }
@@ -1004,9 +1016,9 @@ public class MainView extends javax.swing.JFrame {
         fundList = brm.synthesize();
     }
 
-    private void sysTrendEva(int mode, boolean status, int t1, int t2) {
+    private void sysLMEva(int mode, int days, boolean status, int t1, int t2) {
         MALine ma = new MALine(priceList);
-        ArrayList<Double> maList = ma.getMAList(mode + 1);
+        ArrayList<Double> maList = ma.getMAList(days);
         Livermore livermore = new Livermore(status, t1, t2);
         strategy = new Strategy(this);
         strategy.livermore = livermore;
@@ -1021,7 +1033,11 @@ public class MainView extends javax.swing.JFrame {
                 String message = livermore.arithmetic(maList.get(i));
                 livermoreLogger(livermore, message);
                 if ((i >= sIdx) && (i <= eIdx)) {
-                    strategy.livermoreTrade(i);
+                    if (mode == 0) {
+                        strategy.lmLongTrade(i);
+                    } else {
+                        strategy.lmShortTrade(i);
+                    }
                 }
                 if (i > eIdx) {
                     break;
@@ -1080,11 +1096,11 @@ public class MainView extends javax.swing.JFrame {
         fundList = brm.synthesize();
     }
 
-    private void sysMACDTrendEva(int mm, double bp, int tm, boolean status, int t1, int t2) {
+    private void sysMACDLMEva(int mode, double bp, int mode1, int days, boolean status, int t1, int t2) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         MALine ma = new MALine(priceList);
-        ArrayList<Double> maList = ma.getMAList(tm + 1);
+        ArrayList<Double> maList = ma.getMAList(days);
         Livermore livermore = new Livermore(status, t1, t2);
         strategy = new Strategy(this);
         strategy.macd = macd;
@@ -1094,10 +1110,14 @@ public class MainView extends javax.swing.JFrame {
             updateMarket(i);
             livermore.arithmetic(maList.get(i));
             if ((i >= sIdx) && (i <= eIdx)) {
-                if (mm == 0) {
-                    strategy.barTrendCrossTrade(i, bp);
-                } else {
-                    strategy.difTrendCrossTrade(i, bp);
+                if ((mode == 0) && (mode1 == 0)) {
+                    strategy.barLMLCrossTrade(i, bp);
+                } else if ((mode == 1) && (mode1 == 0)) {
+                    strategy.difLMLCrossTrade(i, bp);
+                } else if ((mode == 0) && (mode1 == 1)) {
+                    strategy.barLMSCrossTrade(i, bp);
+                } else if ((mode == 1) && (mode1 == 1)) {
+                    strategy.difLMSCrossTrade(i, bp);
                 }
             }
             if (i > eIdx) {
@@ -1310,6 +1330,7 @@ public class MainView extends javax.swing.JFrame {
     public boolean evaluated = false;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupLM;
     private javax.swing.ButtonGroup buttonGroupMA;
     private javax.swing.ButtonGroup buttonGroupMACD;
     private javax.swing.ButtonGroup buttonGroupMacdAdd;
@@ -1319,7 +1340,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTradeRecord;
     private javax.swing.JCheckBox jCheckBoxAddSys;
     private javax.swing.JCheckBox jCheckBoxRecord;
-    private javax.swing.JComboBox<String> jComboBoxLMMode;
+    private javax.swing.JComboBox<String> jComboBoxLMDays;
     private javax.swing.JComboBox<String> jComboBoxLMStatus;
     private javax.swing.JComboBox<String> jComboBoxPriceFactor;
     private javax.swing.JLabel jLabel10;
@@ -1333,7 +1354,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDash4;
     private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelHigh;
-    private javax.swing.JLabel jLabelLMMode;
+    private javax.swing.JLabel jLabelLMDays;
     private javax.swing.JLabel jLabelLMStatus;
     private javax.swing.JLabel jLabelLow;
     private javax.swing.JLabel jLabelOpen;
@@ -1368,7 +1389,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemTDX;
     private javax.swing.JMenuItem jMenuItemZXBZ;
     private javax.swing.JMenu jMenuRun;
-    private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelLM;
     private javax.swing.JPanel jPanelMA;
     private javax.swing.JPanel jPanelMACD;
@@ -1377,6 +1397,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButtonAddMa;
     private javax.swing.JRadioButton jRadioButtonAddTrend;
+    private javax.swing.JRadioButton jRadioButtonLML;
+    private javax.swing.JRadioButton jRadioButtonLMS;
     private javax.swing.JRadioButton jRadioButtonMAM;
     private javax.swing.JRadioButton jRadioButtonMAP;
     private javax.swing.JRadioButton jRadioButtonMacdBar;

@@ -277,12 +277,20 @@ public class Livermore {
         }
     }
 
-    public boolean enterRiseStatus() {
+    public boolean enterRiseTrend() {
         return (STATUSY < 0) && (STATUST > 0);
     }
 
-    public boolean enterFallStatus() {
+    public boolean enterFallTrend() {
         return (STATUSY > 0) && (STATUST < 0);
+    }
+
+    public boolean enterMainRise() {
+        return (STATUSY != 1) && (STATUST == 1);
+    }
+
+    public boolean exitMainRise() {
+        return (STATUSY == 1) && (STATUST != 1);
     }
 
     public double riseKeyHead = 0;

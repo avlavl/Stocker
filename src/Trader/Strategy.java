@@ -19,12 +19,6 @@ public class Strategy {
         pList = mv.priceList;
     }
 
-    public void livermoreTrade(int idx) {
-        boolean b = livermore.enterRiseStatus();
-        boolean s = livermore.enterFallStatus();
-        trade(idx, b, s);
-    }
-
     public void barCrossTrade(int idx, double value) {
         boolean b = CROSS(idx, macd.barList, value);
         boolean s = CROSS(idx, value, macd.barList);
@@ -49,6 +43,18 @@ public class Strategy {
         trade(idx, b, s);
     }
 
+    public void lmLongTrade(int idx) {
+        boolean b = livermore.enterRiseTrend();
+        boolean s = livermore.enterFallTrend();
+        trade(idx, b, s);
+    }
+
+    public void lmShortTrade(int idx) {
+        boolean b = livermore.enterMainRise();
+        boolean s = livermore.exitMainRise();
+        trade(idx, b, s);
+    }
+
     public void barMACrossTrade(int idx, double value, ArrayList<Double> sList, ArrayList<Double> lList) {
         boolean c1 = (REFD(macd.barList, idx, 1) > value) && (REFD(sList, idx, 1) > REFD(lList, idx, 1));
         boolean c2 = (macd.barList.get(idx) > value) && (sList.get(idx) > lList.get(idx));
@@ -65,7 +71,7 @@ public class Strategy {
         trade(idx, b, s);
     }
 
-    public void barTrendCrossTrade(int idx, double value) {
+    public void barLMLCrossTrade(int idx, double value) {
         boolean c1 = (REFD(macd.barList, idx, 1) > value) && (livermore.STATUSY > 0);
         boolean c2 = (macd.barList.get(idx) > value) && (livermore.STATUST > 0);
         boolean b = (!c1) && c2;
@@ -73,9 +79,25 @@ public class Strategy {
         trade(idx, b, s);
     }
 
-    public void difTrendCrossTrade(int idx, double value) {
+    public void difLMLCrossTrade(int idx, double value) {
         boolean c1 = (REFD(macd.difList, idx, 1) > value) && (livermore.STATUSY > 0);
         boolean c2 = (macd.difList.get(idx) > value) && (livermore.STATUST > 0);
+        boolean b = (!c1) && c2;
+        boolean s = c1 && (!c2);
+        trade(idx, b, s);
+    }
+
+    public void barLMSCrossTrade(int idx, double value) {
+        boolean c1 = (REFD(macd.barList, idx, 1) > value) && (livermore.STATUSY == 1);
+        boolean c2 = (macd.barList.get(idx) > value) && (livermore.STATUST == 1);
+        boolean b = (!c1) && c2;
+        boolean s = c1 && (!c2);
+        trade(idx, b, s);
+    }
+
+    public void difLMSCrossTrade(int idx, double value) {
+        boolean c1 = (REFD(macd.difList, idx, 1) > value) && (livermore.STATUSY == 1);
+        boolean c2 = (macd.difList.get(idx) > value) && (livermore.STATUST == 1);
         boolean b = (!c1) && c2;
         boolean s = c1 && (!c2);
         trade(idx, b, s);
