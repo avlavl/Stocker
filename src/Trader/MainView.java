@@ -727,21 +727,21 @@ public class MainView extends javax.swing.JFrame {
         switch (jTabbedPaneSys.getSelectedIndex()) {
             case 0:
                 mode = jRadioButtonMacdBar.isSelected() ? 0 : 1;
-                double breakPoint = Double.parseDouble(jTextFieldbp.getText());
+                double bp = Double.parseDouble(jTextFieldbp.getText());
                 if (jCheckBoxAddSys.isSelected()) {
                     if (jRadioButtonAddMa.isSelected()) {
                         int mas = Integer.parseInt(jTextFieldMAS.getText());
                         int mal = Integer.parseInt(jTextFieldMAL.getText());
-                        sysMACDMAEva(mode, breakPoint, mas, mal);
+                        sysMACDMAEva(mode, bp, mas, mal);
                     } else {
                         int mode1 = jComboBoxLMMode.getSelectedIndex();
                         boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                         int tp1 = Integer.parseInt(jTextFieldTp1.getText());
                         int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                        sysMACDTrendEva(mode, breakPoint, mode1, status, tp1, tp2);
+                        sysMACDTrendEva(mode, bp, mode1, status, tp1, tp2);
                     }
                 } else {
-                    sysMACDEva(mode, breakPoint);
+                    sysMACDEva(mode, bp);
                 }
                 break;
             case 1:
@@ -777,11 +777,51 @@ public class MainView extends javax.swing.JFrame {
                 mode = jRadioButtonMacdBar.isSelected() ? 0 : 1;
                 int bps = Integer.parseInt(jTextFieldPS1.getText());
                 int bpe = Integer.parseInt(jTextFieldPE1.getText());
-                for (int i = bps; i <= bpe; i++) {
-                    sysMACDEva(mode, i);
-                    jTextAreaMain.append(String.format("参数:%-3d  ", i));
-                    updateReport(strategy, brm);
+
+                if (jCheckBoxAddSys.isSelected()) {
+                    if (jRadioButtonAddMa.isSelected()) {
+                        int mass = Integer.parseInt(jTextFieldPS2.getText());
+                        int mase = Integer.parseInt(jTextFieldPE2.getText());
+                        int mals = Integer.parseInt(jTextFieldPS3.getText());
+                        int male = Integer.parseInt(jTextFieldPE3.getText());
+                        for (int i = bps; i <= bpe; i++) {
+                            for (int j = mass; j <= mase; j++) {
+                                for (int k = mals; k <= male; k++) {
+                                    if (k >= j * 2) {
+                                        sysMACDMAEva(mode, i, j, k);
+                                        jTextAreaMain.append(String.format("参数:%3d|%3d|%3d  ", i, j, k));
+                                        updateReport(strategy, brm);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        int mode1 = jComboBoxLMMode.getSelectedIndex();
+                        boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
+                        int tps1 = Integer.parseInt(jTextFieldPS2.getText());
+                        int tpe1 = Integer.parseInt(jTextFieldPE2.getText());
+                        int tps2 = Integer.parseInt(jTextFieldPS3.getText());
+                        int tpe2 = Integer.parseInt(jTextFieldPE3.getText());
+                        for (int i = bps; i <= bpe; i++) {
+                            for (int j = tps1; j <= tpe1; j++) {
+                                for (int k = tps2; k <= tpe2; k++) {
+                                    if (k <= (j / 2 + 1)) {
+                                        sysMACDTrendEva(mode, i, mode1, status, j, k);
+                                        jTextAreaMain.append(String.format("参数:%3d|%3d|%3d  ", i, j, k));
+                                        updateReport(strategy, brm);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    for (int i = bps; i <= bpe; i++) {
+                        sysMACDEva(mode, i);
+                        jTextAreaMain.append(String.format("参数:%-3d  ", i));
+                        updateReport(strategy, brm);
+                    }
                 }
+
                 break;
             case 1:
                 mode = jRadioButtonMAM.isSelected() ? 0 : 1;
