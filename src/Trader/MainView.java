@@ -774,6 +774,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTradeEvaActionPerformed
 
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
+        long time = System.currentTimeMillis();
         tradeDays = dateProcess();
         if (tradeDays == 0) {
             return;
@@ -895,6 +896,10 @@ public class MainView extends javax.swing.JFrame {
 
         Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.currentAsset).compareTo(arg0.currentAsset));
         new RankTable(this, false, srList);
+
+        time = System.currentTimeMillis() - time;
+        float excTime = (float) time / 1000;
+        System.out.println("Elapsed time: " + excTime + "s");
     }//GEN-LAST:event_jButtonFilterStartActionPerformed
 
     private void jComboBoxPriceFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPriceFactorActionPerformed
