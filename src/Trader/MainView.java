@@ -78,15 +78,11 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonAddMa = new javax.swing.JRadioButton();
         jRadioButtonAddTrend = new javax.swing.JRadioButton();
         jPanelMA = new javax.swing.JPanel();
-        jRadioButtonMAM = new javax.swing.JRadioButton();
-        jRadioButtonMAP = new javax.swing.JRadioButton();
         jTextFieldMAS = new javax.swing.JTextField();
         jTextFieldMAL = new javax.swing.JTextField();
-        jTextFieldMAM = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelMATrade = new javax.swing.JLabel();
+        jLabelMAS = new javax.swing.JLabel();
+        jLabelMAL = new javax.swing.JLabel();
         jPanelLM = new javax.swing.JPanel();
         jLabelStatus = new javax.swing.JLabel();
         jCheckBoxRecord = new javax.swing.JCheckBox();
@@ -284,44 +280,25 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMA.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonGroupMA.add(jRadioButtonMAM);
-        jRadioButtonMAM.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonMAM.setSelected(true);
-        jRadioButtonMAM.setText("均线突破均线交易");
-        jPanelMA.add(jRadioButtonMAM, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        buttonGroupMA.add(jRadioButtonMAP);
-        jRadioButtonMAP.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonMAP.setText("收盘价突破均线交易");
-        jPanelMA.add(jRadioButtonMAP, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
         jTextFieldMAS.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldMAS.setText("5");
-        jPanelMA.add(jTextFieldMAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 40, -1));
+        jPanelMA.add(jTextFieldMAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 40, -1));
 
         jTextFieldMAL.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldMAL.setText("10");
-        jPanelMA.add(jTextFieldMAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 40, -1));
+        jPanelMA.add(jTextFieldMAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 40, -1));
 
-        jTextFieldMAM.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldMAM.setText("10");
-        jPanelMA.add(jTextFieldMAM, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 40, -1));
+        jLabelMATrade.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelMATrade.setText("均线突破均线交易：");
+        jPanelMA.add(jLabelMATrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabel4.setText("日线突破");
-        jPanelMA.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 52, -1, -1));
+        jLabelMAS.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelMAS.setText("短期均线：");
+        jPanelMA.add(jLabelMAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabel5.setText("买卖");
-        jPanelMA.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 52, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabel6.setText("收盘价突破");
-        jPanelMA.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 112, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabel10.setText("买卖");
-        jPanelMA.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 112, -1, -1));
+        jLabelMAL.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelMAL.setText("长期均线：");
+        jPanelMA.add(jLabelMAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
         jTabbedPaneSys.addTab("均线", jPanelMA);
 
@@ -763,11 +740,9 @@ public class MainView extends javax.swing.JFrame {
                 }
                 break;
             case 1:
-                mode = jRadioButtonMAM.isSelected() ? 0 : 1;
                 int mas = Integer.parseInt(jTextFieldMAS.getText());
                 int mal = Integer.parseInt(jTextFieldMAL.getText());
-                int mam = Integer.parseInt(jTextFieldMAM.getText());
-                sysMAEva(mode, mas, mal, mam);
+                sysMAEva(mas, mal);
                 break;
             case 2:
                 mode = jRadioButtonLML.isSelected() ? 0 : 1;
@@ -811,7 +786,7 @@ public class MainView extends javax.swing.JFrame {
                                 for (int k = mals; k <= male; k++) {
                                     if (k >= j * 2) {
                                         sysMACDMAEva(mode, i, j, k);
-                                        String para = String.format("%3d|%3d|%3d", i, j, k);
+                                        String para = String.format("%3d|%2d|%-3d", i, j, k);
                                         sr = updateSimpleReport(para, strategy, brm);
                                         updateTextArea(sr);
                                         srList.add(sr);
@@ -832,7 +807,7 @@ public class MainView extends javax.swing.JFrame {
                                 for (int k = tps2; k <= tpe2; k++) {
                                     if (k <= (j / 2 + 1)) {
                                         sysMACDLMEva(mode, i, mode1, days, status, j, k);
-                                        String para = String.format("%3d|%3d|%3d", i, j, k);
+                                        String para = String.format("%3d|%2d|%-2d", i, j, k);
                                         sr = updateSimpleReport(para, strategy, brm);
                                         updateTextArea(sr);
                                         srList.add(sr);
@@ -844,7 +819,7 @@ public class MainView extends javax.swing.JFrame {
                 } else {
                     for (int i = bps; i <= bpe; i++) {
                         sysMACDEva(mode, i);
-                        String para = String.format("%-3d", i);
+                        String para = String.format("%3d", i);
                         sr = updateSimpleReport(para, strategy, brm);
                         updateTextArea(sr);
                         srList.add(sr);
@@ -853,32 +828,19 @@ public class MainView extends javax.swing.JFrame {
 
                 break;
             case 1:
-                mode = jRadioButtonMAM.isSelected() ? 0 : 1;
                 int mass = Integer.parseInt(jTextFieldPS1.getText());
                 int mase = Integer.parseInt(jTextFieldPE1.getText());
                 int mals = Integer.parseInt(jTextFieldPS2.getText());
                 int male = Integer.parseInt(jTextFieldPE2.getText());
-                int mams = Integer.parseInt(jTextFieldPS3.getText());
-                int mame = Integer.parseInt(jTextFieldPE3.getText());
-                if (mode == 0) {
-                    for (int i = mass; i <= mase; i++) {
-                        for (int j = mals; j <= male; j++) {
-                            if (j >= i * 2) {
-                                sysMAEva(mode, i, j, 0);
-                                String para = String.format("%2d|%-3d", i, j);
-                                sr = updateSimpleReport(para, strategy, brm);
-                                updateTextArea(sr);
-                                srList.add(sr);
-                            }
+                for (int i = mass; i <= mase; i++) {
+                    for (int j = mals; j <= male; j++) {
+                        if (j >= i * 2) {
+                            sysMAEva(i, j);
+                            String para = String.format("%2d|%-3d", i, j);
+                            sr = updateSimpleReport(para, strategy, brm);
+                            updateTextArea(sr);
+                            srList.add(sr);
                         }
-                    }
-                } else {
-                    for (int i = mams; i <= mame; i++) {
-                        sysMAEva(mode, 0, 0, i);
-                        String para = String.format("%-3d", i);
-                        sr = updateSimpleReport(para, strategy, brm);
-                        updateTextArea(sr);
-                        srList.add(sr);
                     }
                 }
                 break;
@@ -894,7 +856,7 @@ public class MainView extends javax.swing.JFrame {
                     for (int j = tps2; j <= tpe2; j++) {
                         if (j <= (i / 2 + 1)) {
                             sysLMEva(mode, days, status, i, j);
-                            String para = String.format("%2d|%-3d", i, j);
+                            String para = String.format("%2d|%-2d", i, j);
                             sr = updateSimpleReport(para, strategy, brm);
                             updateTextArea(sr);
                             srList.add(sr);
@@ -1056,29 +1018,18 @@ public class MainView extends javax.swing.JFrame {
         fundList = brm.synthesize();
     }
 
-    private void sysMAEva(int mode, int mas, int mal, int mam) {
+    private void sysMAEva(int mas, int mal) {
         MALine ma = new MALine(priceList);
         strategy = new Strategy(this);
         strategy.ma = ma;
 
-        ArrayList<Double> masList = new ArrayList<>();
-        ArrayList<Double> malList = new ArrayList<>();
-        ArrayList<Double> mamList = new ArrayList<>();
-        if (mode == 0) {
-            masList = ma.getMAList(mas);
-            malList = ma.getMAList(mal);
-        } else {
-            mamList = ma.getMAList(mam);
-        }
+        ArrayList<Double> masList = ma.getMAList(mas);
+        ArrayList<Double> malList = ma.getMAList(mal);
 
         for (int i = 0; i < rows; i++) {
             updateMarket(i);
             if ((i >= sIdx) && (i <= eIdx)) {
-                if (mode == 0) {
-                    strategy.maCrossTrade(i, masList, malList);
-                } else {
-                    strategy.maCrossTrade(i, mamList);
-                }
+                strategy.maCrossTrade(i, masList, malList);
             }
             if (i > eIdx) {
                 break;
@@ -1470,10 +1421,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxLMDays;
     private javax.swing.JComboBox<String> jComboBoxLMStatus;
     private javax.swing.JComboBox<String> jComboBoxPriceFactor;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelDash1;
     private javax.swing.JLabel jLabelDash2;
@@ -1484,6 +1431,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLMDays;
     private javax.swing.JLabel jLabelLMStatus;
     private javax.swing.JLabel jLabelLow;
+    private javax.swing.JLabel jLabelMAL;
+    private javax.swing.JLabel jLabelMAS;
+    private javax.swing.JLabel jLabelMATrade;
     private javax.swing.JLabel jLabelOpen;
     private javax.swing.JLabel jLabelPara1;
     private javax.swing.JLabel jLabelPara2;
@@ -1526,8 +1476,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonAddTrend;
     private javax.swing.JRadioButton jRadioButtonLML;
     private javax.swing.JRadioButton jRadioButtonLMS;
-    private javax.swing.JRadioButton jRadioButtonMAM;
-    private javax.swing.JRadioButton jRadioButtonMAP;
     private javax.swing.JRadioButton jRadioButtonMacdBar;
     private javax.swing.JRadioButton jRadioButtonMacdDif;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1537,7 +1485,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaMain;
     private javax.swing.JTextField jTextFieldEDate;
     private javax.swing.JTextField jTextFieldMAL;
-    private javax.swing.JTextField jTextFieldMAM;
     private javax.swing.JTextField jTextFieldMAS;
     private javax.swing.JTextField jTextFieldPE1;
     private javax.swing.JTextField jTextFieldPE2;
