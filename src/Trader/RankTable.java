@@ -7,7 +7,6 @@ package Trader;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
  *
@@ -56,7 +55,7 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("系统排名");
+        setTitle("交易系统排名");
 
         jScrollPaneTrade.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
@@ -150,53 +149,25 @@ public class RankTable extends javax.swing.JDialog {
             jTableRank.setColumnSelectionInterval(index, index);
             switch (index) {
                 case 2:
-                    Collections.sort(SRList, new Comparator<SystemReport>() {
-                        public int compare(SystemReport arg0, SystemReport arg1) {
-                            return new Float(arg1.currentAsset).compareTo(arg0.currentAsset);
-                        }
-                    });
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.currentAsset).compareTo(arg0.currentAsset));
                     break;
                 case 3:
-                    Collections.sort(SRList, new Comparator<SystemReport>() {
-                        public int compare(SystemReport arg0, SystemReport arg1) {
-                            return new Float(arg1.annualRate).compareTo(arg0.annualRate);
-                        }
-                    });
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.annualRate).compareTo(arg0.annualRate));
                     break;
                 case 4:
-                    Collections.sort(SRList, new Comparator<SystemReport>() {
-                        public int compare(SystemReport arg0, SystemReport arg1) {
-                            return new Float(arg0.positionDaysRate).compareTo(arg1.positionDaysRate);
-                        }
-                    });
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg0.positionDaysRate).compareTo(arg1.positionDaysRate));
                     break;
                 case 5:
-                    Collections.sort(SRList, new Comparator<SystemReport>() {
-                        public int compare(SystemReport arg0, SystemReport arg1) {
-                            return new Float(arg1.positionAnnualRate).compareTo(new Float(arg0.positionAnnualRate));
-                        }
-                    });
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.positionAnnualRate).compareTo(new Float(arg0.positionAnnualRate)));
                     break;
                 case 6:
-                    Collections.sort(SRList, new Comparator<SystemReport>() {
-                        public int compare(SystemReport arg0, SystemReport arg1) {
-                            return new Integer(arg0.tradeTimes).compareTo(arg1.tradeTimes);
-                        }
-                    });
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Integer(arg0.tradeTimes).compareTo(arg1.tradeTimes));
                     break;
                 case 7:
-                    Collections.sort(SRList, new Comparator<SystemReport>() {
-                        public int compare(SystemReport arg0, SystemReport arg1) {
-                            return new Float(arg1.evenEarningRate).compareTo(arg0.evenEarningRate);
-                        }
-                    });
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.evenEarningRate).compareTo(arg0.evenEarningRate));
                     break;
                 case 8:
-                    Collections.sort(SRList, new Comparator<SystemReport>() {
-                        public int compare(SystemReport arg0, SystemReport arg1) {
-                            return new Float(arg1.expectation).compareTo(arg0.expectation);
-                        }
-                    });
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.expectation).compareTo(arg0.expectation));
                     break;
                 default:
                     break;
