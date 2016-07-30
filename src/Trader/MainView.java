@@ -135,7 +135,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemZXBZ = new javax.swing.JMenuItem();
         jMenuItemSZ50 = new javax.swing.JMenuItem();
         jMenuItemHSZS = new javax.swing.JMenuItem();
-        jMenuItemBSHJ = new javax.swing.JMenuItem();
+        jMenuItemDQSGY = new javax.swing.JMenuItem();
+        jMenuItemBP500 = new javax.swing.JMenuItem();
+        jMenuItemNSDK = new javax.swing.JMenuItem();
+        jMenuItemHJXH = new javax.swing.JMenuItem();
+        jMenuItemBLTYY = new javax.swing.JMenuItem();
         jMenuRun = new javax.swing.JMenu();
         jMenuItemDZH = new javax.swing.JMenuItem();
         jMenuItemTDX = new javax.swing.JMenuItem();
@@ -587,14 +591,50 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemHSZS);
 
-        jMenuItemBSHJ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemBSHJ.setText("博时黄金");
-        jMenuItemBSHJ.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDQSGY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemDQSGY.setText("道琼斯工业");
+        jMenuItemDQSGY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemBSHJActionPerformed(evt);
+                jMenuItemDQSGYActionPerformed(evt);
             }
         });
-        jMenuIndex.add(jMenuItemBSHJ);
+        jMenuIndex.add(jMenuItemDQSGY);
+
+        jMenuItemBP500.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemBP500.setText("标普500");
+        jMenuItemBP500.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBP500ActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemBP500);
+
+        jMenuItemNSDK.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemNSDK.setText("纳斯达克");
+        jMenuItemNSDK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNSDKActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemNSDK);
+
+        jMenuItemHJXH.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemHJXH.setText("黄金现货");
+        jMenuItemHJXH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHJXHActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemHJXH);
+
+        jMenuItemBLTYY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemBLTYY.setText("布伦特原油");
+        jMenuItemBLTYY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBLTYYActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemBLTYY);
 
         jMenuBar.add(jMenuIndex);
 
@@ -669,9 +709,25 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\恒生指数.txt");
     }//GEN-LAST:event_jMenuItemHSZSActionPerformed
 
-    private void jMenuItemBSHJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBSHJActionPerformed
-        importFile("data\\博时黄金.txt");
-    }//GEN-LAST:event_jMenuItemBSHJActionPerformed
+    private void jMenuItemDQSGYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDQSGYActionPerformed
+        importFile("data\\道琼斯工业.txt");
+    }//GEN-LAST:event_jMenuItemDQSGYActionPerformed
+
+    private void jMenuItemBP500ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBP500ActionPerformed
+        importFile("data\\标普500.txt");
+    }//GEN-LAST:event_jMenuItemBP500ActionPerformed
+
+    private void jMenuItemNSDKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNSDKActionPerformed
+        importFile("data\\纳斯达克.txt");
+    }//GEN-LAST:event_jMenuItemNSDKActionPerformed
+
+    private void jMenuItemHJXHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHJXHActionPerformed
+        importFile("data\\黄金现货.txt");
+    }//GEN-LAST:event_jMenuItemHJXHActionPerformed
+
+    private void jMenuItemBLTYYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBLTYYActionPerformed
+        importFile("data\\布伦特原油.txt");
+    }//GEN-LAST:event_jMenuItemBLTYYActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
         runExeFile("C:\\dzh365\\dzh2.exe");
@@ -1382,7 +1438,7 @@ public class MainView extends javax.swing.JFrame {
     public FileWriter fileWriter;
 
     public String stockName = "上证指数";
-    public int column = 15;
+    public int column = 0;
     public int rows = 0;
     public ArrayList<String> dateList;
     public ArrayList<Double> openList;
@@ -1453,14 +1509,18 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuIndex;
     private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemBSHJ;
+    private javax.swing.JMenuItem jMenuItemBLTYY;
+    private javax.swing.JMenuItem jMenuItemBP500;
     private javax.swing.JMenuItem jMenuItemCYBZ;
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
+    private javax.swing.JMenuItem jMenuItemDQSGY;
     private javax.swing.JMenuItem jMenuItemDZH;
+    private javax.swing.JMenuItem jMenuItemHJXH;
     private javax.swing.JMenuItem jMenuItemHS300;
     private javax.swing.JMenuItem jMenuItemHSZS;
     private javax.swing.JMenuItem jMenuItemImport;
+    private javax.swing.JMenuItem jMenuItemNSDK;
     private javax.swing.JMenuItem jMenuItemSZ50;
     private javax.swing.JMenuItem jMenuItemSZCZ;
     private javax.swing.JMenuItem jMenuItemSZZS;
