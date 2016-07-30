@@ -761,6 +761,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
         long time = System.currentTimeMillis();
+        jTextAreaMain.setText("");
         tradeDays = dateProcess();
         if (tradeDays == 0) {
             return;
