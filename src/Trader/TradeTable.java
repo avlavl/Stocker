@@ -110,9 +110,9 @@ public class TradeTable extends javax.swing.JDialog {
 
         jScrollPaneTrade.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
-        DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-        r.setHorizontalAlignment(JLabel.CENTER);
-        jTableTrade.setDefaultRenderer(Object.class,   r);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(JLabel.CENTER);
+        jTableTrade.setDefaultRenderer(Object.class, tcr);
         jTableTrade.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTableTrade.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTableTrade.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N

@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -770,8 +772,8 @@ public class MainView extends javax.swing.JFrame {
                 break;
         }
 
-        updateTable(strategy, brm);
-        updateReport(strategy, brm);
+        SystemReport sr = updateSystemReport(strategy, brm);
+        updateTable(sr);
         evaluated = true;
     }//GEN-LAST:event_jButtonTradeEvaActionPerformed
 
@@ -781,6 +783,8 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SystemReport sr;
+        ArrayList<SystemReport> srList = new ArrayList<>();
         int mode = 0;
         switch (jTabbedPaneSys.getSelectedIndex()) {
             case 0:
@@ -799,8 +803,10 @@ public class MainView extends javax.swing.JFrame {
                                 for (int k = mals; k <= male; k++) {
                                     if (k >= j * 2) {
                                         sysMACDMAEva(mode, i, j, k);
-                                        jTextAreaMain.append(String.format("参数:%3d|%3d|%3d  ", i, j, k));
-                                        updateReport(strategy, brm);
+                                        String para = String.format("%3d|%3d|%3d", i, j, k);
+                                        sr = updateSimpleReport(para, strategy, brm);
+                                        updateTextArea(sr);
+                                        srList.add(sr);
                                     }
                                 }
                             }
@@ -818,8 +824,10 @@ public class MainView extends javax.swing.JFrame {
                                 for (int k = tps2; k <= tpe2; k++) {
                                     if (k <= (j / 2 + 1)) {
                                         sysMACDLMEva(mode, i, mode1, days, status, j, k);
-                                        jTextAreaMain.append(String.format("参数:%3d|%3d|%3d  ", i, j, k));
-                                        updateReport(strategy, brm);
+                                        String para = String.format("%3d|%3d|%3d", i, j, k);
+                                        sr = updateSimpleReport(para, strategy, brm);
+                                        updateTextArea(sr);
+                                        srList.add(sr);
                                     }
                                 }
                             }
@@ -828,8 +836,10 @@ public class MainView extends javax.swing.JFrame {
                 } else {
                     for (int i = bps; i <= bpe; i++) {
                         sysMACDEva(mode, i);
-                        jTextAreaMain.append(String.format("参数:%-3d  ", i));
-                        updateReport(strategy, brm);
+                        String para = String.format("%-3d", i);
+                        sr = updateSimpleReport(para, strategy, brm);
+                        updateTextArea(sr);
+                        srList.add(sr);
                     }
                 }
 
@@ -847,16 +857,19 @@ public class MainView extends javax.swing.JFrame {
                         for (int j = mals; j <= male; j++) {
                             if (j >= i * 2) {
                                 sysMAEva(mode, i, j, 0);
-                                jTextAreaMain.append(String.format("参数:%2d | %-3d  ", i, j));
-                                updateReport(strategy, brm);
+                                String para = String.format("%2d|%-3d", i, j);
+                                sr = updateSimpleReport(para, strategy, brm);
+                                updateTextArea(sr);
                             }
                         }
                     }
                 } else {
                     for (int i = mams; i <= mame; i++) {
                         sysMAEva(mode, 0, 0, i);
-                        jTextAreaMain.append(String.format("参数:%-3d  ", i));
-                        updateReport(strategy, brm);
+                        String para = String.format("%-3d", i);
+                        sr = updateSimpleReport(para, strategy, brm);
+                        updateTextArea(sr);
+                        srList.add(sr);
                     }
                 }
                 break;
@@ -872,14 +885,23 @@ public class MainView extends javax.swing.JFrame {
                     for (int j = tps2; j <= tpe2; j++) {
                         if (j <= (i / 2 + 1)) {
                             sysLMEva(mode, days, status, i, j);
-                            jTextAreaMain.append(String.format("参数:%2d | %-3d  ", i, j));
-                            updateReport(strategy, brm);
+                            String para = String.format("%2d|%-3d", i, j);
+                            sr = updateSimpleReport(para, strategy, brm);
+                            updateTextArea(sr);
+                            srList.add(sr);
                         }
                     }
                 }
                 break;
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+        Collections.sort(srList, new Comparator<SystemReport>() {
+            public int compare(SystemReport arg0, SystemReport arg1) {
+                return new Float(arg1.currentAsset).compareTo(new Float(arg0.currentAsset));
+            }
+        });
+        new RankTable(this, false, srList);
     }//GEN-LAST:event_jButtonFilterStartActionPerformed
 
     private void jComboBoxPriceFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPriceFactorActionPerformed
@@ -1217,42 +1239,89 @@ public class MainView extends javax.swing.JFrame {
         jLabelClose.setText("收盘：" + CLOSE);
     }
 
-    protected void updateTable(Strategy stg, BRM brm) {
-        jTablePoint.setValueAt((float) brm.getInitAsset(), 0, 1);
-        jTablePoint.setValueAt((float) brm.getCurrentAsset(eIdx), 1, 1);
-        jTablePoint.setValueAt((float) brm.getNetProfit(), 2, 1);
-        jTablePoint.setValueAt((float) brm.getObjectRate(eIdx) + "%", 3, 1);
-        jTablePoint.setValueAt((float) brm.getEarningRate() + "%", 4, 1);
-        jTablePoint.setValueAt((float) brm.getAnnualRate((double) tradeDays / 244) + "%", 5, 1);
-        jTablePoint.setValueAt((float) brm.getGainProfit(), 6, 1);
-        jTablePoint.setValueAt((float) brm.getLossProfit(), 7, 1);
-        jTablePoint.setValueAt((float) brm.getMaxGain(), 8, 1);
-        jTablePoint.setValueAt((float) brm.getMaxLoss(), 9, 1);
-        jTablePoint.setValueAt((float) brm.getAnnualRate((double) stg.getPositionDays() / 244) + "%", 10, 1);
-        jTablePoint.setValueAt((float) brm.getEvenEarningRate() + "%", 11, 1);
+    protected SystemReport updateSystemReport(Strategy stg, BRM brm) {
+        SystemReport sr = new SystemReport();
 
-        jTablePoint.setValueAt(brm.getTradeTimes() + "次", 0, 3);
-        jTablePoint.setValueAt(brm.getGainTimes() + "次", 1, 3);
-        jTablePoint.setValueAt((float) brm.getWinRate() + "%", 2, 3);
-        jTablePoint.setValueAt((float) brm.getMeanGain(), 3, 3);
-        jTablePoint.setValueAt((float) brm.getMeanLoss(), 4, 3);
-        jTablePoint.setValueAt((float) brm.getOdds(), 5, 3);
-        jTablePoint.setValueAt((float) brm.getExpectation(), 6, 3);
-        jTablePoint.setValueAt((float) tradeDays / 244 + "年", 7, 3);
-        jTablePoint.setValueAt((float) stg.getPositionDaysRate() + "%", 8, 3);
-        jTablePoint.setValueAt((float) stg.getMeanPositionDays() + "天", 9, 3);
-        jTablePoint.setValueAt((float) stg.getMeanGainDays() + "天", 10, 3);
-        jTablePoint.setValueAt((float) stg.getMeanLossDays() + "天", 11, 3);
+        sr.initAsset = (float) brm.getInitAsset();
+        sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
+        sr.netProfit = (float) brm.getNetProfit();
+        sr.objectRate = (float) brm.getObjectRate(eIdx);
+        sr.earningRate = (float) brm.getEarningRate();
+        sr.annualRate = (float) brm.getAnnualRate((double) tradeDays / 244);
+        sr.gainProfit = (float) brm.getGainProfit();
+        sr.lossProfit = (float) brm.getLossProfit();
+        sr.maxGain = (float) brm.getMaxGain();
+        sr.maxLoss = (float) brm.getMaxLoss();
+        sr.positionAnnualRate = (float) brm.getAnnualRate((double) stg.getPositionDays() / 244);
+        sr.evenEarningRate = (float) brm.getEvenEarningRate();
+        sr.tradeTimes = brm.getTradeTimes();
+        sr.gainTimes = brm.getGainTimes();
+        sr.winRate = (float) brm.getWinRate();
+        sr.meanGain = (float) brm.getMeanGain();
+        sr.meanLoss = (float) brm.getMeanLoss();
+        sr.odds = (float) brm.getOdds();
+        sr.expectation = (float) brm.getExpectation();
+        sr.tradeYears = (float) tradeDays / 244;
+        sr.positionDaysRate = (float) stg.getPositionDaysRate();
+        sr.meanPositionDays = (float) stg.getMeanPositionDays();
+        sr.meanGainDays = (float) stg.getMeanGainDays();
+        sr.meanLossDays = (float) stg.getMeanLossDays();
+
+        return sr;
     }
 
-    protected void updateReport(Strategy stg, BRM brm) {
-        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", brm.getCurrentAsset(eIdx)));
-        jTextAreaMain.append(String.format("年化率:%5.2f%%  ", brm.getAnnualRate((double) tradeDays / 244)));
-        jTextAreaMain.append(String.format("持仓时间比:%5.2f%%  ", stg.getPositionDaysRate()));
-        jTextAreaMain.append(String.format("持仓年化:%5.2f%%  ", brm.getAnnualRate((double) stg.getPositionDays() / 244)));
-        jTextAreaMain.append(String.format("交易次数:%-3d  ", brm.getTradeTimes()));
-        jTextAreaMain.append(String.format("单次均收益:%5.2f%%  ", brm.getEvenEarningRate()));
-        jTextAreaMain.append(String.format("数学期望:%5.2f%%", brm.getExpectation()));
+    protected SystemReport updateSimpleReport(String para, Strategy stg, BRM brm) {
+        SystemReport sr = new SystemReport();
+
+        sr.parameter = para;
+        sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
+        sr.annualRate = (float) brm.getAnnualRate((double) tradeDays / 244);
+        sr.positionDaysRate = (float) stg.getPositionDaysRate();
+        sr.positionAnnualRate = (float) brm.getAnnualRate((double) stg.getPositionDays() / 244);
+        sr.tradeTimes = brm.getTradeTimes();
+        sr.evenEarningRate = (float) brm.getEvenEarningRate();
+        sr.expectation = (float) brm.getExpectation();
+
+        return sr;
+    }
+
+    protected void updateTable(SystemReport sr) {
+        jTablePoint.setValueAt(sr.initAsset, 0, 1);
+        jTablePoint.setValueAt(sr.currentAsset, 1, 1);
+        jTablePoint.setValueAt(sr.netProfit, 2, 1);
+        jTablePoint.setValueAt(sr.objectRate + "%", 3, 1);
+        jTablePoint.setValueAt(sr.earningRate + "%", 4, 1);
+        jTablePoint.setValueAt(sr.annualRate + "%", 5, 1);
+        jTablePoint.setValueAt(sr.gainProfit, 6, 1);
+        jTablePoint.setValueAt(sr.lossProfit, 7, 1);
+        jTablePoint.setValueAt(sr.maxGain, 8, 1);
+        jTablePoint.setValueAt(sr.maxLoss, 9, 1);
+        jTablePoint.setValueAt(sr.positionAnnualRate + "%", 10, 1);
+        jTablePoint.setValueAt(sr.evenEarningRate + "%", 11, 1);
+
+        jTablePoint.setValueAt(sr.tradeTimes + "次", 0, 3);
+        jTablePoint.setValueAt(sr.gainTimes + "次", 1, 3);
+        jTablePoint.setValueAt(sr.winRate + "%", 2, 3);
+        jTablePoint.setValueAt(sr.meanGain, 3, 3);
+        jTablePoint.setValueAt(sr.meanLoss, 4, 3);
+        jTablePoint.setValueAt(sr.odds, 5, 3);
+        jTablePoint.setValueAt(sr.expectation, 6, 3);
+        jTablePoint.setValueAt(sr.tradeYears + "年", 7, 3);
+        jTablePoint.setValueAt(sr.positionDaysRate + "%", 8, 3);
+        jTablePoint.setValueAt(sr.meanPositionDays + "天", 9, 3);
+        jTablePoint.setValueAt(sr.meanGainDays + "天", 10, 3);
+        jTablePoint.setValueAt(sr.meanLossDays + "天", 11, 3);
+    }
+
+    protected void updateTextArea(SystemReport sr) {
+        jTextAreaMain.append(String.format("参数:%s  ", sr.parameter));
+        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", sr.currentAsset));
+        jTextAreaMain.append(String.format("年化率:%5.2f%%  ", sr.annualRate));
+        jTextAreaMain.append(String.format("持仓时间比:%5.2f%%  ", sr.positionDaysRate));
+        jTextAreaMain.append(String.format("持仓年化:%6.2f%%  ", sr.positionAnnualRate));
+        jTextAreaMain.append(String.format("交易次数:%-3d  ", sr.tradeTimes));
+        jTextAreaMain.append(String.format("单次均收益:%5.2f%%  ", sr.evenEarningRate));
+        jTextAreaMain.append(String.format("数学期望:%5.2f", sr.expectation));
         jTextAreaMain.append(System.getProperty("line.separator"));
     }
 
