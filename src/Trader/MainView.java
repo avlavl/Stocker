@@ -127,6 +127,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPS4 = new javax.swing.JTextField();
         jTextFieldPE4 = new javax.swing.JTextField();
         jButtonFilterStart = new javax.swing.JButton();
+        jButtonFilterCheck = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -515,7 +516,17 @@ public class MainView extends javax.swing.JFrame {
                 jButtonFilterStartActionPerformed(evt);
             }
         });
-        jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 60, 30));
+        jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 23, 60, -1));
+
+        jButtonFilterCheck.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonFilterCheck.setText("查看");
+        jButtonFilterCheck.setEnabled(false);
+        jButtonFilterCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFilterCheckActionPerformed(evt);
+            }
+        });
+        jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 48, 60, -1));
 
         jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 325, 320, 88));
 
@@ -894,13 +905,18 @@ public class MainView extends javax.swing.JFrame {
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
+        jButtonFilterCheck.setEnabled(true);
         Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.currentAsset).compareTo(arg0.currentAsset));
-        new RankTable(this, false, srList);
+        rankTable = new RankTable(this, false, srList);
 
         time = System.currentTimeMillis() - time;
         float excTime = (float) time / 1000;
         System.out.println("Elapsed time: " + excTime + "s");
     }//GEN-LAST:event_jButtonFilterStartActionPerformed
+
+    private void jButtonFilterCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterCheckActionPerformed
+        rankTable.setVisible(true);
+    }//GEN-LAST:event_jButtonFilterCheckActionPerformed
 
     private void jComboBoxPriceFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPriceFactorActionPerformed
         for (int i = 0; i < rows; i++) {
@@ -1437,12 +1453,14 @@ public class MainView extends javax.swing.JFrame {
     public Strategy strategy;
     public BRM brm;
     public boolean evaluated = false;
+    public RankTable rankTable;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
     private javax.swing.ButtonGroup buttonGroupMA;
     private javax.swing.ButtonGroup buttonGroupMACD;
     private javax.swing.ButtonGroup buttonGroupMacdAdd;
+    private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;
     private javax.swing.JButton jButtonTradeChart;
     private javax.swing.JButton jButtonTradeEva;
