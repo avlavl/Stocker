@@ -229,7 +229,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 293, -1, -1));
 
         jTextFieldSDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldSDate.setText("1990/05/14");
+        jTextFieldSDate.setText("1990/12/19");
         jPanelMain.add(jTextFieldSDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 75, -1));
 
         jTextFieldEDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -237,6 +237,11 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jTextFieldEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 75, -1));
 
         jTabbedPaneSys.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTabbedPaneSys.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPaneSysStateChanged(evt);
+            }
+        });
 
         jPanelMACD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -479,35 +484,27 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS1.setText("0");
         jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 26, 30, -1));
 
         jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE1.setText("100");
         jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 30, -1));
 
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS2.setText("0");
         jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 30, -1));
 
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE2.setText("100");
         jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 30, -1));
 
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS3.setText("0");
         jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 26, 30, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE3.setText("100");
         jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 30, -1));
 
         jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS4.setText("0");
         jPanelSysFilter.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 30, -1));
 
         jTextFieldPE4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE4.setText("100");
         jPanelSysFilter.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 30, -1));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -912,6 +909,46 @@ public class MainView extends javax.swing.JFrame {
         parseStatus(status);
     }//GEN-LAST:event_jComboBoxLMStatusActionPerformed
 
+    private void jTabbedPaneSysStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneSysStateChanged
+        jTextFieldPS1.setText("");
+        jTextFieldPE1.setText("");
+        jTextFieldPS2.setText("");
+        jTextFieldPE2.setText("");
+        jTextFieldPS3.setText("");
+        jTextFieldPE3.setText("");
+        switch (jTabbedPaneSys.getSelectedIndex()) {
+            case 0:
+                jTextFieldPS1.setText("0");
+                jTextFieldPE1.setText("100");
+                if (jCheckBoxAddSys.isSelected()) {
+                    if (jRadioButtonAddMa.isSelected()) {
+                        jTextFieldPS2.setText("1");
+                        jTextFieldPE2.setText("10");
+                        jTextFieldPS3.setText("10");
+                        jTextFieldPE3.setText("120");
+                    } else {
+                        jTextFieldPS2.setText("5");
+                        jTextFieldPE2.setText("12");
+                        jTextFieldPS3.setText("2");
+                        jTextFieldPE3.setText("6");
+                    }
+                }
+                break;
+            case 1:
+                jTextFieldPS1.setText("1");
+                jTextFieldPE1.setText("10");
+                jTextFieldPS2.setText("10");
+                jTextFieldPE2.setText("120");
+                break;
+            case 2:
+                jTextFieldPS1.setText("5");
+                jTextFieldPE1.setText("12");
+                jTextFieldPS2.setText("2");
+                jTextFieldPE2.setText("6");
+                break;
+        }
+    }//GEN-LAST:event_jTabbedPaneSysStateChanged
+
     /**
      ********************* Start of User-defined function ********************
      */
@@ -964,6 +1001,8 @@ public class MainView extends javax.swing.JFrame {
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         }
+        jTextFieldSDate.setText(dateList.get(0));
+        jTextFieldEDate.setText(dateList.get(rows - 1));
         evaluated = false;
     }
 
