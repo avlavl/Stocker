@@ -15,36 +15,76 @@ import java.util.Collections;
 public class BRM {
 
     public BRM(MainView mv) {
-        mainView = mv;
+        mode = mv.brmMode;
         pList = mv.priceList;
         bpIdxList = mv.bpIndexList;
         spIdxList = mv.spIndexList;
     }
 
-    protected void quota(boolean bs, double price) {
-        bsFlag = bs;
+    protected void quant(boolean bs, double price) {
         if (bs) {
-            asset -= price;
             bPrice = price;
-        } else if (initAsset != 0) {
-            asset += price;
+            cash -= price;
+            holdFlag = true;
+        } else if (holdFlag) {
             sPrice = price;
             agioList.add(sPrice - bPrice);
             yieldList.add(100 * (sPrice - bPrice) / bPrice);
+            cash += price;
+            holdFlag = false;
+        }
+    }
+
+    protected void quota(boolean bs, double price) {
+        if (bs) {
+            bPrice = price;
+            cash -= amount;
+            ratio = amount / price;
+            holdFlag = true;
+        } else if (holdFlag) {
+            sPrice = price;
+            double yield = (sPrice - bPrice) / bPrice;
+            yieldList.add(100 * yield);
+            agioList.add(amount * yield);
+            cash += amount * (1 + yield);
+            holdFlag = false;
         }
     }
 
     protected void iterate(boolean bs, double price) {
         if (bs) {
-            ratio = asset / price;
-        } else if (bs == false) {
-            asset = ratio * price;
+            bPrice = price;
+            ratio = cash / price;
+            cash = 0;
+            holdFlag = true;
+        } else if (holdFlag) {
+            sPrice = price;
+            double yield = (sPrice - bPrice) / bPrice;
+            yieldList.add(100 * yield);
+            agioList.add((sPrice - bPrice) * ratio);
+            cash = price * ratio;
+            holdFlag = false;
+        }
+    }
+
+    protected void trade(int mode, boolean bs, double price) {
+        switch (mode) {
+            case 0:
+                quant(bs, price);
+                break;
+            case 1:
+                quota(bs, price);
+                break;
+            case 2:
+                iterate(bs, price);
+                break;
         }
     }
 
     public ArrayList<Double> synthesize() {
-        initAsset = pList.get(bpIdxList.get(0));
-        asset = initAsset;
+        initAsset = (mode == 0) ? pList.get(bpIdxList.get(0)) : amount;
+        cash = initAsset;
+
         int times = bpIdxList.size();
         int startIdx = bpIdxList.get(0);
         int endIdx = spIdxList.get(times - 1);
@@ -53,9 +93,9 @@ public class BRM {
                 fundList.add(initAsset);
             } else if (i <= endIdx) {
                 if (bpIdxList.contains(i)) {
-                    quota(true, pList.get(i));
+                    trade(mode, true, pList.get(i));
                 } else if (spIdxList.contains(i)) {
-                    quota(false, pList.get(i));
+                    trade(mode, false, pList.get(i));
                 }
                 fundList.add(getCurrentAsset(i));
             } else {
@@ -70,10 +110,10 @@ public class BRM {
     }
 
     public double getCurrentAsset(int idx) {
-        if (bsFlag) {
-            return asset + pList.get(idx);
+        if (holdFlag) {
+            return cash + ratio * (pList.get(idx));
         } else {
-            return asset;
+            return cash;
         }
     }
 
@@ -86,8 +126,9 @@ public class BRM {
     }
 
     public double getObjectRate(int idx) {
+        double initPrice = pList.get(bpIdxList.get(0));
         double price = pList.get(idx);
-        return (double) 100 * (price - initAsset) / initAsset;
+        return (double) 100 * (price - initPrice) / initPrice;
     }
 
     public double getEarningRate() {
@@ -185,17 +226,19 @@ public class BRM {
         return (double) (winRate * odds - (1 - winRate));
     }
 
-    private MainView mainView;
     private ArrayList<Double> pList = new ArrayList<>();
     private ArrayList<Integer> bpIdxList = new ArrayList<>();
     private ArrayList<Integer> spIdxList = new ArrayList<>();
     public ArrayList<Double> agioList = new ArrayList<>();
     public ArrayList<Double> yieldList = new ArrayList<>();
     public ArrayList<Double> fundList = new ArrayList<>();
-    public double asset = 10000000;
+    public double amount = 10000;
+    public double cash = 0;
     public double initAsset = 0;
     private double ratio = 1;
-    public boolean bsFlag = false;
+    public boolean holdFlag = false;
     public double bPrice = 0;
     public double sPrice = 0;
+
+    public int mode = 1;
 }

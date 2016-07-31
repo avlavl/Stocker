@@ -124,6 +124,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE4 = new javax.swing.JTextField();
         jButtonFilterStart = new javax.swing.JButton();
         jButtonFilterCheck = new javax.swing.JButton();
+        jCheckBoxBrmMode = new javax.swing.JCheckBox();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -368,7 +369,7 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPaneSys.addTab("趋势", jPanelLM);
 
-        jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 220));
+        jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 222));
 
         jLabelOpen.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelOpen.setForeground(new java.awt.Color(204, 0, 204));
@@ -398,7 +399,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeChartActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 285, -1, 30));
+        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 285, -1, 30));
 
         jButtonTradeRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeRecord.setText("交易记录");
@@ -408,7 +409,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeRecordActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 285, -1, 30));
+        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 285, -1, 30));
 
         jButtonTradeEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeEva.setText("交易评测");
@@ -418,7 +419,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeEvaActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 285, -1, 30));
+        jPanelMain.add(jButtonTradeEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 285, -1, 30));
 
         jLabelPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPriceFactor.setText("系数：");
@@ -510,6 +511,15 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 48, 60, -1));
 
         jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 325, 320, 88));
+
+        jCheckBoxBrmMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBoxBrmMode.setText("固定金额投资");
+        jCheckBoxBrmMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxBrmModeActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jCheckBoxBrmMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 285, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 423));
 
@@ -989,6 +999,14 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPaneSysStateChanged
 
+    private void jCheckBoxBrmModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxBrmModeActionPerformed
+        if (jCheckBoxBrmMode.isSelected()) {
+            brmMode = 1;
+        } else {
+            brmMode = 0;
+        }
+    }//GEN-LAST:event_jCheckBoxBrmModeActionPerformed
+
     /**
      ********************* Start of User-defined function ********************
      */
@@ -1462,6 +1480,7 @@ public class MainView extends javax.swing.JFrame {
     public BRM brm;
     public boolean evaluated = false;
     public RankTable rankTable;
+    public int brmMode = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
@@ -1474,6 +1493,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;
     private javax.swing.JCheckBox jCheckBoxAddSys;
+    private javax.swing.JCheckBox jCheckBoxBrmMode;
     private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JComboBox<String> jComboBoxLMDays;
     private javax.swing.JComboBox<String> jComboBoxLMStatus;

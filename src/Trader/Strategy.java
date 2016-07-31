@@ -22,37 +22,37 @@ public class Strategy {
     public void barCrossTrade(int idx, double value) {
         boolean b = CROSS(idx, macd.barList, value);
         boolean s = CROSS(idx, value, macd.barList);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void difCrossTrade(int idx, double value) {
         boolean b = CROSS(idx, macd.difList, value);
         boolean s = CROSS(idx, value, macd.difList);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void maCrossTrade(int idx, ArrayList<Double> list) {
         boolean b = CROSS(idx, pList, list);
         boolean s = CROSS(idx, list, pList);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void maCrossTrade(int idx, ArrayList<Double> sList, ArrayList<Double> lList) {
         boolean b = CROSS(idx, sList, lList);
         boolean s = CROSS(idx, lList, sList);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void lmLongTrade(int idx) {
         boolean b = livermore.enterRiseTrend();
         boolean s = livermore.enterFallTrend();
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void lmShortTrade(int idx) {
         boolean b = livermore.enterMainRise();
         boolean s = livermore.exitMainRise();
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void barMACrossTrade(int idx, double value, ArrayList<Double> sList, ArrayList<Double> lList) {
@@ -60,7 +60,7 @@ public class Strategy {
         boolean c2 = (macd.barList.get(idx) > value) && (sList.get(idx) > lList.get(idx));
         boolean b = (!c1) && c2;
         boolean s = c1 && (!c2);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void difMACrossTrade(int idx, double value, ArrayList<Double> sList, ArrayList<Double> lList) {
@@ -68,7 +68,7 @@ public class Strategy {
         boolean c2 = (macd.difList.get(idx) > value) && (sList.get(idx) > lList.get(idx));
         boolean b = (!c1) && c2;
         boolean s = c1 && (!c2);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void barLMLCrossTrade(int idx, double value) {
@@ -76,7 +76,7 @@ public class Strategy {
         boolean c2 = (macd.barList.get(idx) > value) && (livermore.STATUST > 0);
         boolean b = (!c1) && c2;
         boolean s = c1 && (!c2);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void difLMLCrossTrade(int idx, double value) {
@@ -84,7 +84,7 @@ public class Strategy {
         boolean c2 = (macd.difList.get(idx) > value) && (livermore.STATUST > 0);
         boolean b = (!c1) && c2;
         boolean s = c1 && (!c2);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void barLMSCrossTrade(int idx, double value) {
@@ -92,7 +92,7 @@ public class Strategy {
         boolean c2 = (macd.barList.get(idx) > value) && (livermore.STATUST == 1);
         boolean b = (!c1) && c2;
         boolean s = c1 && (!c2);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
     public void difLMSCrossTrade(int idx, double value) {
@@ -100,10 +100,10 @@ public class Strategy {
         boolean c2 = (macd.difList.get(idx) > value) && (livermore.STATUST == 1);
         boolean b = (!c1) && c2;
         boolean s = c1 && (!c2);
-        trade(idx, b, s);
+        saveTradeIndex(idx, b, s);
     }
 
-    public void trade(int idx, boolean buy, boolean sell) {
+    public void saveTradeIndex(int idx, boolean buy, boolean sell) {
         if (buy) {
             bpIdxList.add(idx);
         }

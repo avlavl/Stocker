@@ -24,6 +24,7 @@ public class TradeTable extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
+        int mode = mv.brmMode;
         int times = mv.bpIndexList.size();
         String[][] tableContent = new String[times * 2][7];
         for (int i = 0; i < times; i++) {
@@ -31,10 +32,11 @@ public class TradeTable extends javax.swing.JDialog {
             String sDate = mv.dateList.get(mv.spIndexList.get(i));
             double bPrice = mv.priceList.get(mv.bpIndexList.get(i));
             double sPrice = mv.priceList.get(mv.spIndexList.get(i));
-            double agio = sPrice - bPrice;
-            double yield = 100 * agio / bPrice;
-            double sAsset = mv.fundList.get(mv.bpIndexList.get(i)) - bPrice;
-            double eAsset = mv.fundList.get(mv.spIndexList.get(i));
+            double ratio = (mode == 0) ? 1 : ((double) 10000 / bPrice);
+            double agio = (sPrice - bPrice) * ratio;
+            double yield = 100 * (sPrice - bPrice) / bPrice;
+            double sCash = mv.fundList.get(mv.bpIndexList.get(i)) - (bPrice * ratio);
+            double eCash = mv.fundList.get(mv.spIndexList.get(i));
 
             tableContent[2 * i][0] = bDate;
             tableContent[2 * i][1] = "买入";
@@ -42,7 +44,7 @@ public class TradeTable extends javax.swing.JDialog {
             tableContent[2 * i][3] = "*";
             tableContent[2 * i][4] = "*";
             tableContent[2 * i][5] = "*";
-            tableContent[2 * i][6] = (float) sAsset + "元";
+            tableContent[2 * i][6] = (float) sCash + "元";
 
             tableContent[2 * i + 1][0] = sDate;
             tableContent[2 * i + 1][1] = "卖出";
@@ -50,7 +52,7 @@ public class TradeTable extends javax.swing.JDialog {
             tableContent[2 * i + 1][3] = (agio > 0) ? "盈利" : "亏损";
             tableContent[2 * i + 1][4] = (float) agio + "元";
             tableContent[2 * i + 1][5] = (float) yield + "%";
-            tableContent[2 * i + 1][6] = (float) eAsset + "元";
+            tableContent[2 * i + 1][6] = (float) eCash + "元";
         }
         jTableTrade.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
         jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
