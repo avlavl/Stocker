@@ -853,7 +853,7 @@ public class MainView extends javax.swing.JFrame {
                                 for (int k = mals; k <= male; k++) {
                                     if (k >= j * 2) {
                                         sysMACDMAEva(mode, i, j, k);
-                                        String para = String.format("%3d|%2d|%-3d", i, j, k);
+                                        String para = String.format("%3d,%2d,%-3d", i, j, k);
                                         sr = updateSimpleReport(para, strategy, brm);
                                         updateTextArea(sr);
                                         srList.add(sr);
@@ -874,7 +874,7 @@ public class MainView extends javax.swing.JFrame {
                                 for (int k = tps2; k <= tpe2; k++) {
                                     if (k <= (j / 2 + 1)) {
                                         sysMACDLMEva(mode, i, mode1, days, status, j, k);
-                                        String para = String.format("%3d|%2d|%-2d", i, j, k);
+                                        String para = String.format("%3d,%2d,%-2d", i, j, k);
                                         sr = updateSimpleReport(para, strategy, brm);
                                         updateTextArea(sr);
                                         srList.add(sr);
@@ -903,7 +903,7 @@ public class MainView extends javax.swing.JFrame {
                     for (int j = mals; j <= male; j++) {
                         if (j >= i * 2) {
                             sysMAEva(i, j);
-                            String para = String.format("%2d|%-3d", i, j);
+                            String para = String.format("%2d,%-3d", i, j);
                             sr = updateSimpleReport(para, strategy, brm);
                             updateTextArea(sr);
                             srList.add(sr);
@@ -923,7 +923,7 @@ public class MainView extends javax.swing.JFrame {
                     for (int j = tps2; j <= tpe2; j++) {
                         if (j <= (i / 2 + 1)) {
                             sysLMEva(mode, days, status, i, j);
-                            String para = String.format("%2d|%-2d", i, j);
+                            String para = String.format("%2d,%-2d", i, j);
                             sr = updateSimpleReport(para, strategy, brm);
                             updateTextArea(sr);
                             srList.add(sr);
@@ -936,7 +936,7 @@ public class MainView extends javax.swing.JFrame {
 
         jButtonFilterCheck.setEnabled(true);
         Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.currentAsset).compareTo(arg0.currentAsset));
-        rankTable = new RankTable(this, false, srList);
+        rankTable = new RankTable(this, false, this, srList);
 
         time = System.currentTimeMillis() - time;
         float excTime = (float) time / 1000;
@@ -1236,6 +1236,39 @@ public class MainView extends javax.swing.JFrame {
 
         brm = new BRM(this);
         fundList = brm.synthesize();
+    }
+
+    public void paraEva(String str) {
+        String[] paras = str.replaceAll(" ", "").split(",");
+
+        try {
+            switch (jTabbedPaneSys.getSelectedIndex()) {
+                case 0:
+                    jTextFieldbp.setText(paras[0]);
+                    if (jCheckBoxAddSys.isSelected()) {
+                        if (jRadioButtonAddMa.isSelected()) {
+                            jTextFieldMAS.setText(paras[1]);
+                            jTextFieldMAS.setText(paras[2]);
+                        } else {
+                            jTextFieldTp1.setText(paras[1]);
+                            jTextFieldTp2.setText(paras[2]);
+                        }
+                    }
+                    break;
+                case 1:
+                    jTextFieldMAS.setText(paras[0]);
+                    jTextFieldMAS.setText(paras[1]);
+                    break;
+                case 2:
+                    jTextFieldTp1.setText(paras[0]);
+                    jTextFieldTp2.setText(paras[1]);
+                    break;
+            }
+
+            jButtonTradeEva.doClick();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "参数不匹配！");
+        }
     }
 
     private int dateProcess() {
