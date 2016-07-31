@@ -22,8 +22,48 @@ public class RankTable extends javax.swing.JDialog {
         initComponents();
 
         SRList = list;
-        updateTable();
+        jTableRank.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
+        jTableRank.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        int rows = (list.size() > 20) ? 20 : list.size();
+        String[][] tableContent = new String[rows][9];
+        for (int i = 0; i < rows; i++) {
+            tableContent[i][0] = "" + (i + 1);
+            tableContent[i][1] = "" + SRList.get(i).parameter;
+            tableContent[i][2] = "" + SRList.get(i).currentAsset;
+            tableContent[i][3] = "" + SRList.get(i).annualRate;
+            tableContent[i][4] = "" + SRList.get(i).positionDaysRate;
+            tableContent[i][5] = "" + SRList.get(i).positionAnnualRate;
+            tableContent[i][6] = "" + SRList.get(i).tradeTimes;
+            tableContent[i][7] = "" + SRList.get(i).evenEarningRate;
+            tableContent[i][8] = "" + SRList.get(i).expectation;
+        }
+        jTableRank.setModel(new javax.swing.table.DefaultTableModel(
+                tableContent,
+                new String[]{
+                    "排名", "参数", "当前资产", "年化率", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
+                }
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false, false, false, false
+            };
 
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+
+        jScrollPaneRank.setViewportView(jTableRank);
+        if (jTableRank.getColumnModel().getColumnCount() > 0) {
+            jTableRank.getColumnModel().getColumn(0).setMaxWidth(38);
+            jTableRank.getColumnModel().getColumn(1).setMaxWidth(80);
+            jTableRank.getColumnModel().getColumn(2).setMaxWidth(70);
+            jTableRank.getColumnModel().getColumn(6).setMaxWidth(40);
+        }
+        setPreferredSize(new java.awt.Dimension(690, 20 * rows + 88));
+        jScrollPaneRank.setPreferredSize(new java.awt.Dimension(652, 20 * rows + 30));
+        getContentPane().add(jScrollPaneRank, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        pack();
         setLocationRelativeTo(parent);
         setVisible(true);
     }
@@ -51,39 +91,22 @@ public class RankTable extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPaneTrade = new javax.swing.JScrollPane();
+        jScrollPaneRank = new javax.swing.JScrollPane();
         jTableRank = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("交易系统排名");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPaneTrade.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jScrollPaneRank.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jScrollPaneRank.setPreferredSize(new java.awt.Dimension(452, 20));
 
         jTableRank.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTableRank.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTableRank.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTableRank.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", null, null, null, null, null, null, null, null},
-                {"2", null, null, null, null, null, null, null, null},
-                {"3", null, null, null, null, null, null, null, null},
-                {"4", null, null, null, null, null, null, null, null},
-                {"5", null, null, null, null, null, null, null, null},
-                {"6", null, null, null, null, null, null, null, null},
-                {"7", null, null, null, null, null, null, null, null},
-                {"8", null, null, null, null, null, null, null, null},
-                {"9", null, null, null, null, null, null, null, null},
-                {"10", null, null, null, null, null, null, null, null},
-                {"11", null, null, null, null, null, null, null, null},
-                {"12", null, null, null, null, null, null, null, null},
-                {"13", null, null, null, null, null, null, null, null},
-                {"14", null, null, null, null, null, null, null, null},
-                {"15", null, null, null, null, null, null, null, null},
-                {"16", null, null, null, null, null, null, null, null},
-                {"17", null, null, null, null, null, null, null, null},
-                {"18", null, null, null, null, null, null, null, null},
-                {"19", null, null, null, null, null, null, null, null},
-                {"20", null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "排名", "参数", "当前资产", "年化率", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
@@ -108,7 +131,7 @@ public class RankTable extends javax.swing.JDialog {
                 jTableRankMouseClicked(evt);
             }
         });
-        jScrollPaneTrade.setViewportView(jTableRank);
+        jScrollPaneRank.setViewportView(jTableRank);
         if (jTableRank.getColumnModel().getColumnCount() > 0) {
             jTableRank.getColumnModel().getColumn(0).setMaxWidth(38);
             jTableRank.getColumnModel().getColumn(1).setMaxWidth(80);
@@ -116,22 +139,7 @@ public class RankTable extends javax.swing.JDialog {
             jTableRank.getColumnModel().getColumn(6).setMaxWidth(40);
         }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPaneTrade, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPaneTrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPaneRank, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 662, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -180,7 +188,7 @@ public class RankTable extends javax.swing.JDialog {
     ArrayList<SystemReport> SRList;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPaneTrade;
+    private javax.swing.JScrollPane jScrollPaneRank;
     private javax.swing.JTable jTableRank;
     // End of variables declaration//GEN-END:variables
 }

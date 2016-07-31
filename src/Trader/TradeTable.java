@@ -60,15 +60,6 @@ public class TradeTable extends javax.swing.JDialog {
                 new String[]{
                     "交易日期", "类型", "价格", "盈亏", "收益", "收益率", "可用资金"
                 }) {
-
-            Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
             boolean[] canEdit = new boolean[]{
                 false, false, false, false, false, false, false
             };
@@ -88,7 +79,9 @@ public class TradeTable extends javax.swing.JDialog {
             jTableTrade.getColumnModel().getColumn(3).setPreferredWidth(40);
             jTableTrade.getColumnModel().getColumn(3).setMaxWidth(40);
         }
-
+        setPreferredSize(new java.awt.Dimension(565, 40 * (times < 10 ? times : 10) + 90));
+        jScrollPaneTrade.setPreferredSize(new java.awt.Dimension(452, 40 * (times < 10 ? times : 10) + 31));
+        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 530, -1));
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
@@ -108,8 +101,11 @@ public class TradeTable extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("交易记录");
+        setPreferredSize(new java.awt.Dimension(550, 70));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPaneTrade.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jScrollPaneTrade.setPreferredSize(new java.awt.Dimension(452, 20));
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(JLabel.CENTER);
@@ -119,25 +115,6 @@ public class TradeTable extends javax.swing.JDialog {
         jTableTrade.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
@@ -163,22 +140,7 @@ public class TradeTable extends javax.swing.JDialog {
             jTableTrade.getColumnModel().getColumn(3).setMaxWidth(40);
         }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPaneTrade, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPaneTrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 530, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
