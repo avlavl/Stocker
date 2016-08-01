@@ -26,7 +26,7 @@ public class TradeTable extends javax.swing.JDialog {
 
         int mode = mv.brmMode;
         int times = mv.bpIndexList.size();
-        String[][] tableContent = new String[times * 2][7];
+        String[][] tableContent = new String[times * 2][8];
         for (int i = 0; i < times; i++) {
             String bDate = mv.dateList.get(mv.bpIndexList.get(i));
             String sDate = mv.dateList.get(mv.spIndexList.get(i));
@@ -35,6 +35,7 @@ public class TradeTable extends javax.swing.JDialog {
             double ratio = (mode == 0) ? 1 : ((double) 10000 / bPrice);
             double agio = (sPrice - bPrice) * ratio;
             double yield = 100 * (sPrice - bPrice) / bPrice;
+            int days = mv.daysBetween(mv.bpIndexList.get(i), mv.spIndexList.get(i));
             double sCash = mv.fundList.get(mv.bpIndexList.get(i)) - (bPrice * ratio);
             double eCash = mv.fundList.get(mv.spIndexList.get(i));
 
@@ -44,7 +45,8 @@ public class TradeTable extends javax.swing.JDialog {
             tableContent[2 * i][3] = "*";
             tableContent[2 * i][4] = "*";
             tableContent[2 * i][5] = "*";
-            tableContent[2 * i][6] = (float) sCash + "元";
+            tableContent[2 * i][6] = "*";
+            tableContent[2 * i][7] = (float) sCash + "元";
 
             tableContent[2 * i + 1][0] = sDate;
             tableContent[2 * i + 1][1] = "卖出";
@@ -52,16 +54,17 @@ public class TradeTable extends javax.swing.JDialog {
             tableContent[2 * i + 1][3] = (agio > 0) ? "盈利" : "亏损";
             tableContent[2 * i + 1][4] = (float) agio + "元";
             tableContent[2 * i + 1][5] = (float) yield + "%";
-            tableContent[2 * i + 1][6] = (float) eCash + "元";
+            tableContent[2 * i + 1][6] = days + "天";
+            tableContent[2 * i + 1][7] = (float) eCash + "元";
         }
         jTableTrade.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
         jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "交易日期", "类型", "价格", "盈亏", "收益", "收益率", "可用资金"
+                    "交易日期", "类型", "价格", "盈亏", "收益", "收益率", "持仓时间", "可用资金"
                 }) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             @Override
@@ -69,19 +72,19 @@ public class TradeTable extends javax.swing.JDialog {
                 return canEdit[columnIndex];
             }
         });
-
+        jTableTrade.setRowHeight(20);
         jScrollPaneTrade.setViewportView(jTableTrade);
         if (jTableTrade.getColumnModel().getColumnCount() > 0) {
             jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(75);
-            jTableTrade.getColumnModel().getColumn(0).setMaxWidth(75);
             jTableTrade.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTableTrade.getColumnModel().getColumn(1).setMaxWidth(40);
             jTableTrade.getColumnModel().getColumn(3).setPreferredWidth(40);
-            jTableTrade.getColumnModel().getColumn(3).setMaxWidth(40);
+            jTableTrade.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTableTrade.getColumnModel().getColumn(6).setPreferredWidth(60);
         }
-        setPreferredSize(new java.awt.Dimension(565, 40 * (times < 10 ? times : 10) + 90));
-        jScrollPaneTrade.setPreferredSize(new java.awt.Dimension(452, 40 * (times < 10 ? times : 10) + 31));
-        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 530, -1));
+
+        setPreferredSize(new java.awt.Dimension(635, 40 * (times < 10 ? times : 10) + 90));
+        jScrollPaneTrade.setPreferredSize(new java.awt.Dimension(522, 40 * (times < 10 ? times : 10) + 31));
+        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, -1));
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
@@ -115,14 +118,14 @@ public class TradeTable extends javax.swing.JDialog {
         jTableTrade.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "交易日期", "类型", "价格", "盈亏", "收益", "收益率", "可用资金"
+                "交易日期", "类型", "价格", "盈亏", "收益", "收益率", "持仓时间", "可用资金"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -133,14 +136,13 @@ public class TradeTable extends javax.swing.JDialog {
         jScrollPaneTrade.setViewportView(jTableTrade);
         if (jTableTrade.getColumnModel().getColumnCount() > 0) {
             jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(75);
-            jTableTrade.getColumnModel().getColumn(0).setMaxWidth(75);
             jTableTrade.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTableTrade.getColumnModel().getColumn(1).setMaxWidth(40);
             jTableTrade.getColumnModel().getColumn(3).setPreferredWidth(40);
-            jTableTrade.getColumnModel().getColumn(3).setMaxWidth(40);
+            jTableTrade.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTableTrade.getColumnModel().getColumn(6).setPreferredWidth(60);
         }
 
-        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 530, 50));
+        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

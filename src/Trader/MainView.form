@@ -28,8 +28,6 @@
     </Container>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupMACD">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroupMA">
-    </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupMacdAdd">
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupLM">

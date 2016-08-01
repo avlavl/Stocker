@@ -13,7 +13,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -54,7 +57,6 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemCopy = new javax.swing.JMenuItem();
         jMenuItemClear = new javax.swing.JMenuItem();
         buttonGroupMACD = new javax.swing.ButtonGroup();
-        buttonGroupMA = new javax.swing.ButtonGroup();
         buttonGroupMacdAdd = new javax.swing.ButtonGroup();
         buttonGroupLM = new javax.swing.ButtonGroup();
         jPanelMain = new javax.swing.JPanel();
@@ -779,7 +781,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTradeRecordActionPerformed
 
     private void jButtonTradeEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTradeEvaActionPerformed
-        tradeDays = dateProcess();
+        dateProcess();
         if (tradeDays == 0) {
             return;
         }
@@ -828,7 +830,7 @@ public class MainView extends javax.swing.JFrame {
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
         long time = System.currentTimeMillis();
         jTextAreaMain.setText("");
-        tradeDays = dateProcess();
+        dateProcess();
         if (tradeDays == 0) {
             return;
         }
@@ -1271,12 +1273,13 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    private int dateProcess() {
+    private void dateProcess() {
         String start = jTextFieldSDate.getText();
         String end = jTextFieldEDate.getText();
         if ((end.compareTo(start) <= 0)) {
             JOptionPane.showMessageDialog(this, "起始日期必须早于结束日期！");
-            return 0;
+            tradeDays = 0;
+            return;
         }
 
         sIdx = -1;
@@ -1289,8 +1292,8 @@ public class MainView extends javax.swing.JFrame {
                 eIdx = i;
             }
         }
-        int len = eIdx - sIdx + 1;
-        return len;
+        tradeYears = (double) daysBetween(sIdx, eIdx) / 365.25;
+        tradeDays = eIdx - sIdx + 1;
     }
 
     protected void parseStatus(int status) {
@@ -1362,7 +1365,7 @@ public class MainView extends javax.swing.JFrame {
         sr.netProfit = (float) brm.getNetProfit();
         sr.objectRate = (float) brm.getObjectRate(eIdx);
         sr.earningRate = (float) brm.getEarningRate();
-        sr.annualRate = (float) brm.getAnnualRate((double) tradeDays / 244);
+        sr.annualRate = (float) brm.getAnnualRate(tradeYears);
         sr.gainProfit = (float) brm.getGainProfit();
         sr.lossProfit = (float) brm.getLossProfit();
         sr.maxGain = (float) brm.getMaxGain();
@@ -1376,7 +1379,7 @@ public class MainView extends javax.swing.JFrame {
         sr.meanLoss = (float) brm.getMeanLoss();
         sr.odds = (float) brm.getOdds();
         sr.expectation = (float) brm.getExpectation();
-        sr.tradeYears = (float) tradeDays / 244;
+        sr.tradeYears = (float) tradeYears;
         sr.positionDaysRate = (float) stg.getPositionDaysRate();
         sr.meanPositionDays = (float) stg.getMeanPositionDays();
         sr.meanGainDays = (float) stg.getMeanGainDays();
@@ -1390,7 +1393,7 @@ public class MainView extends javax.swing.JFrame {
 
         sr.parameter = para;
         sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
-        sr.annualRate = (float) brm.getAnnualRate((double) tradeDays / 244);
+        sr.annualRate = (float) brm.getAnnualRate(tradeYears);
         sr.positionDaysRate = (float) stg.getPositionDaysRate();
         sr.positionAnnualRate = (float) brm.getAnnualRate((double) stg.getPositionDays() / 244);
         sr.tradeTimes = brm.getTradeTimes();
@@ -1484,6 +1487,24 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
+    public int daysBetween(int idxs, int idxe) {
+        String sdate = dateList.get(idxs);
+        String edate = dateList.get(idxe);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Calendar cal = Calendar.getInstance();
+        long between_days = 0;
+        try {
+            cal.setTime(dateFormat.parse(sdate));
+            long time1 = cal.getTimeInMillis();
+            cal.setTime(dateFormat.parse(edate));
+            long time2 = cal.getTimeInMillis();
+            between_days = (time2 - time1) / (1000 * 3600 * 24);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return Integer.parseInt(String.valueOf(between_days));
+    }
+
     private String fileIn = "data\\上证指数.txt";
     private String fileOut = "data\\上证指数_测试日志.txt";
     public FileWriter fileWriter;
@@ -1508,6 +1529,7 @@ public class MainView extends javax.swing.JFrame {
     public int sIdx = -1;
     public int eIdx = 0;
     public int tradeDays = 0;
+    public double tradeYears = 0;
 
     public Strategy strategy;
     public BRM brm;
@@ -1517,7 +1539,6 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
-    private javax.swing.ButtonGroup buttonGroupMA;
     private javax.swing.ButtonGroup buttonGroupMACD;
     private javax.swing.ButtonGroup buttonGroupMacdAdd;
     private javax.swing.JButton jButtonFilterCheck;
