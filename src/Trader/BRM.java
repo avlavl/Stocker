@@ -163,15 +163,15 @@ public class BRM {
     }
 
     public double getMaxGain() {
-        if (agioList.size() > 0) {
-            return (double) Collections.max(agioList);
+        if (yieldList.size() > 0) {
+            return (double) Collections.max(yieldList);
         }
         return 0;
     }
 
     public double getMaxLoss() {
-        if (agioList.size() > 0) {
-            return (double) Collections.min(agioList);
+        if (yieldList.size() > 0) {
+            return (double) Collections.min(yieldList);
         }
         return 0;
     }
@@ -217,15 +217,33 @@ public class BRM {
     }
 
     public double getMeanGain() {
-        double profit = getGainProfit();
-        int times = getGainTimes();
-        return (double) profit / times;
+        double totalYield = 0;
+        int times = 0;
+        for (Double yield : yieldList) {
+            if (yield > 0) {
+                totalYield += yield;
+                times++;
+            }
+        }
+        if (times > 0) {
+            return (double) totalYield / times;
+        }
+        return 0;
     }
 
     public double getMeanLoss() {
-        double profit = getLossProfit();
-        int times = getTradeTimes() - getGainTimes();
-        return (double) profit / times;
+        double totalYield = 0;
+        int times = 0;
+        for (Double yield : yieldList) {
+            if (yield <= 0) {
+                totalYield += yield;
+                times++;
+            }
+        }
+        if (times > 0) {
+            return (double) totalYield / times;
+        }
+        return 0;
     }
 
     public double getOdds() {

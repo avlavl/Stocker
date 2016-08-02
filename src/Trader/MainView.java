@@ -1412,16 +1412,16 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(sr.annualRate + "%", 5, 1);
         jTablePoint.setValueAt(sr.gainProfit, 6, 1);
         jTablePoint.setValueAt(sr.lossProfit, 7, 1);
-        jTablePoint.setValueAt(sr.maxGain, 8, 1);
-        jTablePoint.setValueAt(sr.maxLoss, 9, 1);
+        jTablePoint.setValueAt(sr.maxGain + "%", 8, 1);
+        jTablePoint.setValueAt(sr.maxLoss + "%", 9, 1);
         jTablePoint.setValueAt(sr.positionAnnualRate + "%", 10, 1);
         jTablePoint.setValueAt(sr.evenEarningRate + "%", 11, 1);
 
         jTablePoint.setValueAt(sr.tradeTimes + "次", 0, 3);
         jTablePoint.setValueAt(sr.gainTimes + "次", 1, 3);
         jTablePoint.setValueAt(sr.winRate + "%", 2, 3);
-        jTablePoint.setValueAt(sr.meanGain, 3, 3);
-        jTablePoint.setValueAt(sr.meanLoss, 4, 3);
+        jTablePoint.setValueAt(sr.meanGain + "%", 3, 3);
+        jTablePoint.setValueAt(sr.meanLoss + "%", 4, 3);
         jTablePoint.setValueAt(sr.odds, 5, 3);
         jTablePoint.setValueAt(sr.expectation, 6, 3);
         jTablePoint.setValueAt(sr.tradeYears + "年", 7, 3);
