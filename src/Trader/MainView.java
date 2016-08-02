@@ -1363,7 +1363,7 @@ public class MainView extends javax.swing.JFrame {
         sr.initAsset = (float) brm.getInitAsset();
         sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
         sr.netProfit = (float) brm.getNetProfit();
-        sr.objectRate = (float) brm.getObjectRate(eIdx);
+        sr.objectRate = (float) brm.getObjectRate(sIdx, eIdx);
         sr.earningRate = (float) brm.getEarningRate();
         sr.annualRate = (float) brm.getAnnualRate(tradeYears);
         sr.gainProfit = (float) brm.getGainProfit();

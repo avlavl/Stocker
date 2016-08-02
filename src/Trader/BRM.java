@@ -126,10 +126,10 @@ public class BRM {
         return profit;
     }
 
-    public double getObjectRate(int idx) {
-        double initPrice = pList.get(bpIdxList.get(0));
-        double price = pList.get(idx);
-        return (double) 100 * (price - initPrice) / initPrice;
+    public double getObjectRate(int idxs, int idxe) {
+        double sPrice = pList.get(idxs);
+        double ePrice = pList.get(idxe);
+        return (double) 100 * (ePrice - sPrice) / sPrice;
     }
 
     public double getEarningRate() {
