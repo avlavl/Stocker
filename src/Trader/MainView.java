@@ -1370,7 +1370,7 @@ public class MainView extends javax.swing.JFrame {
         sr.lossProfit = (float) brm.getLossProfit();
         sr.maxGain = (float) brm.getMaxGain();
         sr.maxLoss = (float) brm.getMaxLoss();
-        sr.positionAnnualRate = (float) brm.getAnnualRate((double) stg.getPositionDays() / 244);
+        sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
         sr.evenEarningRate = (float) brm.getEvenEarningRate();
         sr.tradeTimes = brm.getTradeTimes();
         sr.gainTimes = brm.getGainTimes();
@@ -1395,7 +1395,7 @@ public class MainView extends javax.swing.JFrame {
         sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
         sr.annualRate = (float) brm.getAnnualRate(tradeYears);
         sr.positionDaysRate = (float) stg.getPositionDaysRate();
-        sr.positionAnnualRate = (float) brm.getAnnualRate((double) stg.getPositionDays() / 244);
+        sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
         sr.tradeTimes = brm.getTradeTimes();
         sr.evenEarningRate = (float) brm.getEvenEarningRate();
         sr.expectation = (float) brm.getExpectation();

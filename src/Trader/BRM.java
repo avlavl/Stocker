@@ -15,6 +15,7 @@ import java.util.Collections;
 public class BRM {
 
     public BRM(MainView mv) {
+        mainView = mv;
         mode = mv.brmMode;
         pList = mv.priceList;
         bpIdxList = mv.bpIndexList;
@@ -175,6 +176,19 @@ public class BRM {
         return 0;
     }
 
+    public double getPositionAnnualRate() {
+        double totalYield = 0;
+        for (Double yield : yieldList) {
+            totalYield += yield / 100;
+        }
+        int totalDays = 0;
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            totalDays += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
+        }
+
+        return (double) 100 * (Math.pow(totalYield + 1, (double) 365.25 / totalDays) - 1);
+    }
+
     public double getEvenEarningRate() {
         double totalYield = 0;
         for (Double yield : yieldList) {
@@ -226,6 +240,7 @@ public class BRM {
         return (double) (winRate * odds - (1 - winRate));
     }
 
+    private MainView mainView;
     private ArrayList<Double> pList = new ArrayList<>();
     private ArrayList<Integer> bpIdxList = new ArrayList<>();
     private ArrayList<Integer> spIdxList = new ArrayList<>();
