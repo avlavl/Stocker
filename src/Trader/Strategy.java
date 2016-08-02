@@ -133,7 +133,7 @@ public class Strategy {
     public double getMeanPositionDays() {
         int days = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
-            days += spIdxList.get(i) - bpIdxList.get(i);
+            days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
         }
         return (double) days / bpIdxList.size();
     }
@@ -143,7 +143,7 @@ public class Strategy {
         int times = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
             if (pList.get(spIdxList.get(i)) > pList.get(bpIdxList.get(i))) {
-                days += spIdxList.get(i) - bpIdxList.get(i);
+                days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
                 times++;
             }
         }
@@ -155,7 +155,7 @@ public class Strategy {
         int times = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
             if (pList.get(spIdxList.get(i)) <= pList.get(bpIdxList.get(i))) {
-                days += spIdxList.get(i) - bpIdxList.get(i);
+                days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
                 times++;
             }
         }
