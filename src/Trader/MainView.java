@@ -1278,7 +1278,7 @@ public class MainView extends javax.swing.JFrame {
                     if (jCheckBoxAddSys.isSelected()) {
                         if (jRadioButtonAddMa.isSelected()) {
                             jTextFieldMAS.setText(paras[1]);
-                            jTextFieldMAS.setText(paras[2]);
+                            jTextFieldMAL.setText(paras[2]);
                         } else {
                             jTextFieldTp1.setText(paras[1]);
                             jTextFieldTp2.setText(paras[2]);
@@ -1287,7 +1287,7 @@ public class MainView extends javax.swing.JFrame {
                     break;
                 case 1:
                     jTextFieldMAS.setText(paras[0]);
-                    jTextFieldMAS.setText(paras[1]);
+                    jTextFieldMAL.setText(paras[1]);
                     break;
                 case 2:
                     jTextFieldTp1.setText(paras[0]);
