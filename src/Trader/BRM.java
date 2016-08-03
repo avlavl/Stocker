@@ -106,16 +106,19 @@ public class BRM {
         return fundList;
     }
 
-    public double getInitAsset() {
-        return initAsset;
-    }
-
+    /**
+     ** Start of report function
+     */
     public double getCurrentAsset(int idx) {
         if (holdFlag) {
             return cash + ratio * (pList.get(idx));
         } else {
             return cash;
         }
+    }
+
+    public double getInitAsset() {
+        return initAsset;
     }
 
     public double getNetProfit() {

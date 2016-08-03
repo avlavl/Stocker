@@ -185,8 +185,8 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTablePoint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"起始资金", null, "交易次数", ""},
-                {"当前资产", null, "盈利次数", null},
+                {"当前资产", null, "交易次数", ""},
+                {"起始资金", null, "盈利次数", null},
                 {"净利润", null, "胜率(P)", ""},
                 {"标的收益率", null, "平均盈利", null},
                 {"系统收益率", null, "平均亏损", null},
@@ -1360,8 +1360,8 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSystemReport(Strategy stg, BRM brm) {
         SystemReport sr = new SystemReport();
 
-        sr.initAsset = (float) brm.getInitAsset();
         sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
+        sr.initAsset = (float) brm.getInitAsset();
         sr.netProfit = (float) brm.getNetProfit();
         sr.objectRate = (float) brm.getObjectRate(sIdx, eIdx);
         sr.earningRate = (float) brm.getEarningRate();
@@ -1404,8 +1404,8 @@ public class MainView extends javax.swing.JFrame {
     }
 
     protected void updateTable(SystemReport sr) {
-        jTablePoint.setValueAt(sr.initAsset, 0, 1);
-        jTablePoint.setValueAt(sr.currentAsset, 1, 1);
+        jTablePoint.setValueAt(sr.currentAsset, 0, 1);
+        jTablePoint.setValueAt(sr.initAsset, 1, 1);
         jTablePoint.setValueAt(sr.netProfit, 2, 1);
         jTablePoint.setValueAt(sr.objectRate + "%", 3, 1);
         jTablePoint.setValueAt(sr.earningRate + "%", 4, 1);
