@@ -781,6 +781,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTradeRecordActionPerformed
 
     private void jButtonTradeEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTradeEvaActionPerformed
+        boolean ret = false;
         dateProcess();
         if (tradeDays == 0) {
             return;
@@ -794,23 +795,23 @@ public class MainView extends javax.swing.JFrame {
                     if (jRadioButtonAddMa.isSelected()) {
                         int mas = Integer.parseInt(jTextFieldMAS.getText());
                         int mal = Integer.parseInt(jTextFieldMAL.getText());
-                        sysMACDMAEva(mode, bp, mas, mal);
+                        ret = sysMACDMAEva(mode, bp, mas, mal);
                     } else {
                         int mode1 = jRadioButtonLML.isSelected() ? 0 : 1;
                         int days = jComboBoxLMDays.getSelectedIndex() + 1;
                         boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                         int tp1 = Integer.parseInt(jTextFieldTp1.getText());
                         int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                        sysMACDLMEva(mode, bp, mode1, days, status, tp1, tp2);
+                        ret = sysMACDLMEva(mode, bp, mode1, days, status, tp1, tp2);
                     }
                 } else {
-                    sysMACDEva(mode, bp);
+                    ret = sysMACDEva(mode, bp);
                 }
                 break;
             case 1:
                 int mas = Integer.parseInt(jTextFieldMAS.getText());
                 int mal = Integer.parseInt(jTextFieldMAL.getText());
-                sysMAEva(mas, mal);
+                ret = sysMAEva(mas, mal);
                 break;
             case 2:
                 mode = jRadioButtonLML.isSelected() ? 0 : 1;
@@ -818,10 +819,14 @@ public class MainView extends javax.swing.JFrame {
                 boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                 int tp1 = Integer.parseInt(jTextFieldTp1.getText());
                 int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                sysLMEva(mode, days, status, tp1, tp2);
+                ret = sysLMEva(mode, days, status, tp1, tp2);
                 break;
         }
 
+        if (!ret) {
+            JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
+            return;
+        }
         SystemReport sr = updateSystemReport(strategy, brm);
         updateTable(sr);
         evaluated = true;
@@ -854,11 +859,12 @@ public class MainView extends javax.swing.JFrame {
                             for (int j = mass; j <= mase; j++) {
                                 for (int k = mals; k <= male; k++) {
                                     if (k >= j * 2) {
-                                        sysMACDMAEva(mode, i, j, k);
-                                        String para = String.format("%3d,%2d,%-3d", i, j, k);
-                                        sr = updateSimpleReport(para, strategy, brm);
-                                        updateTextArea(sr);
-                                        srList.add(sr);
+                                        if (sysMACDMAEva(mode, i, j, k)) {
+                                            String para = String.format("%3d,%2d,%-3d", i, j, k);
+                                            sr = updateSimpleReport(para, strategy, brm);
+                                            updateTextArea(sr);
+                                            srList.add(sr);
+                                        }
                                     }
                                 }
                             }
@@ -875,11 +881,12 @@ public class MainView extends javax.swing.JFrame {
                             for (int j = tps1; j <= tpe1; j++) {
                                 for (int k = tps2; k <= tpe2; k++) {
                                     if (k <= (j / 2 + 1)) {
-                                        sysMACDLMEva(mode, i, mode1, days, status, j, k);
-                                        String para = String.format("%3d,%2d,%-2d", i, j, k);
-                                        sr = updateSimpleReport(para, strategy, brm);
-                                        updateTextArea(sr);
-                                        srList.add(sr);
+                                        if (sysMACDLMEva(mode, i, mode1, days, status, j, k)) {
+                                            String para = String.format("%3d,%2d,%-2d", i, j, k);
+                                            sr = updateSimpleReport(para, strategy, brm);
+                                            updateTextArea(sr);
+                                            srList.add(sr);
+                                        }
                                     }
                                 }
                             }
@@ -887,11 +894,12 @@ public class MainView extends javax.swing.JFrame {
                     }
                 } else {
                     for (int i = bps; i <= bpe; i++) {
-                        sysMACDEva(mode, i);
-                        String para = String.format("%3d", i);
-                        sr = updateSimpleReport(para, strategy, brm);
-                        updateTextArea(sr);
-                        srList.add(sr);
+                        if (sysMACDEva(mode, i)) {
+                            String para = String.format("%3d", i);
+                            sr = updateSimpleReport(para, strategy, brm);
+                            updateTextArea(sr);
+                            srList.add(sr);
+                        }
                     }
                 }
 
@@ -904,11 +912,12 @@ public class MainView extends javax.swing.JFrame {
                 for (int i = mass; i <= mase; i++) {
                     for (int j = mals; j <= male; j++) {
                         if (j >= i * 2) {
-                            sysMAEva(i, j);
-                            String para = String.format("%2d,%-3d", i, j);
-                            sr = updateSimpleReport(para, strategy, brm);
-                            updateTextArea(sr);
-                            srList.add(sr);
+                            if (sysMAEva(i, j)) {
+                                String para = String.format("%2d,%-3d", i, j);
+                                sr = updateSimpleReport(para, strategy, brm);
+                                updateTextArea(sr);
+                                srList.add(sr);
+                            }
                         }
                     }
                 }
@@ -924,11 +933,12 @@ public class MainView extends javax.swing.JFrame {
                 for (int i = tps1; i <= tpe1; i++) {
                     for (int j = tps2; j <= tpe2; j++) {
                         if (j <= (i / 2 + 1)) {
-                            sysLMEva(mode, days, status, i, j);
-                            String para = String.format("%2d,%-2d", i, j);
-                            sr = updateSimpleReport(para, strategy, brm);
-                            updateTextArea(sr);
-                            srList.add(sr);
+                            if (sysLMEva(mode, days, status, i, j)) {
+                                String para = String.format("%2d,%-2d", i, j);
+                                sr = updateSimpleReport(para, strategy, brm);
+                                updateTextArea(sr);
+                                srList.add(sr);
+                            }
                         }
                     }
                 }
@@ -1066,7 +1076,7 @@ public class MainView extends javax.swing.JFrame {
         evaluated = false;
     }
 
-    private void sysMACDEva(int mode, double bp) {
+    private boolean sysMACDEva(int mode, double bp) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         strategy = new Strategy(this);
@@ -1090,12 +1100,16 @@ public class MainView extends javax.swing.JFrame {
         }
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
+        if (bpIndexList.isEmpty()) {
+            return false;
+        }
 
         brm = new BRM(this);
         fundList = brm.synthesize();
+        return true;
     }
 
-    private void sysMAEva(int mas, int mal) {
+    private boolean sysMAEva(int mas, int mal) {
         MALine ma = new MALine(priceList);
         strategy = new Strategy(this);
         strategy.ma = ma;
@@ -1117,12 +1131,16 @@ public class MainView extends javax.swing.JFrame {
         }
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
+        if (bpIndexList.isEmpty()) {
+            return false;
+        }
 
         brm = new BRM(this);
         fundList = brm.synthesize();
+        return true;
     }
 
-    private void sysLMEva(int mode, int days, boolean status, int t1, int t2) {
+    private boolean sysLMEva(int mode, int days, boolean status, int t1, int t2) {
         MALine ma = new MALine(priceList);
         ArrayList<Double> maList = ma.getMAList(days);
         Livermore livermore = new Livermore(status, t1, t2);
@@ -1133,7 +1151,6 @@ public class MainView extends javax.swing.JFrame {
             if (jCheckBoxRecord.isSelected()) {
                 fileWriter = new FileWriter(fileOut);
             }
-
             for (int i = 0; i < rows; i++) {
                 updateMarket(i);
                 String message = livermore.arithmetic(maList.get(i));
@@ -1149,26 +1166,29 @@ public class MainView extends javax.swing.JFrame {
                     break;
                 }
             }
-            if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
-                strategy.spIdxList.add(eIdx);
-            }
-            bpIndexList = strategy.bpIdxList;
-            spIndexList = strategy.spIdxList;
-
-            brm = new BRM(this);
-            fundList = brm.synthesize();
-            parseStatus(livermore.STATUST);
-
             if (jCheckBoxRecord.isSelected()) {
                 fileWriter.flush();
                 fileWriter.close();
             }
         } catch (IOException e1) {
-            e1.printStackTrace();
         }
+
+        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+            strategy.spIdxList.add(eIdx);
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.isEmpty()) {
+            return false;
+        }
+
+        brm = new BRM(this);
+        fundList = brm.synthesize();
+        parseStatus(livermore.STATUST);
+        return true;
     }
 
-    private void sysMACDMAEva(int mode, double bp, int mas, int mal) {
+    private boolean sysMACDMAEva(int mode, double bp, int mas, int mal) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         MALine ma = new MALine(priceList);
@@ -1197,12 +1217,16 @@ public class MainView extends javax.swing.JFrame {
         }
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
+        if (bpIndexList.isEmpty()) {
+            return false;
+        }
 
         brm = new BRM(this);
         fundList = brm.synthesize();
+        return true;
     }
 
-    private void sysMACDLMEva(int mode, double bp, int mode1, int days, boolean status, int t1, int t2) {
+    private boolean sysMACDLMEva(int mode, double bp, int mode1, int days, boolean status, int t1, int t2) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         MALine ma = new MALine(priceList);
@@ -1235,9 +1259,13 @@ public class MainView extends javax.swing.JFrame {
         }
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
+        if (bpIndexList.isEmpty()) {
+            return false;
+        }
 
         brm = new BRM(this);
         fundList = brm.synthesize();
+        return true;
     }
 
     public void paraEva(String str) {
