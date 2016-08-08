@@ -98,10 +98,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelLMDays = new javax.swing.JLabel();
         jRadioButtonLML = new javax.swing.JRadioButton();
         jRadioButtonLMS = new javax.swing.JRadioButton();
-        jLabelOpen = new javax.swing.JLabel();
-        jLabelHigh = new javax.swing.JLabel();
         jLabelClose = new javax.swing.JLabel();
-        jLabelLow = new javax.swing.JLabel();
         jButtonTradeChart = new javax.swing.JButton();
         jButtonTradeRecord = new javax.swing.JButton();
         jButtonTradeEva = new javax.swing.JButton();
@@ -178,6 +175,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
 
         jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate.setForeground(new java.awt.Color(0, 0, 204));
         jLabelDate.setText("日期：----/--/--");
         jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
@@ -373,25 +371,10 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 222));
 
-        jLabelOpen.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelOpen.setForeground(new java.awt.Color(204, 0, 204));
-        jLabelOpen.setText("开盘：");
-        jPanelMain.add(jLabelOpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
-
-        jLabelHigh.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelHigh.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelHigh.setText("最高：");
-        jPanelMain.add(jLabelHigh, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
-
         jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelClose.setForeground(new java.awt.Color(153, 51, 0));
+        jLabelClose.setForeground(new java.awt.Color(200, 0, 0));
         jLabelClose.setText("收盘：");
-        jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
-
-        jLabelLow.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelLow.setForeground(new java.awt.Color(0, 153, 0));
-        jLabelLow.setText("最低：");
-        jPanelMain.add(jLabelLow, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
+        jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
         jButtonTradeChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeChart.setText("交易曲线");
@@ -829,6 +812,7 @@ public class MainView extends javax.swing.JFrame {
         }
         SystemReport sr = updateSystemReport(strategy, brm);
         updateTable(sr);
+        updateMarket(eIdx);
         evaluated = true;
     }//GEN-LAST:event_jButtonTradeEvaActionPerformed
 
@@ -1083,7 +1067,6 @@ public class MainView extends javax.swing.JFrame {
         strategy.macd = macd;
 
         for (int i = 0; i < rows; i++) {
-            updateMarket(i);
             if ((i >= sIdx) && (i <= eIdx)) {
                 if (mode == 0) {
                     strategy.barCrossTrade(i, bp);
@@ -1118,7 +1101,6 @@ public class MainView extends javax.swing.JFrame {
         ArrayList<Double> malList = ma.getMAList(mal);
 
         for (int i = 0; i < rows; i++) {
-            updateMarket(i);
             if ((i >= sIdx) && (i <= eIdx)) {
                 strategy.maCrossTrade(i, masList, malList);
             }
@@ -1152,9 +1134,8 @@ public class MainView extends javax.swing.JFrame {
                 fileWriter = new FileWriter(fileOut);
             }
             for (int i = 0; i < rows; i++) {
-                updateMarket(i);
                 String message = livermore.arithmetic(maList.get(i));
-                livermoreLogger(livermore, message);
+                lmLogger(i, livermore, message);
                 if ((i >= sIdx) && (i <= eIdx)) {
                     if (mode == 0) {
                         strategy.lmLongTrade(i);
@@ -1200,7 +1181,6 @@ public class MainView extends javax.swing.JFrame {
         ArrayList<Double> malList = ma.getMAList(mal);
 
         for (int i = 0; i < rows; i++) {
-            updateMarket(i);
             if ((i >= sIdx) && (i <= eIdx)) {
                 if (mode == 0) {
                     strategy.barMACrossTrade(i, bp, masList, malList);
@@ -1237,7 +1217,6 @@ public class MainView extends javax.swing.JFrame {
         strategy.livermore = livermore;
 
         for (int i = 0; i < rows; i++) {
-            updateMarket(i);
             livermore.arithmetic(maList.get(i));
             if ((i >= sIdx) && (i <= eIdx)) {
                 if ((mode == 0) && (mode1 == 0)) {
@@ -1371,18 +1350,15 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    protected void updateMarket(int index) {
-        DATE = dateList.get(index);
-        OPEN = openList.get(index);
-        HIGH = highList.get(index);
-        LOW = lowList.get(index);
-        CLOSE = closeList.get(index);
-
-        jLabelDate.setText("日期：" + DATE);
-        jLabelOpen.setText("开盘：" + OPEN);
-        jLabelHigh.setText("最高：" + HIGH);
-        jLabelLow.setText("最低：" + LOW);
-        jLabelClose.setText("收盘：" + CLOSE);
+    protected void updateMarket(int idx) {
+        jLabelDate.setText("日期：" + dateList.get(idx));
+        double margin = 100 * (closeList.get(idx) - closeList.get(idx - 1)) / closeList.get(idx - 1);
+        if (margin > 0) {
+            jLabelClose.setForeground(new java.awt.Color(200, 0, 0));
+        } else {
+            jLabelClose.setForeground(new java.awt.Color(0, 150, 0));
+        }
+        jLabelClose.setText(String.format("收盘：%s  %5.2f%%", closeList.get(idx), margin));
     }
 
     protected SystemReport updateSystemReport(Strategy stg, BRM brm) {
@@ -1471,9 +1447,9 @@ public class MainView extends javax.swing.JFrame {
         jTextAreaMain.append(System.getProperty("line.separator"));
     }
 
-    protected void livermoreLogger(Livermore lm, String msg) {
+    protected void lmLogger(int idx, Livermore lm, String msg) {
         if (!msg.equals("") && jCheckBoxRecord.isSelected()) {
-            fileLogger("[" + DATE + "] " + msg);
+            fileLogger("[" + dateList.get(idx) + "] " + msg);
             if (!msg.contains("趋势可能改变")) {
                 fileLogger(String.format("上关键点：%-8.2f\t\t上关键点：%-8.2f", lm.riseKeyHead, lm.fallKeyHead));
                 fileLogger(String.format("下关键点：%-8.2f\t\t下关键点：%-8.2f", lm.riseKeyFoot, lm.fallKeyFoot));
@@ -1549,11 +1525,6 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<Double> fundList;
     public ArrayList<Integer> bpIndexList;
     public ArrayList<Integer> spIndexList;
-    public String DATE = "";
-    public double OPEN = 0;
-    public double HIGH = 0;
-    public double LOW = 0;
-    public double CLOSE = 0;
     public int sIdx = -1;
     public int eIdx = 0;
     public int tradeDays = 0;
@@ -1586,14 +1557,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDash3;
     private javax.swing.JLabel jLabelDash4;
     private javax.swing.JLabel jLabelDate;
-    private javax.swing.JLabel jLabelHigh;
     private javax.swing.JLabel jLabelLMDays;
     private javax.swing.JLabel jLabelLMStatus;
-    private javax.swing.JLabel jLabelLow;
     private javax.swing.JLabel jLabelMAL;
     private javax.swing.JLabel jLabelMAS;
     private javax.swing.JLabel jLabelMATrade;
-    private javax.swing.JLabel jLabelOpen;
     private javax.swing.JLabel jLabelPara1;
     private javax.swing.JLabel jLabelPara2;
     private javax.swing.JLabel jLabelPara3;
