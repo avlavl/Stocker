@@ -132,8 +132,8 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemImport = new javax.swing.JMenuItem();
         jMenuIndex = new javax.swing.JMenu();
         jMenuItemSZZS = new javax.swing.JMenuItem();
-        jMenuItemSZCZ = new javax.swing.JMenuItem();
         jMenuItemCYBZ = new javax.swing.JMenuItem();
+        jMenuItemSZCZ = new javax.swing.JMenuItem();
         jMenuItemHS300 = new javax.swing.JMenuItem();
         jMenuItemZXBZ = new javax.swing.JMenuItem();
         jMenuItemSZ50 = new javax.swing.JMenuItem();
@@ -233,11 +233,11 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 293, -1, -1));
 
         jTextFieldSDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldSDate.setText("1990/12/19");
+        jTextFieldSDate.setText("----/--/--");
         jPanelMain.add(jTextFieldSDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 75, -1));
 
         jTextFieldEDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldEDate.setText("2016/07/31");
+        jTextFieldEDate.setText("----/--/--");
         jPanelMain.add(jTextFieldEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 75, -1));
 
         jTabbedPaneSys.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -549,16 +549,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemSZZS);
 
-        jMenuItemSZCZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemSZCZ.setText("深证成指");
-        jMenuItemSZCZ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemSZCZActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemSZCZ);
-
-        jMenuItemCYBZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemCYBZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCYBZ.setText("创业板指");
         jMenuItemCYBZ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -566,6 +557,15 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jMenuIndex.add(jMenuItemCYBZ);
+
+        jMenuItemSZCZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSZCZ.setText("深证成指");
+        jMenuItemSZCZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSZCZActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemSZCZ);
 
         jMenuItemHS300.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemHS300.setText("沪深300");
@@ -697,13 +697,13 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\上证指数.txt");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
 
-    private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
-        importFile("data\\深证成指.txt");
-    }//GEN-LAST:event_jMenuItemSZCZActionPerformed
-
     private void jMenuItemCYBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCYBZActionPerformed
         importFile("data\\创业板指.txt");
     }//GEN-LAST:event_jMenuItemCYBZActionPerformed
+
+    private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
+        importFile("data\\深证成指.txt");
+    }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
     private void jMenuItemHS300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHS300ActionPerformed
         importFile("data\\沪深300.txt");
