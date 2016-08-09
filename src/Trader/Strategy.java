@@ -112,12 +112,12 @@ public class Strategy {
         }
     }
 
-    public int getPositionDays() {
+    public double getPositionYears() {
         int days = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
-            days += spIdxList.get(i) - bpIdxList.get(i);
+            days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
         }
-        return days;
+        return (double) days / 365.25;
     }
 
     public double getPositionDaysRate() {

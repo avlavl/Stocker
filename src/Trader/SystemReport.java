@@ -22,6 +22,7 @@ public class SystemReport {
     public float lossProfit;
     public float maxGain;
     public float maxLoss;
+    public float standardAnnualRate;
     public float positionAnnualRate;
     public float evenEarningRate;
     public int tradeTimes;
@@ -32,6 +33,7 @@ public class SystemReport {
     public float odds;
     public float expectation;
     public float tradeYears;
+    public float positionYears;
     public float positionDaysRate;
     public float meanPositionDays;
     public float meanGainDays;

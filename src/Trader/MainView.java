@@ -191,8 +191,9 @@ public class MainView extends javax.swing.JFrame {
                 {"年化收益", null, "赔率(R)", ""},
                 {"总盈利", "", "数学期望", null},
                 {"总亏损", null, "测试周期", null},
-                {"最大盈利", "", "持仓时间比", null},
-                {"最大亏损", null, "平均持仓期", null},
+                {"最大盈利", "", "持仓周期", null},
+                {"最大亏损", null, "持仓时间比", null},
+                {"标准年化率", null, "平均持仓期", null},
                 {"持仓年化率", null, "平均盈利期", null},
                 {"单次均收益", null, "平均亏损期", null}
             },
@@ -208,7 +209,7 @@ public class MainView extends javax.swing.JFrame {
             jTablePoint.getColumnModel().getColumn(2).setMaxWidth(70);
         }
 
-        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 340, 222));
+        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 340, 238));
 
         jTextAreaMain.setColumns(20);
         jTextAreaMain.setFont(new java.awt.Font("仿宋", 0, 11)); // NOI18N
@@ -221,22 +222,22 @@ public class MainView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTextAreaMain);
 
-        jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 340, 80));
+        jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 340, 80));
 
         jLabelSEDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelSEDate.setText("日期：");
-        jPanelMain.add(jLabelSEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 292, -1, -1));
+        jPanelMain.add(jLabelSEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 312, -1, -1));
 
         jLabelSEDash.setText("-");
-        jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 293, -1, -1));
+        jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 313, -1, -1));
 
         jTextFieldSDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldSDate.setText("----/--/--");
-        jPanelMain.add(jTextFieldSDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 75, -1));
+        jPanelMain.add(jTextFieldSDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 75, -1));
 
         jTextFieldEDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldEDate.setText("----/--/--");
-        jPanelMain.add(jTextFieldEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 75, -1));
+        jPanelMain.add(jTextFieldEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 75, -1));
 
         jTabbedPaneSys.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTabbedPaneSys.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -369,7 +370,7 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPaneSys.addTab("趋势", jPanelLM);
 
-        jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 222));
+        jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 238));
 
         jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelClose.setForeground(new java.awt.Color(200, 0, 0));
@@ -384,7 +385,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeChartActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 285, -1, 30));
+        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 305, -1, 30));
 
         jButtonTradeRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeRecord.setText("交易记录");
@@ -394,7 +395,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeRecordActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 285, -1, 30));
+        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 305, -1, 30));
 
         jButtonTradeEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTradeEva.setText("交易评测");
@@ -404,11 +405,11 @@ public class MainView extends javax.swing.JFrame {
                 jButtonTradeEvaActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 285, -1, 30));
+        jPanelMain.add(jButtonTradeEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 305, -1, 30));
 
         jLabelPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPriceFactor.setText("系数：");
-        jPanelMain.add(jLabelPriceFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 292, -1, -1));
+        jPanelMain.add(jLabelPriceFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 312, -1, -1));
 
         jComboBoxPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxPriceFactor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "X1", "X10", "X100", "X1000" }));
@@ -417,7 +418,7 @@ public class MainView extends javax.swing.JFrame {
                 jComboBoxPriceFactorActionPerformed(evt);
             }
         });
-        jPanelMain.add(jComboBoxPriceFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, -1, -1));
+        jPanelMain.add(jComboBoxPriceFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, -1, -1));
 
         jPanelSysFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "优选系统", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelSysFilter.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -495,7 +496,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 48, 60, -1));
 
-        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 325, 320, 88));
+        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 345, 320, 88));
 
         jCheckBoxBrmMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBoxBrmMode.setText("固定金额投资");
@@ -504,9 +505,9 @@ public class MainView extends javax.swing.JFrame {
                 jCheckBoxBrmModeActionPerformed(evt);
             }
         });
-        jPanelMain.add(jCheckBoxBrmMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 285, -1, -1));
+        jPanelMain.add(jCheckBoxBrmMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 305, -1, -1));
 
-        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 423));
+        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 445));
 
         jMenuFile.setText("文件");
 
@@ -1374,6 +1375,7 @@ public class MainView extends javax.swing.JFrame {
         sr.lossProfit = (float) brm.getLossProfit();
         sr.maxGain = (float) brm.getMaxGain();
         sr.maxLoss = (float) brm.getMaxLoss();
+        sr.standardAnnualRate = (float) brm.getStandardAnnualRate();
         sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
         sr.evenEarningRate = (float) brm.getEvenEarningRate();
         sr.tradeTimes = brm.getTradeTimes();
@@ -1384,6 +1386,7 @@ public class MainView extends javax.swing.JFrame {
         sr.odds = (float) brm.getOdds();
         sr.expectation = (float) brm.getExpectation();
         sr.tradeYears = (float) tradeYears;
+        sr.positionYears = (float) stg.getPositionYears();
         sr.positionDaysRate = (float) stg.getPositionDaysRate();
         sr.meanPositionDays = (float) stg.getMeanPositionDays();
         sr.meanGainDays = (float) stg.getMeanGainDays();
@@ -1397,7 +1400,7 @@ public class MainView extends javax.swing.JFrame {
 
         sr.parameter = para;
         sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
-        sr.annualRate = (float) brm.getAnnualRate(tradeYears);
+        sr.standardAnnualRate = (float) brm.getStandardAnnualRate();
         sr.positionDaysRate = (float) stg.getPositionDaysRate();
         sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
         sr.tradeTimes = brm.getTradeTimes();
@@ -1418,8 +1421,9 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(sr.lossProfit, 7, 1);
         jTablePoint.setValueAt(sr.maxGain + "%", 8, 1);
         jTablePoint.setValueAt(sr.maxLoss + "%", 9, 1);
-        jTablePoint.setValueAt(sr.positionAnnualRate + "%", 10, 1);
-        jTablePoint.setValueAt(sr.evenEarningRate + "%", 11, 1);
+        jTablePoint.setValueAt(sr.standardAnnualRate + "%", 10, 1);
+        jTablePoint.setValueAt(sr.positionAnnualRate + "%", 11, 1);
+        jTablePoint.setValueAt(sr.evenEarningRate + "%", 12, 1);
 
         jTablePoint.setValueAt(sr.tradeTimes + "次", 0, 3);
         jTablePoint.setValueAt(sr.gainTimes + "次", 1, 3);
@@ -1429,16 +1433,17 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(sr.odds, 5, 3);
         jTablePoint.setValueAt(sr.expectation, 6, 3);
         jTablePoint.setValueAt(sr.tradeYears + "年", 7, 3);
-        jTablePoint.setValueAt(sr.positionDaysRate + "%", 8, 3);
-        jTablePoint.setValueAt(sr.meanPositionDays + "天", 9, 3);
-        jTablePoint.setValueAt(sr.meanGainDays + "天", 10, 3);
-        jTablePoint.setValueAt(sr.meanLossDays + "天", 11, 3);
+        jTablePoint.setValueAt(sr.positionYears + "年", 8, 3);
+        jTablePoint.setValueAt(sr.positionDaysRate + "%", 9, 3);
+        jTablePoint.setValueAt(sr.meanPositionDays + "天", 10, 3);
+        jTablePoint.setValueAt(sr.meanGainDays + "天", 11, 3);
+        jTablePoint.setValueAt(sr.meanLossDays + "天", 12, 3);
     }
 
     protected void updateTextArea(SystemReport sr) {
         jTextAreaMain.append(String.format("参数:%s  ", sr.parameter));
         jTextAreaMain.append(String.format("当前资产:%-8.2f  ", sr.currentAsset));
-        jTextAreaMain.append(String.format("年化率:%5.2f%%  ", sr.annualRate));
+        jTextAreaMain.append(String.format("标准年化:%5.2f%%  ", sr.standardAnnualRate));
         jTextAreaMain.append(String.format("持仓时间比:%5.2f%%  ", sr.positionDaysRate));
         jTextAreaMain.append(String.format("持仓年化:%6.2f%%  ", sr.positionAnnualRate));
         jTextAreaMain.append(String.format("交易次数:%-3d  ", sr.tradeTimes));

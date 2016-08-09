@@ -179,6 +179,15 @@ public class BRM {
         return 0;
     }
 
+    public double getStandardAnnualRate() {
+        double totalYield = 0;
+        for (Double yield : yieldList) {
+            totalYield += yield;
+        }
+
+        return totalYield / mainView.tradeYears;
+    }
+
     public double getPositionAnnualRate() {
         double totalYield = 0;
         for (Double yield : yieldList) {

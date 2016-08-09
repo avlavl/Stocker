@@ -31,7 +31,7 @@ public class RankTable extends javax.swing.JDialog {
             tableContent[i][0] = "" + (i + 1);
             tableContent[i][1] = "" + SRList.get(i).parameter;
             tableContent[i][2] = "" + SRList.get(i).currentAsset;
-            tableContent[i][3] = "" + SRList.get(i).annualRate;
+            tableContent[i][3] = "" + SRList.get(i).standardAnnualRate;
             tableContent[i][4] = "" + SRList.get(i).positionDaysRate;
             tableContent[i][5] = "" + SRList.get(i).positionAnnualRate;
             tableContent[i][6] = "" + SRList.get(i).tradeTimes;
@@ -41,7 +41,7 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "排名", "参数", "当前资产", "年化率", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
+                    "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
@@ -74,7 +74,7 @@ public class RankTable extends javax.swing.JDialog {
         for (int i = 0; i < rows; i++) {
             jTableRank.setValueAt(SRList.get(i).parameter, i, 1);
             jTableRank.setValueAt(SRList.get(i).currentAsset, i, 2);
-            jTableRank.setValueAt(SRList.get(i).annualRate, i, 3);
+            jTableRank.setValueAt(SRList.get(i).standardAnnualRate, i, 3);
             jTableRank.setValueAt(SRList.get(i).positionDaysRate, i, 4);
             jTableRank.setValueAt(SRList.get(i).positionAnnualRate, i, 5);
             jTableRank.setValueAt(SRList.get(i).tradeTimes, i, 6);
@@ -110,7 +110,7 @@ public class RankTable extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "排名", "参数", "当前资产", "年化率", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
+                "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -166,7 +166,7 @@ public class RankTable extends javax.swing.JDialog {
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.currentAsset).compareTo(arg0.currentAsset));
                     break;
                 case 3:
-                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.annualRate).compareTo(arg0.annualRate));
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.standardAnnualRate).compareTo(arg0.standardAnnualRate));
                     break;
                 case 4:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg0.positionDaysRate).compareTo(arg1.positionDaysRate));
