@@ -182,14 +182,14 @@ public class BRM {
     public double getPositionAnnualRate() {
         double totalYield = 0;
         for (Double yield : yieldList) {
-            totalYield += yield / 100;
+            totalYield += yield;
         }
         int totalDays = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
             totalDays += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
         }
 
-        return (double) 100 * (Math.pow(totalYield + 1, (double) 365.25 / totalDays) - 1);
+        return totalYield * 365.25 / totalDays;
     }
 
     public double getEvenEarningRate() {
