@@ -169,7 +169,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelStockName.setFont(new java.awt.Font("微软雅黑", 0, 16)); // NOI18N
-        jLabelStockName.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelStockName.setForeground(new java.awt.Color(204, 0, 204));
         jLabelStockName.setText("上证指数(000001)");
         jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
@@ -373,8 +373,8 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 238));
 
         jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelClose.setForeground(new java.awt.Color(200, 0, 0));
-        jLabelClose.setText("收盘：");
+        jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
+        jLabelClose.setText("收盘：--");
         jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
         jButtonTradeChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -1058,6 +1058,8 @@ public class MainView extends javax.swing.JFrame {
         }
         jTextFieldSDate.setText(dateList.get(0));
         jTextFieldEDate.setText(dateList.get(rows - 1));
+        jLabelDate.setText("日期：----/--/--");
+        jLabelClose.setText("收盘：--");
         evaluated = false;
     }
 
@@ -1355,7 +1357,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelDate.setText("日期：" + dateList.get(idx));
         double margin = 100 * (closeList.get(idx) - closeList.get(idx - 1)) / closeList.get(idx - 1);
         if (margin > 0) {
-            jLabelClose.setForeground(new java.awt.Color(200, 0, 0));
+            jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
         } else {
             jLabelClose.setForeground(new java.awt.Color(0, 150, 0));
         }
