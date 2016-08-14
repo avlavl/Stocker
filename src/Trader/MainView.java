@@ -804,6 +804,8 @@ public class MainView extends javax.swing.JFrame {
                 int tp1 = Integer.parseInt(jTextFieldTp1.getText());
                 int tp2 = Integer.parseInt(jTextFieldTp2.getText());
                 ret = sysLMEva(mode, days, status, tp1, tp2);
+                parseStatus(livermore.STATUST);
+                lmLogger(livermore);
                 break;
         }
 
@@ -1128,7 +1130,7 @@ public class MainView extends javax.swing.JFrame {
     private boolean sysLMEva(int mode, int days, boolean status, int t1, int t2) {
         MALine ma = new MALine(priceList);
         ArrayList<Double> maList = ma.getMAList(days);
-        Livermore livermore = new Livermore(status, t1, t2);
+        livermore = new Livermore(status, t1, t2);
         strategy = new Strategy(this);
         strategy.livermore = livermore;
 
@@ -1138,7 +1140,7 @@ public class MainView extends javax.swing.JFrame {
             }
             for (int i = 0; i < rows; i++) {
                 String message = livermore.arithmetic(maList.get(i));
-                lmLogger(i, livermore, message);
+                lmFileLogger(i, livermore, message);
                 if ((i >= sIdx) && (i <= eIdx)) {
                     if (mode == 0) {
                         strategy.lmLongTrade(i);
@@ -1168,7 +1170,6 @@ public class MainView extends javax.swing.JFrame {
 
         brm = new BRM(this);
         fundList = brm.synthesize();
-        parseStatus(livermore.STATUST);
         return true;
     }
 
@@ -1454,7 +1455,7 @@ public class MainView extends javax.swing.JFrame {
         jTextAreaMain.append(System.getProperty("line.separator"));
     }
 
-    protected void lmLogger(int idx, Livermore lm, String msg) {
+    protected void lmFileLogger(int idx, Livermore lm, String msg) {
         if (!msg.equals("") && jCheckBoxRecord.isSelected()) {
             fileLogger("[" + dateList.get(idx) + "] " + msg);
             if (!msg.contains("趋势可能改变")) {
@@ -1467,6 +1468,16 @@ public class MainView extends javax.swing.JFrame {
                 fileLogger(String.format("次级回升：%-8.2f\t\t次级回升：%-8.2f", lm.minorRiseUVal, lm.minorRiseDVal));
             }
         }
+    }
+
+    protected void lmLogger(Livermore lm) {
+        msgLogger(String.format("上关键点：%-8.2f\t\t上关键点：%-8.2f", lm.riseKeyHead, lm.fallKeyHead));
+        msgLogger(String.format("下关键点：%-8.2f\t\t下关键点：%-8.2f", lm.riseKeyFoot, lm.fallKeyFoot));
+        msgLogger(String.format("主上升值：%-8.2f\t\t主下降值：%-8.2f", lm.mainRiseVal, lm.mainFallVal));
+        msgLogger(String.format("自然回撤：%-8.2f\t\t自然回撤：%-8.2f", lm.normalFallUVal, lm.normalFallDVal));
+        msgLogger(String.format("自然回升：%-8.2f\t\t自然回升：%-8.2f", lm.normalRiseUVal, lm.normalRiseDVal));
+        msgLogger(String.format("次级回撤：%-8.2f\t\t次级回撤：%-8.2f", lm.minorFallUVal, lm.minorFallDVal));
+        msgLogger(String.format("次级回升：%-8.2f\t\t次级回升：%-8.2f", lm.minorRiseUVal, lm.minorRiseDVal));
     }
 
     public void msgLogger(String str) {
@@ -1539,6 +1550,7 @@ public class MainView extends javax.swing.JFrame {
 
     public Strategy strategy;
     public BRM brm;
+    Livermore livermore;
     public boolean evaluated = false;
     public RankTable rankTable;
     public int brmMode = 0;
