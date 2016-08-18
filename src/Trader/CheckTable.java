@@ -17,9 +17,11 @@ public class CheckTable extends javax.swing.JDialog {
     /**
      * Creates new form CheckTable
      */
-    public CheckTable(java.awt.Frame parent, boolean modal, ArrayList<CheckData> list) {
+    public CheckTable(java.awt.Frame parent, boolean modal, MainView mv) {
         super(parent, modal);
         initComponents();
+        mainView = mv;
+        ArrayList<CheckData> list = mv.chkDataList;
 
         int size = list.size();
         String[][] tableContent = new String[size][6];
@@ -96,12 +98,31 @@ public class CheckTable extends javax.swing.JDialog {
             }
         });
         jTableCheck.setRowHeight(20);
+        jTableCheck.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCheckMouseClicked(evt);
+            }
+        });
         jScrollPaneCheck.setViewportView(jTableCheck);
 
         getContentPane().add(jScrollPaneCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTableCheckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCheckMouseClicked
+        if (evt.getClickCount() > 1) {
+            jTableCheck.setRowSelectionAllowed(true);
+            int index = jTableCheck.getSelectedRow();
+            String mode = (String) jTableCheck.getValueAt(index, 0);
+            String para = (String) jTableCheck.getValueAt(index, 1);
+            mainView.tradeModeEva(mode, para);
+        } else {
+            jTableCheck.setRowSelectionAllowed(false);
+        }
+    }//GEN-LAST:event_jTableCheckMouseClicked
+
+    private MainView mainView;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPaneCheck;

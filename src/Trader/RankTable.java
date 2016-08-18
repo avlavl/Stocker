@@ -21,6 +21,7 @@ public class RankTable extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         mainView = mv;
+        tradeMode = mv.tradeMode;
 
         SRList = list;
         jTableRank.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
@@ -151,7 +152,7 @@ public class RankTable extends javax.swing.JDialog {
         if (evt.getClickCount() > 1) {
             int index = jTableRank.getSelectedRow();
             String para = (String) jTableRank.getValueAt(index, 1);
-            mainView.paraEva(para);
+            mainView.tradeModeEva(tradeMode, para);
         }
     }//GEN-LAST:event_jTableRankMouseClicked
 
@@ -193,6 +194,7 @@ public class RankTable extends javax.swing.JDialog {
 
     private MainView mainView;
     private ArrayList<SystemReport> SRList;
+    private String tradeMode;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPaneRank;
