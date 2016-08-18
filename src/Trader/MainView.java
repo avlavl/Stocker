@@ -30,6 +30,20 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class MainView extends javax.swing.JFrame {
 
+    public class CheckData {
+
+        public CheckData(String m, String para) {
+            mode = m;
+            parameter = para;
+        }
+        public String mode;
+        public String parameter;
+        public String status;
+        public int days;
+        public double key;
+        public double percent;
+    }
+
     /**
      * Creates new form StockerView
      */
@@ -124,6 +138,7 @@ public class MainView extends javax.swing.JFrame {
         jButtonFilterStart = new javax.swing.JButton();
         jButtonFilterCheck = new javax.swing.JButton();
         jCheckBoxBrmMode = new javax.swing.JCheckBox();
+        jButtonObjectCheck = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -506,6 +521,16 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jPanelMain.add(jCheckBoxBrmMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 305, -1, -1));
+
+        jButtonObjectCheck.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonObjectCheck.setText("标的检测");
+        jButtonObjectCheck.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonObjectCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonObjectCheckActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonObjectCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, 30));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 445));
 
@@ -1006,6 +1031,103 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBoxBrmModeActionPerformed
 
+    private void jButtonObjectCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObjectCheckActionPerformed
+        ArrayList<String> modeList = new ArrayList<>();
+        chkDataList = new ArrayList<>();
+
+        try {
+            File file = new File("ini/" + stockName + ".ini");
+            if (!file.exists()) {
+                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + stockName + ".ini\"文件！");
+                return;
+            }
+            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.matches("^[A-Z].*")) {
+                    modeList.add(line);
+                }
+            }
+            br.close();
+            isr.close();
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        int bp;
+        int mas, mal, tp1, tp2;
+        for (String line : modeList) {
+            String[] words = line.split("\t");
+            switch (words[0]) {
+                case "MA":
+                    mas = Integer.parseInt(words[1]);
+                    mal = Integer.parseInt(words[2]);
+                    sysMAChk(mas, mal);
+                    break;
+                case "LML":
+                    tp1 = Integer.parseInt(words[1]);
+                    tp2 = Integer.parseInt(words[2]);
+                    sysLMChk(0, tp1, tp2);
+                    break;
+                case "LMS":
+                    tp1 = Integer.parseInt(words[1]);
+                    tp2 = Integer.parseInt(words[2]);
+                    sysLMChk(1, tp1, tp2);
+                    break;
+                case "BAR":
+                    bp = Integer.parseInt(words[1]);
+                    sysMACDChk(0, bp);
+                    break;
+                case "DIF":
+                    bp = Integer.parseInt(words[1]);
+                    sysMACDChk(1, bp);
+                    break;
+                case "BARMA":
+                    bp = Integer.parseInt(words[1]);
+                    mas = Integer.parseInt(words[2]);
+                    mal = Integer.parseInt(words[3]);
+                    sysMACDMAChk(0, bp, mas, mal);
+                    break;
+                case "DIFMA":
+                    bp = Integer.parseInt(words[1]);
+                    mas = Integer.parseInt(words[2]);
+                    mal = Integer.parseInt(words[3]);
+                    sysMACDMAChk(1, bp, mas, mal);
+                    break;
+                case "BARLML":
+                    bp = Integer.parseInt(words[1]);
+                    tp1 = Integer.parseInt(words[2]);
+                    tp2 = Integer.parseInt(words[3]);
+                    sysMACDLMChk(0, bp, tp1, tp2);
+                    break;
+                case "BARLMS":
+                    bp = Integer.parseInt(words[1]);
+                    tp1 = Integer.parseInt(words[2]);
+                    tp2 = Integer.parseInt(words[3]);
+                    sysMACDLMChk(1, bp, tp1, tp2);
+                    break;
+                case "DIFLML":
+                    bp = Integer.parseInt(words[1]);
+                    tp1 = Integer.parseInt(words[2]);
+                    tp2 = Integer.parseInt(words[3]);
+                    sysMACDLMChk(2, bp, tp1, tp2);
+                    break;
+                case "DIFLMS":
+                    bp = Integer.parseInt(words[1]);
+                    tp1 = Integer.parseInt(words[2]);
+                    tp2 = Integer.parseInt(words[3]);
+                    sysMACDLMChk(3, bp, tp1, tp2);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        CheckTable ct = new CheckTable(this, false, chkDataList);
+    }//GEN-LAST:event_jButtonObjectCheckActionPerformed
+
     /**
      ********************* Start of User-defined function ********************
      */
@@ -1249,6 +1371,172 @@ public class MainView extends javax.swing.JFrame {
         brm = new BRM(this);
         fundList = brm.synthesize();
         return true;
+    }
+
+    private void sysMACDChk(int mode, int bp) {
+        String para = String.format("%d", bp);
+        String modeString = (mode == 0) ? "BAR" : "DIF";
+        CheckData chkData = new CheckData(modeString, para);
+        MACD macd = new MACD(priceList, 12, 26, 9);
+        macd.init();
+        strategy = new Strategy(this);
+        strategy.macd = macd;
+
+        for (int i = 0; i < rows; i++) {
+            if (mode == 0) {
+                strategy.barCrossTrade(i, bp);
+            } else {
+                strategy.difCrossTrade(i, bp);
+            }
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.size() > spIndexList.size()) {
+            chkData.status = "买入";
+            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+        } else {
+            chkData.status = "卖出";
+            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+        }
+
+        chkData.key = macd.getMACDKey(mode, bp);
+        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
+        chkDataList.add(chkData);
+    }
+
+    private void sysMAChk(int mas, int mal) {
+        String para = String.format("%d,%d", mas, mal);
+        CheckData chkData = new CheckData("MA", para);
+        MALine ma = new MALine(priceList);
+        strategy = new Strategy(this);
+        strategy.ma = ma;
+
+        ArrayList<Double> masList = ma.getMAList(mas);
+        ArrayList<Double> malList = ma.getMAList(mal);
+        for (int i = 0; i < rows; i++) {
+            strategy.maCrossTrade(i, masList, malList);
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.size() > spIndexList.size()) {
+            chkData.status = "买入";
+            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+        } else {
+            chkData.status = "卖出";
+            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+        }
+
+        chkData.key = ma.getMAKey(mas, mal);
+        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
+        chkDataList.add(chkData);
+    }
+
+    private void sysLMChk(int mode, int t1, int t2) {
+        String para = String.format("%d,%d", t1, t2);
+        String modeString = (mode == 0) ? "LML" : "LMS";
+        CheckData chkData = new CheckData(modeString, para);
+        livermore = new Livermore(true, t1, t2);
+        strategy = new Strategy(this);
+        strategy.livermore = livermore;
+
+        for (int i = 0; i < rows; i++) {
+            livermore.arithmetic(priceList.get(i));
+            if (mode == 0) {
+                strategy.lmLongTrade(i);
+            } else {
+                strategy.lmShortTrade(i);
+            }
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.size() > spIndexList.size()) {
+            chkData.status = "买入";
+            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+        } else {
+            chkData.status = "卖出";
+            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+        }
+
+        chkData.key = livermore.getLMKey(mode);
+        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
+        chkDataList.add(chkData);
+    }
+
+    private void sysMACDMAChk(int mode, int bp, int mas, int mal) {
+        String para = String.format("%d,%d,%d", bp, mas, mal);
+        String modeString = (mode == 0) ? "BARMA" : "DIFMA";
+        CheckData chkData = new CheckData(modeString, para);
+        MACD macd = new MACD(priceList, 12, 26, 9);
+        macd.init();
+        MALine ma = new MALine(priceList);
+        strategy = new Strategy(this);
+        strategy.macd = macd;
+        strategy.ma = ma;
+
+        ArrayList<Double> masList = ma.getMAList(mas);
+        ArrayList<Double> malList = ma.getMAList(mal);
+        for (int i = 0; i < rows; i++) {
+            if (mode == 0) {
+                strategy.barMACrossTrade(i, bp, masList, malList);
+            } else {
+                strategy.difMACrossTrade(i, bp, masList, malList);
+            }
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.size() > spIndexList.size()) {
+            chkData.status = "买入";
+            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+        } else {
+            chkData.status = "卖出";
+            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+        }
+
+        double maKey = ma.getMAKey(mas, mal);
+        double macdKey = macd.getMACDKey(mode, bp);
+        chkData.key = (maKey > macdKey) ? maKey : macdKey;
+        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
+        chkDataList.add(chkData);
+    }
+
+    private void sysMACDLMChk(int mode, int bp, int t1, int t2) {
+        String para = String.format("%d,%d,%d", bp, t1, t2);
+        String modeString = (((mode & 0x02) == 0) ? "BAR" : "DIF") + (((mode & 0x01) == 0) ? "LML" : "LMS");
+        CheckData chkData = new CheckData(modeString, para);
+        MACD macd = new MACD(priceList, 12, 26, 9);
+        macd.init();
+        livermore = new Livermore(true, t1, t2);
+        strategy = new Strategy(this);
+        strategy.macd = macd;
+        strategy.livermore = livermore;
+
+        for (int i = 0; i < rows; i++) {
+            livermore.arithmetic(priceList.get(i));
+            if (mode == 0) {
+                strategy.barLMLCrossTrade(i, bp);
+            } else if (mode == 1) {
+                strategy.barLMSCrossTrade(i, bp);
+            } else if (mode == 2) {
+                strategy.difLMLCrossTrade(i, bp);
+            } else if (mode == 3) {
+                strategy.difLMSCrossTrade(i, bp);
+            }
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.size() > spIndexList.size()) {
+            chkData.status = "买入";
+            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+        } else {
+            chkData.status = "卖出";
+            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+        }
+
+        double lmKey = livermore.getLMKey(mode & 0x01);
+        double macdKey = macd.getMACDKey(mode & 0x02, bp);
+        chkData.key = (lmKey > macdKey) ? lmKey : macdKey;
+        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
+        chkDataList.add(chkData);
     }
 
     public void paraEva(String str) {
@@ -1555,12 +1843,15 @@ public class MainView extends javax.swing.JFrame {
     public RankTable rankTable;
     public int brmMode = 0;
 
+    public ArrayList<CheckData> chkDataList;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
     private javax.swing.ButtonGroup buttonGroupMACD;
     private javax.swing.ButtonGroup buttonGroupMacdAdd;
     private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;
+    private javax.swing.JButton jButtonObjectCheck;
     private javax.swing.JButton jButtonTradeChart;
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;

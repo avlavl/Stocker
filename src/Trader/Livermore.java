@@ -277,6 +277,41 @@ public class Livermore {
         }
     }
 
+    public double getLMKey(int mode) {
+        if (mode == 0) {
+            return getLMLKey();
+        } else {
+            return getLMSKey();
+        }
+    }
+
+    public double getLMLKey() {
+        if (STATUST > 0) {
+            double key = riseKeyFoot * (100 - TP2) / 100;
+            return (key > fallKeyFoot) ? key : fallKeyFoot;
+        } else {
+            if (fallKeyHead == 0) {
+                return riseKeyHead;
+            }
+            double key = fallKeyHead * (100 + TP2) / 100;
+            return (key < riseKeyHead) ? key : riseKeyHead;
+        }
+    }
+
+    public double getLMSKey() {
+        if (STATUST == 1) {
+            return mainRiseVal * (100 - TP1) / 100;
+        } else if (STATUST > 1) {
+            return mainRiseVal;
+        } else {
+            if (fallKeyHead == 0) {
+                return mainRiseVal;
+            }
+            double key = fallKeyHead * (100 + TP2) / 100;
+            return (key < mainRiseVal) ? key : mainRiseVal;
+        }
+    }
+
     public boolean enterRiseTrend() {
         return (STATUSY < 0) && (STATUST > 0);
     }

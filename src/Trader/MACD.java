@@ -49,6 +49,20 @@ public class MACD {
         }
     }
 
+    public double getMACDKey(int mode, double bp) {
+        double es = emasList.get(emasList.size() - 1);
+        double el = emalList.get(emalList.size() - 1);
+        double de = deaList.get(deaList.size() - 1);
+        double key;
+        if (mode == 0) {
+            double val = bp * (m + 1) / (2 * (m - 1)) + de;
+            key = (val * (s + 1) * (l + 1) - es * (s - 1) * (l + 1) + el * (l - 1) * (s + 1)) / ((l - s) * 2);
+        } else {
+            key = (bp * (s + 1) * (l + 1) - es * (s - 1) * (l + 1) + el * (l - 1) * (s + 1)) / ((l - s) * 2);
+        }
+        return key;
+    }
+
     private final int s;
     private final int l;
     private final int m;

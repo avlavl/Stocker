@@ -27,5 +27,15 @@ public class MALine {
         return maList;
     }
 
+    public double getMAKey(int s, int l) {
+        double lm = MA(pList, pList.size() - 1, l - 1);
+        if (s > 1) {
+            double sm = MA(pList, pList.size() - 1, s - 1);
+            double key = (lm * (l - 1) * s - sm * (s - 1) * l) / (l - s);
+            return key;
+        }
+        return lm;
+    }
+
     public ArrayList<Double> pList = new ArrayList<>();
 }
