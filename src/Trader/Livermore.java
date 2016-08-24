@@ -55,6 +55,9 @@ public class Livermore {
             normalFallUVal = price;
         } else if (price > mainRiseVal) {
             STATUST = 1;
+            if (normalFallUVal > riseKeyVal) {
+                riseKeyVal = normalFallUVal;
+            }
             resetValue(1);
             mainRiseVal = price;
             msg = "↗↗↗ 恢复上升趋势";
@@ -210,6 +213,9 @@ public class Livermore {
             normalRiseDVal = price;
         } else if (price < mainFallVal) {
             STATUST = -1;
+            if ((normalRiseDVal < fallKeyVal) || (fallKeyVal == 0)) {
+                fallKeyVal = normalRiseDVal;
+            }
             resetValue(1);
             mainFallVal = price;
             msg = "↘↘↘ 恢复下降趋势";
