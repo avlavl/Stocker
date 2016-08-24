@@ -1834,8 +1834,7 @@ public class MainView extends javax.swing.JFrame {
         if (!msg.equals("") && jCheckBoxRecord.isSelected()) {
             fileLogger("[" + dateList.get(idx) + "] " + msg);
             if (!msg.contains("趋势可能改变")) {
-                fileLogger(String.format("上关键点：%-8.2f\t\t上关键点：%-8.2f", lm.riseKeyHead, lm.fallKeyHead));
-                fileLogger(String.format("下关键点：%-8.2f\t\t下关键点：%-8.2f", lm.riseKeyFoot, lm.fallKeyFoot));
+                fileLogger(String.format("上关键点：%-8.2f\t\t下关键点：%-8.2f", lm.riseKeyVal, lm.fallKeyVal));
                 fileLogger(String.format("主上升值：%-8.2f\t\t主下降值：%-8.2f", lm.mainRiseVal, lm.mainFallVal));
                 fileLogger(String.format("自然回撤：%-8.2f\t\t自然回撤：%-8.2f", lm.normalFallUVal, lm.normalFallDVal));
                 fileLogger(String.format("自然回升：%-8.2f\t\t自然回升：%-8.2f", lm.normalRiseUVal, lm.normalRiseDVal));
@@ -1846,8 +1845,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     protected void lmLogger(Livermore lm) {
-        msgLogger(String.format("上关键点：%-8.2f\t\t上关键点：%-8.2f", lm.riseKeyHead, lm.fallKeyHead));
-        msgLogger(String.format("下关键点：%-8.2f\t\t下关键点：%-8.2f", lm.riseKeyFoot, lm.fallKeyFoot));
+        msgLogger(String.format("上关键点：%-8.2f\t\t下关键点：%-8.2f", lm.riseKeyVal, lm.fallKeyVal));
         msgLogger(String.format("主上升值：%-8.2f\t\t主下降值：%-8.2f", lm.mainRiseVal, lm.mainFallVal));
         msgLogger(String.format("自然回撤：%-8.2f\t\t自然回撤：%-8.2f", lm.normalFallUVal, lm.normalFallDVal));
         msgLogger(String.format("自然回升：%-8.2f\t\t自然回升：%-8.2f", lm.normalRiseUVal, lm.normalRiseDVal));
