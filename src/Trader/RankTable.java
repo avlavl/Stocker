@@ -24,9 +24,10 @@ public class RankTable extends javax.swing.JDialog {
         tradeMode = mv.tradeMode;
 
         SRList = list;
+        rankSize = list.size();
         jTableRank.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTableRank.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        int rows = (list.size() > 20) ? 20 : list.size();
+        int rows = (rankSize > 20) ? 20 : rankSize;
         String[][] tableContent = new String[rows][9];
         for (int i = 0; i < rows; i++) {
             tableContent[i][0] = "" + (i + 1);
@@ -70,17 +71,18 @@ public class RankTable extends javax.swing.JDialog {
         setVisible(true);
     }
 
-    public void updateTable() {
-        int rows = (SRList.size() > 20) ? 20 : SRList.size();
+    public void updateTable(int idx) {
+        int rows = (rankSize > 20) ? 20 : rankSize;
         for (int i = 0; i < rows; i++) {
-            jTableRank.setValueAt(SRList.get(i).parameter, i, 1);
-            jTableRank.setValueAt(SRList.get(i).currentAsset, i, 2);
-            jTableRank.setValueAt(SRList.get(i).standardAnnualRate, i, 3);
-            jTableRank.setValueAt(SRList.get(i).positionDaysRate, i, 4);
-            jTableRank.setValueAt(SRList.get(i).positionAnnualRate, i, 5);
-            jTableRank.setValueAt(SRList.get(i).tradeTimes, i, 6);
-            jTableRank.setValueAt(SRList.get(i).evenEarningRate, i, 7);
-            jTableRank.setValueAt(SRList.get(i).expectation, i, 8);
+            jTableRank.setValueAt(i + idx + 1, i, 0);
+            jTableRank.setValueAt(SRList.get(i + idx).parameter, i, 1);
+            jTableRank.setValueAt(SRList.get(i + idx).currentAsset, i, 2);
+            jTableRank.setValueAt(SRList.get(i + idx).standardAnnualRate, i, 3);
+            jTableRank.setValueAt(SRList.get(i + idx).positionDaysRate, i, 4);
+            jTableRank.setValueAt(SRList.get(i + idx).positionAnnualRate, i, 5);
+            jTableRank.setValueAt(SRList.get(i + idx).tradeTimes, i, 6);
+            jTableRank.setValueAt(SRList.get(i + idx).evenEarningRate, i, 7);
+            jTableRank.setValueAt(SRList.get(i + idx).expectation, i, 8);
         }
     }
 
@@ -128,6 +130,11 @@ public class RankTable extends javax.swing.JDialog {
                 jTableRankHeaderMouseClicked(evt);
             }
         });
+        jTableRank.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                jTableRankMouseWheelMoved(evt);
+            }
+        });
         jTableRank.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableRankMouseClicked(evt);
@@ -155,6 +162,18 @@ public class RankTable extends javax.swing.JDialog {
             mainView.tradeModeEva(tradeMode, para);
         }
     }//GEN-LAST:event_jTableRankMouseClicked
+
+    private void jTableRankMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jTableRankMouseWheelMoved
+        if (evt.getWheelRotation() > 0) {
+            if (rankIndex < rankSize - 20) {
+                rankIndex += 1;
+                updateTable(rankIndex);
+            }
+        } else if (rankIndex > 0) {
+            rankIndex -= 1;
+            updateTable(rankIndex);
+        }
+    }//GEN-LAST:event_jTableRankMouseWheelMoved
 
     private void jTableRankHeaderMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() > 1) {
@@ -187,14 +206,16 @@ public class RankTable extends javax.swing.JDialog {
                 default:
                     break;
             }
-
-            updateTable();
+            rankIndex = 0;
+            updateTable(rankIndex);
         }
     }
 
     private MainView mainView;
     private ArrayList<SystemReport> SRList;
     private String tradeMode;
+    private int rankIndex = 0;
+    private int rankSize = 1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPaneRank;
