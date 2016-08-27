@@ -135,7 +135,7 @@ public class BRM {
         return (double) 100 * (ePrice - sPrice) / sPrice;
     }
 
-    public double getEarningRate() {
+    public double getSystemRate() {
         double profit = getNetProfit();
         return (double) 100 * profit / initAsset;
     }
@@ -143,40 +143,6 @@ public class BRM {
     public double getAnnualRate(double years) {
         double rate = (initAsset + getNetProfit()) / initAsset;
         return (double) 100 * (Math.pow(rate, (double) 1 / years) - 1);
-    }
-
-    public double getGainProfit() {
-        double profit = 0;
-        for (Double agio : agioList) {
-            if (agio > 0) {
-                profit += agio;
-            }
-        }
-        return profit;
-    }
-
-    public double getLossProfit() {
-        double profit = 0;
-        for (Double agio : agioList) {
-            if (agio <= 0) {
-                profit += agio;
-            }
-        }
-        return profit;
-    }
-
-    public double getMaxGain() {
-        if (yieldList.size() > 0) {
-            return (double) Collections.max(yieldList);
-        }
-        return 0;
-    }
-
-    public double getMaxLoss() {
-        if (yieldList.size() > 0) {
-            return (double) Collections.min(yieldList);
-        }
-        return 0;
     }
 
     public double getStandardAnnualRate() {
@@ -268,6 +234,116 @@ public class BRM {
         double winRate = getWinRate() / 100;
         double odds = getOdds();
         return (double) (winRate * odds - (1 - winRate));
+    }
+
+    public double getGainProfit() {
+        double profit = 0;
+        for (Double agio : agioList) {
+            if (agio > 0) {
+                profit += agio;
+            }
+        }
+        return profit;
+    }
+
+    public double getLossProfit() {
+        double profit = 0;
+        for (Double agio : agioList) {
+            if (agio <= 0) {
+                profit += agio;
+            }
+        }
+        return profit;
+    }
+
+    public double getMaxGain() {
+        if (yieldList.size() > 0) {
+            return (double) ((Collections.max(yieldList) > 0) ? Collections.max(yieldList) : 0);
+        }
+        return 0;
+    }
+
+    public double getMaxLoss() {
+        if (yieldList.size() > 0) {
+            return (double) ((Collections.min(yieldList) > 0) ? 0 : Collections.min(yieldList));
+        }
+        return 0;
+    }
+
+    public int getMaxGainTimes() {
+        ArrayList<Integer> timesList = new ArrayList<>();
+        int times = 0;
+        for (Double agio : agioList) {
+            if (agio > 0) {
+                times++;
+            } else {
+                if (times != 0) {
+                    timesList.add(times);
+                }
+                times = 0;
+            }
+        }
+        if (times != 0) {
+            timesList.add(times);
+        }
+        return (timesList.size() > 0) ? Collections.max(timesList) : 0;
+    }
+
+    public int getMaxLossTimes() {
+        ArrayList<Integer> timesList = new ArrayList<>();
+        int times = 0;
+        for (Double agio : agioList) {
+            if (agio <= 0) {
+                times++;
+            } else {
+                if (times != 0) {
+                    timesList.add(times);
+                }
+                times = 0;
+            }
+        }
+        if (times != 0) {
+            timesList.add(times);
+        }
+        return (timesList.size() > 0) ? Collections.max(timesList) : 0;
+    }
+
+    public double getMaxGainRatio() {
+        ArrayList<Double> ratioList = new ArrayList<>();
+        double ratio = 0;
+        for (Double yield : yieldList) {
+            if (yield > 0) {
+                ratio += yield;
+            } else {
+                if (ratio != 0) {
+                    ratioList.add(ratio);
+                }
+                ratio = 0;
+            }
+        }
+        if (ratio != 0) {
+            ratioList.add(ratio);
+        }
+        return (ratioList.size() > 0) ? Collections.max(ratioList) : 0;
+    }
+
+    public double getMaxLossRatio() {
+        ArrayList<Double> ratioList = new ArrayList<>();
+        double ratio = 0;
+        for (Double yield : yieldList) {
+            if (yield <= 0) {
+                ratio += yield;
+            } else {
+                if (ratio != 0) {
+                    ratioList.add(ratio);
+                }
+                ratio = 0;
+            }
+        }
+        if (ratio != 0) {
+            ratioList.add(ratio);
+        }
+        return (ratioList.size() > 0) ? Collections.min(ratioList) : 0;
     }
 
     private MainView mainView;

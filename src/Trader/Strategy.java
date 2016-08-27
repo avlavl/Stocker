@@ -147,7 +147,7 @@ public class Strategy {
                 times++;
             }
         }
-        return (double) days / times;
+        return (double) ((times > 0) ? days / times : 0);
     }
 
     public double getMeanLossDays() {
@@ -159,7 +159,7 @@ public class Strategy {
                 times++;
             }
         }
-        return (double) days / times;
+        return (double) ((times > 0) ? days / times : 0);
     }
 
     private MainView mainView;
