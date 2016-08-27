@@ -65,7 +65,7 @@
                 <Column editable="false" title="&#x6301;&#x4ed3;&#x65f6;&#x95f4;&#x6bd4;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x6301;&#x4ed3;&#x5e74;&#x5316;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x6b21;&#x6570;" type="java.lang.Object"/>
-                <Column editable="false" title="&#x5355;&#x6b21;&#x5747;&#x6536;&#x76ca;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x6700;&#x5927;&#x8fde;&#x4e8f;&#x6bd4;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x6570;&#x5b66;&#x671f;&#x671b;" type="java.lang.Object"/>
               </Table>
             </Property>

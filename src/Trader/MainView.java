@@ -878,7 +878,6 @@ public class MainView extends javax.swing.JFrame {
                                         if (sysMACDMAEva(mode, i, j, k)) {
                                             String para = String.format("%3d,%2d,%-3d", i, j, k);
                                             sr = updateSimpleReport(para, strategy, brm);
-                                            updateTextArea(sr);
                                             srList.add(sr);
                                         }
                                     }
@@ -900,7 +899,6 @@ public class MainView extends javax.swing.JFrame {
                                         if (sysMACDLMEva(mode, i, mode1, days, status, j, k)) {
                                             String para = String.format("%3d,%2d,%-2d", i, j, k);
                                             sr = updateSimpleReport(para, strategy, brm);
-                                            updateTextArea(sr);
                                             srList.add(sr);
                                         }
                                     }
@@ -913,7 +911,6 @@ public class MainView extends javax.swing.JFrame {
                         if (sysMACDEva(mode, i)) {
                             String para = String.format("%3d", i);
                             sr = updateSimpleReport(para, strategy, brm);
-                            updateTextArea(sr);
                             srList.add(sr);
                         }
                     }
@@ -931,7 +928,6 @@ public class MainView extends javax.swing.JFrame {
                             if (sysMAEva(i, j)) {
                                 String para = String.format("%2d,%-3d", i, j);
                                 sr = updateSimpleReport(para, strategy, brm);
-                                updateTextArea(sr);
                                 srList.add(sr);
                             }
                         }
@@ -952,7 +948,6 @@ public class MainView extends javax.swing.JFrame {
                             if (sysLMEva(mode, days, status, i, j)) {
                                 String para = String.format("%2d,%-2d", i, j);
                                 sr = updateSimpleReport(para, strategy, brm);
-                                updateTextArea(sr);
                                 srList.add(sr);
                             }
                         }
@@ -1792,7 +1787,7 @@ public class MainView extends javax.swing.JFrame {
         sr.positionDaysRate = (float) stg.getPositionDaysRate();
         sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
         sr.tradeTimes = brm.getTradeTimes();
-        sr.evenEarningRate = (float) brm.getEvenEarningRate();
+        sr.maxLossRatio = (float) brm.getMaxLossRatio();
         sr.expectation = (float) brm.getExpectation();
 
         return sr;
@@ -1832,18 +1827,6 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(sr.maxLossTimes + "次", 13, 3);
         jTablePoint.setValueAt(sr.maxGainRatio + "%", 14, 3);
         jTablePoint.setValueAt(sr.maxLossRatio + "%", 15, 3);
-    }
-
-    protected void updateTextArea(SystemReport sr) {
-        jTextAreaMain.append(String.format("参数:%s  ", sr.parameter));
-        jTextAreaMain.append(String.format("当前资产:%-8.2f  ", sr.currentAsset));
-        jTextAreaMain.append(String.format("标准年化:%5.2f%%  ", sr.standardAnnualRate));
-        jTextAreaMain.append(String.format("持仓时间比:%5.2f%%  ", sr.positionDaysRate));
-        jTextAreaMain.append(String.format("持仓年化:%6.2f%%  ", sr.positionAnnualRate));
-        jTextAreaMain.append(String.format("交易次数:%-3d  ", sr.tradeTimes));
-        jTextAreaMain.append(String.format("单次均收益:%5.2f%%  ", sr.evenEarningRate));
-        jTextAreaMain.append(String.format("数学期望:%5.2f", sr.expectation));
-        jTextAreaMain.append(System.getProperty("line.separator"));
     }
 
     protected void lmFileLogger(int idx, Livermore lm, String msg) {

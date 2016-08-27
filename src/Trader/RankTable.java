@@ -37,13 +37,13 @@ public class RankTable extends javax.swing.JDialog {
             tableContent[i][4] = "" + SRList.get(i).positionDaysRate;
             tableContent[i][5] = "" + SRList.get(i).positionAnnualRate;
             tableContent[i][6] = "" + SRList.get(i).tradeTimes;
-            tableContent[i][7] = "" + SRList.get(i).evenEarningRate;
+            tableContent[i][7] = "" + SRList.get(i).maxLossRatio;
             tableContent[i][8] = "" + SRList.get(i).expectation;
         }
         jTableRank.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
+                    "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "最大连亏比", "数学期望"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
@@ -81,7 +81,7 @@ public class RankTable extends javax.swing.JDialog {
             jTableRank.setValueAt(SRList.get(i + idx).positionDaysRate, i, 4);
             jTableRank.setValueAt(SRList.get(i + idx).positionAnnualRate, i, 5);
             jTableRank.setValueAt(SRList.get(i + idx).tradeTimes, i, 6);
-            jTableRank.setValueAt(SRList.get(i + idx).evenEarningRate, i, 7);
+            jTableRank.setValueAt(SRList.get(i + idx).maxLossRatio, i, 7);
             jTableRank.setValueAt(SRList.get(i + idx).expectation, i, 8);
         }
     }
@@ -113,7 +113,7 @@ public class RankTable extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "单次均收益", "数学期望"
+                "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "最大连亏比", "数学期望"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -198,7 +198,7 @@ public class RankTable extends javax.swing.JDialog {
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Integer(arg0.tradeTimes).compareTo(arg1.tradeTimes));
                     break;
                 case 7:
-                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.evenEarningRate).compareTo(arg0.evenEarningRate));
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.maxLossRatio).compareTo(arg0.maxLossRatio));
                     break;
                 case 8:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.expectation).compareTo(arg0.expectation));
