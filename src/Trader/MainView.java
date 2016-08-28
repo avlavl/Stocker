@@ -301,11 +301,11 @@ public class MainView extends javax.swing.JFrame {
         jPanelMA.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextFieldMAS.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldMAS.setText("5");
+        jTextFieldMAS.setText("1");
         jPanelMA.add(jTextFieldMAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 40, -1));
 
         jTextFieldMAL.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldMAL.setText("10");
+        jTextFieldMAL.setText("20");
         jPanelMA.add(jTextFieldMAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 40, -1));
 
         jLabelMATrade.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -342,7 +342,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelLM.add(jLabelTp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
 
         jTextFieldTp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldTp1.setText("9");
+        jTextFieldTp1.setText("8");
         jPanelLM.add(jTextFieldTp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 30, -1));
 
         jLabelTp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -935,19 +935,19 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE3.setText("");
         switch (jTabbedPaneSys.getSelectedIndex()) {
             case 0:
-                jTextFieldPS1.setText("0");
+                jTextFieldPS1.setText("-80");
                 jTextFieldPE1.setText("100");
                 if (jCheckBoxAddSys.isSelected()) {
                     if (jRadioButtonAddMa.isSelected()) {
                         jTextFieldPS2.setText("1");
                         jTextFieldPE2.setText("10");
                         jTextFieldPS3.setText("10");
-                        jTextFieldPE3.setText("120");
+                        jTextFieldPE3.setText("240");
                     } else {
                         jTextFieldPS2.setText("5");
-                        jTextFieldPE2.setText("12");
+                        jTextFieldPE2.setText("18");
                         jTextFieldPS3.setText("2");
-                        jTextFieldPE3.setText("6");
+                        jTextFieldPE3.setText("8");
                     }
                 }
                 break;
@@ -955,13 +955,13 @@ public class MainView extends javax.swing.JFrame {
                 jTextFieldPS1.setText("1");
                 jTextFieldPE1.setText("10");
                 jTextFieldPS2.setText("10");
-                jTextFieldPE2.setText("120");
+                jTextFieldPE2.setText("240");
                 break;
             case 2:
                 jTextFieldPS1.setText("5");
-                jTextFieldPE1.setText("12");
+                jTextFieldPE1.setText("18");
                 jTextFieldPS2.setText("2");
-                jTextFieldPE2.setText("6");
+                jTextFieldPE2.setText("8");
                 break;
         }
     }//GEN-LAST:event_jTabbedPaneSysStateChanged
