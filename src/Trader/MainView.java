@@ -1615,7 +1615,7 @@ public class MainView extends javax.swing.JFrame {
                 jRadioButtonMacdBar.setSelected(true);
                 jTextFieldbp0.setText(paras[0]);
                 jTextFieldbp1.setText(paras[1]);
-                jCheckBoxAddSys.setSelected(false);
+                jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddDif.setSelected(true);
                 break;
             case "BARMA":
