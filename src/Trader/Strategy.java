@@ -19,15 +19,23 @@ public class Strategy {
         pList = mv.priceList;
     }
 
-    public void barCrossTrade(int idx, double value) {
-        boolean b = CROSS(idx, macd.barList, value);
-        boolean s = CROSS(idx, value, macd.barList);
+    public void barCrossTrade(int idx, double bp) {
+        boolean b = CROSS(idx, macd.barList, bp);
+        boolean s = CROSS(idx, bp, macd.barList);
         saveTradeIndex(idx, b, s);
     }
 
-    public void difCrossTrade(int idx, double value) {
-        boolean b = CROSS(idx, macd.difList, value);
-        boolean s = CROSS(idx, value, macd.difList);
+    public void difCrossTrade(int idx, double bp) {
+        boolean b = CROSS(idx, macd.difList, bp);
+        boolean s = CROSS(idx, bp, macd.difList);
+        saveTradeIndex(idx, b, s);
+    }
+
+    public void barDifCrossTrade(int idx, double bp0, double bp1) {
+        boolean c1 = (REFD(macd.barList, idx, 1) > bp0) && (REFD(macd.difList, idx, 1) > bp1);
+        boolean c2 = (macd.barList.get(idx) > bp0) && (macd.difList.get(idx) > bp1);
+        boolean b = (!c1) && c2;
+        boolean s = c1 && (!c2);
         saveTradeIndex(idx, b, s);
     }
 

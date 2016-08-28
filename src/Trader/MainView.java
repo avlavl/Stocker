@@ -88,11 +88,14 @@ public class MainView extends javax.swing.JFrame {
         jPanelMACD = new javax.swing.JPanel();
         jRadioButtonMacdBar = new javax.swing.JRadioButton();
         jRadioButtonMacdDif = new javax.swing.JRadioButton();
-        jLabelbp = new javax.swing.JLabel();
-        jTextFieldbp = new javax.swing.JTextField();
+        jLabelbp0 = new javax.swing.JLabel();
+        jLabelbp1 = new javax.swing.JLabel();
+        jTextFieldbp0 = new javax.swing.JTextField();
+        jTextFieldbp1 = new javax.swing.JTextField();
         jCheckBoxAddSys = new javax.swing.JCheckBox();
         jRadioButtonAddMa = new javax.swing.JRadioButton();
         jRadioButtonAddLm = new javax.swing.JRadioButton();
+        jRadioButtonAddDif = new javax.swing.JRadioButton();
         jPanelMA = new javax.swing.JPanel();
         jTextFieldMAS = new javax.swing.JTextField();
         jTextFieldMAL = new javax.swing.JTextField();
@@ -271,30 +274,43 @@ public class MainView extends javax.swing.JFrame {
         buttonGroupMACD.add(jRadioButtonMacdDif);
         jRadioButtonMacdDif.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jRadioButtonMacdDif.setText("DIF突破交易");
-        jPanelMACD.add(jRadioButtonMacdDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jPanelMACD.add(jRadioButtonMacdDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
-        jLabelbp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelbp.setText("突破点：");
-        jPanelMACD.add(jLabelbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+        jLabelbp0.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelbp0.setText("主突破点：");
+        jPanelMACD.add(jLabelbp0, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jTextFieldbp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldbp.setText("0");
-        jPanelMACD.add(jTextFieldbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 40, -1));
+        jLabelbp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelbp1.setText("副突破点：");
+        jPanelMACD.add(jLabelbp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+
+        jTextFieldbp0.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldbp0.setText("0");
+        jPanelMACD.add(jTextFieldbp0, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 58, 40, -1));
+
+        jTextFieldbp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldbp1.setText("0");
+        jPanelMACD.add(jTextFieldbp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 58, 40, -1));
 
         jCheckBoxAddSys.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jCheckBoxAddSys.setText("叠加均线或趋势参考");
-        jPanelMACD.add(jCheckBoxAddSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jCheckBoxAddSys.setText("叠加系统交易参考");
+        jPanelMACD.add(jCheckBoxAddSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         buttonGroupMacdAdd.add(jRadioButtonAddMa);
         jRadioButtonAddMa.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonAddMa.setSelected(true);
-        jRadioButtonAddMa.setText("叠加均线系统");
-        jPanelMACD.add(jRadioButtonAddMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 115, -1, -1));
+        jRadioButtonAddMa.setText("均线系统");
+        jPanelMACD.add(jRadioButtonAddMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         buttonGroupMacdAdd.add(jRadioButtonAddLm);
         jRadioButtonAddLm.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonAddLm.setText("叠加趋势系统");
-        jPanelMACD.add(jRadioButtonAddLm, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 115, -1, -1));
+        jRadioButtonAddLm.setText("趋势系统");
+        jPanelMACD.add(jRadioButtonAddLm, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+
+        buttonGroupMacdAdd.add(jRadioButtonAddDif);
+        jRadioButtonAddDif.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonAddDif.setSelected(true);
+        jRadioButtonAddDif.setText("DIF系统");
+        jPanelMACD.add(jRadioButtonAddDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jTabbedPaneSys.addTab("MACD", jPanelMACD);
 
@@ -746,22 +762,25 @@ public class MainView extends javax.swing.JFrame {
         switch (jTabbedPaneSys.getSelectedIndex()) {
             case 0:
                 mode = jRadioButtonMacdBar.isSelected() ? 0 : 1;
-                double bp = Double.parseDouble(jTextFieldbp.getText());
+                double bp0 = Double.parseDouble(jTextFieldbp0.getText());
                 if (jCheckBoxAddSys.isSelected()) {
-                    if (jRadioButtonAddMa.isSelected()) {
+                    if (jRadioButtonAddDif.isSelected()) {
+                        int bp1 = Integer.parseInt(jTextFieldbp1.getText());
+                        ret = sysMACD2Eva(bp0, bp1);
+                    } else if (jRadioButtonAddMa.isSelected()) {
                         int mas = Integer.parseInt(jTextFieldMAS.getText());
                         int mal = Integer.parseInt(jTextFieldMAL.getText());
-                        ret = sysMACDMAEva(mode, bp, mas, mal);
+                        ret = sysMACDMAEva(mode, bp0, mas, mal);
                     } else {
                         int mode1 = jRadioButtonLML.isSelected() ? 0 : 1;
                         int days = jComboBoxLMDays.getSelectedIndex() + 1;
                         boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
                         int tp1 = Integer.parseInt(jTextFieldTp1.getText());
                         int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                        ret = sysMACDLMEva(mode, bp, mode1, days, status, tp1, tp2);
+                        ret = sysMACDLMEva(mode, bp0, mode1, days, status, tp1, tp2);
                     }
                 } else {
-                    ret = sysMACDEva(mode, bp);
+                    ret = sysMACDEva(mode, bp0);
                 }
                 break;
             case 1:
@@ -810,7 +829,19 @@ public class MainView extends javax.swing.JFrame {
                 int bpe = Integer.parseInt(jTextFieldPE1.getText());
 
                 if (jCheckBoxAddSys.isSelected()) {
-                    if (jRadioButtonAddMa.isSelected()) {
+                    if (jRadioButtonAddDif.isSelected()) {
+                        int bps1 = Integer.parseInt(jTextFieldPS2.getText());
+                        int bpe1 = Integer.parseInt(jTextFieldPE2.getText());
+                        for (int i = bps; i <= bpe; i++) {
+                            for (int j = bps1; j <= bpe1; j++) {
+                                if (sysMACD2Eva(i, j)) {
+                                    String para = String.format("%3d,%-3d", i, j);
+                                    sr = updateSimpleReport(para, strategy, brm);
+                                    srList.add(sr);
+                                }
+                            }
+                        }
+                    } else if (jRadioButtonAddMa.isSelected()) {
                         int mass = Integer.parseInt(jTextFieldPS2.getText());
                         int mase = Integer.parseInt(jTextFieldPE2.getText());
                         int mals = Integer.parseInt(jTextFieldPS3.getText());
@@ -938,7 +969,10 @@ public class MainView extends javax.swing.JFrame {
                 jTextFieldPS1.setText("-80");
                 jTextFieldPE1.setText("100");
                 if (jCheckBoxAddSys.isSelected()) {
-                    if (jRadioButtonAddMa.isSelected()) {
+                    if (jRadioButtonAddDif.isSelected()) {
+                        jTextFieldPS2.setText("-80");
+                        jTextFieldPE2.setText("100");
+                    } else if (jRadioButtonAddMa.isSelected()) {
                         jTextFieldPS2.setText("1");
                         jTextFieldPE2.setText("10");
                         jTextFieldPS3.setText("10");
@@ -999,8 +1033,7 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
 
-        int bp;
-        int mas, mal, tp1, tp2;
+        int bp0, bp1, mas, mal, tp1, tp2;
         for (String line : modeList) {
             String[] words = line.split("\t");
             switch (words[0]) {
@@ -1020,48 +1053,53 @@ public class MainView extends javax.swing.JFrame {
                     sysLMChk(1, tp1, tp2);
                     break;
                 case "BAR":
-                    bp = Integer.parseInt(words[1]);
-                    sysMACDChk(0, bp);
+                    bp0 = Integer.parseInt(words[1]);
+                    sysMACDChk(0, bp0);
                     break;
                 case "DIF":
-                    bp = Integer.parseInt(words[1]);
-                    sysMACDChk(1, bp);
+                    bp0 = Integer.parseInt(words[1]);
+                    sysMACDChk(1, bp0);
+                    break;
+                case "BARDIF":
+                    bp0 = Integer.parseInt(words[1]);
+                    bp1 = Integer.parseInt(words[2]);
+                    sysMACD2Chk(bp0, bp1);
                     break;
                 case "BARMA":
-                    bp = Integer.parseInt(words[1]);
+                    bp0 = Integer.parseInt(words[1]);
                     mas = Integer.parseInt(words[2]);
                     mal = Integer.parseInt(words[3]);
-                    sysMACDMAChk(0, bp, mas, mal);
+                    sysMACDMAChk(0, bp0, mas, mal);
                     break;
                 case "DIFMA":
-                    bp = Integer.parseInt(words[1]);
+                    bp0 = Integer.parseInt(words[1]);
                     mas = Integer.parseInt(words[2]);
                     mal = Integer.parseInt(words[3]);
-                    sysMACDMAChk(1, bp, mas, mal);
+                    sysMACDMAChk(1, bp0, mas, mal);
                     break;
                 case "BARLML":
-                    bp = Integer.parseInt(words[1]);
+                    bp0 = Integer.parseInt(words[1]);
                     tp1 = Integer.parseInt(words[2]);
                     tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(0, bp, tp1, tp2);
+                    sysMACDLMChk(0, bp0, tp1, tp2);
                     break;
                 case "BARLMS":
-                    bp = Integer.parseInt(words[1]);
+                    bp0 = Integer.parseInt(words[1]);
                     tp1 = Integer.parseInt(words[2]);
                     tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(1, bp, tp1, tp2);
+                    sysMACDLMChk(1, bp0, tp1, tp2);
                     break;
                 case "DIFLML":
-                    bp = Integer.parseInt(words[1]);
+                    bp0 = Integer.parseInt(words[1]);
                     tp1 = Integer.parseInt(words[2]);
                     tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(2, bp, tp1, tp2);
+                    sysMACDLMChk(2, bp0, tp1, tp2);
                     break;
                 case "DIFLMS":
-                    bp = Integer.parseInt(words[1]);
+                    bp0 = Integer.parseInt(words[1]);
                     tp1 = Integer.parseInt(words[2]);
                     tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(3, bp, tp1, tp2);
+                    sysMACDLMChk(3, bp0, tp1, tp2);
                     break;
                 default:
                     break;
@@ -1143,6 +1181,34 @@ public class MainView extends javax.swing.JFrame {
                 } else {
                     strategy.difCrossTrade(i, bp);
                 }
+            }
+            if (i > eIdx) {
+                break;
+            }
+        }
+        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+            strategy.spIdxList.add(eIdx);
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.isEmpty()) {
+            return false;
+        }
+
+        brm = new BRM(this);
+        fundList = brm.synthesize();
+        return true;
+    }
+
+    private boolean sysMACD2Eva(double bp0, double bp1) {
+        MACD macd = new MACD(priceList, 12, 26, 9);
+        macd.init();
+        strategy = new Strategy(this);
+        strategy.macd = macd;
+
+        for (int i = 0; i < rows; i++) {
+            if ((i >= sIdx) && (i <= eIdx)) {
+                strategy.barDifCrossTrade(i, bp0, bp1);
             }
             if (i > eIdx) {
                 break;
@@ -1405,6 +1471,35 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
+    private void sysMACD2Chk(int bp0, int bp1) {
+        String para = String.format("%d,%d", bp0, bp1);
+        String modeString = "BARDIF";
+        CheckData chkData = new CheckData(modeString, para);
+        MACD macd = new MACD(priceList, 12, 26, 9);
+        macd.init();
+        strategy = new Strategy(this);
+        strategy.macd = macd;
+
+        for (int i = 0; i < rows; i++) {
+            strategy.barDifCrossTrade(i, bp0, bp1);
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.size() > spIndexList.size()) {
+            chkData.status = "买入";
+            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+        } else {
+            chkData.status = "卖出";
+            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+        }
+
+        double barKey = macd.getMACDKey(0, bp0);
+        double difKey = macd.getMACDKey(1, bp1);
+        chkData.key = (barKey > difKey) ? barKey : difKey;
+        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
+        chkDataList.add(chkData);
+    }
+
     private void sysMACDMAChk(int mode, int bp, int mas, int mal) {
         String para = String.format("%d,%d,%d", bp, mas, mal);
         String modeString = (mode == 0) ? "BARMA" : "DIFMA";
@@ -1506,19 +1601,27 @@ public class MainView extends javax.swing.JFrame {
             case "BAR":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(false);
                 break;
             case "DIF":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(false);
+                break;
+            case "BARDIF":
+                jTabbedPaneSys.setSelectedIndex(0);
+                jRadioButtonMacdBar.setSelected(true);
+                jTextFieldbp0.setText(paras[0]);
+                jTextFieldbp1.setText(paras[1]);
+                jCheckBoxAddSys.setSelected(false);
+                jRadioButtonAddDif.setSelected(true);
                 break;
             case "BARMA":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddMa.setSelected(true);
                 jTextFieldMAS.setText(paras[1]);
@@ -1527,7 +1630,7 @@ public class MainView extends javax.swing.JFrame {
             case "DIFMA":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddMa.setSelected(true);
                 jTextFieldMAS.setText(paras[1]);
@@ -1536,7 +1639,7 @@ public class MainView extends javax.swing.JFrame {
             case "BARLML":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLML.setSelected(true);
@@ -1546,7 +1649,7 @@ public class MainView extends javax.swing.JFrame {
             case "BARLMS":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLMS.setSelected(true);
@@ -1556,7 +1659,7 @@ public class MainView extends javax.swing.JFrame {
             case "DIFLML":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLML.setSelected(true);
@@ -1566,7 +1669,7 @@ public class MainView extends javax.swing.JFrame {
             case "DIFLMS":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp.setText(paras[0]);
+                jTextFieldbp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLMS.setSelected(true);
@@ -1585,7 +1688,9 @@ public class MainView extends javax.swing.JFrame {
             case 0:
                 tradeMode = (jRadioButtonMacdBar.isSelected()) ? "BAR" : "DIF";
                 if (jCheckBoxAddSys.isSelected()) {
-                    if (jRadioButtonAddMa.isSelected()) {
+                    if (jRadioButtonAddDif.isSelected()) {
+                        tradeMode = "BARDIF";
+                    } else if (jRadioButtonAddMa.isSelected()) {
                         tradeMode += "MA";
                     } else {
                         tradeMode += (jRadioButtonLML.isSelected()) ? "LML" : "LMS";
@@ -1911,7 +2016,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStockName;
     private javax.swing.JLabel jLabelTp1;
     private javax.swing.JLabel jLabelTp2;
-    private javax.swing.JLabel jLabelbp;
+    private javax.swing.JLabel jLabelbp0;
+    private javax.swing.JLabel jLabelbp1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
@@ -1937,6 +2043,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelSysFilter;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButton jRadioButtonAddDif;
     private javax.swing.JRadioButton jRadioButtonAddLm;
     private javax.swing.JRadioButton jRadioButtonAddMa;
     private javax.swing.JRadioButton jRadioButtonLML;
@@ -1962,6 +2069,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSDate;
     private javax.swing.JTextField jTextFieldTp1;
     private javax.swing.JTextField jTextFieldTp2;
-    private javax.swing.JTextField jTextFieldbp;
+    private javax.swing.JTextField jTextFieldbp0;
+    private javax.swing.JTextField jTextFieldbp1;
     // End of variables declaration//GEN-END:variables
 }
