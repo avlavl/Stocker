@@ -6,7 +6,10 @@
 package Trader;
 
 import Trader.MainView.CheckData;
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -51,6 +54,7 @@ public class CheckTable extends javax.swing.JDialog {
         });
         jTableCheck.setRowHeight(20);
         jScrollPaneCheck.setViewportView(jTableCheck);
+        setTableRowColor(jTableCheck, new Color(200, 0, 0), new Color(0, 130, 2));
 
         setPreferredSize(new java.awt.Dimension(535, 20 * size + 90));
         jScrollPaneCheck.setPreferredSize(new java.awt.Dimension(500, 20 * size + 31));
@@ -121,6 +125,28 @@ public class CheckTable extends javax.swing.JDialog {
             jTableCheck.setRowSelectionAllowed(false);
         }
     }//GEN-LAST:event_jTableCheckMouseClicked
+
+    public static void setTableRowColor(javax.swing.JTable Table, final Color color1, final Color color2) {
+        try {
+            DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    String status = (String) Table.getValueAt(row, 2);
+                    if (status.equals("买入")) {
+                        setForeground(color1);
+                    } else {
+                        setForeground(color2);
+                    }
+                    return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                }
+            };
+            for (int i = 0; i < Table.getColumnCount(); i++) {
+                Table.getColumnModel().getColumn(i).setCellRenderer(tcr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private MainView mainView;
 

@@ -5,6 +5,8 @@
  */
 package Trader;
 
+import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -82,12 +84,38 @@ public class TradeTable extends javax.swing.JDialog {
             jTableTrade.getColumnModel().getColumn(6).setPreferredWidth(60);
         }
 
+        setTableRowColor(jTableTrade, new Color(200, 0, 0), new Color(0, 130, 2));
+
         setPreferredSize(new java.awt.Dimension(635, 40 * (times < 10 ? times : 10) + 90));
         jScrollPaneTrade.setPreferredSize(new java.awt.Dimension(522, 40 * (times < 10 ? times : 10) + 31));
         getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, -1));
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
+    }
+
+    public static void setTableRowColor(javax.swing.JTable Table, final Color color1, final Color color2) {
+        try {
+            DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    String status = (String) Table.getValueAt(row, 3);
+                    if (status.equals("盈利")) {
+                        setForeground(color1);
+                    } else if (status.equals("亏损")) {
+                        setForeground(color2);
+                    } else {
+                        setForeground(Color.BLACK);
+                    }
+                    return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                }
+            };
+            for (int i = 0; i < Table.getColumnCount(); i++) {
+                Table.getColumnModel().getColumn(i).setCellRenderer(tcr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
