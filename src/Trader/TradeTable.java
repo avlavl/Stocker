@@ -41,23 +41,23 @@ public class TradeTable extends javax.swing.JDialog {
             double sCash = mv.fundList.get(mv.bpIndexList.get(i)) - (bPrice * ratio);
             double eCash = mv.fundList.get(mv.spIndexList.get(i));
 
-            tableContent[2 * i][0] = bDate;
-            tableContent[2 * i][1] = "买入";
-            tableContent[2 * i][2] = bPrice + "元";
-            tableContent[2 * i][3] = "*";
-            tableContent[2 * i][4] = "*";
-            tableContent[2 * i][5] = "*";
-            tableContent[2 * i][6] = "*";
-            tableContent[2 * i][7] = (float) sCash + "元";
+            tableContent[2 * (times - i) - 2][0] = sDate;
+            tableContent[2 * (times - i) - 2][1] = "卖出";
+            tableContent[2 * (times - i) - 2][2] = sPrice + "元";
+            tableContent[2 * (times - i) - 2][3] = (agio > 0) ? "盈利" : "亏损";
+            tableContent[2 * (times - i) - 2][4] = (float) agio + "元";
+            tableContent[2 * (times - i) - 2][5] = (float) yield + "%";
+            tableContent[2 * (times - i) - 2][6] = days + "天";
+            tableContent[2 * (times - i) - 2][7] = (float) eCash + "元";
 
-            tableContent[2 * i + 1][0] = sDate;
-            tableContent[2 * i + 1][1] = "卖出";
-            tableContent[2 * i + 1][2] = sPrice + "元";
-            tableContent[2 * i + 1][3] = (agio > 0) ? "盈利" : "亏损";
-            tableContent[2 * i + 1][4] = (float) agio + "元";
-            tableContent[2 * i + 1][5] = (float) yield + "%";
-            tableContent[2 * i + 1][6] = days + "天";
-            tableContent[2 * i + 1][7] = (float) eCash + "元";
+            tableContent[2 * (times - i) - 1][0] = bDate;
+            tableContent[2 * (times - i) - 1][1] = "买入";
+            tableContent[2 * (times - i) - 1][2] = bPrice + "元";
+            tableContent[2 * (times - i) - 1][3] = "*";
+            tableContent[2 * (times - i) - 1][4] = "*";
+            tableContent[2 * (times - i) - 1][5] = "*";
+            tableContent[2 * (times - i) - 1][6] = "*";
+            tableContent[2 * (times - i) - 1][7] = (float) sCash + "元";
         }
         jTableTrade.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
         jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
