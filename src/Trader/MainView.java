@@ -1035,7 +1035,7 @@ public class MainView extends javax.swing.JFrame {
 
         int bp0, bp1, mas, mal, tp1, tp2;
         for (String line : modeList) {
-            String[] words = line.split("\t");
+            String[] words = line.split(",");
             switch (words[0]) {
                 case "MA":
                     mas = Integer.parseInt(words[1]);
