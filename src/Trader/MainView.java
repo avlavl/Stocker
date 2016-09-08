@@ -1778,13 +1778,15 @@ public class MainView extends javax.swing.JFrame {
 
     protected void updateMarket(int idx) {
         jLabelDate.setText("日期：" + dateList.get(idx));
-        double margin = 100 * (closeList.get(idx) - closeList.get(idx - 1)) / closeList.get(idx - 1);
+        double margin = closeList.get(idx) - closeList.get(idx - 1);
+        double ratio = 100 * (closeList.get(idx) - closeList.get(idx - 1)) / closeList.get(idx - 1);
         if (margin > 0) {
             jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
+            jLabelClose.setText(String.format("收盘：%s  上涨：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
         } else {
             jLabelClose.setForeground(new java.awt.Color(0, 150, 0));
+            jLabelClose.setText(String.format("收盘：%s  下跌：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
         }
-        jLabelClose.setText(String.format("收盘：%s  %5.2f%%", closeList.get(idx), margin));
     }
 
     protected SystemReport updateSystemReport(Strategy stg, BRM brm) {
