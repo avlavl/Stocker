@@ -1136,7 +1136,8 @@ public class MainView extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(isr);
             String[] words = br.readLine().split("\t");
             stockName = words[1];
-            jLabelStockName.setText(stockName + "(" + words[0].replaceAll("[\\pP\\p{Punct}]", "") + ")");
+            stockCode = words[0].replaceAll("[\\pP\\p{Punct}]", "");
+            jLabelStockName.setText(stockName + "(" + stockCode + ")");
             words = br.readLine().split("\t");
             column = words.length;
             dateList = new ArrayList<>();
@@ -1955,6 +1956,7 @@ public class MainView extends javax.swing.JFrame {
     public FileWriter fileWriter;
 
     public String stockName = "上证指数";
+    public String stockCode = "000001";
     public int column = 0;
     public int rows = 0;
     public ArrayList<String> dateList;

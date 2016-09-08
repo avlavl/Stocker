@@ -24,8 +24,9 @@ public class CheckTable extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         mainView = mv;
-        ArrayList<CheckData> list = mv.chkDataList;
+        outputStockInfo();
 
+        ArrayList<CheckData> list = mv.chkDataList;
         int size = list.size();
         String[][] tableContent = new String[size][6];
         for (int i = 0; i < size; i++) {
@@ -56,9 +57,9 @@ public class CheckTable extends javax.swing.JDialog {
         jScrollPaneCheck.setViewportView(jTableCheck);
         setTableRowColor(jTableCheck, new Color(200, 0, 0), new Color(0, 130, 2));
 
-        setPreferredSize(new java.awt.Dimension(535, 20 * size + 90));
+        setPreferredSize(new java.awt.Dimension(535, 20 * size + 110));
         jScrollPaneCheck.setPreferredSize(new java.awt.Dimension(500, 20 * size + 31));
-        getContentPane().add(jScrollPaneCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(jScrollPaneCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
@@ -73,13 +74,36 @@ public class CheckTable extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelName = new javax.swing.JLabel();
+        jLabelDate = new javax.swing.JLabel();
+        jLabelClose = new javax.swing.JLabel();
+        jLabelRange = new javax.swing.JLabel();
         jScrollPaneCheck = new javax.swing.JScrollPane();
         jTableCheck = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("行情状态");
-        setPreferredSize(new java.awt.Dimension(535, 110));
+        setPreferredSize(new java.awt.Dimension(535, 130));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelName.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelName.setForeground(new java.awt.Color(102, 0, 0));
+        jLabelName.setText("上证指数");
+        getContentPane().add(jLabelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate.setForeground(new java.awt.Color(0, 0, 102));
+        jLabelDate.setText("日期：20--/--/--");
+        getContentPane().add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
+
+        jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelClose.setForeground(new java.awt.Color(51, 51, 0));
+        jLabelClose.setText("收盘：----");
+        getContentPane().add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+
+        jLabelRange.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelRange.setText("涨跌：----");
+        getContentPane().add(jLabelRange, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
         jScrollPaneCheck.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
@@ -109,7 +133,7 @@ public class CheckTable extends javax.swing.JDialog {
         });
         jScrollPaneCheck.setViewportView(jTableCheck);
 
-        getContentPane().add(jScrollPaneCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 50));
+        getContentPane().add(jScrollPaneCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 500, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -148,9 +172,29 @@ public class CheckTable extends javax.swing.JDialog {
         }
     }
 
+    public void outputStockInfo() {
+        int idx = mainView.rows - 1;
+        jLabelName.setText(mainView.stockName + "(" + mainView.stockCode + ")");
+        jLabelDate.setText("日期：" + mainView.dateList.get(idx));
+        jLabelClose.setText("收盘：" + String.format("%s", mainView.closeList.get(idx)));
+        double margin = mainView.closeList.get(idx) - mainView.closeList.get(idx - 1);
+        double ratio = 100 * (mainView.closeList.get(idx) - mainView.closeList.get(idx - 1)) / mainView.closeList.get(idx - 1);
+        if (margin > 0) {
+            jLabelRange.setForeground(new java.awt.Color(250, 0, 0));
+            jLabelRange.setText(String.format("上涨：%.2f/%5.2f%%", margin, ratio));
+        } else {
+            jLabelRange.setForeground(new java.awt.Color(0, 150, 0));
+            jLabelRange.setText(String.format("下跌：%.2f/%5.2f%%", margin, ratio));
+        }
+    }
+
     private MainView mainView;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelClose;
+    private javax.swing.JLabel jLabelDate;
+    private javax.swing.JLabel jLabelName;
+    private javax.swing.JLabel jLabelRange;
     private javax.swing.JScrollPane jScrollPaneCheck;
     private javax.swing.JTable jTableCheck;
     // End of variables declaration//GEN-END:variables
