@@ -28,26 +28,27 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTableRank.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         int rows = (rankSize > 20) ? 20 : rankSize;
-        String[][] tableContent = new String[rows][9];
+        String[][] tableContent = new String[rows][10];
         for (int i = 0; i < rows; i++) {
-            tableContent[i][0] = "" + (i + 1);
-            tableContent[i][1] = "" + SRList.get(i).parameter;
-            tableContent[i][2] = "" + SRList.get(i).currentAsset;
-            tableContent[i][3] = "" + SRList.get(i).standardAnnualRate;
-            tableContent[i][4] = "" + SRList.get(i).positionDaysRate;
-            tableContent[i][5] = "" + SRList.get(i).positionAnnualRate;
-            tableContent[i][6] = "" + SRList.get(i).tradeTimes;
-            tableContent[i][7] = "" + SRList.get(i).maxLossRatio;
-            tableContent[i][8] = "" + SRList.get(i).expectation;
+            tableContent[i][0] = tradeMode;
+            tableContent[i][1] = "" + (i + 1);
+            tableContent[i][2] = "" + SRList.get(i).parameter;
+            tableContent[i][3] = "" + SRList.get(i).currentAsset;
+            tableContent[i][4] = String.format("%.4f", SRList.get(i).standardAnnualRate);
+            tableContent[i][5] = String.format("%.4f", SRList.get(i).positionDaysRate);
+            tableContent[i][6] = String.format("%.4f", SRList.get(i).positionAnnualRate);
+            tableContent[i][7] = "" + SRList.get(i).tradeTimes;
+            tableContent[i][8] = String.format("%.4f", SRList.get(i).maxLossRatio);
+            tableContent[i][9] = String.format("%.4f", SRList.get(i).expectation);
         }
         jTableRank.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "最大连亏比", "数学期望"
+                    "模式", "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "最大连亏比", "数学期望"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             @Override
@@ -58,10 +59,11 @@ public class RankTable extends javax.swing.JDialog {
 
         jScrollPaneRank.setViewportView(jTableRank);
         if (jTableRank.getColumnModel().getColumnCount() > 0) {
-            jTableRank.getColumnModel().getColumn(0).setMaxWidth(38);
-            jTableRank.getColumnModel().getColumn(1).setMaxWidth(80);
-            jTableRank.getColumnModel().getColumn(2).setMaxWidth(70);
-            jTableRank.getColumnModel().getColumn(6).setMaxWidth(40);
+            jTableRank.getColumnModel().getColumn(0).setMaxWidth(70);
+            jTableRank.getColumnModel().getColumn(1).setMaxWidth(38);
+            jTableRank.getColumnModel().getColumn(2).setMaxWidth(80);
+            jTableRank.getColumnModel().getColumn(3).setMaxWidth(70);
+            jTableRank.getColumnModel().getColumn(7).setMaxWidth(40);
         }
         setPreferredSize(new java.awt.Dimension(690, 20 * rows + 88));
         jScrollPaneRank.setPreferredSize(new java.awt.Dimension(652, 20 * rows + 30));
@@ -74,15 +76,16 @@ public class RankTable extends javax.swing.JDialog {
     public void updateTable(int idx) {
         int rows = (rankSize > 20) ? 20 : rankSize;
         for (int i = 0; i < rows; i++) {
-            jTableRank.setValueAt(i + idx + 1, i, 0);
-            jTableRank.setValueAt(SRList.get(i + idx).parameter, i, 1);
-            jTableRank.setValueAt(SRList.get(i + idx).currentAsset, i, 2);
-            jTableRank.setValueAt(SRList.get(i + idx).standardAnnualRate, i, 3);
-            jTableRank.setValueAt(SRList.get(i + idx).positionDaysRate, i, 4);
-            jTableRank.setValueAt(SRList.get(i + idx).positionAnnualRate, i, 5);
-            jTableRank.setValueAt(SRList.get(i + idx).tradeTimes, i, 6);
-            jTableRank.setValueAt(SRList.get(i + idx).maxLossRatio, i, 7);
-            jTableRank.setValueAt(SRList.get(i + idx).expectation, i, 8);
+            jTableRank.setValueAt(tradeMode, i, 0);
+            jTableRank.setValueAt(i + idx + 1, i, 1);
+            jTableRank.setValueAt(SRList.get(i + idx).parameter, i, 2);
+            jTableRank.setValueAt(SRList.get(i + idx).currentAsset, i, 3);
+            jTableRank.setValueAt(String.format("%.4f", SRList.get(i + idx).standardAnnualRate), i, 4);
+            jTableRank.setValueAt(String.format("%.4f", SRList.get(i + idx).positionDaysRate), i, 5);
+            jTableRank.setValueAt(String.format("%.4f", SRList.get(i + idx).positionAnnualRate), i, 6);
+            jTableRank.setValueAt(SRList.get(i + idx).tradeTimes, i, 7);
+            jTableRank.setValueAt(String.format("%.4f", SRList.get(i + idx).maxLossRatio), i, 8);
+            jTableRank.setValueAt(String.format("%.4f", SRList.get(i + idx).expectation), i, 9);
         }
     }
 
@@ -110,14 +113,14 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTableRank.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "最大连亏比", "数学期望"
+                "模式", "排名", "参数", "当前资产", "标准年化", "持仓时间比", "持仓年化", "次数", "最大连亏比", "数学期望"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -142,10 +145,11 @@ public class RankTable extends javax.swing.JDialog {
         });
         jScrollPaneRank.setViewportView(jTableRank);
         if (jTableRank.getColumnModel().getColumnCount() > 0) {
-            jTableRank.getColumnModel().getColumn(0).setMaxWidth(38);
-            jTableRank.getColumnModel().getColumn(1).setMaxWidth(80);
-            jTableRank.getColumnModel().getColumn(2).setMaxWidth(70);
-            jTableRank.getColumnModel().getColumn(6).setMaxWidth(40);
+            jTableRank.getColumnModel().getColumn(0).setMaxWidth(70);
+            jTableRank.getColumnModel().getColumn(1).setMaxWidth(38);
+            jTableRank.getColumnModel().getColumn(2).setMaxWidth(80);
+            jTableRank.getColumnModel().getColumn(3).setMaxWidth(70);
+            jTableRank.getColumnModel().getColumn(7).setMaxWidth(40);
         }
 
         getContentPane().add(jScrollPaneRank, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 662, 50));
@@ -158,7 +162,7 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank.setRowSelectionAllowed(true);
         if (evt.getClickCount() > 1) {
             int index = jTableRank.getSelectedRow();
-            String para = (String) jTableRank.getValueAt(index, 1);
+            String para = (String) jTableRank.getValueAt(index, 2);
             mainView.tradeModeEva(tradeMode, para);
         }
     }//GEN-LAST:event_jTableRankMouseClicked
@@ -182,25 +186,25 @@ public class RankTable extends javax.swing.JDialog {
             jTableRank.setRowSelectionAllowed(false);
             jTableRank.setColumnSelectionInterval(index, index);
             switch (index) {
-                case 2:
+                case 3:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.currentAsset).compareTo(arg0.currentAsset));
                     break;
-                case 3:
+                case 4:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.standardAnnualRate).compareTo(arg0.standardAnnualRate));
                     break;
-                case 4:
+                case 5:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg0.positionDaysRate).compareTo(arg1.positionDaysRate));
                     break;
-                case 5:
+                case 6:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.positionAnnualRate).compareTo(new Float(arg0.positionAnnualRate)));
                     break;
-                case 6:
+                case 7:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Integer(arg0.tradeTimes).compareTo(arg1.tradeTimes));
                     break;
-                case 7:
+                case 8:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.maxLossRatio).compareTo(arg0.maxLossRatio));
                     break;
-                case 8:
+                case 9:
                     Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.expectation).compareTo(arg0.expectation));
                     break;
                 default:
