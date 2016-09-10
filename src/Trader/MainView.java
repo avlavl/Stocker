@@ -141,8 +141,8 @@ public class MainView extends javax.swing.JFrame {
         jButtonFilterStart = new javax.swing.JButton();
         jButtonFilterCheck = new javax.swing.JButton();
         jCheckBoxBrmMode = new javax.swing.JCheckBox();
-        jButtonObjectCheck = new javax.swing.JButton();
-        jButtonObjectEvaluate = new javax.swing.JButton();
+        jButtonCheckUp = new javax.swing.JButton();
+        jButtonEvaluate = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -551,25 +551,23 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelMain.add(jCheckBoxBrmMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 340, -1, -1));
 
-        jButtonObjectCheck.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonObjectCheck.setText("标的检测");
-        jButtonObjectCheck.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonObjectCheck.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCheckUp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonCheckUp.setText("检测");
+        jButtonCheckUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonObjectCheckActionPerformed(evt);
+                jButtonCheckUpActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonObjectCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, 30));
+        jPanelMain.add(jButtonCheckUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, 30));
 
-        jButtonObjectEvaluate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonObjectEvaluate.setText("标的评估");
-        jButtonObjectEvaluate.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonObjectEvaluate.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEvaluate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonEvaluate.setText("评估");
+        jButtonEvaluate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonObjectEvaluateActionPerformed(evt);
+                jButtonEvaluateActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonObjectEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, 30));
+        jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, 30));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 478));
 
@@ -854,7 +852,7 @@ public class MainView extends javax.swing.JFrame {
                     for (int j = ps2; j <= pe2; j++) {
                         if (j >= i * 2) {
                             if (sysMAEva(i, j)) {
-                                String para = String.format("%2d,%-3d", i, j);
+                                String para = String.format("%d,%d", i, j);
                                 sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                 srList.add(sr);
                             }
@@ -868,7 +866,7 @@ public class MainView extends javax.swing.JFrame {
                     for (int j = ps2; j <= pe2; j++) {
                         if (j <= (i / 2 + 1)) {
                             if (sysLMEva(tradeMode, i, j)) {
-                                String para = String.format("%2d,%-2d", i, j);
+                                String para = String.format("%d,%d", i, j);
                                 sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                 srList.add(sr);
                             }
@@ -880,7 +878,7 @@ public class MainView extends javax.swing.JFrame {
             case "DIF":
                 for (int i = ps1; i <= pe1; i++) {
                     if (sysMACDEva(tradeMode, i)) {
-                        String para = String.format("%3d", i);
+                        String para = String.format("%d", i);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
@@ -890,7 +888,7 @@ public class MainView extends javax.swing.JFrame {
                 for (int i = ps1; i <= pe1; i++) {
                     for (int j = ps2; j <= pe2; j++) {
                         if (sysMACD2Eva(i, j)) {
-                            String para = String.format("%3d,%-3d", i, j);
+                            String para = String.format("%d,%d", i, j);
                             sr = updateSimpleReport(tradeMode, para, strategy, brm);
                             srList.add(sr);
                         }
@@ -904,7 +902,7 @@ public class MainView extends javax.swing.JFrame {
                         for (int k = ps3; k <= pe3; k++) {
                             if (k >= j * 2) {
                                 if (sysMACDMAEva(tradeMode, i, j, k)) {
-                                    String para = String.format("%3d,%2d,%-3d", i, j, k);
+                                    String para = String.format("%d,%d,%d", i, j, k);
                                     sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                     srList.add(sr);
                                 }
@@ -922,7 +920,7 @@ public class MainView extends javax.swing.JFrame {
                         for (int k = ps3; k <= pe3; k++) {
                             if (k <= (j / 2 + 1)) {
                                 if (sysMACDLMEva(tradeMode, i, j, k)) {
-                                    String para = String.format("%3d,%2d,%-2d", i, j, k);
+                                    String para = String.format("%d,%d,%d", i, j, k);
                                     sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                     srList.add(sr);
                                 }
@@ -1016,7 +1014,7 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBoxBrmModeActionPerformed
 
-    private void jButtonObjectCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObjectCheckActionPerformed
+    private void jButtonCheckUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckUpActionPerformed
         ArrayList<String> modelList = new ArrayList<>();
         chkDataList = new ArrayList<>();
 
@@ -1082,9 +1080,9 @@ public class MainView extends javax.swing.JFrame {
         }
 
         CheckTable ct = new CheckTable(this, false, this);
-    }//GEN-LAST:event_jButtonObjectCheckActionPerformed
+    }//GEN-LAST:event_jButtonCheckUpActionPerformed
 
-    private void jButtonObjectEvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObjectEvaluateActionPerformed
+    private void jButtonEvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEvaluateActionPerformed
         ArrayList<String> modelList = new ArrayList<>();
         chkDataList = new ArrayList<>();
 
@@ -1129,7 +1127,7 @@ public class MainView extends javax.swing.JFrame {
             switch (tradeMode) {
                 case "MA":
                     if (sysMAEva(p1, p2)) {
-                        String para = String.format("%2d,%-3d", p1, p2);
+                        String para = String.format("%d,%d", p1, p2);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
@@ -1137,7 +1135,7 @@ public class MainView extends javax.swing.JFrame {
                 case "LML":
                 case "LMS":
                     if (sysLMEva(tradeMode, p1, p2)) {
-                        String para = String.format("%2d,%-2d", p1, p2);
+                        String para = String.format("%d,%d", p1, p2);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
@@ -1145,14 +1143,14 @@ public class MainView extends javax.swing.JFrame {
                 case "BAR":
                 case "DIF":
                     if (sysMACDEva(tradeMode, p1)) {
-                        String para = String.format("%3d", p1);
+                        String para = String.format("%d", p1);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
                 case "BARDIF":
                     if (sysMACD2Eva(p1, p2)) {
-                        String para = String.format("%3d,%-3d", p1, p2);
+                        String para = String.format("%d,%d", p1, p2);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
@@ -1160,7 +1158,7 @@ public class MainView extends javax.swing.JFrame {
                 case "BARMA":
                 case "DIFMA":
                     if (sysMACDMAEva(tradeMode, p1, p2, p3)) {
-                        String para = String.format("%3d,%2d,%-3d", p1, p2, p3);
+                        String para = String.format("%d,%d,%d", p1, p2, p3);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
@@ -1170,7 +1168,7 @@ public class MainView extends javax.swing.JFrame {
                 case "DIFLML":
                 case "DIFLMS":
                     if (sysMACDLMEva(tradeMode, p1, p2, p3)) {
-                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
+                        String para = String.format("%d,%d,%d", p1, p2, p3);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
@@ -1180,7 +1178,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
         rankTable = new RankTable(this, false, this, srList);
-    }//GEN-LAST:event_jButtonObjectEvaluateActionPerformed
+    }//GEN-LAST:event_jButtonEvaluateActionPerformed
 
     /**
      ********************* Start of User-defined function ********************
@@ -1913,6 +1911,7 @@ public class MainView extends javax.swing.JFrame {
         sr.standardAnnualRate = (float) brm.getStandardAnnualRate();
         sr.positionDaysRate = (float) stg.getPositionDaysRate();
         sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
+        sr.meanPositionDays = (float) stg.getMeanPositionDays();
         sr.tradeTimes = brm.getTradeTimes();
         sr.maxLossRatio = (float) brm.getMaxLossRatio();
         sr.expectation = (float) brm.getExpectation();
@@ -2065,10 +2064,10 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupLM;
     private javax.swing.ButtonGroup buttonGroupMACD;
     private javax.swing.ButtonGroup buttonGroupMacdAdd;
+    private javax.swing.JButton jButtonCheckUp;
+    private javax.swing.JButton jButtonEvaluate;
     private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;
-    private javax.swing.JButton jButtonObjectCheck;
-    private javax.swing.JButton jButtonObjectEvaluate;
     private javax.swing.JButton jButtonTradeChart;
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;
