@@ -142,6 +142,7 @@ public class MainView extends javax.swing.JFrame {
         jButtonFilterCheck = new javax.swing.JButton();
         jCheckBoxBrmMode = new javax.swing.JCheckBox();
         jButtonObjectCheck = new javax.swing.JButton();
+        jButtonObjectEvaluate = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -547,6 +548,16 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelMain.add(jButtonObjectCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, 30));
 
+        jButtonObjectEvaluate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonObjectEvaluate.setText("标的评估");
+        jButtonObjectEvaluate.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonObjectEvaluate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonObjectEvaluateActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonObjectEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, -1, 30));
+
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 478));
 
         jMenuFile.setText("文件");
@@ -836,7 +847,7 @@ public class MainView extends javax.swing.JFrame {
                             for (int j = bps1; j <= bpe1; j++) {
                                 if (sysMACD2Eva(i, j)) {
                                     String para = String.format("%3d,%-3d", i, j);
-                                    sr = updateSimpleReport(para, strategy, brm);
+                                    sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                     srList.add(sr);
                                 }
                             }
@@ -852,7 +863,7 @@ public class MainView extends javax.swing.JFrame {
                                     if (k >= j * 2) {
                                         if (sysMACDMAEva(mode, i, j, k)) {
                                             String para = String.format("%3d,%2d,%-3d", i, j, k);
-                                            sr = updateSimpleReport(para, strategy, brm);
+                                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                             srList.add(sr);
                                         }
                                     }
@@ -873,7 +884,7 @@ public class MainView extends javax.swing.JFrame {
                                     if (k <= (j / 2 + 1)) {
                                         if (sysMACDLMEva(mode, i, mode1, days, status, j, k)) {
                                             String para = String.format("%3d,%2d,%-2d", i, j, k);
-                                            sr = updateSimpleReport(para, strategy, brm);
+                                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                             srList.add(sr);
                                         }
                                     }
@@ -885,7 +896,7 @@ public class MainView extends javax.swing.JFrame {
                     for (int i = bps; i <= bpe; i++) {
                         if (sysMACDEva(mode, i)) {
                             String para = String.format("%3d", i);
-                            sr = updateSimpleReport(para, strategy, brm);
+                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
                             srList.add(sr);
                         }
                     }
@@ -902,7 +913,7 @@ public class MainView extends javax.swing.JFrame {
                         if (j >= i * 2) {
                             if (sysMAEva(i, j)) {
                                 String para = String.format("%2d,%-3d", i, j);
-                                sr = updateSimpleReport(para, strategy, brm);
+                                sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                 srList.add(sr);
                             }
                         }
@@ -922,7 +933,7 @@ public class MainView extends javax.swing.JFrame {
                         if (j <= (i / 2 + 1)) {
                             if (sysLMEva(mode, days, status, i, j)) {
                                 String para = String.format("%2d,%-2d", i, j);
-                                sr = updateSimpleReport(para, strategy, brm);
+                                sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                 srList.add(sr);
                             }
                         }
@@ -1108,6 +1119,140 @@ public class MainView extends javax.swing.JFrame {
 
         CheckTable ct = new CheckTable(this, false, this);
     }//GEN-LAST:event_jButtonObjectCheckActionPerformed
+
+    private void jButtonObjectEvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObjectEvaluateActionPerformed
+        ArrayList<String> modeList = new ArrayList<>();
+        chkDataList = new ArrayList<>();
+
+        try {
+            File file = new File("ini/" + stockName + ".ini");
+            if (!file.exists()) {
+                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + stockName + ".ini\"文件！");
+                return;
+            }
+            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.matches("^[A-Z].*")) {
+                    modeList.add(line);
+                }
+            }
+            br.close();
+            isr.close();
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        dateProcess();
+        if (tradeDays == 0) {
+            return;
+        }
+        SystemReport sr;
+        ArrayList<SystemReport> srList = new ArrayList<>();
+
+        int p1 = 0, p2 = 0, p3 = 0;
+        for (String line : modeList) {
+            String[] words = line.split(",");
+            tradeMode = words[0];
+            try {
+                p1 = Integer.parseInt(words[1]);
+                p2 = Integer.parseInt(words[2]);
+                p3 = Integer.parseInt(words[3]);
+            } catch (Exception e) {
+            }
+            switch (tradeMode) {
+                case "MA":
+                    if (sysMAEva(p1, p2)) {
+                        String para = String.format("%2d,%-3d", p1, p2);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "LML":
+                    if (sysLMEva(0, 1, true, p1, p2)) {
+                        String para = String.format("%2d,%-2d", p1, p2);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "LMS":
+                    if (sysLMEva(1, 1, true, p1, p2)) {
+                        String para = String.format("%2d,%-2d", p1, p2);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "BAR":
+                    if (sysMACDEva(0, p1)) {
+                        String para = String.format("%3d", p1);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "DIF":
+                    if (sysMACDEva(1, p1)) {
+                        String para = String.format("%3d", p1);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "BARDIF":
+                    if (sysMACD2Eva(p1, p2)) {
+                        String para = String.format("%3d,%-3d", p1, p2);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "BARMA":
+                    if (sysMACDMAEva(0, p1, p2, p3)) {
+                        String para = String.format("%3d,%2d,%-3d", p1, p2, p3);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "DIFMA":
+                    if (sysMACDMAEva(1, p1, p2, p3)) {
+                        String para = String.format("%3d,%2d,%-3d", p1, p2, p3);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "BARLML":
+                    if (sysMACDLMEva(0, p1, 0, 1, true, p2, p3)) {
+                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "BARLMS":
+                    if (sysMACDLMEva(0, p1, 1, 1, true, p2, p3)) {
+                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "DIFLML":
+                    if (sysMACDLMEva(1, p1, 0, 1, true, p2, p3)) {
+                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                case "DIFLMS":
+                    if (sysMACDLMEva(1, p1, 1, 1, true, p2, p3)) {
+                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        rankTable = new RankTable(this, false, this, srList);
+    }//GEN-LAST:event_jButtonObjectEvaluateActionPerformed
 
     /**
      ********************* Start of User-defined function ********************
@@ -1830,8 +1975,8 @@ public class MainView extends javax.swing.JFrame {
         return sr;
     }
 
-    protected SystemReport updateSimpleReport(String para, Strategy stg, BRM brm) {
-        SystemReport sr = new SystemReport();
+    protected SystemReport updateSimpleReport(String mode, String para, Strategy stg, BRM brm) {
+        SystemReport sr = new SystemReport(mode, para);
 
         sr.parameter = para;
         sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
@@ -1989,6 +2134,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;
     private javax.swing.JButton jButtonObjectCheck;
+    private javax.swing.JButton jButtonObjectEvaluate;
     private javax.swing.JButton jButtonTradeChart;
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;

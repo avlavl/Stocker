@@ -11,7 +11,17 @@ package Trader;
  */
 public class SystemReport {
 
+    public SystemReport() {
+    }
+
+    public SystemReport(String mode, String para) {
+        tradeMode = mode;
+        parameter = para;
+    }
+
+    public String tradeMode;
     public String parameter;
+
     public float currentAsset;
     public float initAsset;
     public float netProfit;

@@ -21,7 +21,6 @@ public class RankTable extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         mainView = mv;
-        tradeMode = mv.tradeMode;
 
         SRList = list;
         rankSize = list.size();
@@ -30,7 +29,7 @@ public class RankTable extends javax.swing.JDialog {
         int rows = (rankSize > 20) ? 20 : rankSize;
         String[][] tableContent = new String[rows][10];
         for (int i = 0; i < rows; i++) {
-            tableContent[i][0] = tradeMode;
+            tableContent[i][0] = "" + SRList.get(i).tradeMode;
             tableContent[i][1] = "" + (i + 1);
             tableContent[i][2] = "" + SRList.get(i).parameter;
             tableContent[i][3] = "" + SRList.get(i).currentAsset;
