@@ -144,7 +144,7 @@ public class CheckTable extends javax.swing.JDialog {
             int index = jTableCheck.getSelectedRow();
             String mode = (String) jTableCheck.getValueAt(index, 0);
             String para = (String) jTableCheck.getValueAt(index, 1);
-            mainView.tradeModeEva(mode, para);
+            mainView.tradeModelEva(mode, para);
         } else {
             jTableCheck.setRowSelectionAllowed(false);
         }

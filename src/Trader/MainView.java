@@ -90,8 +90,8 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonMacdDif = new javax.swing.JRadioButton();
         jLabelbp0 = new javax.swing.JLabel();
         jLabelbp1 = new javax.swing.JLabel();
-        jTextFieldbp0 = new javax.swing.JTextField();
-        jTextFieldbp1 = new javax.swing.JTextField();
+        jTextFieldBp0 = new javax.swing.JTextField();
+        jTextFieldBp1 = new javax.swing.JTextField();
         jCheckBoxAddSys = new javax.swing.JCheckBox();
         jRadioButtonAddMa = new javax.swing.JRadioButton();
         jRadioButtonAddLm = new javax.swing.JRadioButton();
@@ -285,13 +285,13 @@ public class MainView extends javax.swing.JFrame {
         jLabelbp1.setText("副突破点：");
         jPanelMACD.add(jLabelbp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
-        jTextFieldbp0.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldbp0.setText("0");
-        jPanelMACD.add(jTextFieldbp0, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 58, 40, -1));
+        jTextFieldBp0.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldBp0.setText("0");
+        jPanelMACD.add(jTextFieldBp0, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 58, 40, -1));
 
-        jTextFieldbp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldbp1.setText("0");
-        jPanelMACD.add(jTextFieldbp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 58, 40, -1));
+        jTextFieldBp1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldBp1.setText("0");
+        jPanelMACD.add(jTextFieldBp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 58, 40, -1));
 
         jCheckBoxAddSys.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBoxAddSys.setText("叠加系统交易参考");
@@ -382,6 +382,11 @@ public class MainView extends javax.swing.JFrame {
         jComboBoxLMDays.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBoxLMDays.setMaximumRowCount(9);
         jComboBoxLMDays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘价", "2日均线", "3日均线", "4日均线", "5日均线" }));
+        jComboBoxLMDays.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxLMDaysActionPerformed(evt);
+            }
+        });
         jPanelLM.add(jComboBoxLMDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 50, -1, -1));
 
         jLabelLMDays.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -484,27 +489,35 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPS1.setText("-80");
         jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 26, 30, -1));
 
         jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPE1.setText("100");
         jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 30, -1));
 
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPS2.setText("0");
         jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 30, -1));
 
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPE2.setText("0");
         jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 30, -1));
 
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPS3.setText("0");
         jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 26, 30, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPE3.setText("0");
         jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 30, -1));
 
         jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPS4.setText("0");
         jPanelSysFilter.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 30, -1));
 
         jTextFieldPE4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextFieldPE4.setText("0");
         jPanelSysFilter.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 30, -1));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -769,48 +782,45 @@ public class MainView extends javax.swing.JFrame {
         if (tradeDays == 0) {
             return;
         }
-        int mode = 0;
-        switch (jTabbedPaneSys.getSelectedIndex()) {
-            case 0:
-                mode = jRadioButtonMacdBar.isSelected() ? 0 : 1;
-                double bp0 = Double.parseDouble(jTextFieldbp0.getText());
-                if (jCheckBoxAddSys.isSelected()) {
-                    if (jRadioButtonAddDif.isSelected()) {
-                        int bp1 = Integer.parseInt(jTextFieldbp1.getText());
-                        ret = sysMACD2Eva(bp0, bp1);
-                    } else if (jRadioButtonAddMa.isSelected()) {
-                        int mas = Integer.parseInt(jTextFieldMAS.getText());
-                        int mal = Integer.parseInt(jTextFieldMAL.getText());
-                        ret = sysMACDMAEva(mode, bp0, mas, mal);
-                    } else {
-                        int mode1 = jRadioButtonLML.isSelected() ? 0 : 1;
-                        int days = jComboBoxLMDays.getSelectedIndex() + 1;
-                        boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
-                        int tp1 = Integer.parseInt(jTextFieldTp1.getText());
-                        int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                        ret = sysMACDLMEva(mode, bp0, mode1, days, status, tp1, tp2);
-                    }
-                } else {
-                    ret = sysMACDEva(mode, bp0);
-                }
+        getTradeMode();
+        int p1 = 0, p2 = 0, p3 = 0;
+        String[] words = tradePara.split(",");
+        try {
+            p1 = Integer.parseInt(words[0]);
+            p2 = Integer.parseInt(words[1]);
+            p3 = Integer.parseInt(words[2]);
+        } catch (Exception e) {
+        }
+        switch (tradeMode) {
+            case "MA":
+                ret = sysMAEva(p1, p2);
                 break;
-            case 1:
-                int mas = Integer.parseInt(jTextFieldMAS.getText());
-                int mal = Integer.parseInt(jTextFieldMAL.getText());
-                ret = sysMAEva(mas, mal);
-                break;
-            case 2:
-                mode = jRadioButtonLML.isSelected() ? 0 : 1;
-                int days = jComboBoxLMDays.getSelectedIndex() + 1;
-                boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
-                int tp1 = Integer.parseInt(jTextFieldTp1.getText());
-                int tp2 = Integer.parseInt(jTextFieldTp2.getText());
-                ret = sysLMEva(mode, days, status, tp1, tp2);
+            case "LML":
+            case "LMS":
+                ret = sysLMEva(tradeMode, p1, p2);
                 parseStatus(livermore.STATUST);
                 lmLogger(livermore);
                 break;
+            case "BAR":
+            case "DIF":
+                ret = sysMACDEva(tradeMode, p1);
+                break;
+            case "BARDIF":
+                ret = sysMACD2Eva(p1, p2);
+                break;
+            case "BARMA":
+            case "DIFMA":
+                ret = sysMACDMAEva(tradeMode, p1, p2, p3);
+                break;
+            case "BARLML":
+            case "BARLMS":
+            case "DIFLML":
+            case "DIFLMS":
+                ret = sysMACDLMEva(tradeMode, p1, p2, p3);
+                break;
+            default:
+                break;
         }
-
         if (!ret) {
             JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
             return;
@@ -832,84 +842,16 @@ public class MainView extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         SystemReport sr;
         ArrayList<SystemReport> srList = new ArrayList<>();
-        int mode = 0;
-        switch (jTabbedPaneSys.getSelectedIndex()) {
-            case 0:
-                mode = jRadioButtonMacdBar.isSelected() ? 0 : 1;
-                int bps = Integer.parseInt(jTextFieldPS1.getText());
-                int bpe = Integer.parseInt(jTextFieldPE1.getText());
-
-                if (jCheckBoxAddSys.isSelected()) {
-                    if (jRadioButtonAddDif.isSelected()) {
-                        int bps1 = Integer.parseInt(jTextFieldPS2.getText());
-                        int bpe1 = Integer.parseInt(jTextFieldPE2.getText());
-                        for (int i = bps; i <= bpe; i++) {
-                            for (int j = bps1; j <= bpe1; j++) {
-                                if (sysMACD2Eva(i, j)) {
-                                    String para = String.format("%3d,%-3d", i, j);
-                                    sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                                    srList.add(sr);
-                                }
-                            }
-                        }
-                    } else if (jRadioButtonAddMa.isSelected()) {
-                        int mass = Integer.parseInt(jTextFieldPS2.getText());
-                        int mase = Integer.parseInt(jTextFieldPE2.getText());
-                        int mals = Integer.parseInt(jTextFieldPS3.getText());
-                        int male = Integer.parseInt(jTextFieldPE3.getText());
-                        for (int i = bps; i <= bpe; i++) {
-                            for (int j = mass; j <= mase; j++) {
-                                for (int k = mals; k <= male; k++) {
-                                    if (k >= j * 2) {
-                                        if (sysMACDMAEva(mode, i, j, k)) {
-                                            String para = String.format("%3d,%2d,%-3d", i, j, k);
-                                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                                            srList.add(sr);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        int mode1 = jRadioButtonLML.isSelected() ? 0 : 1;
-                        int days = jComboBoxLMDays.getSelectedIndex() + 1;
-                        boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
-                        int tps1 = Integer.parseInt(jTextFieldPS2.getText());
-                        int tpe1 = Integer.parseInt(jTextFieldPE2.getText());
-                        int tps2 = Integer.parseInt(jTextFieldPS3.getText());
-                        int tpe2 = Integer.parseInt(jTextFieldPE3.getText());
-                        for (int i = bps; i <= bpe; i++) {
-                            for (int j = tps1; j <= tpe1; j++) {
-                                for (int k = tps2; k <= tpe2; k++) {
-                                    if (k <= (j / 2 + 1)) {
-                                        if (sysMACDLMEva(mode, i, mode1, days, status, j, k)) {
-                                            String para = String.format("%3d,%2d,%-2d", i, j, k);
-                                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                                            srList.add(sr);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    for (int i = bps; i <= bpe; i++) {
-                        if (sysMACDEva(mode, i)) {
-                            String para = String.format("%3d", i);
-                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                            srList.add(sr);
-                        }
-                    }
-                }
-
-                break;
-            case 1:
-                int mass = Integer.parseInt(jTextFieldPS1.getText());
-                int mase = Integer.parseInt(jTextFieldPE1.getText());
-                int mals = Integer.parseInt(jTextFieldPS2.getText());
-                int male = Integer.parseInt(jTextFieldPE2.getText());
-                for (int i = mass; i <= mase; i++) {
-                    for (int j = mals; j <= male; j++) {
+        int ps1 = Integer.parseInt(jTextFieldPS1.getText());
+        int pe1 = Integer.parseInt(jTextFieldPE1.getText());
+        int ps2 = Integer.parseInt(jTextFieldPS2.getText());
+        int pe2 = Integer.parseInt(jTextFieldPE2.getText());
+        int ps3 = Integer.parseInt(jTextFieldPS3.getText());
+        int pe3 = Integer.parseInt(jTextFieldPE3.getText());
+        switch (tradeMode) {
+            case "MA":
+                for (int i = ps1; i <= pe1; i++) {
+                    for (int j = ps2; j <= pe2; j++) {
                         if (j >= i * 2) {
                             if (sysMAEva(i, j)) {
                                 String para = String.format("%2d,%-3d", i, j);
@@ -920,18 +862,12 @@ public class MainView extends javax.swing.JFrame {
                     }
                 }
                 break;
-            case 2:
-                mode = jRadioButtonLML.isSelected() ? 0 : 1;
-                int days = jComboBoxLMDays.getSelectedIndex() + 1;
-                boolean status = (jComboBoxLMStatus.getSelectedIndex() == 0);
-                int tps1 = Integer.parseInt(jTextFieldPS1.getText());
-                int tpe1 = Integer.parseInt(jTextFieldPE1.getText());
-                int tps2 = Integer.parseInt(jTextFieldPS2.getText());
-                int tpe2 = Integer.parseInt(jTextFieldPE2.getText());
-                for (int i = tps1; i <= tpe1; i++) {
-                    for (int j = tps2; j <= tpe2; j++) {
+            case "LML":
+            case "LMS":
+                for (int i = ps1; i <= pe1; i++) {
+                    for (int j = ps2; j <= pe2; j++) {
                         if (j <= (i / 2 + 1)) {
-                            if (sysLMEva(mode, days, status, i, j)) {
+                            if (sysLMEva(tradeMode, i, j)) {
                                 String para = String.format("%2d,%-2d", i, j);
                                 sr = updateSimpleReport(tradeMode, para, strategy, brm);
                                 srList.add(sr);
@@ -939,6 +875,63 @@ public class MainView extends javax.swing.JFrame {
                         }
                     }
                 }
+                break;
+            case "BAR":
+            case "DIF":
+                for (int i = ps1; i <= pe1; i++) {
+                    if (sysMACDEva(tradeMode, i)) {
+                        String para = String.format("%3d", i);
+                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        srList.add(sr);
+                    }
+                }
+                break;
+            case "BARDIF":
+                for (int i = ps1; i <= pe1; i++) {
+                    for (int j = ps2; j <= pe2; j++) {
+                        if (sysMACD2Eva(i, j)) {
+                            String para = String.format("%3d,%-3d", i, j);
+                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                            srList.add(sr);
+                        }
+                    }
+                }
+                break;
+            case "BARMA":
+            case "DIFMA":
+                for (int i = ps1; i <= pe1; i++) {
+                    for (int j = ps2; j <= pe2; j++) {
+                        for (int k = ps3; k <= pe3; k++) {
+                            if (k >= j * 2) {
+                                if (sysMACDMAEva(tradeMode, i, j, k)) {
+                                    String para = String.format("%3d,%2d,%-3d", i, j, k);
+                                    sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                                    srList.add(sr);
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case "BARLML":
+            case "BARLMS":
+            case "DIFLML":
+            case "DIFLMS":
+                for (int i = ps1; i <= pe1; i++) {
+                    for (int j = ps2; j <= pe2; j++) {
+                        for (int k = ps3; k <= pe3; k++) {
+                            if (k <= (j / 2 + 1)) {
+                                if (sysMACDLMEva(tradeMode, i, j, k)) {
+                                    String para = String.format("%3d,%2d,%-2d", i, j, k);
+                                    sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                                    srList.add(sr);
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
                 break;
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -963,18 +956,22 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxPriceFactorActionPerformed
 
+    private void jComboBoxLMDaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLMDaysActionPerformed
+        lmDays = jComboBoxLMDays.getSelectedIndex() + 1;
+    }//GEN-LAST:event_jComboBoxLMDaysActionPerformed
+
     private void jComboBoxLMStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLMStatusActionPerformed
-        int status = (jComboBoxLMStatus.getSelectedIndex() == 0) ? 1 : -1;
-        parseStatus(status);
+        lmStatus = (jComboBoxLMStatus.getSelectedIndex() == 0);
+        parseStatus(lmStatus ? 1 : -1);
     }//GEN-LAST:event_jComboBoxLMStatusActionPerformed
 
     private void jTabbedPaneSysStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneSysStateChanged
-        jTextFieldPS1.setText("");
-        jTextFieldPE1.setText("");
-        jTextFieldPS2.setText("");
-        jTextFieldPE2.setText("");
-        jTextFieldPS3.setText("");
-        jTextFieldPE3.setText("");
+        jTextFieldPS1.setText("0");
+        jTextFieldPE1.setText("0");
+        jTextFieldPS2.setText("0");
+        jTextFieldPE2.setText("0");
+        jTextFieldPS3.setText("0");
+        jTextFieldPE3.setText("0");
         switch (jTabbedPaneSys.getSelectedIndex()) {
             case 0:
                 jTextFieldPS1.setText("-80");
@@ -1020,7 +1017,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxBrmModeActionPerformed
 
     private void jButtonObjectCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObjectCheckActionPerformed
-        ArrayList<String> modeList = new ArrayList<>();
+        ArrayList<String> modelList = new ArrayList<>();
         chkDataList = new ArrayList<>();
 
         try {
@@ -1034,7 +1031,7 @@ public class MainView extends javax.swing.JFrame {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.matches("^[A-Z].*")) {
-                    modeList.add(line);
+                    modelList.add(line);
                 }
             }
             br.close();
@@ -1044,73 +1041,40 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
 
-        int bp0, bp1, mas, mal, tp1, tp2;
-        for (String line : modeList) {
+        int p1 = 0, p2 = 0, p3 = 0;
+        for (String line : modelList) {
             String[] words = line.split(",");
-            switch (words[0]) {
+            tradeMode = words[0];
+            try {
+                p1 = Integer.parseInt(words[1]);
+                p2 = Integer.parseInt(words[2]);
+                p3 = Integer.parseInt(words[3]);
+            } catch (Exception e) {
+            }
+            switch (tradeMode) {
                 case "MA":
-                    mas = Integer.parseInt(words[1]);
-                    mal = Integer.parseInt(words[2]);
-                    sysMAChk(mas, mal);
+                    sysMAChk(p1, p2);
                     break;
                 case "LML":
-                    tp1 = Integer.parseInt(words[1]);
-                    tp2 = Integer.parseInt(words[2]);
-                    sysLMChk(0, tp1, tp2);
-                    break;
                 case "LMS":
-                    tp1 = Integer.parseInt(words[1]);
-                    tp2 = Integer.parseInt(words[2]);
-                    sysLMChk(1, tp1, tp2);
+                    sysLMChk(tradeMode, p1, p2);
                     break;
                 case "BAR":
-                    bp0 = Integer.parseInt(words[1]);
-                    sysMACDChk(0, bp0);
-                    break;
                 case "DIF":
-                    bp0 = Integer.parseInt(words[1]);
-                    sysMACDChk(1, bp0);
+                    sysMACDChk(tradeMode, p1);
                     break;
                 case "BARDIF":
-                    bp0 = Integer.parseInt(words[1]);
-                    bp1 = Integer.parseInt(words[2]);
-                    sysMACD2Chk(bp0, bp1);
+                    sysMACD2Chk(p1, p2);
                     break;
                 case "BARMA":
-                    bp0 = Integer.parseInt(words[1]);
-                    mas = Integer.parseInt(words[2]);
-                    mal = Integer.parseInt(words[3]);
-                    sysMACDMAChk(0, bp0, mas, mal);
-                    break;
                 case "DIFMA":
-                    bp0 = Integer.parseInt(words[1]);
-                    mas = Integer.parseInt(words[2]);
-                    mal = Integer.parseInt(words[3]);
-                    sysMACDMAChk(1, bp0, mas, mal);
+                    sysMACDMAChk(tradeMode, p1, p2, p3);
                     break;
                 case "BARLML":
-                    bp0 = Integer.parseInt(words[1]);
-                    tp1 = Integer.parseInt(words[2]);
-                    tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(0, bp0, tp1, tp2);
-                    break;
                 case "BARLMS":
-                    bp0 = Integer.parseInt(words[1]);
-                    tp1 = Integer.parseInt(words[2]);
-                    tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(1, bp0, tp1, tp2);
-                    break;
                 case "DIFLML":
-                    bp0 = Integer.parseInt(words[1]);
-                    tp1 = Integer.parseInt(words[2]);
-                    tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(2, bp0, tp1, tp2);
-                    break;
                 case "DIFLMS":
-                    bp0 = Integer.parseInt(words[1]);
-                    tp1 = Integer.parseInt(words[2]);
-                    tp2 = Integer.parseInt(words[3]);
-                    sysMACDLMChk(3, bp0, tp1, tp2);
+                    sysMACDLMChk(tradeMode, p1, p2, p3);
                     break;
                 default:
                     break;
@@ -1121,7 +1085,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonObjectCheckActionPerformed
 
     private void jButtonObjectEvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObjectEvaluateActionPerformed
-        ArrayList<String> modeList = new ArrayList<>();
+        ArrayList<String> modelList = new ArrayList<>();
         chkDataList = new ArrayList<>();
 
         try {
@@ -1135,7 +1099,7 @@ public class MainView extends javax.swing.JFrame {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.matches("^[A-Z].*")) {
-                    modeList.add(line);
+                    modelList.add(line);
                 }
             }
             br.close();
@@ -1153,7 +1117,7 @@ public class MainView extends javax.swing.JFrame {
         ArrayList<SystemReport> srList = new ArrayList<>();
 
         int p1 = 0, p2 = 0, p3 = 0;
-        for (String line : modeList) {
+        for (String line : modelList) {
             String[] words = line.split(",");
             tradeMode = words[0];
             try {
@@ -1171,28 +1135,16 @@ public class MainView extends javax.swing.JFrame {
                     }
                     break;
                 case "LML":
-                    if (sysLMEva(0, 1, true, p1, p2)) {
-                        String para = String.format("%2d,%-2d", p1, p2);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                        srList.add(sr);
-                    }
-                    break;
                 case "LMS":
-                    if (sysLMEva(1, 1, true, p1, p2)) {
+                    if (sysLMEva(tradeMode, p1, p2)) {
                         String para = String.format("%2d,%-2d", p1, p2);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
                 case "BAR":
-                    if (sysMACDEva(0, p1)) {
-                        String para = String.format("%3d", p1);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                        srList.add(sr);
-                    }
-                    break;
                 case "DIF":
-                    if (sysMACDEva(1, p1)) {
+                    if (sysMACDEva(tradeMode, p1)) {
                         String para = String.format("%3d", p1);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
@@ -1206,42 +1158,18 @@ public class MainView extends javax.swing.JFrame {
                     }
                     break;
                 case "BARMA":
-                    if (sysMACDMAEva(0, p1, p2, p3)) {
-                        String para = String.format("%3d,%2d,%-3d", p1, p2, p3);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                        srList.add(sr);
-                    }
-                    break;
                 case "DIFMA":
-                    if (sysMACDMAEva(1, p1, p2, p3)) {
+                    if (sysMACDMAEva(tradeMode, p1, p2, p3)) {
                         String para = String.format("%3d,%2d,%-3d", p1, p2, p3);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
                 case "BARLML":
-                    if (sysMACDLMEva(0, p1, 0, 1, true, p2, p3)) {
-                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                        srList.add(sr);
-                    }
-                    break;
                 case "BARLMS":
-                    if (sysMACDLMEva(0, p1, 1, 1, true, p2, p3)) {
-                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                        srList.add(sr);
-                    }
-                    break;
                 case "DIFLML":
-                    if (sysMACDLMEva(1, p1, 0, 1, true, p2, p3)) {
-                        String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
-                        srList.add(sr);
-                    }
-                    break;
                 case "DIFLMS":
-                    if (sysMACDLMEva(1, p1, 1, 1, true, p2, p3)) {
+                    if (sysMACDLMEva(tradeMode, p1, p2, p3)) {
                         String para = String.format("%3d,%2d,%-2d", p1, p2, p3);
                         sr = updateSimpleReport(tradeMode, para, strategy, brm);
                         srList.add(sr);
@@ -1314,7 +1242,7 @@ public class MainView extends javax.swing.JFrame {
         evaluated = false;
     }
 
-    private boolean sysMACDEva(int mode, double bp) {
+    private boolean sysMACDEva(String mode, double bp) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         strategy = new Strategy(this);
@@ -1322,7 +1250,7 @@ public class MainView extends javax.swing.JFrame {
 
         for (int i = 0; i < rows; i++) {
             if ((i >= sIdx) && (i <= eIdx)) {
-                if (mode == 0) {
+                if (mode.equals("BAR")) {
                     strategy.barCrossTrade(i, bp);
                 } else {
                     strategy.difCrossTrade(i, bp);
@@ -1404,10 +1332,10 @@ public class MainView extends javax.swing.JFrame {
         return true;
     }
 
-    private boolean sysLMEva(int mode, int days, boolean status, int t1, int t2) {
+    private boolean sysLMEva(String mode, int t1, int t2) {
         MALine ma = new MALine(priceList);
-        ArrayList<Double> maList = ma.getMAList(days);
-        livermore = new Livermore(status, t1, t2);
+        ArrayList<Double> maList = ma.getMAList(lmDays);
+        livermore = new Livermore(lmStatus, t1, t2);
         strategy = new Strategy(this);
         strategy.livermore = livermore;
 
@@ -1419,7 +1347,7 @@ public class MainView extends javax.swing.JFrame {
                 String message = livermore.arithmetic(maList.get(i));
                 lmFileLogger(i, livermore, message);
                 if ((i >= sIdx) && (i <= eIdx)) {
-                    if (mode == 0) {
+                    if (mode.equals("LML")) {
                         strategy.lmLongTrade(i);
                     } else {
                         strategy.lmShortTrade(i);
@@ -1450,7 +1378,7 @@ public class MainView extends javax.swing.JFrame {
         return true;
     }
 
-    private boolean sysMACDMAEva(int mode, double bp, int mas, int mal) {
+    private boolean sysMACDMAEva(String mode, double bp, int mas, int mal) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         MALine ma = new MALine(priceList);
@@ -1463,7 +1391,7 @@ public class MainView extends javax.swing.JFrame {
 
         for (int i = 0; i < rows; i++) {
             if ((i >= sIdx) && (i <= eIdx)) {
-                if (mode == 0) {
+                if (mode.equals("BARMA")) {
                     strategy.barMACrossTrade(i, bp, masList, malList);
                 } else {
                     strategy.difMACrossTrade(i, bp, masList, malList);
@@ -1487,12 +1415,12 @@ public class MainView extends javax.swing.JFrame {
         return true;
     }
 
-    private boolean sysMACDLMEva(int mode, double bp, int mode1, int days, boolean status, int t1, int t2) {
+    private boolean sysMACDLMEva(String mode, double bp, int t1, int t2) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         MALine ma = new MALine(priceList);
-        ArrayList<Double> maList = ma.getMAList(days);
-        Livermore livermore = new Livermore(status, t1, t2);
+        ArrayList<Double> maList = ma.getMAList(lmDays);
+        Livermore livermore = new Livermore(lmStatus, t1, t2);
         strategy = new Strategy(this);
         strategy.macd = macd;
         strategy.livermore = livermore;
@@ -1500,13 +1428,13 @@ public class MainView extends javax.swing.JFrame {
         for (int i = 0; i < rows; i++) {
             livermore.arithmetic(maList.get(i));
             if ((i >= sIdx) && (i <= eIdx)) {
-                if ((mode == 0) && (mode1 == 0)) {
+                if (mode.equals("BARLML")) {
                     strategy.barLMLCrossTrade(i, bp);
-                } else if ((mode == 1) && (mode1 == 0)) {
+                } else if (mode.equals("DIFLML")) {
                     strategy.difLMLCrossTrade(i, bp);
-                } else if ((mode == 0) && (mode1 == 1)) {
+                } else if (mode.equals("BARLMS")) {
                     strategy.barLMSCrossTrade(i, bp);
-                } else if ((mode == 1) && (mode1 == 1)) {
+                } else if (mode.equals("DIFLMS")) {
                     strategy.difLMSCrossTrade(i, bp);
                 }
             }
@@ -1528,17 +1456,16 @@ public class MainView extends javax.swing.JFrame {
         return true;
     }
 
-    private void sysMACDChk(int mode, int bp) {
+    private void sysMACDChk(String mode, int bp) {
         String para = String.format("%d", bp);
-        String modeString = (mode == 0) ? "BAR" : "DIF";
-        CheckData chkData = new CheckData(modeString, para);
+        CheckData chkData = new CheckData(mode, para);
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         strategy = new Strategy(this);
         strategy.macd = macd;
 
         for (int i = 0; i < rows; i++) {
-            if (mode == 0) {
+            if (mode.equals("BAR")) {
                 strategy.barCrossTrade(i, bp);
             } else {
                 strategy.difCrossTrade(i, bp);
@@ -1586,17 +1513,16 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
-    private void sysLMChk(int mode, int t1, int t2) {
+    private void sysLMChk(String mode, int t1, int t2) {
         String para = String.format("%d,%d", t1, t2);
-        String modeString = (mode == 0) ? "LML" : "LMS";
-        CheckData chkData = new CheckData(modeString, para);
+        CheckData chkData = new CheckData(mode, para);
         livermore = new Livermore(true, t1, t2);
         strategy = new Strategy(this);
         strategy.livermore = livermore;
 
         for (int i = 0; i < rows; i++) {
             livermore.arithmetic(priceList.get(i));
-            if (mode == 0) {
+            if (mode.equals("LML")) {
                 strategy.lmLongTrade(i);
             } else {
                 strategy.lmShortTrade(i);
@@ -1639,17 +1565,16 @@ public class MainView extends javax.swing.JFrame {
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
-        double barKey = macd.getMACDKey(0, bp0);
-        double difKey = macd.getMACDKey(1, bp1);
+        double barKey = macd.getBARKey(bp0);
+        double difKey = macd.getDIFKey(bp1);
         chkData.key = (barKey > difKey) ? barKey : difKey;
         chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
         chkDataList.add(chkData);
     }
 
-    private void sysMACDMAChk(int mode, int bp, int mas, int mal) {
+    private void sysMACDMAChk(String mode, int bp, int mas, int mal) {
         String para = String.format("%d,%d,%d", bp, mas, mal);
-        String modeString = (mode == 0) ? "BARMA" : "DIFMA";
-        CheckData chkData = new CheckData(modeString, para);
+        CheckData chkData = new CheckData(mode, para);
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         MALine ma = new MALine(priceList);
@@ -1660,7 +1585,7 @@ public class MainView extends javax.swing.JFrame {
         ArrayList<Double> masList = ma.getMAList(mas);
         ArrayList<Double> malList = ma.getMAList(mal);
         for (int i = 0; i < rows; i++) {
-            if (mode == 0) {
+            if (mode.equals("BARMA")) {
                 strategy.barMACrossTrade(i, bp, masList, malList);
             } else {
                 strategy.difMACrossTrade(i, bp, masList, malList);
@@ -1683,10 +1608,9 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
-    private void sysMACDLMChk(int mode, int bp, int t1, int t2) {
+    private void sysMACDLMChk(String mode, int bp, int t1, int t2) {
         String para = String.format("%d,%d,%d", bp, t1, t2);
-        String modeString = (((mode & 0x02) == 0) ? "BAR" : "DIF") + (((mode & 0x01) == 0) ? "LML" : "LMS");
-        CheckData chkData = new CheckData(modeString, para);
+        CheckData chkData = new CheckData(mode, para);
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         livermore = new Livermore(true, t1, t2);
@@ -1696,13 +1620,13 @@ public class MainView extends javax.swing.JFrame {
 
         for (int i = 0; i < rows; i++) {
             livermore.arithmetic(priceList.get(i));
-            if (mode == 0) {
+            if (mode.equals("BARLML")) {
                 strategy.barLMLCrossTrade(i, bp);
-            } else if (mode == 1) {
+            } else if (mode.equals("BARLMS")) {
                 strategy.barLMSCrossTrade(i, bp);
-            } else if (mode == 2) {
+            } else if (mode.equals("DIFLML")) {
                 strategy.difLMLCrossTrade(i, bp);
-            } else if (mode == 3) {
+            } else if (mode.equals("DIFLMS")) {
                 strategy.difLMSCrossTrade(i, bp);
             }
         }
@@ -1716,14 +1640,14 @@ public class MainView extends javax.swing.JFrame {
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
-        double lmKey = livermore.getLMKey(mode & 0x01);
-        double macdKey = macd.getMACDKey(mode & 0x02, bp);
+        double lmKey = livermore.getLMKey(mode);
+        double macdKey = macd.getMACDKey(mode, bp);
         chkData.key = (lmKey > macdKey) ? lmKey : macdKey;
         chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
         chkDataList.add(chkData);
     }
 
-    public void tradeModeEva(String mode, String para) {
+    public void tradeModelEva(String mode, String para) {
         String[] paras = para.replaceAll(" ", "").split(",");
 
         switch (mode) {
@@ -1747,27 +1671,27 @@ public class MainView extends javax.swing.JFrame {
             case "BAR":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(false);
                 break;
             case "DIF":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(false);
                 break;
             case "BARDIF":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
-                jTextFieldbp1.setText(paras[1]);
+                jTextFieldBp0.setText(paras[0]);
+                jTextFieldBp1.setText(paras[1]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddDif.setSelected(true);
                 break;
             case "BARMA":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddMa.setSelected(true);
                 jTextFieldMAS.setText(paras[1]);
@@ -1776,7 +1700,7 @@ public class MainView extends javax.swing.JFrame {
             case "DIFMA":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddMa.setSelected(true);
                 jTextFieldMAS.setText(paras[1]);
@@ -1785,7 +1709,7 @@ public class MainView extends javax.swing.JFrame {
             case "BARLML":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLML.setSelected(true);
@@ -1795,7 +1719,7 @@ public class MainView extends javax.swing.JFrame {
             case "BARLMS":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdBar.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLMS.setSelected(true);
@@ -1805,7 +1729,7 @@ public class MainView extends javax.swing.JFrame {
             case "DIFLML":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLML.setSelected(true);
@@ -1815,7 +1739,7 @@ public class MainView extends javax.swing.JFrame {
             case "DIFLMS":
                 jTabbedPaneSys.setSelectedIndex(0);
                 jRadioButtonMacdDif.setSelected(true);
-                jTextFieldbp0.setText(paras[0]);
+                jTextFieldBp0.setText(paras[0]);
                 jCheckBoxAddSys.setSelected(true);
                 jRadioButtonAddLm.setSelected(true);
                 jRadioButtonLMS.setSelected(true);
@@ -1833,21 +1757,27 @@ public class MainView extends javax.swing.JFrame {
         switch (jTabbedPaneSys.getSelectedIndex()) {
             case 0:
                 tradeMode = (jRadioButtonMacdBar.isSelected()) ? "BAR" : "DIF";
+                tradePara = jTextFieldBp0.getText();
                 if (jCheckBoxAddSys.isSelected()) {
                     if (jRadioButtonAddDif.isSelected()) {
                         tradeMode = "BARDIF";
+                        tradePara += "," + jTextFieldBp1.getText();
                     } else if (jRadioButtonAddMa.isSelected()) {
                         tradeMode += "MA";
+                        tradePara += "," + jTextFieldMAS.getText() + "," + jTextFieldMAL.getText();
                     } else {
                         tradeMode += (jRadioButtonLML.isSelected()) ? "LML" : "LMS";
+                        tradePara += "," + jTextFieldTp1.getText() + "," + jTextFieldTp2.getText();
                     }
                 }
                 break;
             case 1:
                 tradeMode = "MA";
+                tradePara = jTextFieldMAS.getText() + "," + jTextFieldMAL.getText();
                 break;
             case 2:
                 tradeMode = (jRadioButtonLML.isSelected()) ? "LML" : "LMS";
+                tradePara = jTextFieldTp1.getText() + "," + jTextFieldTp2.getText();
                 break;
         }
     }
@@ -2125,7 +2055,11 @@ public class MainView extends javax.swing.JFrame {
     public RankTable rankTable;
     public int brmMode = 0;
     public String tradeMode;
+    public String tradePara;
     public ArrayList<CheckData> chkDataList;
+
+    public int lmDays = 1;
+    public boolean lmStatus = true;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
@@ -2205,6 +2139,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneSys;
     private javax.swing.JTable jTablePoint;
     private javax.swing.JTextArea jTextAreaMain;
+    private javax.swing.JTextField jTextFieldBp0;
+    private javax.swing.JTextField jTextFieldBp1;
     private javax.swing.JTextField jTextFieldEDate;
     private javax.swing.JTextField jTextFieldMAL;
     private javax.swing.JTextField jTextFieldMAS;
@@ -2219,7 +2155,5 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSDate;
     private javax.swing.JTextField jTextFieldTp1;
     private javax.swing.JTextField jTextFieldTp2;
-    private javax.swing.JTextField jTextFieldbp0;
-    private javax.swing.JTextField jTextFieldbp1;
     // End of variables declaration//GEN-END:variables
 }

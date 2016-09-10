@@ -389,8 +389,8 @@ public class Livermore {
         }
     }
 
-    public double getLMKey(int mode) {
-        if (mode == 0) {
+    public double getLMKey(String mode) {
+        if (mode.contains("LML")) {
             return getLMLKey();
         } else {
             return getLMSKey();

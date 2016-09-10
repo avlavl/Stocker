@@ -75,7 +75,7 @@ public class RankTable extends javax.swing.JDialog {
     public void updateTable(int idx) {
         int rows = (rankSize > 20) ? 20 : rankSize;
         for (int i = 0; i < rows; i++) {
-            jTableRank.setValueAt(tradeMode, i, 0);
+            jTableRank.setValueAt(SRList.get(i + idx).tradeMode, i, 0);
             jTableRank.setValueAt(i + idx + 1, i, 1);
             jTableRank.setValueAt(SRList.get(i + idx).parameter, i, 2);
             jTableRank.setValueAt(SRList.get(i + idx).currentAsset, i, 3);
@@ -161,8 +161,9 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank.setRowSelectionAllowed(true);
         if (evt.getClickCount() > 1) {
             int index = jTableRank.getSelectedRow();
+            String mode = (String) jTableRank.getValueAt(index, 0);
             String para = (String) jTableRank.getValueAt(index, 2);
-            mainView.tradeModeEva(tradeMode, para);
+            mainView.tradeModelEva(mode, para);
         }
     }//GEN-LAST:event_jTableRankMouseClicked
 
