@@ -1235,8 +1235,7 @@ public class MainView extends javax.swing.JFrame {
         }
         jTextFieldSDate.setText(dateList.get(0));
         jTextFieldEDate.setText(dateList.get(rows - 1));
-        jLabelDate.setText("日期：----/--/--");
-        jLabelClose.setText("收盘：--");
+        updateMarket(rows - 1);
         evaluated = false;
     }
 
