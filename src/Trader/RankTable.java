@@ -29,8 +29,8 @@ public class RankTable extends javax.swing.JDialog {
         int rows = (rankSize > 20) ? 20 : rankSize;
         String[][] tableContent = new String[rows][11];
         for (int i = 0; i < rows; i++) {
-            tableContent[i][0] = "" + SRList.get(i).tradeMode;
-            tableContent[i][1] = "" + (i + 1);
+            tableContent[i][0] = "" + (i + 1);
+            tableContent[i][1] = "" + SRList.get(i).tradeMode;
             tableContent[i][2] = "" + SRList.get(i).parameter;
             tableContent[i][3] = "" + SRList.get(i).currentAsset;
             tableContent[i][4] = String.format("%.3f%%", SRList.get(i).standardAnnualRate);
@@ -44,7 +44,7 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "模式", "排名", "参数", "当前资产", "标准年化", "持仓时间", "持仓年化", "平均持仓", "次数", "最大连亏", "数学期望"
+                    "排名", "模式", "参数", "当前资产", "标准年化", "持仓时间", "持仓年化", "平均持仓", "次数", "最大连亏", "数学期望"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
@@ -59,8 +59,8 @@ public class RankTable extends javax.swing.JDialog {
 
         jScrollPaneRank.setViewportView(jTableRank);
         if (jTableRank.getColumnModel().getColumnCount() > 0) {
-            jTableRank.getColumnModel().getColumn(0).setMaxWidth(70);
-            jTableRank.getColumnModel().getColumn(1).setMaxWidth(38);
+            jTableRank.getColumnModel().getColumn(0).setMaxWidth(38);
+            jTableRank.getColumnModel().getColumn(1).setMaxWidth(70);
             jTableRank.getColumnModel().getColumn(2).setMaxWidth(80);
             jTableRank.getColumnModel().getColumn(3).setMaxWidth(70);
             jTableRank.getColumnModel().getColumn(7).setMaxWidth(68);
@@ -79,8 +79,8 @@ public class RankTable extends javax.swing.JDialog {
     public void updateTable(int idx) {
         int rows = (rankSize > 20) ? 20 : rankSize;
         for (int i = 0; i < rows; i++) {
-            jTableRank.setValueAt(SRList.get(i + idx).tradeMode, i, 0);
-            jTableRank.setValueAt(i + idx + 1, i, 1);
+            jTableRank.setValueAt(i + idx + 1, i, 0);
+            jTableRank.setValueAt(SRList.get(i + idx).tradeMode, i, 1);
             jTableRank.setValueAt(SRList.get(i + idx).parameter, i, 2);
             jTableRank.setValueAt(SRList.get(i + idx).currentAsset, i, 3);
             jTableRank.setValueAt(String.format("%.3f%%", SRList.get(i + idx).standardAnnualRate), i, 4);
@@ -120,7 +120,7 @@ public class RankTable extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "模式", "排名", "参数", "当前资产", "标准年化", "持仓时间", "持仓年化", "平均持仓", "次数", "最大连亏", "数学期望"
+                "排名", "模式", "参数", "当前资产", "标准年化", "持仓时间", "持仓年化", "平均持仓", "次数", "最大连亏", "数学期望"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -149,8 +149,8 @@ public class RankTable extends javax.swing.JDialog {
         });
         jScrollPaneRank.setViewportView(jTableRank);
         if (jTableRank.getColumnModel().getColumnCount() > 0) {
-            jTableRank.getColumnModel().getColumn(0).setMaxWidth(70);
-            jTableRank.getColumnModel().getColumn(1).setMaxWidth(38);
+            jTableRank.getColumnModel().getColumn(0).setMaxWidth(38);
+            jTableRank.getColumnModel().getColumn(1).setMaxWidth(70);
             jTableRank.getColumnModel().getColumn(2).setMaxWidth(80);
             jTableRank.getColumnModel().getColumn(3).setMaxWidth(70);
             jTableRank.getColumnModel().getColumn(7).setMaxWidth(68);
@@ -169,7 +169,7 @@ public class RankTable extends javax.swing.JDialog {
         jTableRank.setRowSelectionAllowed(true);
         if (evt.getClickCount() > 1) {
             int index = jTableRank.getSelectedRow();
-            String mode = (String) jTableRank.getValueAt(index, 0);
+            String mode = (String) jTableRank.getValueAt(index, 1);
             String para = (String) jTableRank.getValueAt(index, 2);
             mainView.tradeModelEva(mode, para);
         }
