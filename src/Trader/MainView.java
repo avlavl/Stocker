@@ -42,6 +42,7 @@ public class MainView extends javax.swing.JFrame {
         public int days;
         public double key;
         public double percent;
+        public String amount;
     }
 
     /**
@@ -1039,40 +1040,34 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
 
-        int p1 = 0, p2 = 0, p3 = 0;
         for (String line : modelList) {
-            String[] words = line.split(",");
-            tradeMode = words[0];
-            try {
-                p1 = Integer.parseInt(words[1]);
-                p2 = Integer.parseInt(words[2]);
-                p3 = Integer.parseInt(words[3]);
-            } catch (Exception e) {
-            }
-            switch (tradeMode) {
+            String[] words = line.split(":");
+            String mode = words[0];
+            String para = words[1];
+            switch (mode) {
                 case "MA":
-                    sysMAChk(p1, p2);
+                    sysMAChk(para);
                     break;
                 case "LML":
                 case "LMS":
-                    sysLMChk(tradeMode, p1, p2);
+                    sysLMChk(mode, para);
                     break;
                 case "BAR":
                 case "DIF":
-                    sysMACDChk(tradeMode, p1);
+                    sysMACDChk(mode, para);
                     break;
                 case "BARDIF":
-                    sysMACD2Chk(p1, p2);
+                    sysMACD2Chk(para);
                     break;
                 case "BARMA":
                 case "DIFMA":
-                    sysMACDMAChk(tradeMode, p1, p2, p3);
+                    sysMACDMAChk(mode, para);
                     break;
                 case "BARLML":
                 case "BARLMS":
                 case "DIFLML":
                 case "DIFLMS":
-                    sysMACDLMChk(tradeMode, p1, p2, p3);
+                    sysMACDLMChk(mode, para);
                     break;
                 default:
                     break;
@@ -1116,50 +1111,52 @@ public class MainView extends javax.swing.JFrame {
 
         int p1 = 0, p2 = 0, p3 = 0;
         for (String line : modelList) {
-            String[] words = line.split(",");
-            tradeMode = words[0];
+            String[] words = line.split(":");
+            String mode = words[0];
+            String paras[] = words[1].split(" ");
+            String[] ps = paras[0].split(",");
             try {
-                p1 = Integer.parseInt(words[1]);
-                p2 = Integer.parseInt(words[2]);
-                p3 = Integer.parseInt(words[3]);
+                p1 = Integer.parseInt(ps[0]);
+                p2 = Integer.parseInt(ps[1]);
+                p3 = Integer.parseInt(ps[2]);
             } catch (Exception e) {
             }
-            switch (tradeMode) {
+            switch (mode) {
                 case "MA":
                     if (sysMAEva(p1, p2)) {
                         String para = String.format("%d,%d", p1, p2);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
                 case "LML":
                 case "LMS":
-                    if (sysLMEva(tradeMode, p1, p2)) {
+                    if (sysLMEva(mode, p1, p2)) {
                         String para = String.format("%d,%d", p1, p2);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
                 case "BAR":
                 case "DIF":
-                    if (sysMACDEva(tradeMode, p1)) {
+                    if (sysMACDEva(mode, p1)) {
                         String para = String.format("%d", p1);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
                 case "BARDIF":
                     if (sysMACD2Eva(p1, p2)) {
                         String para = String.format("%d,%d", p1, p2);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
                 case "BARMA":
                 case "DIFMA":
-                    if (sysMACDMAEva(tradeMode, p1, p2, p3)) {
+                    if (sysMACDMAEva(mode, p1, p2, p3)) {
                         String para = String.format("%d,%d,%d", p1, p2, p3);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
@@ -1167,9 +1164,9 @@ public class MainView extends javax.swing.JFrame {
                 case "BARLMS":
                 case "DIFLML":
                 case "DIFLMS":
-                    if (sysMACDLMEva(tradeMode, p1, p2, p3)) {
+                    if (sysMACDLMEva(mode, p1, p2, p3)) {
                         String para = String.format("%d,%d,%d", p1, p2, p3);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, strategy, brm);
                         srList.add(sr);
                     }
                     break;
@@ -1453,9 +1450,14 @@ public class MainView extends javax.swing.JFrame {
         return true;
     }
 
-    private void sysMACDChk(String mode, int bp) {
-        String para = String.format("%d", bp);
-        CheckData chkData = new CheckData(mode, para);
+    private void sysMACDChk(String mode, String para) {
+        String[] paras = para.split(" ");
+        String para0 = paras[0];
+        String[] ps = para0.split(",");
+        int bp = Integer.parseInt(ps[0]);
+        CheckData chkData = new CheckData(mode, para0);
+        chkData.amount = paras[1];
+
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         strategy = new Strategy(this);
@@ -1471,10 +1473,10 @@ public class MainView extends javax.swing.JFrame {
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
-            chkData.status = "买入";
+            chkData.status = "持有";
             chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
-            chkData.status = "卖出";
+            chkData.status = "清空";
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
@@ -1483,9 +1485,15 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
-    private void sysMAChk(int mas, int mal) {
-        String para = String.format("%d,%d", mas, mal);
-        CheckData chkData = new CheckData("MA", para);
+    private void sysMAChk(String para) {
+        String[] paras = para.split(" ");
+        String para0 = paras[0];
+        String[] ps = para0.split(",");
+        int mas = Integer.parseInt(ps[0]);
+        int mal = Integer.parseInt(ps[1]);
+        CheckData chkData = new CheckData("MA", para0);
+        chkData.amount = paras[1];
+
         MALine ma = new MALine(priceList);
         strategy = new Strategy(this);
         strategy.ma = ma;
@@ -1498,10 +1506,10 @@ public class MainView extends javax.swing.JFrame {
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
-            chkData.status = "买入";
+            chkData.status = "持有";
             chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
-            chkData.status = "卖出";
+            chkData.status = "清空";
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
@@ -1510,9 +1518,15 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
-    private void sysLMChk(String mode, int t1, int t2) {
-        String para = String.format("%d,%d", t1, t2);
-        CheckData chkData = new CheckData(mode, para);
+    private void sysLMChk(String mode, String para) {
+        String[] paras = para.split(" ");
+        String para0 = paras[0];
+        String[] ps = para0.split(",");
+        int t1 = Integer.parseInt(ps[0]);
+        int t2 = Integer.parseInt(ps[1]);
+        CheckData chkData = new CheckData(mode, para0);
+        chkData.amount = paras[1];
+
         livermore = new Livermore(true, t1, t2);
         strategy = new Strategy(this);
         strategy.livermore = livermore;
@@ -1528,10 +1542,10 @@ public class MainView extends javax.swing.JFrame {
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
-            chkData.status = "买入";
+            chkData.status = "持有";
             chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
-            chkData.status = "卖出";
+            chkData.status = "清空";
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
@@ -1540,10 +1554,15 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
-    private void sysMACD2Chk(int bp0, int bp1) {
-        String para = String.format("%d,%d", bp0, bp1);
-        String modeString = "BARDIF";
-        CheckData chkData = new CheckData(modeString, para);
+    private void sysMACD2Chk(String para) {
+        String[] paras = para.split(" ");
+        String para0 = paras[0];
+        String[] ps = para0.split(",");
+        int bp0 = Integer.parseInt(ps[0]);
+        int bp1 = Integer.parseInt(ps[1]);
+        CheckData chkData = new CheckData("BARDIF", para0);
+        chkData.amount = paras[1];
+
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         strategy = new Strategy(this);
@@ -1555,10 +1574,10 @@ public class MainView extends javax.swing.JFrame {
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
-            chkData.status = "买入";
+            chkData.status = "持有";
             chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
-            chkData.status = "卖出";
+            chkData.status = "清空";
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
@@ -1569,9 +1588,16 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
-    private void sysMACDMAChk(String mode, int bp, int mas, int mal) {
-        String para = String.format("%d,%d,%d", bp, mas, mal);
-        CheckData chkData = new CheckData(mode, para);
+    private void sysMACDMAChk(String mode, String para) {
+        String[] paras = para.split(" ");
+        String para0 = paras[0];
+        String[] ps = para0.split(",");
+        int bp = Integer.parseInt(ps[0]);
+        int mas = Integer.parseInt(ps[1]);
+        int mal = Integer.parseInt(ps[2]);
+        CheckData chkData = new CheckData(mode, para0);
+        chkData.amount = paras[1];
+
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         MALine ma = new MALine(priceList);
@@ -1591,10 +1617,10 @@ public class MainView extends javax.swing.JFrame {
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
-            chkData.status = "买入";
+            chkData.status = "持有";
             chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
-            chkData.status = "卖出";
+            chkData.status = "清空";
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
@@ -1605,9 +1631,16 @@ public class MainView extends javax.swing.JFrame {
         chkDataList.add(chkData);
     }
 
-    private void sysMACDLMChk(String mode, int bp, int t1, int t2) {
-        String para = String.format("%d,%d,%d", bp, t1, t2);
-        CheckData chkData = new CheckData(mode, para);
+    private void sysMACDLMChk(String mode, String para) {
+        String[] paras = para.split(" ");
+        String para0 = paras[0];
+        String[] ps = para0.split(",");
+        int bp = Integer.parseInt(ps[0]);
+        int t1 = Integer.parseInt(ps[1]);
+        int t2 = Integer.parseInt(ps[2]);
+        CheckData chkData = new CheckData(mode, para0);
+        chkData.amount = paras[1];
+
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
         livermore = new Livermore(true, t1, t2);
@@ -1630,10 +1663,10 @@ public class MainView extends javax.swing.JFrame {
         bpIndexList = strategy.bpIdxList;
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
-            chkData.status = "买入";
+            chkData.status = "持有";
             chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
-            chkData.status = "卖出";
+            chkData.status = "清空";
             chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 

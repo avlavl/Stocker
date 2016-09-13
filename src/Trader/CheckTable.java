@@ -28,24 +28,25 @@ public class CheckTable extends javax.swing.JDialog {
 
         ArrayList<CheckData> list = mv.chkDataList;
         int size = list.size();
-        String[][] tableContent = new String[size][6];
+        String[][] tableContent = new String[size][7];
         for (int i = 0; i < size; i++) {
             tableContent[i][0] = list.get(i).mode;
             tableContent[i][1] = list.get(i).parameter;
             tableContent[i][2] = list.get(i).status;
             tableContent[i][3] = list.get(i).days + "天";
             tableContent[i][4] = String.format("%.2f", list.get(i).key);
-            tableContent[i][5] = String.format("%.2f%%", list.get(i).percent);;
+            tableContent[i][5] = String.format("%.2f%%", list.get(i).percent);
+            tableContent[i][6] = list.get(i).amount + "元";
         }
         jTableCheck.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
         jTableCheck.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "模式", "参数", "状态", "持续时间", "关键点", "百分比"
+                    "模式", "参数", "状态", "持续时间", "关键点", "百分比", "金额"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             @Override
@@ -55,6 +56,10 @@ public class CheckTable extends javax.swing.JDialog {
         });
         jTableCheck.setRowHeight(20);
         jScrollPaneCheck.setViewportView(jTableCheck);
+        if (jTableCheck.getColumnModel().getColumnCount() > 0) {
+            jTableCheck.getColumnModel().getColumn(2).setMaxWidth(40);
+            jTableCheck.getColumnModel().getColumn(3).setMaxWidth(65);
+        }
         setTableRowColor(jTableCheck, new Color(200, 0, 0), new Color(0, 130, 2));
 
         setPreferredSize(new java.awt.Dimension(535, 20 * size + 110));
@@ -111,14 +116,14 @@ public class CheckTable extends javax.swing.JDialog {
         jTableCheck.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTableCheck.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "模式", "参数", "状态", "持续时间", "关键点", "百分比"
+                "模式", "参数", "状态", "持续时间", "关键点", "百分比", "金额"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,6 +137,10 @@ public class CheckTable extends javax.swing.JDialog {
             }
         });
         jScrollPaneCheck.setViewportView(jTableCheck);
+        if (jTableCheck.getColumnModel().getColumnCount() > 0) {
+            jTableCheck.getColumnModel().getColumn(2).setMaxWidth(40);
+            jTableCheck.getColumnModel().getColumn(3).setMaxWidth(65);
+        }
 
         getContentPane().add(jScrollPaneCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 500, 50));
 
@@ -156,7 +165,7 @@ public class CheckTable extends javax.swing.JDialog {
                 @Override
                 public Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                     String status = (String) Table.getValueAt(row, 2);
-                    if (status.equals("买入")) {
+                    if (status.equals("持有")) {
                         setForeground(color1);
                     } else {
                         setForeground(color2);
