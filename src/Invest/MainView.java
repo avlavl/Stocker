@@ -172,16 +172,16 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTablePoint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"累加投入", null, "定投轮数", ""},
+                {"累加投入", null, "定投轮数", null},
                 {"累加产出", null, "最大投入", null},
-                {"净利润", null, "最长周期", ""},
+                {"净利润", null, "最长周期", null},
                 {"总收益率", null, "最长定投轮", null},
                 {"测试年限", null, "最短定投轮", null},
-                {"定投年限", null, "平均定投轮", ""},
-                {"定投时间比", "", "最大亏损", null},
+                {"定投年限", null, "平均定投轮", null},
+                {"定投时间比", null, "最大亏损", null},
                 {"平均持仓期", null, "最大回撤比", null},
-                {"平均年化率", "", "最大差离", null},
-                {"平均日化率", null, "当前差离", null}
+                {"平均年化率", null, "最小离差", null},
+                {"平均日化率", null, "当前离差", null}
             },
             new String [] {
                 "统计指标", "全部交易", "统计指标", "全部交易"
@@ -882,19 +882,19 @@ public class MainView extends javax.swing.JFrame {
         for (int i = 0; i < rows; i++) {
             //strategy.maCrossTrade(i, masList, malList);
         }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
-        if (bpIndexList.size() > spIndexList.size()) {
-            chkData.status = "持有";
-            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
-        } else {
-            chkData.status = "清空";
-            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
-        }
-
-        //chkData.key = ma.getMAKey(mas, mal);
-        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
-        chkDataList.add(chkData);
+//        bpIndexList = strategy.bpIdxList;
+//        spIndexList = strategy.spIdxList;
+//        if (bpIndexList.size() > spIndexList.size()) {
+//            chkData.status = "持有";
+//            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+//        } else {
+//            chkData.status = "清空";
+//            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+//        }
+//
+//        //chkData.key = ma.getMAKey(mas, mal);
+//        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
+//        chkDataList.add(chkData);
     }
 
     public void tradeModelEva(String mode, String para) {
@@ -975,7 +975,7 @@ public class MainView extends javax.swing.JFrame {
         sr.meanInvestCount = (float) stg.getMeanInvestCount();
         sr.maxLoss = (float) stg.getMaxLoss();
         sr.maxLossRatio = (float) stg.getMaxLossRatio();
-        sr.maxDiffRate = (float) stg.getMaxDiffRate();
+        sr.minDiffRate = (float) stg.getMinDiffRate();
         sr.currentDiffRate = (float) stg.getCurrentDiffRate();
 
         return sr;
@@ -1034,9 +1034,9 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(sr.maxLoss + "元", 6, 3);
         jTablePoint.setValueAt("最大回撤比", 7, 2);
         jTablePoint.setValueAt(sr.maxLossRatio + "%", 7, 3);
-        jTablePoint.setValueAt("最大差离", 8, 2);
-        jTablePoint.setValueAt(sr.maxDiffRate, 8, 3);
-        jTablePoint.setValueAt("当前差离", 9, 2);
+        jTablePoint.setValueAt("最小离差", 8, 2);
+        jTablePoint.setValueAt(sr.minDiffRate, 8, 3);
+        jTablePoint.setValueAt("当前离差", 9, 2);
         jTablePoint.setValueAt(sr.currentDiffRate, 9, 3);
     }
 

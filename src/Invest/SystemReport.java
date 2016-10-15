@@ -40,6 +40,6 @@ public class SystemReport {
     public float meanInvestCount;
     public float maxLoss;
     public float maxLossRatio;
-    public float maxDiffRate;
+    public float minDiffRate;
     public float currentDiffRate;
 }

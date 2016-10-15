@@ -17,60 +17,57 @@ public class Strategy {
     public Strategy(MainView mv) {
         mainView = mv;
         pList = mv.priceList;
+        dList = mv.dateList;
         items = pList.size();
         sIndex = mv.sIdx;
         eIndex = mv.eIdx;
     }
 
-    public void maCrossTrade(int idx, ArrayList<Double> list) {
-//        boolean b = CROSS(idx, pList, list);
-//        boolean s = CROSS(idx, list, pList);
-        //saveTradeIndex(idx, b, s);
-    }
-
     public boolean sysInvestEva(int p1, int p2, int p3, int p4) {
         double totalInput = 0;
-        double thisInput = 0;
-        double thisNum = 0;
-        double totalnum = 0;
-        double totalAsset = 0;
-        double baseline = p1;
-        ArrayList<String> bsDateList = new ArrayList<>();
+        double totalPrice = 0;
+        double totalNumber = 0;
+        double input = 0;
+        double number = 0;
+        baseline = p1;
 
         for (int i = 0; i < items; i++) {
             if ((i >= sIndex) && (i <= eIndex)) {
-                totalAsset = totalnum * pList.get(i);
-                if (totalAsset < totalInput) {
-                    lossList.add(totalInput - totalAsset);
-                    lossRateList.add((totalInput - totalAsset) / totalInput);
-                }
-                if (totalAsset > totalInput * (1 + (double) p3 / 100)) {
-                    spIdxList.add(i);
-                    bsDateList.add(mainView.dateList.get(i));
-                    roundDateLists.add(bsDateList);
-                    bsDateList = new ArrayList<>();
-                    mainView.msgLogger("止盈日期：" + mainView.dateList.get(i) + " 投入：" + (float) totalInput + " 回报：" + (float) totalAsset);
-                    inputList.add(totalInput);
-                    assetList.add(totalAsset);
-                    yieldList.add((totalAsset - totalInput) / totalInput);
-                    addInvest += totalInput;
-                    addOutput += totalAsset;
-                    totalInput = 0;
-                    totalAsset = 0;
-                    totalnum = 0;
+                if (totalInput > 0) {
+                    totalPrice = totalNumber * pList.get(i);
+                    profit = totalPrice - totalInput;
+                    profitRatio = profit / totalInput;
+                    profitList.add(profit);
+                    profitRatioList.add(profitRatio);
+                    if (profitRatio >= (double) p3 / 100) {
+                        bsDateList.add(dList.get(i));
+                        roundDateLists.add(bsDateList);
+                        bsDateList = new ArrayList<>();
+                        mainView.msgLogger("止盈日期：" + dList.get(i) + " 总投入：" + (float) totalInput + " 总市值：" + (float) totalPrice);
+                        totalInputList.add(totalInput);
+                        totalPriceList.add(totalPrice);
+                        yieldList.add(profitRatio);
+                        addInvest += totalInput;
+                        addOutput += totalPrice;
+                        totalInput = 0;
+                        totalPrice = 0;
+                        totalNumber = 0;
+                        profit = 0;
+                        profitRatio = 0;
+                    }
                 }
 
                 baseline = 400 + i * p2;
-                diffRate = baseline / pList.get(i);
+                diffRate = pList.get(i) / baseline;
+                //mainView.msgLogger(dList.get(i) + " 利润：" + (float) profit + " 利润比：" + (float) profitRatio + " 离差：" + diffRate);
                 if (pList.get(i) < baseline) {
-                    bpIdxList.add(i);
                     diffRateList.add(diffRate);
-                    thisInput = (40 + i * p2 / 10) * diffRate;
-                    totalInput += thisInput;
-                    thisNum = thisInput / pList.get(i);
-                    totalnum += thisNum;
-                    bsDateList.add(mainView.dateList.get(i));
-                    mainView.msgLogger(mainView.dateList.get(i) + " 金额：" + (float) thisInput + " 数量：" + (float) thisNum);
+                    input = (baseline / 10) / diffRate;
+                    number = input / pList.get(i);
+                    totalInput += input;
+                    totalNumber += number;
+                    bsDateList.add(dList.get(i));
+                    mainView.msgLogger(dList.get(i) + " 金额：" + (float) input + " 数量：" + (float) number);
                 }
             }
             if (i > eIndex) {
@@ -97,12 +94,13 @@ public class Strategy {
     }
 
     public double getInvestYears() {
-        double time = 0;
+        double times = 0;
         for (ArrayList<String> roundDateList : roundDateLists) {
-            time += roundDateList.size() - 1;
+            times += roundDateList.size() - 1;
         }
-        time = time * 7 / 365.25;
-        return time;
+        times += bsDateList.size();
+        times = times * 7 / 365.25;
+        return times;
     }
 
     public double getInvestTimeRatio() {
@@ -111,15 +109,15 @@ public class Strategy {
 
     public double getMeanPositionDays() {
         int num = 0;
-        int time = 0;
+        int days = 0;
         for (int i = 0; i < roundDateLists.size(); i++) {
             ArrayList<String> roundDateList = roundDateLists.get(i);
             for (int j = 0; j < roundDateList.size() - 1; j++) {
-                time += mainView.daysBetween(roundDateList.get(j), roundDateList.get(roundDateList.size() - 1));
+                days += mainView.daysBetween(roundDateList.get(j), roundDateList.get(roundDateList.size() - 1));
                 num++;
             }
         }
-        return (double) time / num;
+        return (double) days / num;
     }
 
     public double getMeanAnnualRate() {
@@ -151,11 +149,11 @@ public class Strategy {
     }
 
     public int getInvestRounds() {
-        return inputList.size();
+        return totalInputList.size();
     }
 
     public double getMaxInvest() {
-        return Collections.max(inputList);
+        return Collections.max(totalInputList);
     }
 
     public double getMaxRoundTime() {
@@ -193,15 +191,15 @@ public class Strategy {
     }
 
     public double getMaxLoss() {
-        return Collections.max(lossList);
+        return Collections.min(profitList);
     }
 
     public double getMaxLossRatio() {
-        return 100 * Collections.max(lossRateList);
+        return 100 * Collections.min(profitRatioList);
     }
 
-    public double getMaxDiffRate() {
-        return Collections.max(diffRateList);
+    public double getMinDiffRate() {
+        return Collections.min(diffRateList);
     }
 
     public double getCurrentDiffRate() {
@@ -210,13 +208,13 @@ public class Strategy {
 
     public MainView mainView;
     public ArrayList<Double> pList = new ArrayList<>();
-    public ArrayList<Integer> bpIdxList = new ArrayList<>();
-    public ArrayList<Integer> spIdxList = new ArrayList<>();
+    public ArrayList<String> dList = new ArrayList<>();
 
     public double initPoint;
     public double slope;
     public double winLevel;
     public double dispersion;
+    public double baseline;
 
     public int items;
     public int sIndex = -1;
@@ -224,12 +222,15 @@ public class Strategy {
 
     private double addInvest = 0;
     private double addOutput = 0;
-    ArrayList<Double> inputList = new ArrayList<>();
-    ArrayList<Double> assetList = new ArrayList<>();
-    ArrayList<ArrayList<String>> roundDateLists = new ArrayList<>();
-    ArrayList<Double> yieldList = new ArrayList<>();
-    ArrayList<Double> lossList = new ArrayList<>();
-    ArrayList<Double> lossRateList = new ArrayList<>();
-    double diffRate = 0;
-    ArrayList<Double> diffRateList = new ArrayList<>();
+    private ArrayList<String> bsDateList = new ArrayList<>();
+    private ArrayList<Double> totalInputList = new ArrayList<>();
+    private ArrayList<Double> totalPriceList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> roundDateLists = new ArrayList<>();
+    private ArrayList<Double> yieldList = new ArrayList<>();
+    private ArrayList<Double> profitList = new ArrayList<>();
+    private ArrayList<Double> profitRatioList = new ArrayList<>();
+    private double diffRate = 0;
+    private double profit = 0;
+    private double profitRatio = 0;
+    private ArrayList<Double> diffRateList = new ArrayList<>();
 }
