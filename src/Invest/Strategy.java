@@ -42,7 +42,7 @@ public class Strategy {
                         bsDateList.add(dList.get(i));
                         roundDateLists.add(bsDateList);
                         bsDateList = new ArrayList<>();
-                        mainView.msgLogger("止盈日期：" + dList.get(i) + " 总投入：" + (float) totalInput + " 总市值：" + (float) totalPrice);
+                        //mainView.msgLogger("止盈日期：" + dList.get(i) + " 总投入：" + (float) totalInput + " 总市值：" + (float) totalPrice);
                         totalInputList.add(totalInput);
                         totalPriceList.add(totalPrice);
                         yieldList.add(profitRatio);
@@ -61,12 +61,12 @@ public class Strategy {
                 diffRateList.add(diffRate);
                 //mainView.msgLogger(dList.get(i) + " 利润：" + (float) profit + " 利润比：" + (float) profitRatio + " 离差：" + diffRate);
                 if (pList.get(i) < baseline) {
-                    input = (baseline / 10) / (diffRate * diffRate);
+                    input = (baseline / 10) / diffRate;
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
                     bsDateList.add(dList.get(i));
-                    mainView.msgLogger(dList.get(i) + " 金额：" + (float) input + " 数量：" + (float) number);
+                    //mainView.msgLogger(dList.get(i) + " 金额：" + (float) input + " 数量：" + (float) number);
                 }
             }
             if (i > eIndex) {
@@ -115,9 +115,10 @@ public class Strategy {
         int days = 0;
         for (int i = 0; i < roundDateLists.size(); i++) {
             ArrayList<String> roundDateList = roundDateLists.get(i);
+            String endDate = roundDateList.get(roundDateList.size() - 1);
+            num += roundDateList.size() - 1;
             for (int j = 0; j < roundDateList.size() - 1; j++) {
-                days += mainView.daysBetween(roundDateList.get(j), roundDateList.get(roundDateList.size() - 1));
-                num++;
+                days += mainView.daysBetween(roundDateList.get(j), endDate);
             }
         }
         return (double) days / num;
@@ -127,14 +128,15 @@ public class Strategy {
         int num = 0;
         double yield = 0;
         for (int i = 0; i < yieldList.size(); i++) {
-            ArrayList<String> roundList = roundDateLists.get(i);
-            for (int j = 0; j < roundList.size() - 1; j++) {
-                int time = mainView.daysBetween(roundList.get(j), roundList.get(roundList.size() - 1));
-                yield += (double) 10000 * yieldList.get(i) / time;
-                num++;
+            ArrayList<String> roundDateList = roundDateLists.get(i);
+            String endDate = roundDateList.get(roundDateList.size() - 1);
+            num += roundDateList.size() - 1;
+            for (int j = 0; j < roundDateList.size() - 1; j++) {
+                int time = mainView.daysBetween(roundDateList.get(j), endDate);
+                yield += (double) yieldList.get(i) / time;
             }
         }
-        return yield / num;
+        return 10000 * yield / num;
     }
 
     public double getMaxInvest() {

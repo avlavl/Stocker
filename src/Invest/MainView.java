@@ -83,9 +83,9 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldSDate = new javax.swing.JTextField();
         jTextFieldEDate = new javax.swing.JTextField();
         jLabelClose = new javax.swing.JLabel();
-        jButtonTradeChart = new javax.swing.JButton();
-        jButtonTradeRecord = new javax.swing.JButton();
-        jButtonTradeEva = new javax.swing.JButton();
+        jButtonInvestChart = new javax.swing.JButton();
+        jButtonInvestRecord = new javax.swing.JButton();
+        jButtonInvestEva = new javax.swing.JButton();
         jLabelPriceFactor = new javax.swing.JLabel();
         jComboBoxPriceFactor = new javax.swing.JComboBox<>();
         jPanelSysFilter = new javax.swing.JPanel();
@@ -228,35 +228,35 @@ public class MainView extends javax.swing.JFrame {
         jLabelClose.setText("收盘：--");
         jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
-        jButtonTradeChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonTradeChart.setText("交易曲线");
-        jButtonTradeChart.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonTradeChart.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInvestChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonInvestChart.setText("投资曲线");
+        jButtonInvestChart.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonInvestChart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTradeChartActionPerformed(evt);
+                jButtonInvestChartActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, 30));
+        jPanelMain.add(jButtonInvestChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, -1, 30));
 
-        jButtonTradeRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonTradeRecord.setText("交易记录");
-        jButtonTradeRecord.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonTradeRecord.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInvestRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonInvestRecord.setText("投资记录");
+        jButtonInvestRecord.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonInvestRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTradeRecordActionPerformed(evt);
+                jButtonInvestRecordActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, -1, 30));
+        jPanelMain.add(jButtonInvestRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, -1, 30));
 
-        jButtonTradeEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonTradeEva.setText("交易评测");
-        jButtonTradeEva.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonTradeEva.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInvestEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonInvestEva.setText("投资评测");
+        jButtonInvestEva.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonInvestEva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTradeEvaActionPerformed(evt);
+                jButtonInvestEvaActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonTradeEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, -1, 30));
+        jPanelMain.add(jButtonInvestEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, -1, 30));
 
         jLabelPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPriceFactor.setText("系数：");
@@ -304,27 +304,27 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS1.setText("-80");
+        jTextFieldPS1.setText("400");
         jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 26, 30, -1));
 
         jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE1.setText("100");
+        jTextFieldPE1.setText("410");
         jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 30, -1));
 
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS2.setText("0");
+        jTextFieldPS2.setText("2");
         jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 30, -1));
 
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE2.setText("0");
+        jTextFieldPE2.setText("2");
         jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 30, -1));
 
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS3.setText("0");
+        jTextFieldPS3.setText("20");
         jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 26, 30, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE3.setText("0");
+        jTextFieldPE3.setText("30");
         jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 30, -1));
 
         jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
@@ -600,19 +600,19 @@ public class MainView extends javax.swing.JFrame {
         jTextAreaMain.copy();
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
-    private void jButtonTradeChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTradeChartActionPerformed
+    private void jButtonInvestChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestChartActionPerformed
         TradeChart tc = new TradeChart(this, false, this);
-    }//GEN-LAST:event_jButtonTradeChartActionPerformed
+    }//GEN-LAST:event_jButtonInvestChartActionPerformed
 
-    private void jButtonTradeRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTradeRecordActionPerformed
+    private void jButtonInvestRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestRecordActionPerformed
         if (evaluated) {
             TradeTable tradeTable = new TradeTable(this, false, this);
         } else {
             JOptionPane.showMessageDialog(this, "请先进行评测再查看交易记录");
         }
-    }//GEN-LAST:event_jButtonTradeRecordActionPerformed
+    }//GEN-LAST:event_jButtonInvestRecordActionPerformed
 
-    private void jButtonTradeEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTradeEvaActionPerformed
+    private void jButtonInvestEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestEvaActionPerformed
         boolean ret = false;
         dateProcess();
         if (tradeDays == 0) {
@@ -640,11 +640,10 @@ public class MainView extends javax.swing.JFrame {
         updateTable(sr);
         updateMarket(eIdx);
         evaluated = true;
-    }//GEN-LAST:event_jButtonTradeEvaActionPerformed
+    }//GEN-LAST:event_jButtonInvestEvaActionPerformed
 
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
         long time = System.currentTimeMillis();
-        getTradeMode();
         jTextAreaMain.setText("");
         dateProcess();
         if (tradeDays == 0) {
@@ -659,27 +658,27 @@ public class MainView extends javax.swing.JFrame {
         int pe2 = Integer.parseInt(jTextFieldPE2.getText());
         int ps3 = Integer.parseInt(jTextFieldPS3.getText());
         int pe3 = Integer.parseInt(jTextFieldPE3.getText());
-        switch (tradeMode) {
-            case "MA":
-                for (int i = ps1; i <= pe1; i++) {
-                    for (int j = ps2; j <= pe2; j++) {
-                        if (j >= i * 2) {
-//                            if (sysInvestEva(i, j)) {
-//                                String para = String.format("%d,%d", i, j);
-//                                sr = updateSimpleReport(tradeMode, para, strategy);
-//                                srList.add(sr);
-//                            }
+        int ps4 = Integer.parseInt(jTextFieldPS4.getText());
+        int pe4 = Integer.parseInt(jTextFieldPE4.getText());
+
+        for (int i = ps1; i <= pe1; i++) {
+            for (int j = ps2; j <= pe2; j++) {
+                for (int k = ps3; k <= pe3; k++) {
+                    for (int l = ps4; l <= pe4; l++) {
+                        strategy = new Strategy(this);
+                        if (strategy.sysInvestEva(i, j, k, l)) {
+                            String para = String.format("%d,%d,%d,%d", i, j, k, l);
+                            sr = updateSimpleReport(para, strategy);
+                            srList.add(sr);
                         }
                     }
                 }
-                break;
-            default:
-                break;
+            }
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
         jButtonFilterCheck.setEnabled(true);
-        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.netProfit).compareTo(arg0.netProfit));
+        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.yieldRate).compareTo(arg0.yieldRate));
         rankTable = new RankTable(this, false, this, srList);
 
         time = System.currentTimeMillis() - time;
@@ -897,20 +896,14 @@ public class MainView extends javax.swing.JFrame {
 //        chkDataList.add(chkData);
     }
 
-    public void tradeModelEva(String mode, String para) {
+    public void investParaEva(String para) {
         String[] paras = para.replaceAll(" ", "").split(",");
+        jTextField1.setText(paras[0]);
+        jTextField2.setText(paras[1]);
+        jTextField3.setText(paras[2]);
+        jTextField4.setText(paras[3]);
 
-        switch (mode) {
-            case "MA":
-//                jTabbedPaneSys.setSelectedIndex(1);
-//                jTextFieldMAS.setText(paras[0]);
-//                jTextFieldMAL.setText(paras[1]);
-                break;
-            default:
-                break;
-        }
-
-        jButtonTradeEva.doClick();
+        jButtonInvestEva.doClick();
     }
 
     public void getTradeMode() {
@@ -957,6 +950,7 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSystemReport(Strategy stg) {
         SystemReport sr = new SystemReport();
 
+        sr.investRounds = stg.getInvestRounds();
         sr.addInvest = (float) stg.getAddInvest();
         sr.addOutput = (float) stg.getAddOutput();
         sr.netProfit = (float) stg.getNetProfit();
@@ -966,7 +960,7 @@ public class MainView extends javax.swing.JFrame {
         sr.investTimeRatio = (float) stg.getInvestTimeRatio();
         sr.meanPositionDays = (float) stg.getMeanPositionDays();
         sr.meanDailyRate = (float) stg.getMeanDailyRate();
-        sr.investRounds = stg.getInvestRounds();
+
         sr.maxInvest = (float) stg.getMaxInvest();
         sr.maxRoundTime = (float) stg.getMaxRoundTime();
         sr.maxInvestCount = (float) stg.getMaxInvestCount();
@@ -981,17 +975,17 @@ public class MainView extends javax.swing.JFrame {
         return sr;
     }
 
-    protected SystemReport updateSimpleReport(String mode, String para, Strategy stg) {
-        SystemReport sr = new SystemReport(mode, para);
+    protected SystemReport updateSimpleReport(String para, Strategy stg) {
+        SystemReport sr = new SystemReport(para);
 
-        sr.parameter = para;
-        sr.netProfit = (float) stg.getNetProfit();
+        sr.addInvest = (float) stg.getAddInvest();
         sr.yieldRate = (float) stg.getYieldRate();
-        sr.meanDiffRate = (float) stg.getMeanDiffRate();
-        sr.investTimeRatio = (float) stg.getInvestTimeRatio();
         sr.meanPositionDays = (float) stg.getMeanPositionDays();
+        sr.meanInvestCount = (float) stg.getMeanInvestCount();
+        sr.meanDailyRate = (float) stg.getMeanDailyRate();
+        sr.maxInvest = (float) stg.getMaxInvest();
+        sr.maxRoundTime = (float) stg.getMaxRoundTime();
         sr.maxLoss = (float) stg.getMaxLoss();
-        sr.maxLossRatio = (float) stg.getMaxLossRatio();
 
         return sr;
     }
@@ -1136,9 +1130,9 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEvaluate;
     private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;
-    private javax.swing.JButton jButtonTradeChart;
-    private javax.swing.JButton jButtonTradeEva;
-    private javax.swing.JButton jButtonTradeRecord;
+    private javax.swing.JButton jButtonInvestChart;
+    private javax.swing.JButton jButtonInvestEva;
+    private javax.swing.JButton jButtonInvestRecord;
     private javax.swing.JComboBox<String> jComboBoxPriceFactor;
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelDash1;

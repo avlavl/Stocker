@@ -14,12 +14,10 @@ public class SystemReport {
     public SystemReport() {
     }
 
-    public SystemReport(String mode, String para) {
-        tradeMode = mode;
+    public SystemReport(String para) {
         parameter = para;
     }
 
-    public String tradeMode;
     public String parameter;
 
     public int investRounds;
