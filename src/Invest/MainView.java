@@ -674,7 +674,7 @@ public class MainView extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
         jButtonFilterCheck.setEnabled(true);
-        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.yieldRate).compareTo(arg0.yieldRate));
+        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.netProfit).compareTo(arg0.netProfit));
         rankTable = new RankTable(this, false, this, srList);
 
         time = System.currentTimeMillis() - time;
@@ -966,10 +966,9 @@ public class MainView extends javax.swing.JFrame {
         SystemReport sr = new SystemReport(para);
 
         sr.addInvest = (float) stg.getAddInvest();
-        sr.yieldRate = (float) stg.getYieldRate();
-        sr.meanPositionDays = (float) stg.getMeanPositionDays();
-        sr.meanInvestCount = (float) stg.getMeanInvestCount();
+        sr.netProfit = (float) stg.getNetProfit();
         sr.meanDailyRate = (float) stg.getMeanDailyRate();
+        sr.meanPositionDays = (float) stg.getMeanPositionDays();
         sr.maxInvest = (float) stg.getMaxInvest();
         sr.maxRoundTime = (float) stg.getMaxRoundTime();
         sr.maxLoss = (float) stg.getMaxLoss();
