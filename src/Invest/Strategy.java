@@ -23,7 +23,7 @@ public class Strategy {
         eIndex = mv.eIdx;
     }
 
-    public boolean sysInvestEva(int p1, int p2, int p3, int p4) {
+    public boolean sysInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
         double totalInput = 0;
         double totalPrice = 0;
         double totalNumber = 0;
@@ -38,7 +38,7 @@ public class Strategy {
                     profitRatio = profit / totalInput;
                     profitList.add(profit);
                     profitRatioList.add(profitRatio);
-                    if (profitRatio >= (double) p3 / 100) {
+                    if (profitRatio >= (double) winLevel / 100) {
                         bsDateList.add(dList.get(i));
                         roundDateLists.add(bsDateList);
                         bsDateList = new ArrayList<>();
@@ -56,12 +56,12 @@ public class Strategy {
                     }
                 }
 
-                baseline = p1 + i * p2;
+                baseline = startPoint + i * ((double) slope / 100);
                 diffRate = pList.get(i) / baseline;
                 diffRateList.add(diffRate);
                 //mainView.msgLogger(dList.get(i) + " 利润：" + (float) profit + " 利润比：" + (float) profitRatio + " 离差：" + diffRate);
                 if (pList.get(i) < baseline) {
-                    input = (baseline / 10) / diffRate;
+                    input = (baseline / 10) / Math.pow(diffRate, (double) diffFactor / 10);
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
