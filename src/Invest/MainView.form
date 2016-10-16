@@ -282,6 +282,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="10">
                     <Column editable="true" title="&#x7edf;&#x8ba1;&#x6307;&#x6807;" type="java.lang.Object">
+                      <Data value="&#x5b9a;&#x6295;&#x8f6e;&#x6570;"/>
                       <Data value="&#x7d2f;&#x52a0;&#x6295;&#x5165;"/>
                       <Data value="&#x7d2f;&#x52a0;&#x4ea7;&#x51fa;"/>
                       <Data value="&#x51c0;&#x5229;&#x6da6;"/>
@@ -290,7 +291,6 @@
                       <Data value="&#x5b9a;&#x6295;&#x5e74;&#x9650;"/>
                       <Data value="&#x5b9a;&#x6295;&#x65f6;&#x95f4;&#x6bd4;"/>
                       <Data value="&#x5e73;&#x5747;&#x6301;&#x4ed3;&#x671f;"/>
-                      <Data value="&#x5e73;&#x5747;&#x5e74;&#x5316;&#x7387;"/>
                       <Data value="&#x5e73;&#x5747;&#x65e5;&#x5316;&#x7387;"/>
                     </Column>
                     <Column editable="true" title="&#x5168;&#x90e8;&#x4ea4;&#x6613;" type="java.lang.Object">
@@ -306,7 +306,6 @@
                       <Data value="null"/>
                     </Column>
                     <Column editable="true" title="&#x7edf;&#x8ba1;&#x6307;&#x6807;" type="java.lang.Object">
-                      <Data value="&#x5b9a;&#x6295;&#x8f6e;&#x6570;"/>
                       <Data value="&#x6700;&#x5927;&#x6295;&#x5165;"/>
                       <Data value="&#x6700;&#x957f;&#x5468;&#x671f;"/>
                       <Data value="&#x6700;&#x957f;&#x5b9a;&#x6295;&#x8f6e;"/>
@@ -315,6 +314,7 @@
                       <Data value="&#x6700;&#x5927;&#x4e8f;&#x635f;"/>
                       <Data value="&#x6700;&#x5927;&#x56de;&#x64a4;&#x6bd4;"/>
                       <Data value="&#x6700;&#x5c0f;&#x79bb;&#x5dee;"/>
+                      <Data value="&#x5e73;&#x5747;&#x79bb;&#x5dee;"/>
                       <Data value="&#x5f53;&#x524d;&#x79bb;&#x5dee;"/>
                     </Column>
                     <Column editable="true" title="&#x5168;&#x90e8;&#x4ea4;&#x6613;" type="java.lang.Object">

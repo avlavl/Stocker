@@ -33,7 +33,7 @@ public class RankTable extends javax.swing.JDialog {
             tableContent[i][2] = "" + SRList.get(i).parameter;
             tableContent[i][3] = "" + SRList.get(i).netProfit;
             tableContent[i][4] = String.format("%.3f%%", SRList.get(i).yieldRate);
-            tableContent[i][5] = String.format("%.3f%%", SRList.get(i).meanAnnualRate);
+            tableContent[i][5] = String.format("%.3f%%", SRList.get(i).meanDailyRate);
             tableContent[i][6] = String.format("%.3f%%", SRList.get(i).investTimeRatio);
             tableContent[i][7] = String.format("%.2f天", SRList.get(i).meanPositionDays);
             tableContent[i][8] = SRList.get(i).maxLoss + "";

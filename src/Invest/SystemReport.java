@@ -22,6 +22,7 @@ public class SystemReport {
     public String tradeMode;
     public String parameter;
 
+    public int investRounds;
     public float addInvest;
     public float addOutput;
     public float netProfit;
@@ -30,9 +31,7 @@ public class SystemReport {
     public float investYears;
     public float investTimeRatio;
     public float meanPositionDays;
-    public float meanAnnualRate;
     public float meanDailyRate;
-    public int investRounds;
     public float maxInvest;
     public float maxRoundTime;
     public float maxInvestCount;
@@ -41,5 +40,6 @@ public class SystemReport {
     public float maxLoss;
     public float maxLossRatio;
     public float minDiffRate;
+    public float meanDiffRate;
     public float currentDiffRate;
 }

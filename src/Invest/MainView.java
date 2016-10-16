@@ -172,15 +172,15 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTablePoint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"累加投入", null, "定投轮数", null},
-                {"累加产出", null, "最大投入", null},
-                {"净利润", null, "最长周期", null},
-                {"总收益率", null, "最长定投轮", null},
-                {"测试年限", null, "最短定投轮", null},
-                {"定投年限", null, "平均定投轮", null},
-                {"定投时间比", null, "最大亏损", null},
-                {"平均持仓期", null, "最大回撤比", null},
-                {"平均年化率", null, "最小离差", null},
+                {"定投轮数", null, "最大投入", ""},
+                {"累加投入", null, "最长周期", null},
+                {"累加产出", null, "最长定投轮", ""},
+                {"净利润", null, "最短定投轮", null},
+                {"总收益率", null, "平均定投轮", null},
+                {"测试年限", null, "最大亏损", ""},
+                {"定投年限", "", "最大回撤比", null},
+                {"定投时间比", null, "最小离差", null},
+                {"平均持仓期", "", "平均离差", null},
                 {"平均日化率", null, "当前离差", null}
             },
             new String [] {
@@ -965,7 +965,6 @@ public class MainView extends javax.swing.JFrame {
         sr.investYears = (float) stg.getInvestYears();
         sr.investTimeRatio = (float) stg.getInvestTimeRatio();
         sr.meanPositionDays = (float) stg.getMeanPositionDays();
-        sr.meanAnnualRate = (float) stg.getMeanAnnualRate();
         sr.meanDailyRate = (float) stg.getMeanDailyRate();
         sr.investRounds = stg.getInvestRounds();
         sr.maxInvest = (float) stg.getMaxInvest();
@@ -976,6 +975,7 @@ public class MainView extends javax.swing.JFrame {
         sr.maxLoss = (float) stg.getMaxLoss();
         sr.maxLossRatio = (float) stg.getMaxLossRatio();
         sr.minDiffRate = (float) stg.getMinDiffRate();
+        sr.meanDiffRate = (float) stg.getMeanDiffRate();
         sr.currentDiffRate = (float) stg.getCurrentDiffRate();
 
         return sr;
@@ -987,7 +987,7 @@ public class MainView extends javax.swing.JFrame {
         sr.parameter = para;
         sr.netProfit = (float) stg.getNetProfit();
         sr.yieldRate = (float) stg.getYieldRate();
-        sr.meanAnnualRate = (float) stg.getMeanAnnualRate();
+        sr.meanDiffRate = (float) stg.getMeanDiffRate();
         sr.investTimeRatio = (float) stg.getInvestTimeRatio();
         sr.meanPositionDays = (float) stg.getMeanPositionDays();
         sr.maxLoss = (float) stg.getMaxLoss();
@@ -997,45 +997,45 @@ public class MainView extends javax.swing.JFrame {
     }
 
     protected void updateTable(SystemReport sr) {
-        jTablePoint.setValueAt("累加投入", 0, 0);
-        jTablePoint.setValueAt(sr.addInvest + "元", 0, 1);
-        jTablePoint.setValueAt("累加产出", 1, 0);
-        jTablePoint.setValueAt(sr.addOutput + "元", 1, 1);
-        jTablePoint.setValueAt("净利润", 2, 0);
-        jTablePoint.setValueAt(sr.netProfit + "元", 2, 1);
-        jTablePoint.setValueAt("总收益率", 3, 0);
-        jTablePoint.setValueAt(sr.yieldRate + "%", 3, 1);
-        jTablePoint.setValueAt("测试年限", 4, 0);
-        jTablePoint.setValueAt(sr.testYears + "年", 4, 1);
-        jTablePoint.setValueAt("定投年限", 5, 0);
-        jTablePoint.setValueAt(sr.investYears + "年", 5, 1);
-        jTablePoint.setValueAt("定投时间比", 6, 0);
-        jTablePoint.setValueAt(sr.investTimeRatio + "%", 6, 1);
-        jTablePoint.setValueAt("平均持仓期", 7, 0);
-        jTablePoint.setValueAt(sr.meanPositionDays + "天", 7, 1);
-        jTablePoint.setValueAt("平均年化率", 8, 0);
-        jTablePoint.setValueAt(sr.meanAnnualRate + "%", 8, 1);
+        jTablePoint.setValueAt("定投轮数", 0, 0);
+        jTablePoint.setValueAt(sr.investRounds + "轮", 0, 1);
+        jTablePoint.setValueAt("累加投入", 1, 0);
+        jTablePoint.setValueAt(sr.addInvest + "元", 1, 1);
+        jTablePoint.setValueAt("累加产出", 2, 0);
+        jTablePoint.setValueAt(sr.addOutput + "元", 2, 1);
+        jTablePoint.setValueAt("净利润", 3, 0);
+        jTablePoint.setValueAt(sr.netProfit + "元", 3, 1);
+        jTablePoint.setValueAt("总收益率", 4, 0);
+        jTablePoint.setValueAt(sr.yieldRate + "%", 4, 1);
+        jTablePoint.setValueAt("测试年限", 5, 0);
+        jTablePoint.setValueAt(sr.testYears + "年", 5, 1);
+        jTablePoint.setValueAt("定投年限", 6, 0);
+        jTablePoint.setValueAt(sr.investYears + "年", 6, 1);
+        jTablePoint.setValueAt("定投时间比", 7, 0);
+        jTablePoint.setValueAt(sr.investTimeRatio + "%", 7, 1);
+        jTablePoint.setValueAt("平均持仓期", 8, 0);
+        jTablePoint.setValueAt(sr.meanPositionDays + "天", 8, 1);
         jTablePoint.setValueAt("平均日化率", 9, 0);
         jTablePoint.setValueAt("万" + sr.meanDailyRate, 9, 1);
 
-        jTablePoint.setValueAt("定投轮数", 0, 2);
-        jTablePoint.setValueAt(sr.investRounds + "轮", 0, 3);
-        jTablePoint.setValueAt("最大投入", 1, 2);
-        jTablePoint.setValueAt(sr.maxInvest + "元", 1, 3);
-        jTablePoint.setValueAt("最长周期", 2, 2);
-        jTablePoint.setValueAt(sr.maxRoundTime + "年", 2, 3);
-        jTablePoint.setValueAt("最长定投轮", 3, 2);
-        jTablePoint.setValueAt(sr.maxInvestCount + "次", 3, 3);
-        jTablePoint.setValueAt("最短定投轮", 4, 2);
-        jTablePoint.setValueAt(sr.minInvestCount + "次", 4, 3);
-        jTablePoint.setValueAt("平均定投轮", 5, 2);
-        jTablePoint.setValueAt(sr.meanInvestCount + "次", 5, 3);
-        jTablePoint.setValueAt("最大亏损", 6, 2);
-        jTablePoint.setValueAt(sr.maxLoss + "元", 6, 3);
-        jTablePoint.setValueAt("最大回撤比", 7, 2);
-        jTablePoint.setValueAt(sr.maxLossRatio + "%", 7, 3);
-        jTablePoint.setValueAt("最小离差", 8, 2);
-        jTablePoint.setValueAt(sr.minDiffRate, 8, 3);
+        jTablePoint.setValueAt("最大投入", 0, 2);
+        jTablePoint.setValueAt(sr.maxInvest + "元", 0, 3);
+        jTablePoint.setValueAt("最长周期", 1, 2);
+        jTablePoint.setValueAt(sr.maxRoundTime + "年", 1, 3);
+        jTablePoint.setValueAt("最长定投轮", 2, 2);
+        jTablePoint.setValueAt(sr.maxInvestCount + "次", 2, 3);
+        jTablePoint.setValueAt("最短定投轮", 3, 2);
+        jTablePoint.setValueAt(sr.minInvestCount + "次", 3, 3);
+        jTablePoint.setValueAt("平均定投轮", 4, 2);
+        jTablePoint.setValueAt(sr.meanInvestCount + "次", 4, 3);
+        jTablePoint.setValueAt("最大亏损", 5, 2);
+        jTablePoint.setValueAt(sr.maxLoss + "元", 5, 3);
+        jTablePoint.setValueAt("最大回撤比", 6, 2);
+        jTablePoint.setValueAt(sr.maxLossRatio + "%", 6, 3);
+        jTablePoint.setValueAt("最小离差", 7, 2);
+        jTablePoint.setValueAt(sr.minDiffRate, 7, 3);
+        jTablePoint.setValueAt("平均离差", 8, 2);
+        jTablePoint.setValueAt(sr.meanDiffRate, 8, 3);
         jTablePoint.setValueAt("当前离差", 9, 2);
         jTablePoint.setValueAt(sr.currentDiffRate, 9, 3);
     }

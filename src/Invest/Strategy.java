@@ -29,7 +29,6 @@ public class Strategy {
         double totalNumber = 0;
         double input = 0;
         double number = 0;
-        baseline = p1;
 
         for (int i = 0; i < items; i++) {
             if ((i >= sIndex) && (i <= eIndex)) {
@@ -57,12 +56,12 @@ public class Strategy {
                     }
                 }
 
-                baseline = 400 + i * p2;
+                baseline = p1 + i * p2;
                 diffRate = pList.get(i) / baseline;
+                diffRateList.add(diffRate);
                 //mainView.msgLogger(dList.get(i) + " 利润：" + (float) profit + " 利润比：" + (float) profitRatio + " 离差：" + diffRate);
                 if (pList.get(i) < baseline) {
-                    diffRateList.add(diffRate);
-                    input = (baseline / 10) / diffRate;
+                    input = (baseline / 10) / (diffRate * diffRate);
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
@@ -75,6 +74,10 @@ public class Strategy {
             }
         }
         return true;
+    }
+
+    public int getInvestRounds() {
+        return totalInputList.size();
     }
 
     public double getAddInvest() {
@@ -120,20 +123,6 @@ public class Strategy {
         return (double) days / num;
     }
 
-    public double getMeanAnnualRate() {
-        int num = 0;
-        double yield = 0;
-        for (int i = 0; i < yieldList.size(); i++) {
-            ArrayList<String> roundList = roundDateLists.get(i);
-            for (int j = 0; j < roundList.size() - 1; j++) {
-                int time = mainView.daysBetween(roundList.get(j), roundList.get(roundList.size() - 1));
-                yield += (double) 100 * (yieldList.get(i) / (time / 365.25));
-                num++;
-            }
-        }
-        return yield / num;
-    }
-
     public double getMeanDailyRate() {
         int num = 0;
         double yield = 0;
@@ -146,10 +135,6 @@ public class Strategy {
             }
         }
         return yield / num;
-    }
-
-    public int getInvestRounds() {
-        return totalInputList.size();
     }
 
     public double getMaxInvest() {
@@ -200,6 +185,14 @@ public class Strategy {
 
     public double getMinDiffRate() {
         return Collections.min(diffRateList);
+    }
+
+    public double getMeanDiffRate() {
+        double totalDiffRate = 0;
+        for (double diffRate : diffRateList) {
+            totalDiffRate += diffRate;
+        }
+        return totalDiffRate / diffRateList.size();
     }
 
     public double getCurrentDiffRate() {
