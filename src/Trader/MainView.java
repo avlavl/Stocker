@@ -51,7 +51,7 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents();
         setLocationRelativeTo(null);
-        final URL filename = this.getClass().getResource("res/Livermore1.jpg");
+        final URL filename = getClass().getResource("/resource/Livermore1.jpg");
         if (filename != null) {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
         }
@@ -179,7 +179,7 @@ public class MainView extends javax.swing.JFrame {
         jPopupMenu1.add(jMenuItemClear);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("智能证券交易系统");
+        setTitle("智能证券系统-证券交易");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -745,7 +745,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemTDXActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(new JFrame(), "智能证券交易系统 V16.0.7\n版权所有(C) 张向荣(Aioros Zhang)");
+        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-证券交易 V16.10\n版权所有(C) 张向荣(Aioros Zhang)");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased

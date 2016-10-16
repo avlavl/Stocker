@@ -51,7 +51,7 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents();
         setLocationRelativeTo(null);
-        final URL filename = this.getClass().getResource("res/Livermore2.jpg");
+        final URL filename = getClass().getResource("/resource/Livermore2.jpg");
         if (filename != null) {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
         }
