@@ -152,7 +152,7 @@ public class MainView extends javax.swing.JFrame {
         jPopupMenu1.add(jMenuItemClear);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("智能证券交易系统");
+        setTitle("智能证券系统-基金定投");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -213,7 +213,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabelSEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jLabelSEDash.setText("-");
-        jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+        jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 265, -1, -1));
 
         jTextFieldSDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldSDate.setText("----/--/--");
@@ -236,7 +236,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonInvestChartActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonInvestChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, -1, 30));
+        jPanelMain.add(jButtonInvestChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, -1, 30));
 
         jButtonInvestRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonInvestRecord.setText("投资记录");
@@ -246,7 +246,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonInvestRecordActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonInvestRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, -1, 30));
+        jPanelMain.add(jButtonInvestRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, 30));
 
         jButtonInvestEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonInvestEva.setText("投资评测");
@@ -256,7 +256,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonInvestEvaActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonInvestEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, -1, 30));
+        jPanelMain.add(jButtonInvestEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 250, -1, 30));
 
         jLabelPriceFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPriceFactor.setText("系数：");
@@ -343,7 +343,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonFilterStartActionPerformed(evt);
             }
         });
-        jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 23, 60, -1));
+        jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 23, 60, -1));
 
         jButtonFilterCheck.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonFilterCheck.setText("查看");
@@ -353,9 +353,9 @@ public class MainView extends javax.swing.JFrame {
                 jButtonFilterCheckActionPerformed(evt);
             }
         });
-        jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 48, 60, -1));
+        jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 48, 60, -1));
 
-        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 320, 90));
+        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 310, 90));
 
         jButtonCheckUp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonCheckUp.setText("检测");
@@ -364,7 +364,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonCheckUpActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonCheckUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, 30));
+        jPanelMain.add(jButtonCheckUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, 30));
 
         jButtonEvaluate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonEvaluate.setText("评估");
@@ -373,7 +373,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonEvaluateActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, 30));
+        jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, 30));
 
         jLabelStartPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelStartPoint.setText("起始值：");
@@ -407,7 +407,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldDiffFactor.setText("10");
         jPanelMain.add(jTextFieldDiffFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 40, -1));
 
-        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 390));
+        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         jMenuFile.setText("文件");
 
@@ -582,7 +582,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemTDXActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(new JFrame(), "智能证券交易系统 V16.0.7\n版权所有(C) 张向荣(Aioros Zhang)");
+        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-基金定投 V16.10\n版权所有(C) 张向荣(Aioros Zhang)");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
