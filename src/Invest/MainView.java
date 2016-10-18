@@ -305,11 +305,11 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS1.setText("400");
+        jTextFieldPS1.setText("350");
         jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 26, 30, -1));
 
         jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE1.setText("410");
+        jTextFieldPE1.setText("450");
         jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 30, -1));
 
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
@@ -317,7 +317,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 26, 30, -1));
 
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE2.setText("210");
+        jTextFieldPE2.setText("220");
         jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 30, -1));
 
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
@@ -325,7 +325,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 30, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE3.setText("60");
+        jTextFieldPE3.setText("100");
         jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 30, -1));
 
         jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
@@ -333,7 +333,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 30, -1));
 
         jTextFieldPE4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE4.setText("30");
+        jTextFieldPE4.setText("20");
         jPanelSysFilter.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 30, -1));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -393,7 +393,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabelDiffFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, -1));
 
         jTextFieldSlope.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldSlope.setText("200");
+        jTextFieldSlope.setText("210");
         jPanelMain.add(jTextFieldSlope, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, 40, -1));
 
         jTextFieldStartPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -658,9 +658,9 @@ public class MainView extends javax.swing.JFrame {
         int ps4 = Integer.parseInt(jTextFieldPS4.getText());
         int pe4 = Integer.parseInt(jTextFieldPE4.getText());
 
-        for (int i = ps1; i <= pe1; i++) {
+        for (int i = ps1; i <= pe1; i += 10) {
             for (int j = ps2; j <= pe2; j++) {
-                for (int k = ps3; k <= pe3; k++) {
+                for (int k = ps3; k <= pe3; k += 5) {
                     for (int l = ps4; l <= pe4; l++) {
                         strategy = new Strategy(this);
                         if (strategy.sysInvestEva(i, j, k, l)) {
