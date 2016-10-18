@@ -26,18 +26,20 @@ public class SystemReport {
     public float netProfit;
     public float yieldRate;
     public float testYears;
-    public float investYears;
+    public int investCounts;
     public float investTimeRatio;
-    public float meanPositionDays;
-    public float meanDailyRate;
-    public float maxInvest;
     public float maxRoundTime;
     public float maxInvestCount;
-    public float minInvestCount;
     public float meanInvestCount;
+    public float meanDailyRate;
+    public float meanPositionDays;
+    public float maxInvest;
+    public float meanInvest;
     public float maxLoss;
     public float maxLossRatio;
-    public float minDiffRate;
     public float meanDiffRate;
-    public float currentDiffRate;
+    public float meanNegaDiffRate;
+    public float minDiffRate;
+    public float meanInvestRate;
+    public float maxInvestRate;
 }

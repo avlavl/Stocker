@@ -24,6 +24,7 @@ public class Strategy {
     }
 
     public boolean sysInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
+        diffCoef = (double) diffFactor / 10;
         double totalInput = 0;
         double totalPrice = 0;
         double totalNumber = 0;
@@ -61,7 +62,7 @@ public class Strategy {
                 diffRateList.add(diffRate);
                 //mainView.msgLogger(dList.get(i) + " 利润：" + (float) profit + " 利润比：" + (float) profitRatio + " 离差：" + diffRate);
                 if (pList.get(i) < baseline) {
-                    input = (baseline / 10) / Math.pow(diffRate, (double) diffFactor / 10);
+                    input = (baseline / 10) / Math.pow(diffRate, diffCoef);
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
@@ -96,51 +97,17 @@ public class Strategy {
         return 100 * (addOutput - addInvest) / addInvest;
     }
 
-    public double getInvestYears() {
-        double times = 0;
+    public int getInvestCounts() {
+        int times = 0;
         for (ArrayList<String> roundDateList : roundDateLists) {
             times += roundDateList.size() - 1;
         }
         times += bsDateList.size();
-        times = times * 7 / 365.25;
         return times;
     }
 
     public double getInvestTimeRatio() {
-        return 100 * getInvestYears() / mainView.testYears;
-    }
-
-    public double getMeanPositionDays() {
-        int num = 0;
-        int days = 0;
-        for (int i = 0; i < roundDateLists.size(); i++) {
-            ArrayList<String> roundDateList = roundDateLists.get(i);
-            String endDate = roundDateList.get(roundDateList.size() - 1);
-            num += roundDateList.size() - 1;
-            for (int j = 0; j < roundDateList.size() - 1; j++) {
-                days += mainView.daysBetween(roundDateList.get(j), endDate);
-            }
-        }
-        return (double) days / num;
-    }
-
-    public double getMeanDailyRate() {
-        int num = 0;
-        double yield = 0;
-        for (int i = 0; i < yieldList.size(); i++) {
-            ArrayList<String> roundDateList = roundDateLists.get(i);
-            String endDate = roundDateList.get(roundDateList.size() - 1);
-            num += roundDateList.size() - 1;
-            for (int j = 0; j < roundDateList.size() - 1; j++) {
-                int time = mainView.daysBetween(roundDateList.get(j), endDate);
-                yield += (double) yieldList.get(i) / time;
-            }
-        }
-        return 10000 * yield / num;
-    }
-
-    public double getMaxInvest() {
-        return Collections.max(totalInputList);
+        return 100 * (double) getInvestCounts() * 7 / (mainView.testYears * 365.25);
     }
 
     public double getMaxRoundTime() {
@@ -161,20 +128,53 @@ public class Strategy {
         return Collections.max(timesList);
     }
 
-    public double getMinInvestCount() {
-        ArrayList<Integer> timesList = new ArrayList<>();
-        for (ArrayList<String> roundDateList : roundDateLists) {
-            timesList.add(roundDateList.size() - 1);
-        }
-        return Collections.min(timesList);
-    }
-
     public double getMeanInvestCount() {
         int times = 0;
         for (ArrayList<String> roundDateList : roundDateLists) {
             times += roundDateList.size() - 1;
         }
         return (double) times / roundDateLists.size();
+    }
+
+    public double getMeanDailyRate() {
+        int num = 0;
+        double yield = 0;
+        for (int i = 0; i < yieldList.size(); i++) {
+            ArrayList<String> roundDateList = roundDateLists.get(i);
+            String endDate = roundDateList.get(roundDateList.size() - 1);
+            num += roundDateList.size() - 1;
+            for (int j = 0; j < roundDateList.size() - 1; j++) {
+                int time = mainView.daysBetween(roundDateList.get(j), endDate);
+                yield += (double) yieldList.get(i) / time;
+            }
+        }
+        return 10000 * yield / num;
+    }
+
+    public double getMeanPositionDays() {
+        int num = 0;
+        int days = 0;
+        for (int i = 0; i < roundDateLists.size(); i++) {
+            ArrayList<String> roundDateList = roundDateLists.get(i);
+            String endDate = roundDateList.get(roundDateList.size() - 1);
+            num += roundDateList.size() - 1;
+            for (int j = 0; j < roundDateList.size() - 1; j++) {
+                days += mainView.daysBetween(roundDateList.get(j), endDate);
+            }
+        }
+        return (double) days / num;
+    }
+
+    public double getMaxInvest() {
+        return Collections.max(totalInputList);
+    }
+
+    public double getMeanInvest() {
+        double totalInput = 0;
+        for (double input : totalInputList) {
+            totalInput += input;
+        }
+        return totalInput / totalInputList.size();
     }
 
     public double getMaxLoss() {
@@ -185,10 +185,6 @@ public class Strategy {
         return 100 * Collections.min(profitRatioList);
     }
 
-    public double getMinDiffRate() {
-        return Collections.min(diffRateList);
-    }
-
     public double getMeanDiffRate() {
         double totalDiffRate = 0;
         for (double diffRate : diffRateList) {
@@ -197,8 +193,28 @@ public class Strategy {
         return totalDiffRate / diffRateList.size();
     }
 
-    public double getCurrentDiffRate() {
-        return diffRate;
+    public double getMeanNegaDiffRate() {
+        double totalDiffRate = 0;
+        int num = 0;
+        for (double diffRate : diffRateList) {
+            if (diffRate < 1) {
+                totalDiffRate += diffRate;
+                num++;
+            }
+        }
+        return totalDiffRate / num;
+    }
+
+    public double getMinDiffRate() {
+        return Collections.min(diffRateList);
+    }
+
+    public double getMeanInvestRate() {
+        return 1 / Math.pow(getMeanNegaDiffRate(), diffCoef);
+    }
+
+    public double getMaxInvestRate() {
+        return 1 / Math.pow(getMinDiffRate(), diffCoef);
     }
 
     public MainView mainView;
@@ -227,5 +243,6 @@ public class Strategy {
     private double diffRate = 0;
     private double profit = 0;
     private double profitRatio = 0;
+    private double diffCoef = 1;
     private ArrayList<Double> diffRateList = new ArrayList<>();
 }
