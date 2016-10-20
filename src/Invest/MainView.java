@@ -968,13 +968,13 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSimpleReport(String para, Strategy stg) {
         SystemReport sr = new SystemReport(para);
 
-        sr.addInvest = (float) stg.getAddInvest();
         sr.netProfit = (float) stg.getNetProfit();
         sr.meanDailyRate = (float) stg.getMeanDailyRate();
-        sr.meanPositionDays = (float) stg.getMeanPositionDays();
-        sr.maxInvest = (float) stg.getMaxInvest();
         sr.maxRoundTime = (float) stg.getMaxRoundTime();
-        sr.maxLoss = (float) stg.getMaxLoss();
+        sr.maxInvest = (float) stg.getMaxInvest();
+        sr.investTimeRatio = (float) stg.getInvestTimeRatio();
+        sr.meanInvestRate = (float) stg.getMeanInvestRate();
+        sr.maxInvestRate = (float) stg.getMaxInvestRate();
 
         return sr;
     }
