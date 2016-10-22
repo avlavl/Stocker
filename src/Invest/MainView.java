@@ -607,9 +607,9 @@ public class MainView extends javax.swing.JFrame {
 
     private void jButtonInvestRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestRecordActionPerformed
         if (evaluated) {
-            TradeTable tradeTable = new TradeTable(this, false, this);
+            InvestTable investTable = new InvestTable(this, false, strategy);
         } else {
-            JOptionPane.showMessageDialog(this, "请先进行评测再查看交易记录");
+            JOptionPane.showMessageDialog(this, "请先进行评测再查看投资记录");
         }
     }//GEN-LAST:event_jButtonInvestRecordActionPerformed
 
@@ -663,7 +663,7 @@ public class MainView extends javax.swing.JFrame {
                 for (int k = ps3; k <= pe3; k += 5) {
                     for (int l = ps4; l <= pe4; l++) {
                         strategy = new Strategy(this);
-                        if (strategy.sysInvestEva(i, j, k, l)) {
+                        if (strategy.sysSimpleInvestEva(i, j, k, l)) {
                             String para = String.format("%d,%d,%d,%d", i, j, k, l);
                             sr = updateSimpleReport(para, strategy);
                             srList.add(sr);

@@ -34,6 +34,7 @@ public class Strategy {
         for (int i = 0; i < items; i++) {
             if ((i >= sIndex) && (i <= eIndex)) {
                 if (totalInput > 0) {
+                    RecordData recordData = new RecordData(dList.get(i), "赎回");
                     totalPrice = totalNumber * pList.get(i);
                     profit = totalPrice - totalInput;
                     profitRatio = profit / totalInput;
@@ -43,7 +44,72 @@ public class Strategy {
                         bsDateList.add(dList.get(i));
                         roundDateLists.add(bsDateList);
                         bsDateList = new ArrayList<>();
-                        //mainView.msgLogger("止盈日期：" + dList.get(i) + " 总投入：" + (float) totalInput + " 总市值：" + (float) totalPrice);
+                        totalInputList.add(totalInput);
+                        totalPriceList.add(totalPrice);
+                        yieldList.add(profitRatio);
+                        addInvest += totalInput;
+                        addOutput += totalPrice;
+                        recordData.price = pList.get(i);
+                        recordData.number = totalNumber;
+                        recordData.cost = totalInput / totalNumber;
+                        recordData.totalInput = totalInput;
+                        recordData.profit = profit;
+                        recordData.profitRatio = profitRatio * 100;
+                        recordDataList.add(recordData);
+                        totalInput = 0;
+                        totalPrice = 0;
+                        totalNumber = 0;
+                        profit = 0;
+                        profitRatio = 0;
+                    }
+                }
+
+                baseline = startPoint + i * ((double) slope / 100);
+                diffRate = pList.get(i) / baseline;
+                diffRateList.add(diffRate);
+                if (pList.get(i) < baseline) {
+                    RecordData recordData = new RecordData(dList.get(i), "投入");
+                    input = (baseline / 10) / Math.pow(diffRate, diffCoef);
+                    number = input / pList.get(i);
+                    totalInput += input;
+                    totalNumber += number;
+                    bsDateList.add(dList.get(i));
+                    recordData.price = pList.get(i);
+                    recordData.diff = diffRate;
+                    recordData.input = input;
+                    recordData.number = number;
+                    recordData.cost = totalInput / totalNumber;
+                    recordData.totalInput = totalInput;
+                    recordData.profit = profit;
+                    recordData.profitRatio = profitRatio * 100;
+                    recordDataList.add(recordData);
+                }
+            }
+            if (i > eIndex) {
+                break;
+            }
+        }
+        return true;
+    }
+
+    public boolean sysSimpleInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
+        diffCoef = (double) diffFactor / 10;
+        double totalInput = 0;
+        double totalPrice = 0;
+        double totalNumber = 0;
+        double input = 0;
+        double number = 0;
+
+        for (int i = 0; i < items; i++) {
+            if ((i >= sIndex) && (i <= eIndex)) {
+                if (totalInput > 0) {
+                    totalPrice = totalNumber * pList.get(i);
+                    profit = totalPrice - totalInput;
+                    profitRatio = profit / totalInput;
+                    if (profitRatio >= (double) winLevel / 100) {
+                        bsDateList.add(dList.get(i));
+                        roundDateLists.add(bsDateList);
+                        bsDateList = new ArrayList<>();
                         totalInputList.add(totalInput);
                         totalPriceList.add(totalPrice);
                         yieldList.add(profitRatio);
@@ -60,14 +126,12 @@ public class Strategy {
                 baseline = startPoint + i * ((double) slope / 100);
                 diffRate = pList.get(i) / baseline;
                 diffRateList.add(diffRate);
-                //mainView.msgLogger(dList.get(i) + " 利润：" + (float) profit + " 利润比：" + (float) profitRatio + " 离差：" + diffRate);
                 if (pList.get(i) < baseline) {
                     input = (baseline / 10) / Math.pow(diffRate, diffCoef);
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
                     bsDateList.add(dList.get(i));
-                    //mainView.msgLogger(dList.get(i) + " 金额：" + (float) input + " 数量：" + (float) number);
                 }
             }
             if (i > eIndex) {
@@ -217,6 +281,24 @@ public class Strategy {
         return 1 / Math.pow(getMinDiffRate(), diffCoef);
     }
 
+    public class RecordData {
+
+        public RecordData(String date, String type) {
+            this.date = date;
+            this.type = type;
+        }
+        public String date;
+        public String type;
+        public double price;
+        public double diff;
+        public double input;
+        public double number;
+        public double cost;
+        public double totalInput;
+        public double profit;
+        public double profitRatio;
+    }
+
     public MainView mainView;
     public ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<String> dList = new ArrayList<>();
@@ -234,15 +316,17 @@ public class Strategy {
     private double addInvest = 0;
     private double addOutput = 0;
     private ArrayList<String> bsDateList = new ArrayList<>();
-    private ArrayList<Double> totalInputList = new ArrayList<>();
-    private ArrayList<Double> totalPriceList = new ArrayList<>();
-    private ArrayList<ArrayList<String>> roundDateLists = new ArrayList<>();
-    private ArrayList<Double> yieldList = new ArrayList<>();
-    private ArrayList<Double> profitList = new ArrayList<>();
-    private ArrayList<Double> profitRatioList = new ArrayList<>();
+    private final ArrayList<Double> totalInputList = new ArrayList<>();
+    private final ArrayList<Double> totalPriceList = new ArrayList<>();
+    private final ArrayList<ArrayList<String>> roundDateLists = new ArrayList<>();
+    private final ArrayList<Double> yieldList = new ArrayList<>();
+    private final ArrayList<Double> profitList = new ArrayList<>();
+    private final ArrayList<Double> profitRatioList = new ArrayList<>();
     private double diffRate = 0;
     private double profit = 0;
     private double profitRatio = 0;
     private double diffCoef = 1;
-    private ArrayList<Double> diffRateList = new ArrayList<>();
+    private final ArrayList<Double> diffRateList = new ArrayList<>();
+
+    public ArrayList<RecordData> recordDataList = new ArrayList<>();
 }
