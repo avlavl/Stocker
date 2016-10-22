@@ -64,12 +64,12 @@ public class Strategy {
                     }
                 }
 
-                baseline = startPoint + i * ((double) slope / 100);
-                diffRate = pList.get(i) / baseline;
+                baseLine = startPoint + i * ((double) slope / 100);
+                diffRate = pList.get(i) / baseLine;
                 diffRateList.add(diffRate);
-                if (pList.get(i) < baseline) {
+                if (pList.get(i) < baseLine) {
                     RecordData recordData = new RecordData(dList.get(i), "投入");
-                    input = (baseline / 10) / Math.pow(diffRate, diffCoef);
+                    input = (baseLine / 10) / Math.pow(diffRate, diffCoef);
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
@@ -123,11 +123,11 @@ public class Strategy {
                     }
                 }
 
-                baseline = startPoint + i * ((double) slope / 100);
-                diffRate = pList.get(i) / baseline;
+                baseLine = startPoint + i * ((double) slope / 100);
+                diffRate = pList.get(i) / baseLine;
                 diffRateList.add(diffRate);
-                if (pList.get(i) < baseline) {
-                    input = (baseline / 10) / Math.pow(diffRate, diffCoef);
+                if (pList.get(i) < baseLine) {
+                    input = (baseLine / 10) / Math.pow(diffRate, diffCoef);
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
@@ -307,7 +307,7 @@ public class Strategy {
     public double slope;
     public double winLevel;
     public double dispersion;
-    public double baseline;
+    public double baseLine;
 
     public int items;
     public int sIndex = -1;
