@@ -144,6 +144,8 @@ public class MainView extends javax.swing.JFrame {
         jCheckBoxBrmMode = new javax.swing.JCheckBox();
         jButtonCheckUp = new javax.swing.JButton();
         jButtonEvaluate = new javax.swing.JButton();
+        jComboBox2dObject = new javax.swing.JComboBox<>();
+        jCheckBox2dObject = new javax.swing.JCheckBox();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -407,7 +409,7 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPaneSys.addTab("趋势", jPanelLM);
 
-        jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 285));
+        jPanelMain.add(jTabbedPaneSys, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 320, 210));
 
         jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
@@ -569,6 +571,24 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, 30));
+
+        jComboBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "淘金100", "腾讯济安", "养老产业" }));
+        jComboBox2dObject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2dObjectActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jComboBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 90, -1));
+
+        jCheckBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBox2dObject.setText("选择二级标的");
+        jCheckBox2dObject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2dObjectActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jCheckBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 478));
 
@@ -1177,6 +1197,33 @@ public class MainView extends javax.swing.JFrame {
         rankTable = new RankTable(this, false, this, srList);
     }//GEN-LAST:event_jButtonEvaluateActionPerformed
 
+    private void jComboBox2dObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2dObjectActionPerformed
+        int index = jComboBox2dObject.getSelectedIndex();
+        switch (index) {
+            case 0:
+                fileIn2 = "data\\淘金100.txt";
+                break;
+            case 1:
+                fileIn2 = "data\\腾讯济安.txt";
+                break;
+            case 2:
+                fileIn2 = "data\\养老产业.txt";
+                break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_jComboBox2dObjectActionPerformed
+
+    private void jCheckBox2dObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2dObjectActionPerformed
+        gradeFlag = jCheckBox2dObject.isSelected() ? 1 : 0;
+        if (gradeFlag == 1) {
+            importFile2(fileIn2);
+        } else {
+            importFile(fileIn);
+        }
+
+    }//GEN-LAST:event_jCheckBox2dObjectActionPerformed
+
     /**
      ********************* Start of User-defined function ********************
      */
@@ -1207,7 +1254,6 @@ public class MainView extends javax.swing.JFrame {
             stockCode = words[0].replaceAll("[\\pP\\p{Punct}]", "");
             jLabelStockName.setText(stockName + "(" + stockCode + ")");
             words = br.readLine().split("\t");
-            column = words.length;
             dateList = new ArrayList<>();
             openList = new ArrayList<>();
             highList = new ArrayList<>();
@@ -1236,6 +1282,47 @@ public class MainView extends javax.swing.JFrame {
         evaluated = false;
     }
 
+    protected void importFile2(String fileName) {
+        fileIn2 = fileName;
+        if (fileName == null) {
+            JFileChooser chooser = new JFileChooser("data/");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Data File (*.txt)", "txt");
+            chooser.setFileFilter(filter);
+            chooser.setDialogTitle("Select Data File");
+            int ret = chooser.showOpenDialog(this);
+            if (ret == JFileChooser.APPROVE_OPTION) {
+                fileIn2 = chooser.getSelectedFile().getPath();
+            } else {
+                return;
+            }
+        }
+
+        try {
+            File file = new File(fileIn2);
+            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
+            BufferedReader br = new BufferedReader(isr);
+            br.readLine();
+            String[] words = br.readLine().split("\t");
+            dateList2 = new ArrayList<>();
+            priceList2 = new ArrayList<>();
+            String line;
+            while ((line = br.readLine()) != null) {
+                words = line.split("\t");
+                dateList2.add(words[0]);
+                priceList2.add(Double.parseDouble(words[4]));
+            }
+            rows2 = dateList2.size();
+            br.close();
+            isr.close();
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+//        jTextFieldSDate.setText(dateList2.get(0));
+//        jTextFieldEDate.setText(dateList2.get(rows2 - 1));
+//        updateMarket(rows2 - 1);
+//        evaluated = false;
+    }
+
     private boolean sysMACDEva(String mode, double bp) {
         MACD macd = new MACD(priceList, 12, 26, 9);
         macd.init();
@@ -1254,18 +1341,8 @@ public class MainView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
-            strategy.spIdxList.add(eIdx);
-        }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
-        if (bpIndexList.isEmpty()) {
-            return false;
-        }
 
-        brm = new BRM(this);
-        fundList = brm.synthesize();
-        return true;
+        return brmProcess(gradeFlag);
     }
 
     private boolean sysMACD2Eva(double bp0, double bp1) {
@@ -1282,18 +1359,8 @@ public class MainView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
-            strategy.spIdxList.add(eIdx);
-        }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
-        if (bpIndexList.isEmpty()) {
-            return false;
-        }
 
-        brm = new BRM(this);
-        fundList = brm.synthesize();
-        return true;
+        return brmProcess(gradeFlag);
     }
 
     private boolean sysMAEva(int mas, int mal) {
@@ -1312,18 +1379,8 @@ public class MainView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
-            strategy.spIdxList.add(eIdx);
-        }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
-        if (bpIndexList.isEmpty()) {
-            return false;
-        }
 
-        brm = new BRM(this);
-        fundList = brm.synthesize();
-        return true;
+        return brmProcess(gradeFlag);
     }
 
     private boolean sysLMEva(String mode, int t1, int t2) {
@@ -1358,18 +1415,7 @@ public class MainView extends javax.swing.JFrame {
         } catch (IOException e1) {
         }
 
-        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
-            strategy.spIdxList.add(eIdx);
-        }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
-        if (bpIndexList.isEmpty()) {
-            return false;
-        }
-
-        brm = new BRM(this);
-        fundList = brm.synthesize();
-        return true;
+        return brmProcess(gradeFlag);
     }
 
     private boolean sysMACDMAEva(String mode, double bp, int mas, int mal) {
@@ -1395,18 +1441,8 @@ public class MainView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
-            strategy.spIdxList.add(eIdx);
-        }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
-        if (bpIndexList.isEmpty()) {
-            return false;
-        }
 
-        brm = new BRM(this);
-        fundList = brm.synthesize();
-        return true;
+        return brmProcess(gradeFlag);
     }
 
     private boolean sysMACDLMEva(String mode, double bp, int t1, int t2) {
@@ -1436,18 +1472,8 @@ public class MainView extends javax.swing.JFrame {
                 break;
             }
         }
-        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
-            strategy.spIdxList.add(eIdx);
-        }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
-        if (bpIndexList.isEmpty()) {
-            return false;
-        }
 
-        brm = new BRM(this);
-        fundList = brm.synthesize();
-        return true;
+        return brmProcess(gradeFlag);
     }
 
     private void sysMACDChk(String mode, String para) {
@@ -1812,6 +1838,39 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
+    private boolean brmProcess(int grade) {
+        if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
+            strategy.spIdxList.add(eIdx);
+        }
+        if (grade != 0) {
+            int offset = rows - rows2;
+            ArrayList<Integer> bpIdxList = new ArrayList<>();
+            ArrayList<Integer> spIdxList = new ArrayList<>();
+            for (int i = 0; i < strategy.bpIdxList.size(); i++) {
+                if (strategy.bpIdxList.get(i) >= offset) {
+                    bpIdxList.add(strategy.bpIdxList.get(i) - offset);
+                    spIdxList.add(strategy.spIdxList.get(i) - offset);
+                }
+            }
+            strategy.bpIdxList = bpIdxList;
+            strategy.spIdxList = spIdxList;
+            sIdx = 0;
+            eIdx = rows2 - 1;
+            tradeYears = (double) daysBetween(sIdx, eIdx) / 365.25;
+            tradeDays = rows2;
+            priceList = priceList2;
+            dateList = dateList2;
+        }
+        bpIndexList = strategy.bpIdxList;
+        spIndexList = strategy.spIdxList;
+        if (bpIndexList.isEmpty()) {
+            return false;
+        }
+        brm = new BRM(this);
+        fundList = brm.synthesize();
+        return true;
+    }
+
     private void dateProcess() {
         String start = jTextFieldSDate.getText();
         String end = jTextFieldEDate.getText();
@@ -2059,18 +2118,21 @@ public class MainView extends javax.swing.JFrame {
 
     private String fileIn = "data\\上证指数.txt";
     private String fileOut = "data\\上证指数_测试日志.txt";
+    private String fileIn2 = "data\\淘金100.txt";
     public FileWriter fileWriter;
 
     public String stockName = "上证指数";
     public String stockCode = "000001";
-    public int column = 0;
     public int rows = 0;
+    public int rows2 = 0;
     public ArrayList<String> dateList;
+    public ArrayList<String> dateList2;
     public ArrayList<Double> openList;
     public ArrayList<Double> highList;
     public ArrayList<Double> lowList;
     public ArrayList<Double> closeList;
     public ArrayList<Double> priceList;
+    public ArrayList<Double> priceList2;
     public ArrayList<Double> fundList;
     public ArrayList<Integer> bpIndexList;
     public ArrayList<Integer> spIndexList;
@@ -2092,6 +2154,8 @@ public class MainView extends javax.swing.JFrame {
     public int lmDays = 1;
     public boolean lmStatus = true;
 
+    public int gradeFlag;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
     private javax.swing.ButtonGroup buttonGroupMACD;
@@ -2103,9 +2167,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTradeChart;
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;
+    private javax.swing.JCheckBox jCheckBox2dObject;
     private javax.swing.JCheckBox jCheckBoxAddSys;
     private javax.swing.JCheckBox jCheckBoxBrmMode;
     private javax.swing.JCheckBox jCheckBoxRecord;
+    private javax.swing.JComboBox<String> jComboBox2dObject;
     private javax.swing.JComboBox<String> jComboBoxLMDays;
     private javax.swing.JComboBox<String> jComboBoxLMStatus;
     private javax.swing.JComboBox<String> jComboBoxPriceFactor;
