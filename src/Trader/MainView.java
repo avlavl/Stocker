@@ -141,7 +141,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE4 = new javax.swing.JTextField();
         jButtonFilterStart = new javax.swing.JButton();
         jButtonFilterCheck = new javax.swing.JButton();
-        jCheckBoxBrmMode = new javax.swing.JCheckBox();
+        jCheckBoxHandleMode = new javax.swing.JCheckBox();
         jButtonCheckUp = new javax.swing.JButton();
         jButtonEvaluate = new javax.swing.JButton();
         jComboBox2dObject = new javax.swing.JComboBox<>();
@@ -545,14 +545,14 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 378, 320, 90));
 
-        jCheckBoxBrmMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jCheckBoxBrmMode.setText("固定金额投资");
-        jCheckBoxBrmMode.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxHandleMode.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBoxHandleMode.setText("固定金额投资");
+        jCheckBoxHandleMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxBrmModeActionPerformed(evt);
+                jCheckBoxHandleModeActionPerformed(evt);
             }
         });
-        jPanelMain.add(jCheckBoxBrmMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 340, -1, -1));
+        jPanelMain.add(jCheckBoxHandleMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 340, -1, -1));
 
         jButtonCheckUp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonCheckUp.setText("检测");
@@ -844,7 +844,7 @@ public class MainView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
             return;
         }
-        SystemReport sr = updateSystemReport(strategy, brm);
+        SystemReport sr = updateSystemReport(handle);
         updateTable(sr);
         updateMarket(eIdx);
         evaluated = true;
@@ -874,7 +874,7 @@ public class MainView extends javax.swing.JFrame {
                         if (j >= i * 2) {
                             if (sysMAEva(i, j)) {
                                 String para = String.format("%d,%d", i, j);
-                                sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                                sr = updateSimpleReport(tradeMode, para, handle);
                                 srList.add(sr);
                             }
                         }
@@ -888,7 +888,7 @@ public class MainView extends javax.swing.JFrame {
                         if (j <= (i / 2 + 1)) {
                             if (sysLMEva(tradeMode, i, j)) {
                                 String para = String.format("%d,%d", i, j);
-                                sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                                sr = updateSimpleReport(tradeMode, para, handle);
                                 srList.add(sr);
                             }
                         }
@@ -900,7 +900,7 @@ public class MainView extends javax.swing.JFrame {
                 for (int i = ps1; i <= pe1; i++) {
                     if (sysMACDEva(tradeMode, i)) {
                         String para = String.format("%d", i);
-                        sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                        sr = updateSimpleReport(tradeMode, para, handle);
                         srList.add(sr);
                     }
                 }
@@ -910,7 +910,7 @@ public class MainView extends javax.swing.JFrame {
                     for (int j = ps2; j <= pe2; j++) {
                         if (sysMACD2Eva(i, j)) {
                             String para = String.format("%d,%d", i, j);
-                            sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                            sr = updateSimpleReport(tradeMode, para, handle);
                             srList.add(sr);
                         }
                     }
@@ -924,7 +924,7 @@ public class MainView extends javax.swing.JFrame {
                             if (k >= j * 2) {
                                 if (sysMACDMAEva(tradeMode, i, j, k)) {
                                     String para = String.format("%d,%d,%d", i, j, k);
-                                    sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                                    sr = updateSimpleReport(tradeMode, para, handle);
                                     srList.add(sr);
                                 }
                             }
@@ -942,7 +942,7 @@ public class MainView extends javax.swing.JFrame {
                             if (k <= (j / 2 + 1)) {
                                 if (sysMACDLMEva(tradeMode, i, j, k)) {
                                     String para = String.format("%d,%d,%d", i, j, k);
-                                    sr = updateSimpleReport(tradeMode, para, strategy, brm);
+                                    sr = updateSimpleReport(tradeMode, para, handle);
                                     srList.add(sr);
                                 }
                             }
@@ -1027,13 +1027,13 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPaneSysStateChanged
 
-    private void jCheckBoxBrmModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxBrmModeActionPerformed
-        if (jCheckBoxBrmMode.isSelected()) {
-            brmMode = 1;
+    private void jCheckBoxHandleModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxHandleModeActionPerformed
+        if (jCheckBoxHandleMode.isSelected()) {
+            handleMode = 1;
         } else {
-            brmMode = 0;
+            handleMode = 0;
         }
-    }//GEN-LAST:event_jCheckBoxBrmModeActionPerformed
+    }//GEN-LAST:event_jCheckBoxHandleModeActionPerformed
 
     private void jButtonCheckUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckUpActionPerformed
         ArrayList<String> modelList = new ArrayList<>();
@@ -1145,7 +1145,7 @@ public class MainView extends javax.swing.JFrame {
                 case "MA":
                     if (sysMAEva(p1, p2)) {
                         String para = String.format("%d,%d", p1, p2);
-                        sr = updateSimpleReport(mode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, handle);
                         srList.add(sr);
                     }
                     break;
@@ -1153,7 +1153,7 @@ public class MainView extends javax.swing.JFrame {
                 case "LMS":
                     if (sysLMEva(mode, p1, p2)) {
                         String para = String.format("%d,%d", p1, p2);
-                        sr = updateSimpleReport(mode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, handle);
                         srList.add(sr);
                     }
                     break;
@@ -1161,14 +1161,14 @@ public class MainView extends javax.swing.JFrame {
                 case "DIF":
                     if (sysMACDEva(mode, p1)) {
                         String para = String.format("%d", p1);
-                        sr = updateSimpleReport(mode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, handle);
                         srList.add(sr);
                     }
                     break;
                 case "BARDIF":
                     if (sysMACD2Eva(p1, p2)) {
                         String para = String.format("%d,%d", p1, p2);
-                        sr = updateSimpleReport(mode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, handle);
                         srList.add(sr);
                     }
                     break;
@@ -1176,7 +1176,7 @@ public class MainView extends javax.swing.JFrame {
                 case "DIFMA":
                     if (sysMACDMAEva(mode, p1, p2, p3)) {
                         String para = String.format("%d,%d,%d", p1, p2, p3);
-                        sr = updateSimpleReport(mode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, handle);
                         srList.add(sr);
                     }
                     break;
@@ -1186,7 +1186,7 @@ public class MainView extends javax.swing.JFrame {
                 case "DIFLMS":
                     if (sysMACDLMEva(mode, p1, p2, p3)) {
                         String para = String.format("%d,%d,%d", p1, p2, p3);
-                        sr = updateSimpleReport(mode, para, strategy, brm);
+                        sr = updateSimpleReport(mode, para, handle);
                         srList.add(sr);
                     }
                     break;
@@ -1342,7 +1342,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
 
-        return brmProcess(gradeFlag);
+        return synthesize(gradeFlag);
     }
 
     private boolean sysMACD2Eva(double bp0, double bp1) {
@@ -1360,7 +1360,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
 
-        return brmProcess(gradeFlag);
+        return synthesize(gradeFlag);
     }
 
     private boolean sysMAEva(int mas, int mal) {
@@ -1380,7 +1380,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
 
-        return brmProcess(gradeFlag);
+        return synthesize(gradeFlag);
     }
 
     private boolean sysLMEva(String mode, int t1, int t2) {
@@ -1415,7 +1415,7 @@ public class MainView extends javax.swing.JFrame {
         } catch (IOException e1) {
         }
 
-        return brmProcess(gradeFlag);
+        return synthesize(gradeFlag);
     }
 
     private boolean sysMACDMAEva(String mode, double bp, int mas, int mal) {
@@ -1442,7 +1442,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
 
-        return brmProcess(gradeFlag);
+        return synthesize(gradeFlag);
     }
 
     private boolean sysMACDLMEva(String mode, double bp, int t1, int t2) {
@@ -1473,7 +1473,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
 
-        return brmProcess(gradeFlag);
+        return synthesize(gradeFlag);
     }
 
     private void sysMACDChk(String mode, String para) {
@@ -1500,10 +1500,10 @@ public class MainView extends javax.swing.JFrame {
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
             chkData.status = "持有";
-            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
             chkData.status = "清空";
-            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
         chkData.key = macd.getMACDKey(mode, bp);
@@ -1533,10 +1533,10 @@ public class MainView extends javax.swing.JFrame {
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
             chkData.status = "持有";
-            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
             chkData.status = "清空";
-            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
         chkData.key = ma.getMAKey(mas, mal);
@@ -1569,10 +1569,10 @@ public class MainView extends javax.swing.JFrame {
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
             chkData.status = "持有";
-            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
             chkData.status = "清空";
-            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
         chkData.key = livermore.getLMKey(mode);
@@ -1601,10 +1601,10 @@ public class MainView extends javax.swing.JFrame {
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
             chkData.status = "持有";
-            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
             chkData.status = "清空";
-            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
         double barKey = macd.getBARKey(bp0);
@@ -1644,10 +1644,10 @@ public class MainView extends javax.swing.JFrame {
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
             chkData.status = "持有";
-            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
             chkData.status = "清空";
-            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
         double maKey = ma.getMAKey(mas, mal);
@@ -1690,10 +1690,10 @@ public class MainView extends javax.swing.JFrame {
         spIndexList = strategy.spIdxList;
         if (bpIndexList.size() > spIndexList.size()) {
             chkData.status = "持有";
-            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, bpIndexList.get(bpIndexList.size() - 1), rows - 1);
         } else {
             chkData.status = "清空";
-            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
+            chkData.days = daysBetween(dateList, spIndexList.get(spIndexList.size() - 1), rows - 1);
         }
 
         double lmKey = livermore.getLMKey(mode);
@@ -1838,11 +1838,14 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    private boolean brmProcess(int grade) {
+    private boolean synthesize(int grade) {
         if (strategy.bpIdxList.size() > strategy.spIdxList.size()) {
             strategy.spIdxList.add(eIdx);
         }
-        if (grade != 0) {
+        if (grade == 0) {
+            bpIndexList = strategy.bpIdxList;
+            spIndexList = strategy.spIdxList;
+        } else {
             int offset = rows - rows2;
             ArrayList<Integer> bpIdxList = new ArrayList<>();
             ArrayList<Integer> spIdxList = new ArrayList<>();
@@ -1852,22 +1855,14 @@ public class MainView extends javax.swing.JFrame {
                     spIdxList.add(strategy.spIdxList.get(i) - offset);
                 }
             }
-            strategy.bpIdxList = bpIdxList;
-            strategy.spIdxList = spIdxList;
-            sIdx = 0;
-            eIdx = rows2 - 1;
-            tradeYears = (double) daysBetween(sIdx, eIdx) / 365.25;
-            tradeDays = rows2;
-            priceList = priceList2;
-            dateList = dateList2;
+            bpIndexList = bpIdxList;
+            spIndexList = spIdxList;
         }
-        bpIndexList = strategy.bpIdxList;
-        spIndexList = strategy.spIdxList;
         if (bpIndexList.isEmpty()) {
             return false;
         }
-        brm = new BRM(this);
-        fundList = brm.synthesize();
+        handle = new Handle(this);
+        fundList = handle.synthesize();
         return true;
     }
 
@@ -1890,7 +1885,6 @@ public class MainView extends javax.swing.JFrame {
                 eIdx = i;
             }
         }
-        tradeYears = (double) daysBetween(sIdx, eIdx) / 365.25;
         tradeDays = eIdx - sIdx + 1;
     }
 
@@ -1954,58 +1948,58 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    protected SystemReport updateSystemReport(Strategy stg, BRM brm) {
+    protected SystemReport updateSystemReport(Handle hde) {
         SystemReport sr = new SystemReport();
 
-        sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
-        sr.initAsset = (float) brm.getInitAsset();
-        sr.netProfit = (float) brm.getNetProfit();
-        sr.objectRate = (float) brm.getObjectRate(sIdx, eIdx);
-        sr.systemRate = (float) brm.getSystemRate();
+        sr.currentAsset = (float) hde.getCurrentAsset();
+        sr.initAsset = (float) hde.getInitAsset();
+        sr.netProfit = (float) hde.getNetProfit();
+        sr.objectRate = (float) hde.getObjectRate();
+        sr.systemRate = (float) hde.getSystemRate();
         sr.sysObjRatio = (float) (sr.systemRate / sr.objectRate);
-        sr.annualRate = (float) brm.getAnnualRate(tradeYears);
-        sr.tradeYears = (float) tradeYears;
-        sr.positionYears = (float) stg.getPositionYears();
-        sr.positionDaysRate = (float) stg.getPositionDaysRate();
-        sr.meanPositionDays = (float) stg.getMeanPositionDays();
-        sr.meanGainDays = (float) stg.getMeanGainDays();
-        sr.meanLossDays = (float) stg.getMeanLossDays();
-        sr.standardAnnualRate = (float) brm.getStandardAnnualRate();
-        sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
-        sr.evenEarningRate = (float) brm.getEvenEarningRate();
+        sr.annualRate = (float) hde.getAnnualRate();
+        sr.tradeYears = (float) hde.getTradeYears();
+        sr.positionYears = (float) hde.getPositionYears();
+        sr.positionDaysRate = (float) hde.getPositionDaysRate();
+        sr.meanPositionDays = (float) hde.getMeanPositionDays();
+        sr.meanGainDays = (float) hde.getMeanGainDays();
+        sr.meanLossDays = (float) hde.getMeanLossDays();
+        sr.standardAnnualRate = (float) hde.getStandardAnnualRate();
+        sr.positionAnnualRate = (float) hde.getPositionAnnualRate();
+        sr.evenEarningRate = (float) hde.getEvenEarningRate();
 
-        sr.tradeTimes = brm.getTradeTimes();
-        sr.gainTimes = brm.getGainTimes();
+        sr.tradeTimes = hde.getTradeTimes();
+        sr.gainTimes = hde.getGainTimes();
         sr.lossTimes = sr.tradeTimes - sr.gainTimes;
-        sr.winRate = (float) brm.getWinRate();
-        sr.meanGain = (float) brm.getMeanGain();
-        sr.meanLoss = (float) brm.getMeanLoss();
-        sr.odds = (float) brm.getOdds();
-        sr.expectation = (float) brm.getExpectation();
-        sr.gainProfit = (float) brm.getGainProfit();
-        sr.lossProfit = (float) brm.getLossProfit();
-        sr.maxGain = (float) brm.getMaxGain();
-        sr.maxLoss = (float) brm.getMaxLoss();
-        sr.maxGainTimes = brm.getMaxGainTimes();
-        sr.maxLossTimes = brm.getMaxLossTimes();
-        sr.maxGainRatio = (float) brm.getMaxGainRatio();
-        sr.maxLossRatio = (float) brm.getMaxLossRatio();
+        sr.winRate = (float) hde.getWinRate();
+        sr.meanGain = (float) hde.getMeanGain();
+        sr.meanLoss = (float) hde.getMeanLoss();
+        sr.odds = (float) hde.getOdds();
+        sr.expectation = (float) hde.getExpectation();
+        sr.gainProfit = (float) hde.getGainProfit();
+        sr.lossProfit = (float) hde.getLossProfit();
+        sr.maxGain = (float) hde.getMaxGain();
+        sr.maxLoss = (float) hde.getMaxLoss();
+        sr.maxGainTimes = hde.getMaxGainTimes();
+        sr.maxLossTimes = hde.getMaxLossTimes();
+        sr.maxGainRatio = (float) hde.getMaxGainRatio();
+        sr.maxLossRatio = (float) hde.getMaxLossRatio();
 
         return sr;
     }
 
-    protected SystemReport updateSimpleReport(String mode, String para, Strategy stg, BRM brm) {
+    protected SystemReport updateSimpleReport(String mode, String para, Handle hde) {
         SystemReport sr = new SystemReport(mode, para);
 
         sr.parameter = para;
-        sr.currentAsset = (float) brm.getCurrentAsset(eIdx);
-        sr.standardAnnualRate = (float) brm.getStandardAnnualRate();
-        sr.positionDaysRate = (float) stg.getPositionDaysRate();
-        sr.positionAnnualRate = (float) brm.getPositionAnnualRate();
-        sr.meanPositionDays = (float) stg.getMeanPositionDays();
-        sr.tradeTimes = brm.getTradeTimes();
-        sr.maxLossRatio = (float) brm.getMaxLossRatio();
-        sr.expectation = (float) brm.getExpectation();
+        sr.currentAsset = (float) hde.getCurrentAsset();
+        sr.standardAnnualRate = (float) hde.getStandardAnnualRate();
+        sr.positionDaysRate = (float) hde.getPositionDaysRate();
+        sr.positionAnnualRate = (float) hde.getPositionAnnualRate();
+        sr.meanPositionDays = (float) hde.getMeanPositionDays();
+        sr.tradeTimes = hde.getTradeTimes();
+        sr.maxLossRatio = (float) hde.getMaxLossRatio();
+        sr.expectation = (float) hde.getExpectation();
 
         return sr;
     }
@@ -2098,9 +2092,9 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    public int daysBetween(int idxs, int idxe) {
-        String sdate = dateList.get(idxs);
-        String edate = dateList.get(idxe);
+    public int daysBetween(ArrayList<String> dates, int idxs, int idxe) {
+        String sdate = dates.get(idxs);
+        String edate = dates.get(idxe);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = Calendar.getInstance();
         long between_days = 0;
@@ -2139,14 +2133,13 @@ public class MainView extends javax.swing.JFrame {
     public int sIdx = -1;
     public int eIdx = 0;
     public int tradeDays = 0;
-    public double tradeYears = 0;
 
     public Strategy strategy;
-    public BRM brm;
-    Livermore livermore;
+    public Handle handle;
+    public Livermore livermore;
     public boolean evaluated = false;
     public RankTable rankTable;
-    public int brmMode = 0;
+    public int handleMode = 0;
     public String tradeMode;
     public String tradePara;
     public ArrayList<CheckData> chkDataList;
@@ -2154,7 +2147,7 @@ public class MainView extends javax.swing.JFrame {
     public int lmDays = 1;
     public boolean lmStatus = true;
 
-    public int gradeFlag;
+    public int gradeFlag = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
@@ -2169,7 +2162,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTradeRecord;
     private javax.swing.JCheckBox jCheckBox2dObject;
     private javax.swing.JCheckBox jCheckBoxAddSys;
-    private javax.swing.JCheckBox jCheckBoxBrmMode;
+    private javax.swing.JCheckBox jCheckBoxHandleMode;
     private javax.swing.JCheckBox jCheckBoxRecord;
     private javax.swing.JComboBox<String> jComboBox2dObject;
     private javax.swing.JComboBox<String> jComboBoxLMDays;

@@ -7,6 +7,7 @@ package Trader;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -26,18 +27,20 @@ public class TradeTable extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        int mode = mv.brmMode;
+        int mode = mv.handleMode;
         int times = mv.bpIndexList.size();
+        ArrayList<String> dateList = (mv.gradeFlag == 0) ? mv.dateList : mv.dateList2;
+        ArrayList<Double> priceList = (mv.gradeFlag == 0) ? mv.priceList : mv.priceList2;
         String[][] tableContent = new String[times * 2][8];
         for (int i = 0; i < times; i++) {
-            String bDate = mv.dateList.get(mv.bpIndexList.get(i));
-            String sDate = mv.dateList.get(mv.spIndexList.get(i));
-            double bPrice = mv.priceList.get(mv.bpIndexList.get(i));
-            double sPrice = mv.priceList.get(mv.spIndexList.get(i));
+            String bDate = dateList.get(mv.bpIndexList.get(i));
+            String sDate = dateList.get(mv.spIndexList.get(i));
+            double bPrice = priceList.get(mv.bpIndexList.get(i));
+            double sPrice = priceList.get(mv.spIndexList.get(i));
             double ratio = (mode == 0) ? 1 : ((double) 10000 / bPrice);
             double agio = (sPrice - bPrice) * ratio;
             double yield = 100 * (sPrice - bPrice) / bPrice;
-            int days = mv.daysBetween(mv.bpIndexList.get(i), mv.spIndexList.get(i));
+            int days = mv.daysBetween(dateList, mv.bpIndexList.get(i), mv.spIndexList.get(i));
             double sCash = mv.fundList.get(mv.bpIndexList.get(i)) - (bPrice * ratio);
             double eCash = mv.fundList.get(mv.spIndexList.get(i));
 

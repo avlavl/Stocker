@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class Strategy {
 
     public Strategy(MainView mv) {
-        mainView = mv;
         pList = mv.priceList;
     }
 
@@ -120,57 +119,6 @@ public class Strategy {
         }
     }
 
-    public double getPositionYears() {
-        int days = 0;
-        for (int i = 0; i < bpIdxList.size(); i++) {
-            days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
-        }
-        return (double) days / 365.25;
-    }
-
-    public double getPositionDaysRate() {
-        int days = 0;
-        for (int i = 0; i < bpIdxList.size(); i++) {
-            days += spIdxList.get(i) - bpIdxList.get(i);
-        }
-
-        double rate = (double) 100 * days / mainView.tradeDays;
-        return rate;
-    }
-
-    public double getMeanPositionDays() {
-        int days = 0;
-        for (int i = 0; i < bpIdxList.size(); i++) {
-            days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
-        }
-        return (double) days / bpIdxList.size();
-    }
-
-    public double getMeanGainDays() {
-        int days = 0;
-        int times = 0;
-        for (int i = 0; i < bpIdxList.size(); i++) {
-            if (pList.get(spIdxList.get(i)) > pList.get(bpIdxList.get(i))) {
-                days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
-                times++;
-            }
-        }
-        return (double) ((times > 0) ? days / times : 0);
-    }
-
-    public double getMeanLossDays() {
-        int days = 0;
-        int times = 0;
-        for (int i = 0; i < bpIdxList.size(); i++) {
-            if (pList.get(spIdxList.get(i)) <= pList.get(bpIdxList.get(i))) {
-                days += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
-                times++;
-            }
-        }
-        return (double) ((times > 0) ? days / times : 0);
-    }
-
-    private MainView mainView;
     private ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<Integer> bpIdxList = new ArrayList<>();
     public ArrayList<Integer> spIdxList = new ArrayList<>();

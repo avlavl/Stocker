@@ -33,7 +33,7 @@ public class TradeChart extends javax.swing.JDialog {
         setVisible(true);
 
         mainView = mv;
-        pList = mainView.priceList;
+        pList = (mv.gradeFlag == 0) ? mv.priceList : mv.priceList2;
         fundList = mainView.fundList;
         units = pList.size();
 

@@ -12,12 +12,22 @@ import java.util.Collections;
  *
  * @author zhangxr
  */
-public class BRM {
+public class Handle {
 
-    public BRM(MainView mv) {
+    public Handle(MainView mv) {
         mainView = mv;
-        mode = mv.brmMode;
-        pList = mv.priceList;
+        mode = mv.handleMode;
+        if (mv.gradeFlag == 0) {
+            dList = mv.dateList;
+            pList = mv.priceList;
+            sIdx = mv.sIdx;
+            eIdx = mv.eIdx;
+        } else {
+            dList = mv.dateList2;
+            pList = mv.priceList2;
+            sIdx = 0;
+            eIdx = dList.size() - 1;
+        }
         bpIdxList = mv.bpIndexList;
         spIdxList = mv.spIndexList;
     }
@@ -98,7 +108,7 @@ public class BRM {
                 } else if (spIdxList.contains(i)) {
                     trade(mode, false, pList.get(i));
                 }
-                fundList.add(getCurrentAsset(i));
+                fundList.add(getAsset(i));
             } else {
                 fundList.add(fundList.get(endIdx));
             }
@@ -109,12 +119,16 @@ public class BRM {
     /**
      ** Start of report function
      */
-    public double getCurrentAsset(int idx) {
+    public double getAsset(int i) {
         if (holdFlag) {
-            return cash + ratio * (pList.get(idx));
+            return cash + ratio * (pList.get(i));
         } else {
             return cash;
         }
+    }
+
+    public double getCurrentAsset() {
+        return getAsset(eIdx);
     }
 
     public double getInitAsset() {
@@ -129,9 +143,9 @@ public class BRM {
         return profit;
     }
 
-    public double getObjectRate(int idxs, int idxe) {
-        double sPrice = pList.get(idxs);
-        double ePrice = pList.get(idxe);
+    public double getObjectRate() {
+        double sPrice = pList.get(sIdx);
+        double ePrice = pList.get(eIdx);
         return (double) 100 * (ePrice - sPrice) / sPrice;
     }
 
@@ -140,18 +154,73 @@ public class BRM {
         return (double) 100 * profit / initAsset;
     }
 
-    public double getAnnualRate(double years) {
+    public double getAnnualRate() {
+        double years = getTradeYears();
         double rate = (initAsset + getNetProfit()) / initAsset;
         return (double) 100 * (Math.pow(rate, (double) 1 / years) - 1);
     }
 
+    public double getTradeYears() {
+        return (double) mainView.daysBetween(dList, sIdx, eIdx) / 365.25;
+    }
+
+    public double getPositionYears() {
+        int days = 0;
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            days += mainView.daysBetween(dList, bpIdxList.get(i), spIdxList.get(i));
+        }
+        return (double) days / 365.25;
+    }
+
+    public double getPositionDaysRate() {
+        int days = 0;
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            days += spIdxList.get(i) - bpIdxList.get(i);
+        }
+
+        double rate = (double) 100 * days / mainView.tradeDays;
+        return rate;
+    }
+
+    public double getMeanPositionDays() {
+        int days = 0;
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            days += mainView.daysBetween(dList, bpIdxList.get(i), spIdxList.get(i));
+        }
+        return (double) days / bpIdxList.size();
+    }
+
+    public double getMeanGainDays() {
+        int days = 0;
+        int times = 0;
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            if (pList.get(spIdxList.get(i)) > pList.get(bpIdxList.get(i))) {
+                days += mainView.daysBetween(dList, bpIdxList.get(i), spIdxList.get(i));
+                times++;
+            }
+        }
+        return (double) ((times > 0) ? days / times : 0);
+    }
+
+    public double getMeanLossDays() {
+        int days = 0;
+        int times = 0;
+        for (int i = 0; i < bpIdxList.size(); i++) {
+            if (pList.get(spIdxList.get(i)) <= pList.get(bpIdxList.get(i))) {
+                days += mainView.daysBetween(dList, bpIdxList.get(i), spIdxList.get(i));
+                times++;
+            }
+        }
+        return (double) ((times > 0) ? days / times : 0);
+    }
+
     public double getStandardAnnualRate() {
+        double years = getTradeYears();
         double totalYield = 0;
         for (Double yield : yieldList) {
             totalYield += yield;
         }
-
-        return totalYield / mainView.tradeYears;
+        return totalYield / years;
     }
 
     public double getPositionAnnualRate() {
@@ -161,7 +230,7 @@ public class BRM {
         }
         int totalDays = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
-            totalDays += mainView.daysBetween(bpIdxList.get(i), spIdxList.get(i));
+            totalDays += mainView.daysBetween(dList, bpIdxList.get(i), spIdxList.get(i));
         }
 
         return totalYield * 365.25 / totalDays;
@@ -347,6 +416,7 @@ public class BRM {
     }
 
     private MainView mainView;
+    private ArrayList<String> dList = new ArrayList<>();
     private ArrayList<Double> pList = new ArrayList<>();
     private ArrayList<Integer> bpIdxList = new ArrayList<>();
     private ArrayList<Integer> spIdxList = new ArrayList<>();
@@ -360,6 +430,7 @@ public class BRM {
     public boolean holdFlag = false;
     public double bPrice = 0;
     public double sPrice = 0;
-
+    public int sIdx = 0;
+    public int eIdx = 0;
     public int mode = 1;
 }
