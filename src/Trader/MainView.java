@@ -1868,8 +1868,8 @@ public class MainView extends javax.swing.JFrame {
             bpIndexList = new ArrayList<>();
             spIndexList = new ArrayList<>();
             for (int i = 0; i < strategy.bpIdxList.size(); i++) {
-                if (strategy.bpIdxList.get(i) >= offset) {
-                    bpIndexList.add(strategy.bpIdxList.get(i) - offset);
+                if (strategy.spIdxList.get(i) > offset) {
+                    bpIndexList.add((strategy.bpIdxList.get(i) > offset) ? (strategy.bpIdxList.get(i) - offset) : 0);
                     spIndexList.add(strategy.spIdxList.get(i) - offset);
                 }
             }
