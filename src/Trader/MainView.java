@@ -1860,17 +1860,18 @@ public class MainView extends javax.swing.JFrame {
             bpIndexList = strategy.bpIdxList;
             spIndexList = strategy.spIdxList;
         } else {
+            if ((rows < rows2) || (!dateList.get(rows - 1).equals(dateList2.get(rows2 - 1)))) {
+                return false;
+            }
             int offset = rows - rows2;
-            ArrayList<Integer> bpIdxList = new ArrayList<>();
-            ArrayList<Integer> spIdxList = new ArrayList<>();
+            bpIndexList = new ArrayList<>();
+            spIndexList = new ArrayList<>();
             for (int i = 0; i < strategy.bpIdxList.size(); i++) {
                 if (strategy.bpIdxList.get(i) >= offset) {
-                    bpIdxList.add(strategy.bpIdxList.get(i) - offset);
-                    spIdxList.add(strategy.spIdxList.get(i) - offset);
+                    bpIndexList.add(strategy.bpIdxList.get(i) - offset);
+                    spIndexList.add(strategy.spIdxList.get(i) - offset);
                 }
             }
-            bpIndexList = bpIdxList;
-            spIndexList = spIdxList;
         }
         if (bpIndexList.isEmpty()) {
             return false;
