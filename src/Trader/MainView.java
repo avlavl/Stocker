@@ -146,6 +146,8 @@ public class MainView extends javax.swing.JFrame {
         jButtonEvaluate = new javax.swing.JButton();
         jComboBox2dObject = new javax.swing.JComboBox<>();
         jCheckBox2dObject = new javax.swing.JCheckBox();
+        jLabelDate2 = new javax.swing.JLabel();
+        jLabelClose2 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -579,7 +581,7 @@ public class MainView extends javax.swing.JFrame {
                 jComboBox2dObjectActionPerformed(evt);
             }
         });
-        jPanelMain.add(jComboBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 90, -1));
+        jPanelMain.add(jComboBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 90, -1));
 
         jCheckBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBox2dObject.setText("选择二级标的");
@@ -588,7 +590,17 @@ public class MainView extends javax.swing.JFrame {
                 jCheckBox2dObjectActionPerformed(evt);
             }
         });
-        jPanelMain.add(jCheckBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
+        jPanelMain.add(jCheckBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
+
+        jLabelDate2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate2.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate2.setText("日期：----/--/--");
+        jPanelMain.add(jLabelDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
+
+        jLabelClose2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelClose2.setForeground(new java.awt.Color(250, 0, 0));
+        jLabelClose2.setText("收盘：--");
+        jPanelMain.add(jLabelClose2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 478));
 
@@ -846,7 +858,7 @@ public class MainView extends javax.swing.JFrame {
         }
         SystemReport sr = updateSystemReport(handle);
         updateTable(sr);
-        updateMarket(eIdx);
+        updateMarket(0, eIdx);
         evaluated = true;
     }//GEN-LAST:event_jButtonTradeEvaActionPerformed
 
@@ -1212,16 +1224,14 @@ public class MainView extends javax.swing.JFrame {
             default:
                 break;
         }
+        importFile2(fileIn2);
     }//GEN-LAST:event_jComboBox2dObjectActionPerformed
 
     private void jCheckBox2dObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2dObjectActionPerformed
         gradeFlag = jCheckBox2dObject.isSelected() ? 1 : 0;
         if (gradeFlag == 1) {
             importFile2(fileIn2);
-        } else {
-            importFile(fileIn);
         }
-
     }//GEN-LAST:event_jCheckBox2dObjectActionPerformed
 
     /**
@@ -1278,7 +1288,7 @@ public class MainView extends javax.swing.JFrame {
         }
         jTextFieldSDate.setText(dateList.get(0));
         jTextFieldEDate.setText(dateList.get(rows - 1));
-        updateMarket(rows - 1);
+        updateMarket(0, rows - 1);
         evaluated = false;
     }
 
@@ -1304,11 +1314,13 @@ public class MainView extends javax.swing.JFrame {
             br.readLine();
             String[] words = br.readLine().split("\t");
             dateList2 = new ArrayList<>();
+            closeList2 = new ArrayList<>();
             priceList2 = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {
                 words = line.split("\t");
                 dateList2.add(words[0]);
+                closeList2.add(Double.parseDouble(words[4]));
                 priceList2.add(Double.parseDouble(words[4]));
             }
             rows2 = dateList2.size();
@@ -1317,10 +1329,9 @@ public class MainView extends javax.swing.JFrame {
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         }
-//        jTextFieldSDate.setText(dateList2.get(0));
-//        jTextFieldEDate.setText(dateList2.get(rows2 - 1));
-//        updateMarket(rows2 - 1);
-//        evaluated = false;
+
+        updateMarket(1, rows2 - 1);
+        evaluated = false;
     }
 
     private boolean sysMACDEva(String mode, double bp) {
@@ -1935,16 +1946,29 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    protected void updateMarket(int idx) {
-        jLabelDate.setText("日期：" + dateList.get(idx));
-        double margin = closeList.get(idx) - closeList.get(idx - 1);
-        double ratio = 100 * (closeList.get(idx) - closeList.get(idx - 1)) / closeList.get(idx - 1);
-        if (margin > 0) {
-            jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
-            jLabelClose.setText(String.format("收盘：%s  上涨：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
+    protected void updateMarket(int grade, int idx) {
+        if (grade == 0) {
+            jLabelDate.setText("日期：" + dateList.get(idx));
+            double margin = closeList.get(idx) - closeList.get(idx - 1);
+            double ratio = 100 * (closeList.get(idx) - closeList.get(idx - 1)) / closeList.get(idx - 1);
+            if (margin > 0) {
+                jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
+                jLabelClose.setText(String.format("收盘：%s  上涨：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
+            } else {
+                jLabelClose.setForeground(new java.awt.Color(0, 150, 0));
+                jLabelClose.setText(String.format("收盘：%s  下跌：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
+            }
         } else {
-            jLabelClose.setForeground(new java.awt.Color(0, 150, 0));
-            jLabelClose.setText(String.format("收盘：%s  下跌：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
+            jLabelDate2.setText("日期：" + dateList2.get(idx));
+            double margin = closeList2.get(idx) - closeList2.get(idx - 1);
+            double ratio = 100 * (closeList2.get(idx) - closeList2.get(idx - 1)) / closeList2.get(idx - 1);
+            if (margin > 0) {
+                jLabelClose2.setForeground(new java.awt.Color(250, 0, 0));
+                jLabelClose2.setText(String.format("收盘：%s  %.2f/%5.2f%%", closeList2.get(idx), margin, ratio));
+            } else {
+                jLabelClose2.setForeground(new java.awt.Color(0, 150, 0));
+                jLabelClose2.setText(String.format("收盘：%s  %.2f/%5.2f%%", closeList2.get(idx), margin, ratio));
+            }
         }
     }
 
@@ -2125,6 +2149,7 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<Double> highList;
     public ArrayList<Double> lowList;
     public ArrayList<Double> closeList;
+    public ArrayList<Double> closeList2;
     public ArrayList<Double> priceList;
     public ArrayList<Double> priceList2;
     public ArrayList<Double> fundList;
@@ -2169,11 +2194,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxLMStatus;
     private javax.swing.JComboBox<String> jComboBoxPriceFactor;
     private javax.swing.JLabel jLabelClose;
+    private javax.swing.JLabel jLabelClose2;
     private javax.swing.JLabel jLabelDash1;
     private javax.swing.JLabel jLabelDash2;
     private javax.swing.JLabel jLabelDash3;
     private javax.swing.JLabel jLabelDash4;
     private javax.swing.JLabel jLabelDate;
+    private javax.swing.JLabel jLabelDate2;
     private javax.swing.JLabel jLabelLMDays;
     private javax.swing.JLabel jLabelLMStatus;
     private javax.swing.JLabel jLabelMAL;
