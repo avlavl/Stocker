@@ -176,7 +176,7 @@
             <StringItem index="16" value="30000"/>
           </StringArray>
         </Property>
-        <Property name="selectedIndex" type="int" value="11"/>
+        <Property name="selectedIndex" type="int" value="13"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxScaleActionPerformed"/>

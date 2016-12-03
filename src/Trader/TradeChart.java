@@ -34,6 +34,8 @@ public class TradeChart extends javax.swing.JDialog {
 
         mainView = mv;
         pList = (mv.gradeFlag == 0) ? mv.priceList : mv.priceList2;
+        String stockName = (mv.gradeFlag == 0) ? mv.stockName : mv.stockName2;
+        ArrayList<String> dateList = (mv.gradeFlag == 0) ? mv.dateList : mv.dateList2;
         fundList = mainView.fundList;
         units = pList.size();
 
@@ -53,7 +55,7 @@ public class TradeChart extends javax.swing.JDialog {
                 }
 
                 g.setColor(Color.LIGHT_GRAY);
-                g.drawString(mainView.stockName, 0, 15);
+                g.drawString(stockName, 0, 15);
 
                 g.setColor(Color.MAGENTA);
                 g.drawString(String.format("开始:"), 100, 15);
@@ -129,7 +131,7 @@ public class TradeChart extends javax.swing.JDialog {
                 g.setColor(Color.YELLOW);
                 for (int i = 0; i < 10; i++) {
                     if (offset + i * 100 < units) {
-                        g.drawString(mainView.dateList.get(offset + i * 100), i * 100, yplots);
+                        g.drawString(dateList.get(offset + i * 100), i * 100, yplots);
                     }
                 }
                 g.setColor(new Color(250, 20, 5));
@@ -240,7 +242,7 @@ public class TradeChart extends javax.swing.JDialog {
 
         jComboBoxScale.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jComboBoxScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "250", "500", "1000", "2000", "3000", "4000", "5000", "6000", "8000", "10000", "15000", "20000", "30000" }));
-        jComboBoxScale.setSelectedIndex(11);
+        jComboBoxScale.setSelectedIndex(13);
         jComboBoxScale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxScaleActionPerformed(evt);
@@ -310,7 +312,7 @@ public class TradeChart extends javax.swing.JDialog {
     public javax.swing.JPanel jPanel_xyChart;
     public int xplots = 0;
     public int yplots = 0;
-    public double scalar = 12;
+    public double scalar = 20;
     private final double[] scalar_buf = {0.02, 0.04, 0.1, 0.2, 0.5, 1, 2, 4, 6, 8, 10, 12, 16, 20, 30, 40, 60};
 
     protected MainView mainView;

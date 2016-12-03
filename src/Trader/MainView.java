@@ -1314,11 +1314,12 @@ public class MainView extends javax.swing.JFrame {
             File file = new File(fileIn2);
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
             BufferedReader br = new BufferedReader(isr);
-            br.readLine();
             String[] words = br.readLine().split("\t");
+            stockName2 = words[1];
             dateList2 = new ArrayList<>();
             closeList2 = new ArrayList<>();
             priceList2 = new ArrayList<>();
+            br.readLine();
             String line;
             while ((line = br.readLine()) != null) {
                 words = line.split("\t");
@@ -2144,6 +2145,7 @@ public class MainView extends javax.swing.JFrame {
     public FileWriter fileWriter;
 
     public String stockName = "上证指数";
+    public String stockName2 = "淘金100";
     public String stockCode = "000001";
     public int rows = 0;
     public int rows2 = 0;
