@@ -183,7 +183,11 @@ public class CheckTable extends javax.swing.JDialog {
 
     public void outputStockInfo() {
         int idx = mainView.rows - 1;
-        jLabelName.setText(mainView.stockName + "(" + mainView.stockCode + ")");
+        if (mainView.gradeFlag == 0) {
+            jLabelName.setText(mainView.stockName + "(" + mainView.stockCode + ")");
+        } else {
+            jLabelName.setText(mainView.stockName + " [" + mainView.stockName2 + "]");
+        }
         jLabelDate.setText("日期：" + mainView.dateList.get(idx));
         jLabelClose.setText("收盘：" + String.format("%s", mainView.closeList.get(idx)));
         double margin = mainView.closeList.get(idx) - mainView.closeList.get(idx - 1);
