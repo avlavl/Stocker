@@ -173,12 +173,13 @@ public class Handle {
     }
 
     public double getPositionDaysRate() {
+        int tradeDays = eIdx - sIdx + 1;
         int days = 0;
         for (int i = 0; i < bpIdxList.size(); i++) {
             days += spIdxList.get(i) - bpIdxList.get(i);
         }
 
-        double rate = (double) 100 * days / mainView.tradeDays;
+        double rate = (double) 100 * days / tradeDays;
         return rate;
     }
 
