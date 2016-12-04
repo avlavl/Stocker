@@ -1052,9 +1052,13 @@ public class MainView extends javax.swing.JFrame {
         chkDataList = new ArrayList<>();
 
         try {
-            File file = new File("ini/" + stockName + ".ini");
+            String fileName = stockName + ".ini";
+            if (gradeFlag == 1) {
+                fileName = stockName + "-" + stockName2 + ".ini";
+            }
+            File file = new File("ini/" + fileName);
             if (!file.exists()) {
-                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + stockName + ".ini\"文件！");
+                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + fileName + "\"文件！");
                 return;
             }
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
@@ -1114,9 +1118,13 @@ public class MainView extends javax.swing.JFrame {
         chkDataList = new ArrayList<>();
 
         try {
-            File file = new File("ini/" + stockName + ".ini");
+            String fileName = stockName + ".ini";
+            if (gradeFlag == 1) {
+                fileName = stockName + "-" + stockName2 + ".ini";
+            }
+            File file = new File("ini/" + fileName);
             if (!file.exists()) {
-                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + stockName + ".ini\"文件！");
+                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + fileName + "\"文件！");
                 return;
             }
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
