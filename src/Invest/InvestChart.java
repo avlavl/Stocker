@@ -16,12 +16,12 @@ import javax.swing.ImageIcon;
  *
  * @author zhangxr
  */
-public class TradeChart extends javax.swing.JDialog {
+public class InvestChart extends javax.swing.JDialog {
 
     /**
      * Creates new form PriceChart
      */
-    public TradeChart(java.awt.Frame parent, boolean modal, MainView mv) {
+    public InvestChart(java.awt.Frame parent, boolean modal, MainView mv) {
         super(parent, modal);
         initComponents();
 
@@ -34,15 +34,15 @@ public class TradeChart extends javax.swing.JDialog {
 
         mainView = mv;
         pList = mainView.priceList;
-        fundList = mainView.fundList;
-        units = pList.size();
+        strategy = mainView.strategy;
+        items = pList.size();
 
         jPanel_xyChart = new javax.swing.JPanel() {
 
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                int counts = (units > xplots) ? xplots : units;
+                int counts = (items > xplots) ? xplots : items;
 
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, xplots, yplots);
@@ -73,49 +73,36 @@ public class TradeChart extends javax.swing.JDialog {
                 g.drawString(String.format("%4.2f", li), 580, 15);
                 g.drawString(String.format("%4.2f%%", ri), 730, 15);
 
-                if (mainView.evaluated) {
-                    g.setColor(Color.GREEN);
-                    for (int i = 0; i < mainView.bpIndexList.size(); i++) {
-                        if ((offset >= mainView.bpIndexList.get(i)) && (offset < mainView.spIndexList.get(i))) {
-                            g.setColor(Color.RED);
-                            break;
-                        }
-                    }
-                }
-                for (int i = 0; i < counts - 1; i++) {
+                for (int i = 1; i < counts - 1; i++) {
                     if (mainView.evaluated) {
-                        if (mainView.bpIndexList.contains(offset + i)) {
+                        if (strategy.weights[offset + i] > 0) {
                             g.setColor(Color.RED);
-                        }
-                        if (mainView.spIndexList.contains(offset + i)) {
+                        } else if (strategy.weights[offset + i] < 0) {
                             g.setColor(Color.GREEN);
+                        } else if ((g.getColor() == Color.GREEN) || (g.getColor() == Color.BLUE)) {
+                            g.setColor(Color.BLUE);
+                        } else {
+                            g.setColor(Color.WHITE);
                         }
                     }
-                    int ystart = yplots - (int) Math.round(pList.get(offset + i) / scalar);
-                    int yend = yplots - (int) Math.round(pList.get(offset + i + 1) / scalar);
+                    int ystart = yplots - (int) Math.round(pList.get(offset + i - 1) / scalar);
+                    int yend = yplots - (int) Math.round(pList.get(offset + i) / scalar);
                     if (ystart >= yplots - 2) {
                         ystart = yplots - 2;
                     }
                     if (yend >= yplots - 2) {
                         yend = yplots - 2;
                     }
-                    g.drawLine(i, ystart, i + 1, yend);
+                    g.drawLine(i - 1, ystart, i, yend);
+                    if (g.getColor() == Color.GREEN) {
+                        g.drawLine(i - 4, yend, i, yend);
+                    }
                 }
                 if (mainView.evaluated) {
-                    double sf = fundList.get(offset);
-                    double ef = fundList.get(offset + counts - 1);
-                    double hf = Collections.max(fundList.subList(offset, offset + counts));
-                    double lf = Collections.min(fundList.subList(offset, offset + counts));
-                    double rf = (ef / sf - 1) * 100;
-                    g.setColor(new Color(255, 255, 150));
-                    g.drawString(String.format("%4.2f", sf), 180, 15);
-                    g.drawString(String.format("%4.2f", ef), 330, 15);
-                    g.drawString(String.format("%4.2f", hf), 480, 15);
-                    g.drawString(String.format("%4.2f", lf), 630, 15);
-                    g.drawString(String.format("%4.2f%%", rf), 780, 15);
-                    for (int i = 0; i < counts - 1; i++) {
-                        int ystart = yplots - (int) Math.round(fundList.get(offset + i) / scalar);
-                        int yend = yplots - (int) Math.round(fundList.get(offset + i + 1) / scalar);
+                    g.setColor(Color.YELLOW);
+                    for (int i = 1; i < counts - 1; i++) {
+                        int ystart = yplots - (int) Math.round(strategy.basePoints[offset + i - 1] / scalar);
+                        int yend = yplots - (int) Math.round(strategy.basePoints[offset + i] / scalar);
                         if (ystart >= yplots - 2) {
                             ystart = yplots - 2;
                         }
@@ -128,7 +115,7 @@ public class TradeChart extends javax.swing.JDialog {
 
                 g.setColor(Color.YELLOW);
                 for (int i = 0; i < 10; i++) {
-                    if (offset + i * 100 < units) {
+                    if (offset + i * 100 < items) {
                         g.drawString(mainView.dateList.get(offset + i * 100), i * 100, yplots);
                     }
                 }
@@ -141,8 +128,8 @@ public class TradeChart extends javax.swing.JDialog {
 
         xplots = jPanel_xyCan.getWidth() - 4;
         yplots = jPanel_xyCan.getHeight() - 4;
-        if (units > xplots) {
-            offset = units - xplots;
+        if (items > xplots) {
+            offset = items - xplots;
         }
         jPanel_xyChart.setBounds(2, 2, xplots, yplots);
         jPanel_xyCan.add(jPanel_xyChart);
@@ -171,7 +158,6 @@ public class TradeChart extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("交易曲线");
         setMinimumSize(new java.awt.Dimension(1024, 570));
-        setPreferredSize(new java.awt.Dimension(1030, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(1024, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -256,11 +242,11 @@ public class TradeChart extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel_xyCanMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel_xyCanMouseWheelMoved
-        if (units > xplots) {
+        if (items > xplots) {
             if (evt.getWheelRotation() > 0) {
                 offset += step;
-                if (offset > units - xplots) {
-                    offset = units - xplots;
+                if (offset > items - xplots) {
+                    offset = items - xplots;
                 }
             } else {
                 offset -= step;
@@ -315,8 +301,8 @@ public class TradeChart extends javax.swing.JDialog {
 
     protected MainView mainView;
     public ArrayList<Double> pList = new ArrayList<>();
-    public ArrayList<Double> fundList = new ArrayList<>();
-    private int units = 0;
+    public Strategy strategy;
+    private int items = 0;
     private int offset = 0;
     private int step = 63;
 }

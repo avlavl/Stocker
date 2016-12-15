@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class InvestTable extends javax.swing.JDialog {
 
     /**
-     * Creates new form tradeTable
+     * Creates new form InvestTable
      *
      * @param parent
      * @param modal

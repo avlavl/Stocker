@@ -30,64 +30,67 @@ public class Strategy {
         double totalNumber = 0;
         double input = 0;
         double number = 0;
+        double weight = 0;
+        weights = new double[items];
+        basePoints = new double[items];
 
-        for (int i = 0; i < items; i++) {
-            if ((i >= sIndex) && (i <= eIndex)) {
-                if (totalInput > 0) {
+        for (int i = sIndex; i <= eIndex; i++) {
+            weight = 0;
+            if (totalInput > 0) {
+                totalPrice = totalNumber * pList.get(i);
+                profit = totalPrice - totalInput;
+                profitRatio = profit / totalInput;
+                profitList.add(profit);
+                profitRatioList.add(profitRatio);
+                if (profitRatio >= (double) winLevel / 100) {
+                    weight -= totalPrice;
                     RecordData recordData = new RecordData(dList.get(i), "赎回");
-                    totalPrice = totalNumber * pList.get(i);
-                    profit = totalPrice - totalInput;
-                    profitRatio = profit / totalInput;
-                    profitList.add(profit);
-                    profitRatioList.add(profitRatio);
-                    if (profitRatio >= (double) winLevel / 100) {
-                        bsDateList.add(dList.get(i));
-                        roundDateLists.add(bsDateList);
-                        bsDateList = new ArrayList<>();
-                        totalInputList.add(totalInput);
-                        totalPriceList.add(totalPrice);
-                        yieldList.add(profitRatio);
-                        addInvest += totalInput;
-                        addOutput += totalPrice;
-                        recordData.price = pList.get(i);
-                        recordData.number = totalNumber;
-                        recordData.cost = totalInput / totalNumber;
-                        recordData.totalInput = totalInput;
-                        recordData.profit = profit;
-                        recordData.profitRatio = profitRatio * 100;
-                        recordDataList.add(recordData);
-                        totalInput = 0;
-                        totalPrice = 0;
-                        totalNumber = 0;
-                        profit = 0;
-                        profitRatio = 0;
-                    }
-                }
-
-                baseLine = startPoint + i * ((double) slope / 100);
-                diffRate = pList.get(i) / baseLine;
-                diffRateList.add(diffRate);
-                if (pList.get(i) < baseLine) {
-                    RecordData recordData = new RecordData(dList.get(i), "投入");
-                    input = (baseLine / 10) / Math.pow(diffRate, diffCoef);
-                    number = input / pList.get(i);
-                    totalInput += input;
-                    totalNumber += number;
                     bsDateList.add(dList.get(i));
+                    roundDateLists.add(bsDateList);
+                    bsDateList = new ArrayList<>();
+                    totalInputList.add(totalInput);
+                    totalPriceList.add(totalPrice);
+                    yieldList.add(profitRatio);
+                    addInvest += totalInput;
+                    addOutput += totalPrice;
                     recordData.price = pList.get(i);
-                    recordData.diff = diffRate;
-                    recordData.input = input;
-                    recordData.number = number;
+                    recordData.number = totalNumber;
                     recordData.cost = totalInput / totalNumber;
                     recordData.totalInput = totalInput;
                     recordData.profit = profit;
                     recordData.profitRatio = profitRatio * 100;
                     recordDataList.add(recordData);
+                    totalInput = 0;
+                    totalPrice = 0;
+                    totalNumber = 0;
+                    profit = 0;
+                    profitRatio = 0;
                 }
             }
-            if (i > eIndex) {
-                break;
+
+            basePoint = startPoint + i * ((double) slope / 100);
+            basePoints[i] = basePoint;
+            diffRate = pList.get(i) / basePoint;
+            diffRateList.add(diffRate);
+            if (pList.get(i) < basePoint) {
+                RecordData recordData = new RecordData(dList.get(i), "投入");
+                input = (basePoint / 10) / Math.pow(diffRate, diffCoef);
+                number = input / pList.get(i);
+                weight += input;
+                totalInput += input;
+                totalNumber += number;
+                bsDateList.add(dList.get(i));
+                recordData.price = pList.get(i);
+                recordData.diff = diffRate;
+                recordData.input = input;
+                recordData.number = number;
+                recordData.cost = totalInput / totalNumber;
+                recordData.totalInput = totalInput;
+                recordData.profit = profit;
+                recordData.profitRatio = profitRatio * 100;
+                recordDataList.add(recordData);
             }
+            weights[i] = weight;
         }
         return true;
     }
@@ -123,11 +126,12 @@ public class Strategy {
                     }
                 }
 
-                baseLine = startPoint + i * ((double) slope / 100);
-                diffRate = pList.get(i) / baseLine;
+                basePoint = startPoint + i * ((double) slope / 100);
+                basePoints[i] = basePoint;
+                diffRate = pList.get(i) / basePoint;
                 diffRateList.add(diffRate);
-                if (pList.get(i) < baseLine) {
-                    input = (baseLine / 10) / Math.pow(diffRate, diffCoef);
+                if (pList.get(i) < basePoint) {
+                    input = (basePoint / 10) / Math.pow(diffRate, diffCoef);
                     number = input / pList.get(i);
                     totalInput += input;
                     totalNumber += number;
@@ -307,11 +311,13 @@ public class Strategy {
     public double slope;
     public double winLevel;
     public double dispersion;
-    public double baseLine;
+    public double basePoint;
+    public double[] basePoints;
 
     public int items;
     public int sIndex = -1;
     public int eIndex = 0;
+    public double[] weights;
 
     private double addInvest = 0;
     private double addOutput = 0;

@@ -620,7 +620,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
     private void jButtonInvestChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestChartActionPerformed
-        TradeChart tc = new TradeChart(this, false, this);
+        InvestChart tc = new InvestChart(this, false, this);
     }//GEN-LAST:event_jButtonInvestChartActionPerformed
 
     private void jButtonInvestRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestRecordActionPerformed
@@ -736,11 +736,7 @@ public class MainView extends javax.swing.JFrame {
             String para = words[1];
             switch (mode) {
                 case "MA":
-                    sysMAChk(para);
-                    break;
-                case "BAR":
-                case "DIF":
-                    //sysMACDChk(mode, para);
+                    //sysMAChk(para);
                     break;
                 default:
                     break;
@@ -878,38 +874,6 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldEDate.setText(dateList.get(rows - 1));
         updateMarket(rows - 1);
         evaluated = false;
-    }
-
-    private void sysMAChk(String para) {
-        String[] paras = para.split(" ");
-        String para0 = paras[0];
-        String[] ps = para0.split(",");
-        int mas = Integer.parseInt(ps[0]);
-        int mal = Integer.parseInt(ps[1]);
-        CheckData chkData = new CheckData("MA", para0);
-        chkData.amount = paras[1];
-
-//        MALine ma = new MALine(priceList);
-//        strategy = new Strategy(this);
-//        strategy.ma = ma;
-//        ArrayList<Double> masList = ma.getMAList(mas);
-//        ArrayList<Double> malList = ma.getMAList(mal);
-        for (int i = 0; i < rows; i++) {
-            //strategy.maCrossTrade(i, masList, malList);
-        }
-//        bpIndexList = strategy.bpIdxList;
-//        spIndexList = strategy.spIdxList;
-//        if (bpIndexList.size() > spIndexList.size()) {
-//            chkData.status = "持有";
-//            chkData.days = daysBetween(bpIndexList.get(bpIndexList.size() - 1), rows - 1);
-//        } else {
-//            chkData.status = "清空";
-//            chkData.days = daysBetween(spIndexList.get(spIndexList.size() - 1), rows - 1);
-//        }
-//
-//        //chkData.key = ma.getMAKey(mas, mal);
-//        chkData.percent = 100 * (chkData.key - priceList.get(rows - 1)) / priceList.get(rows - 1);
-//        chkDataList.add(chkData);
     }
 
     public void investParaEva(String para) {
@@ -1129,9 +1093,6 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<Double> openList;
     public ArrayList<Double> closeList;
     public ArrayList<Double> priceList;
-    public ArrayList<Double> fundList;
-    public ArrayList<Integer> bpIndexList;
-    public ArrayList<Integer> spIndexList;
     public int sIdx = -1;
     public int eIdx = 0;
     public int investDays = 0;
