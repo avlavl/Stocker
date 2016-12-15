@@ -1101,7 +1101,6 @@ public class MainView extends javax.swing.JFrame {
     public Strategy strategy;
     public boolean evaluated = false;
     public RankTable rankTable;
-    public String tradeMode;
     public String investPara;
     public ArrayList<CheckData> chkDataList;
 

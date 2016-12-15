@@ -26,7 +26,7 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JScrollPane" name="jScrollPaneTrade">
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneInvest">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -46,9 +46,9 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTableTrade">
+        <Component class="javax.swing.JTable" name="jTableInvest">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="jTableTrade.getTableHeader().setFont(new java.awt.Font(&quot;&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;&quot;, 0, 12));">
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="jTableInvest.getTableHeader().setFont(new java.awt.Font(&quot;&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;&quot;, 0, 12));">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder/>
               </Border>
@@ -130,7 +130,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();&#xa;tcr.setHorizontalAlignment(JLabel.CENTER);&#xa;jTableTrade.setDefaultRenderer(Object.class, tcr);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();&#xa;tcr.setHorizontalAlignment(JLabel.CENTER);&#xa;jTableInvest.setDefaultRenderer(Object.class, tcr);"/>
           </AuxValues>
         </Component>
       </SubComponents>

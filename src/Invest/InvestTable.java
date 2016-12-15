@@ -42,8 +42,8 @@ public class InvestTable extends javax.swing.JDialog {
             tableContent[i][8] = String.format("%.2f", strategy.recordDataList.get(i).profit);
             tableContent[i][9] = String.format("%.3f%%", strategy.recordDataList.get(i).profitRatio);
         }
-        jTableTrade.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
-        jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
+        jTableInvest.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
+        jTableInvest.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
                     "投资日期", "类型", "价格", "离差", "投资额", "数量", "成本价", "总投入", "总利润", "利润率"
@@ -57,22 +57,22 @@ public class InvestTable extends javax.swing.JDialog {
                 return canEdit[columnIndex];
             }
         });
-        jTableTrade.setRowHeight(20);
-        jScrollPaneTrade.setViewportView(jTableTrade);
-        if (jTableTrade.getColumnModel().getColumnCount() > 0) {
-            jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTableTrade.getColumnModel().getColumn(1).setPreferredWidth(42);
-            jTableTrade.getColumnModel().getColumn(2).setPreferredWidth(60);
-            jTableTrade.getColumnModel().getColumn(3).setPreferredWidth(60);
-            jTableTrade.getColumnModel().getColumn(4).setPreferredWidth(60);
-            jTableTrade.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTableInvest.setRowHeight(20);
+        jScrollPaneInvest.setViewportView(jTableInvest);
+        if (jTableInvest.getColumnModel().getColumnCount() > 0) {
+            jTableInvest.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jTableInvest.getColumnModel().getColumn(1).setPreferredWidth(42);
+            jTableInvest.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jTableInvest.getColumnModel().getColumn(3).setPreferredWidth(60);
+            jTableInvest.getColumnModel().getColumn(4).setPreferredWidth(60);
+            jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        setTableRowColor(jTableTrade, new Color(20, 20, 20), new Color(220, 0, 0));
+        setTableRowColor(jTableInvest, new Color(20, 20, 20), new Color(220, 0, 0));
 
         setPreferredSize(new java.awt.Dimension(635, 40 * (times < 10 ? times : 10) + 90));
-        jScrollPaneTrade.setPreferredSize(new java.awt.Dimension(522, 40 * (times < 10 ? times : 10) + 31));
-        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, -1));
+        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(522, 40 * (times < 10 ? times : 10) + 31));
+        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, -1));
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
@@ -111,23 +111,23 @@ public class InvestTable extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPaneTrade = new javax.swing.JScrollPane();
-        jTableTrade = new javax.swing.JTable();
+        jScrollPaneInvest = new javax.swing.JScrollPane();
+        jTableInvest = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("交易记录");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPaneTrade.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        jScrollPaneTrade.setPreferredSize(new java.awt.Dimension(452, 20));
+        jScrollPaneInvest.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(452, 20));
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(JLabel.CENTER);
-        jTableTrade.setDefaultRenderer(Object.class, tcr);
-        jTableTrade.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTableTrade.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jTableTrade.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTableTrade.setModel(new javax.swing.table.DefaultTableModel(
+        jTableInvest.setDefaultRenderer(Object.class, tcr);
+        jTableInvest.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableInvest.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
+        jTableInvest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTableInvest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null}
             },
@@ -143,25 +143,25 @@ public class InvestTable extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTableTrade.setRowHeight(20);
-        jScrollPaneTrade.setViewportView(jTableTrade);
-        if (jTableTrade.getColumnModel().getColumnCount() > 0) {
-            jTableTrade.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTableTrade.getColumnModel().getColumn(1).setPreferredWidth(42);
-            jTableTrade.getColumnModel().getColumn(2).setPreferredWidth(60);
-            jTableTrade.getColumnModel().getColumn(3).setPreferredWidth(60);
-            jTableTrade.getColumnModel().getColumn(4).setPreferredWidth(60);
-            jTableTrade.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTableInvest.setRowHeight(20);
+        jScrollPaneInvest.setViewportView(jTableInvest);
+        if (jTableInvest.getColumnModel().getColumnCount() > 0) {
+            jTableInvest.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jTableInvest.getColumnModel().getColumn(1).setPreferredWidth(42);
+            jTableInvest.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jTableInvest.getColumnModel().getColumn(3).setPreferredWidth(60);
+            jTableInvest.getColumnModel().getColumn(4).setPreferredWidth(60);
+            jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        getContentPane().add(jScrollPaneTrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, 50));
+        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPaneTrade;
-    private javax.swing.JTable jTableTrade;
+    private javax.swing.JScrollPane jScrollPaneInvest;
+    private javax.swing.JTable jTableInvest;
     // End of variables declaration//GEN-END:variables
 
     private Strategy strategy;
