@@ -153,11 +153,12 @@ public class InvestChart extends javax.swing.JDialog {
         jRadioButtonQuar = new javax.swing.JRadioButton();
         jRadioButtonYear = new javax.swing.JRadioButton();
         jComboBoxScale = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelScale = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("交易曲线");
+        setTitle("投资曲线");
         setMinimumSize(new java.awt.Dimension(1024, 570));
+        setPreferredSize(new java.awt.Dimension(1030, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(1024, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -226,7 +227,7 @@ public class InvestChart extends javax.swing.JDialog {
 
         jComboBoxScale.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jComboBoxScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "250", "500", "1000", "2000", "3000", "4000", "5000", "6000", "8000", "10000", "15000", "20000", "30000" }));
-        jComboBoxScale.setSelectedIndex(11);
+        jComboBoxScale.setSelectedIndex(13);
         jComboBoxScale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxScaleActionPerformed(evt);
@@ -234,9 +235,9 @@ public class InvestChart extends javax.swing.JDialog {
         });
         getContentPane().add(jComboBoxScale, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 540, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabel1.setText("范围：");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, -1, -1));
+        jLabelScale.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelScale.setText("范围：");
+        getContentPane().add(jLabelScale, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -285,7 +286,7 @@ public class InvestChart extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jComboBoxScale;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelScale;
     private javax.swing.JPanel jPanel_xyCan;
     private javax.swing.JRadioButton jRadioButtonDay;
     private javax.swing.JRadioButton jRadioButtonMonth;
@@ -296,7 +297,7 @@ public class InvestChart extends javax.swing.JDialog {
     public javax.swing.JPanel jPanel_xyChart;
     public int xplots = 0;
     public int yplots = 0;
-    public double scalar = 12;
+    public double scalar = 20;
     private final double[] scalar_buf = {0.02, 0.04, 0.1, 0.2, 0.5, 1, 2, 4, 6, 8, 10, 12, 16, 20, 30, 40, 60};
 
     protected MainView mainView;
