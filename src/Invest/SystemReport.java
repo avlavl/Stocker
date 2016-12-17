@@ -29,7 +29,7 @@ public class SystemReport {
     public int investCounts;
     public float investTimeRatio;
     public float maxRoundTime;
-    public float maxInvestCount;
+    public int maxInvestCount;
     public float meanInvestCount;
     public float meanDailyRate;
     public float meanPositionDays;

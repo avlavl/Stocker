@@ -921,7 +921,7 @@ public class MainView extends javax.swing.JFrame {
         sr.investCounts = stg.getInvestCounts();
         sr.investTimeRatio = (float) stg.getInvestTimeRatio();
         sr.maxRoundTime = (float) stg.getMaxRoundTime();
-        sr.maxInvestCount = (float) stg.getMaxInvestCount();
+        sr.maxInvestCount = stg.getMaxInvestCount();
         sr.meanInvestCount = (float) stg.getMeanInvestCount();
 
         sr.meanDailyRate = (float) stg.getMeanDailyRate();

@@ -65,14 +65,14 @@ public class InvestTable extends javax.swing.JDialog {
             jTableInvest.getColumnModel().getColumn(2).setPreferredWidth(60);
             jTableInvest.getColumnModel().getColumn(3).setPreferredWidth(60);
             jTableInvest.getColumnModel().getColumn(4).setPreferredWidth(60);
-            jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(50);
+            jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(60);
         }
 
         setTableRowColor(jTableInvest, new Color(0, 128, 0), new Color(220, 0, 0));
 
-        setPreferredSize(new java.awt.Dimension(635, 40 * (times < 10 ? times : 10) + 90));
-        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(522, 40 * (times < 10 ? times : 10) + 31));
-        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, -1));
+        setPreferredSize(new java.awt.Dimension(715, 40 * (times < 10 ? times : 10) + 90));
+        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(620, 40 * (times < 10 ? times : 10) + 31));
+        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, -1));
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
@@ -151,10 +151,10 @@ public class InvestTable extends javax.swing.JDialog {
             jTableInvest.getColumnModel().getColumn(2).setPreferredWidth(60);
             jTableInvest.getColumnModel().getColumn(3).setPreferredWidth(60);
             jTableInvest.getColumnModel().getColumn(4).setPreferredWidth(60);
-            jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(50);
+            jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(60);
         }
 
-        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, 50));
+        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
