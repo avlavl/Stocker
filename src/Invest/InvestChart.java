@@ -105,6 +105,9 @@ public class InvestChart extends javax.swing.JDialog {
 
                 /* Mouse click content */
                 if ((mainView.evaluated) && (mouseFlag)) {
+                    if (coordx > items - 1) {
+                        coordx = items - 1;
+                    }
                     g.setColor(Color.WHITE);
                     g.drawLine(0, coordy, xplots, coordy);
                     g.drawLine(coordx, 0, coordx, yplots);

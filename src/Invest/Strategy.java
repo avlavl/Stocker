@@ -104,7 +104,8 @@ public class Strategy {
             }
             weights[i] = weight;
         }
-        return true;
+
+        return (getInvestRounds() > 0) ? true : false;
     }
 
     public boolean sysSimpleInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
@@ -148,7 +149,8 @@ public class Strategy {
                 bsDateList.add(dList.get(i));
             }
         }
-        return true;
+
+        return (getInvestRounds() > 0) ? true : false;
     }
 
     public int getInvestRounds() {
