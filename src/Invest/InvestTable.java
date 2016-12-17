@@ -68,7 +68,7 @@ public class InvestTable extends javax.swing.JDialog {
             jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        setTableRowColor(jTableInvest, new Color(20, 20, 20), new Color(220, 0, 0));
+        setTableRowColor(jTableInvest, new Color(0, 128, 0), new Color(220, 0, 0));
 
         setPreferredSize(new java.awt.Dimension(635, 40 * (times < 10 ? times : 10) + 90));
         jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(522, 40 * (times < 10 ? times : 10) + 31));
@@ -89,7 +89,7 @@ public class InvestTable extends javax.swing.JDialog {
                     } else if (status.equals("赎回")) {
                         setForeground(color2);
                     } else {
-                        setForeground(Color.BLACK);
+                        setForeground(new Color(0, 0, 220));
                     }
                     return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 }

@@ -76,13 +76,13 @@ public class InvestChart extends javax.swing.JDialog {
                 for (int i = 1; i < counts - 1; i++) {
                     if (mainView.evaluated) {
                         if (strategy.weights[offset + i] > 0) {
-                            g.setColor(Color.RED);
-                        } else if (strategy.weights[offset + i] < 0) {
                             g.setColor(Color.GREEN);
-                        } else if ((g.getColor() == Color.GREEN) || (g.getColor() == Color.BLUE)) {
-                            g.setColor(Color.BLUE);
+                        } else if (strategy.weights[offset + i] < 0) {
+                            g.setColor(Color.RED);
+                        } else if ((g.getColor() == Color.RED) || (g.getColor() == Color.GRAY)) {
+                            g.setColor(Color.GRAY);
                         } else {
-                            g.setColor(Color.WHITE);
+                            g.setColor(Color.BLUE);
                         }
                     }
                     int ystart = yplots - (int) Math.round(pList.get(offset + i - 1) / scalar);
@@ -94,7 +94,7 @@ public class InvestChart extends javax.swing.JDialog {
                         yend = yplots - 2;
                     }
                     g.drawLine(i - 1, ystart, i, yend);
-                    if (g.getColor() == Color.GREEN) {
+                    if (g.getColor() == Color.RED) {
                         g.drawLine(i - 4, yend, i, yend);
                     }
                 }

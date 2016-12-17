@@ -127,7 +127,6 @@ public class Strategy {
                 }
 
                 basePoint = startPoint + i * ((double) slope / 100);
-                basePoints[i] = basePoint;
                 diffRate = pList.get(i) / basePoint;
                 diffRateList.add(diffRate);
                 if (pList.get(i) < basePoint) {
