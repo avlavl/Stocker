@@ -125,12 +125,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemImport = new javax.swing.JMenuItem();
         jMenuIndex = new javax.swing.JMenu();
         jMenuItemSZZS = new javax.swing.JMenuItem();
-        jMenuItemCYBZ = new javax.swing.JMenuItem();
-        jMenuItemHS300 = new javax.swing.JMenuItem();
-        jMenuItemZZ500 = new javax.swing.JMenuItem();
         jMenuItemSZCZ = new javax.swing.JMenuItem();
-        jMenuItemSZ50 = new javax.swing.JMenuItem();
-        jMenuItemZXBZ = new javax.swing.JMenuItem();
+        jMenuItemSWZQ = new javax.swing.JMenuItem();
+        jMenuItemZZJG = new javax.swing.JMenuItem();
+        jMenuItemZZHB = new javax.swing.JMenuItem();
+        jMenuItemGZYY = new javax.swing.JMenuItem();
         jMenuItemYLCY = new javax.swing.JMenuItem();
         jMenuRun = new javax.swing.JMenu();
         jMenuItemDZH = new javax.swing.JMenuItem();
@@ -452,35 +451,8 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemSZZS);
 
-        jMenuItemCYBZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemCYBZ.setText("创业板指");
-        jMenuItemCYBZ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCYBZActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemCYBZ);
-
-        jMenuItemHS300.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemHS300.setText("沪深300");
-        jMenuItemHS300.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemHS300ActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemHS300);
-
-        jMenuItemZZ500.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemZZ500.setText("中证500");
-        jMenuItemZZ500.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemZZ500ActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemZZ500);
-
-        jMenuItemSZCZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemSZCZ.setText("深证成指");
+        jMenuItemSZCZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSZCZ.setText("深圳成指");
         jMenuItemSZCZ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemSZCZActionPerformed(evt);
@@ -488,25 +460,43 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemSZCZ);
 
-        jMenuItemSZ50.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemSZ50.setText("上证50");
-        jMenuItemSZ50.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSWZQ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSWZQ.setText("申万证券");
+        jMenuItemSWZQ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemSZ50ActionPerformed(evt);
+                jMenuItemSWZQActionPerformed(evt);
             }
         });
-        jMenuIndex.add(jMenuItemSZ50);
+        jMenuIndex.add(jMenuItemSWZQ);
 
-        jMenuItemZXBZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemZXBZ.setText("中小板指");
-        jMenuItemZXBZ.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemZZJG.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemZZJG.setText("中证军工");
+        jMenuItemZZJG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemZXBZActionPerformed(evt);
+                jMenuItemZZJGActionPerformed(evt);
             }
         });
-        jMenuIndex.add(jMenuItemZXBZ);
+        jMenuIndex.add(jMenuItemZZJG);
 
-        jMenuItemYLCY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemZZHB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemZZHB.setText("中证环保");
+        jMenuItemZZHB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemZZHBActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemZZHB);
+
+        jMenuItemGZYY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemGZYY.setText("国证医药");
+        jMenuItemGZYY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGZYYActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemGZYY);
+
+        jMenuItemYLCY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemYLCY.setText("养老产业");
         jMenuItemYLCY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -561,35 +551,31 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemImportActionPerformed
 
     private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
-        importFile("data\\上证指数.txt");
+        importFile("data\\W上证指数.txt");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
 
-    private void jMenuItemCYBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCYBZActionPerformed
-        importFile("data\\创业板指.txt");
-    }//GEN-LAST:event_jMenuItemCYBZActionPerformed
-
-    private void jMenuItemHS300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHS300ActionPerformed
-        importFile("data\\沪深300.txt");
-    }//GEN-LAST:event_jMenuItemHS300ActionPerformed
-
-    private void jMenuItemZZ500ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZ500ActionPerformed
-        importFile("data\\中证500.txt");
-    }//GEN-LAST:event_jMenuItemZZ500ActionPerformed
-
     private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
-        importFile("data\\深证成指.txt");
+        importFile("data\\W深证成指.txt");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
-    private void jMenuItemSZ50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZ50ActionPerformed
-        importFile("data\\上证50.txt");
-    }//GEN-LAST:event_jMenuItemSZ50ActionPerformed
+    private void jMenuItemSWZQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSWZQActionPerformed
+        importFile("data\\W申万证券.txt");
+    }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
-    private void jMenuItemZXBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZXBZActionPerformed
-        importFile("data\\中小板指.txt");
-    }//GEN-LAST:event_jMenuItemZXBZActionPerformed
+    private void jMenuItemZZJGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZJGActionPerformed
+        importFile("data\\W中证军工.txt");
+    }//GEN-LAST:event_jMenuItemZZJGActionPerformed
+
+    private void jMenuItemZZHBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZHBActionPerformed
+        importFile("data\\W中证环保.txt");
+    }//GEN-LAST:event_jMenuItemZZHBActionPerformed
+
+    private void jMenuItemGZYYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGZYYActionPerformed
+        importFile("data\\W国证医药.txt");
+    }//GEN-LAST:event_jMenuItemGZYYActionPerformed
 
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
-        importFile("data\\养老产业.txt");
+        importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
@@ -825,6 +811,7 @@ public class MainView extends javax.swing.JFrame {
      ********************* Start of User-defined function ********************
      */
     protected void importFile(String fileName) {
+        fileIn = fileName;
         if (fileName == null) {
             JFileChooser chooser = new JFileChooser("data/");
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Data File (*.txt)", "txt");
@@ -833,13 +820,9 @@ public class MainView extends javax.swing.JFrame {
             int ret = chooser.showOpenDialog(this);
             if (ret == JFileChooser.APPROVE_OPTION) {
                 fileIn = chooser.getSelectedFile().getPath();
-                fileOut = fileIn.substring(0, fileIn.length() - 4) + "_测试日志.txt";
             } else {
                 return;
             }
-        } else {
-            fileIn = fileName;
-            fileOut = fileIn.substring(0, fileIn.length() - 4) + "_测试日志.txt";
         }
 
         try {
@@ -1081,11 +1064,10 @@ public class MainView extends javax.swing.JFrame {
         return Integer.parseInt(String.valueOf(between_days));
     }
 
-    private String fileIn = "data\\上证指数_周.txt";
-    private String fileOut = "data\\上证指数_测试日志.txt";
+    private String fileIn = "data\\W上证指数.txt";
     public FileWriter fileWriter;
 
-    public String stockName = "上证指数";
+    public String stockName = "W上证指数";
     public String stockCode = "000001";
     public int column = 0;
     public int rows = 0;
@@ -1137,19 +1119,18 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuIndex;
     private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemCYBZ;
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemDZH;
-    private javax.swing.JMenuItem jMenuItemHS300;
+    private javax.swing.JMenuItem jMenuItemGZYY;
     private javax.swing.JMenuItem jMenuItemImport;
-    private javax.swing.JMenuItem jMenuItemSZ50;
+    private javax.swing.JMenuItem jMenuItemSWZQ;
     private javax.swing.JMenuItem jMenuItemSZCZ;
     private javax.swing.JMenuItem jMenuItemSZZS;
     private javax.swing.JMenuItem jMenuItemTDX;
     private javax.swing.JMenuItem jMenuItemYLCY;
-    private javax.swing.JMenuItem jMenuItemZXBZ;
-    private javax.swing.JMenuItem jMenuItemZZ500;
+    private javax.swing.JMenuItem jMenuItemZZHB;
+    private javax.swing.JMenuItem jMenuItemZZJG;
     private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelCongfig;
     private javax.swing.JPanel jPanelMain;
