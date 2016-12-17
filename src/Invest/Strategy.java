@@ -33,6 +33,7 @@ public class Strategy {
         double weight = 0;
         weights = new double[items];
         basePoints = new double[items];
+        profitRatios = new double[items];
 
         for (int i = sIndex; i <= eIndex; i++) {
             weight = 0;
@@ -42,6 +43,7 @@ public class Strategy {
                 profitRatio = profit / totalInput;
                 profitList.add(profit);
                 profitRatioList.add(profitRatio);
+                profitRatios[i] = profitRatio;
                 if (profitRatio >= (double) winLevel / 100) {
                     weight -= totalPrice;
                     RecordData recordData = new RecordData(dList.get(i), "赎回");
@@ -332,6 +334,7 @@ public class Strategy {
     private final ArrayList<Double> yieldList = new ArrayList<>();
     private final ArrayList<Double> profitList = new ArrayList<>();
     private final ArrayList<Double> profitRatioList = new ArrayList<>();
+    public double[] profitRatios;
     private double diffRate = 0;
     private double profit = 0;
     private double profitRatio = 0;

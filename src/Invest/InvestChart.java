@@ -44,6 +44,7 @@ public class InvestChart extends javax.swing.JDialog {
                 super.paintComponent(g);
                 int counts = (items > xplots) ? xplots : items;
 
+                /* Background */
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, xplots, yplots);
                 g.setColor(new Color(0, 50, 50));
@@ -52,15 +53,15 @@ public class InvestChart extends javax.swing.JDialog {
                     g.drawLine((xplots / 10) * i, 0, (xplots / 10) * i, yplots);
                 }
 
+                /* Headline bar */
                 g.setColor(Color.LIGHT_GRAY);
                 g.drawString(mainView.stockName, 0, 15);
-
-                g.setColor(Color.MAGENTA);
+                g.setColor(Color.PINK);
                 g.drawString(String.format("开始:"), 100, 15);
-                g.drawString(String.format("结束:"), 250, 15);
-                g.drawString(String.format("最高:"), 400, 15);
-                g.drawString(String.format("最低:"), 550, 15);
-                g.drawString(String.format("涨幅:"), 700, 15);
+                g.drawString(String.format("最高:"), 200, 15);
+                g.drawString(String.format("最低:"), 300, 15);
+                g.drawString(String.format("结束:"), 400, 15);
+                g.drawString(String.format("涨幅:"), 500, 15);
                 double si = pList.get(offset);
                 double ei = pList.get(offset + counts - 1);
                 double hi = Collections.max(pList.subList(offset, offset + counts));
@@ -68,12 +69,13 @@ public class InvestChart extends javax.swing.JDialog {
                 double ri = (ei / si - 1) * 100;
                 g.setColor(Color.WHITE);
                 g.drawString(String.format("%4.2f", si), 130, 15);
-                g.drawString(String.format("%4.2f", ei), 280, 15);
-                g.drawString(String.format("%4.2f", hi), 430, 15);
-                g.drawString(String.format("%4.2f", li), 580, 15);
-                g.drawString(String.format("%4.2f%%", ri), 730, 15);
+                g.drawString(String.format("%4.2f", hi), 230, 15);
+                g.drawString(String.format("%4.2f", li), 330, 15);
+                g.drawString(String.format("%4.2f", ei), 430, 15);
+                g.drawString(String.format("%4.2f%%", ri), 530, 15);
 
-                for (int i = 1; i < counts - 1; i++) {
+                /* Main line chart */
+                for (int i = 1; i < counts; i++) {
                     if (mainView.evaluated) {
                         if (strategy.weights[offset + i] > 0) {
                             g.setColor(Color.GREEN);
@@ -87,12 +89,6 @@ public class InvestChart extends javax.swing.JDialog {
                     }
                     int ystart = yplots - (int) Math.round(pList.get(offset + i - 1) / scalar);
                     int yend = yplots - (int) Math.round(pList.get(offset + i) / scalar);
-                    if (ystart >= yplots - 2) {
-                        ystart = yplots - 2;
-                    }
-                    if (yend >= yplots - 2) {
-                        yend = yplots - 2;
-                    }
                     g.drawLine(i - 1, ystart, i, yend);
                     if (g.getColor() == Color.RED) {
                         g.drawLine(i - 4, yend, i, yend);
@@ -100,25 +96,38 @@ public class InvestChart extends javax.swing.JDialog {
                 }
                 if (mainView.evaluated) {
                     g.setColor(Color.YELLOW);
-                    for (int i = 1; i < counts - 1; i++) {
+                    for (int i = 1; i < counts; i++) {
                         int ystart = yplots - (int) Math.round(strategy.basePoints[offset + i - 1] / scalar);
                         int yend = yplots - (int) Math.round(strategy.basePoints[offset + i] / scalar);
-                        if (ystart >= yplots - 2) {
-                            ystart = yplots - 2;
-                        }
-                        if (yend >= yplots - 2) {
-                            yend = yplots - 2;
-                        }
-                        g.drawLine(i, ystart, i + 1, yend);
+                        g.drawLine(i - 1, ystart, i, yend);
                     }
                 }
 
-                g.setColor(Color.YELLOW);
+                /* Mouse click content */
+                if ((mainView.evaluated) && (mouseFlag)) {
+                    g.setColor(Color.WHITE);
+                    g.drawLine(0, coordy, xplots, coordy);
+                    g.drawLine(coordx, 0, coordx, yplots);
+                    g.setColor(Color.PINK);
+                    g.drawString(String.format("日期:"), 600, 15);
+                    g.drawString(String.format("收盘:"), 700, 15);
+                    g.drawString(String.format("赢亏:"), 800, 15);
+                    g.setColor(Color.WHITE);
+                    g.drawString(mainView.dateList.get(offset + coordx), 630, 15);
+                    g.drawString(String.format("%4.2f", mainView.priceList.get(offset + coordx)), 730, 15);
+                    double profit = strategy.profitRatios[offset + coordx];
+                    g.drawString(String.format("%4.2f%%", 100 * profit), 830, 15);
+                }
+
+                /* Bottom date */
+                g.setColor(Color.ORANGE);
                 for (int i = 0; i < 10; i++) {
                     if (offset + i * 100 < items) {
                         g.drawString(mainView.dateList.get(offset + i * 100), i * 100, yplots);
                     }
                 }
+
+                /* Left price */
                 g.setColor(new Color(250, 20, 5));
                 for (int i = 0; i < 10; i++) {
                     g.drawString(String.format("%d", (int) (scalar * 50 * (10 - i))), 0, i * 50);
@@ -126,12 +135,12 @@ public class InvestChart extends javax.swing.JDialog {
             }
         };
 
-        xplots = jPanel_xyCan.getWidth() - 4;
-        yplots = jPanel_xyCan.getHeight() - 4;
+        xplots = jPanel_xyCan.getWidth();
+        yplots = jPanel_xyCan.getHeight();
         if (items > xplots) {
             offset = items - xplots;
         }
-        jPanel_xyChart.setBounds(2, 2, xplots, yplots);
+        jPanel_xyChart.setBounds(0, 0, xplots, yplots);
         jPanel_xyCan.add(jPanel_xyChart);
         jPanel_xyChart.updateUI();
         jPanel_xyCan.updateUI();
@@ -164,10 +173,20 @@ public class InvestChart extends javax.swing.JDialog {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel_xyCan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel_xyCan.setPreferredSize(new java.awt.Dimension(1004, 504));
+        jPanel_xyCan.setPreferredSize(new java.awt.Dimension(1000, 500));
+        jPanel_xyCan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel_xyCanMouseMoved(evt);
+            }
+        });
         jPanel_xyCan.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
                 jPanel_xyCanMouseWheelMoved(evt);
+            }
+        });
+        jPanel_xyCan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel_xyCanMouseClicked(evt);
             }
         });
 
@@ -175,14 +194,14 @@ public class InvestChart extends javax.swing.JDialog {
         jPanel_xyCan.setLayout(jPanel_xyCanLayout);
         jPanel_xyCanLayout.setHorizontalGroup(
             jPanel_xyCanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 996, Short.MAX_VALUE)
         );
         jPanel_xyCanLayout.setVerticalGroup(
             jPanel_xyCanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 496, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel_xyCan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1004, 504));
+        getContentPane().add(jPanel_xyCan, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 1000, 500));
 
         buttonGroup1.add(jRadioButtonDay);
         jRadioButtonDay.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -192,7 +211,7 @@ public class InvestChart extends javax.swing.JDialog {
                 jRadioButtonDayActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButtonDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 538, -1, -1));
+        getContentPane().add(jRadioButtonDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, -1, -1));
 
         buttonGroup1.add(jRadioButtonMonth);
         jRadioButtonMonth.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -202,7 +221,7 @@ public class InvestChart extends javax.swing.JDialog {
                 jRadioButtonMonthActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButtonMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 538, -1, -1));
+        getContentPane().add(jRadioButtonMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 530, -1, -1));
 
         buttonGroup1.add(jRadioButtonQuar);
         jRadioButtonQuar.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -213,7 +232,7 @@ public class InvestChart extends javax.swing.JDialog {
                 jRadioButtonQuarActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButtonQuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 538, -1, -1));
+        getContentPane().add(jRadioButtonQuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 530, -1, -1));
 
         buttonGroup1.add(jRadioButtonYear);
         jRadioButtonYear.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -223,7 +242,7 @@ public class InvestChart extends javax.swing.JDialog {
                 jRadioButtonYearActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButtonYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 538, -1, -1));
+        getContentPane().add(jRadioButtonYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 530, -1, -1));
 
         jComboBoxScale.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jComboBoxScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "250", "500", "1000", "2000", "3000", "4000", "5000", "6000", "8000", "10000", "15000", "20000", "30000" }));
@@ -233,11 +252,11 @@ public class InvestChart extends javax.swing.JDialog {
                 jComboBoxScaleActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxScale, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 540, -1, -1));
+        getContentPane().add(jComboBoxScale, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 530, -1, -1));
 
         jLabelScale.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelScale.setText("范围：");
-        getContentPane().add(jLabelScale, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, -1, -1));
+        getContentPane().add(jLabelScale, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -283,6 +302,23 @@ public class InvestChart extends javax.swing.JDialog {
         jPanel_xyChart.updateUI();
     }//GEN-LAST:event_jComboBoxScaleActionPerformed
 
+    private void jPanel_xyCanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_xyCanMouseMoved
+        coordx = evt.getX();
+        coordy = evt.getY();
+        if (mouseFlag) {
+            jPanel_xyChart.updateUI();
+        }
+    }//GEN-LAST:event_jPanel_xyCanMouseMoved
+
+    private void jPanel_xyCanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_xyCanMouseClicked
+        if (evt.getClickCount() > 1) {
+            mouseFlag = true;
+        } else {
+            mouseFlag = false;
+        }
+        jPanel_xyChart.updateUI();
+    }//GEN-LAST:event_jPanel_xyCanMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jComboBoxScale;
@@ -306,4 +342,7 @@ public class InvestChart extends javax.swing.JDialog {
     private int items = 0;
     private int offset = 0;
     private int step = 63;
+    private int coordx = 0;
+    private int coordy = 0;
+    private boolean mouseFlag = false;
 }
