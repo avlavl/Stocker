@@ -119,10 +119,11 @@ public class MainView extends javax.swing.JFrame {
         jLabelLatestPoint = new javax.swing.JLabel();
         jTextFieldLatestPoint = new javax.swing.JTextField();
         jLabelInput = new javax.swing.JLabel();
-        jLabelInputText = new javax.swing.JLabel();
         jLabelBasePoint = new javax.swing.JLabel();
         jTextFieldInvestCoef = new javax.swing.JTextField();
         jLabelInvestCoef = new javax.swing.JLabel();
+        jLabelCurrentAsset = new javax.swing.JLabel();
+        jLabelCurrentRatio = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -421,12 +422,8 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelInput.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
         jLabelInput.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelInput.setText("----元");
-        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 213, -1, -1));
-
-        jLabelInputText.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelInputText.setText("投入金额：");
-        jPanelMain.add(jLabelInputText, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 213, -1, -1));
+        jLabelInput.setText("投入金额：----元");
+        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
 
         jLabelBasePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelBasePoint.setForeground(new java.awt.Color(102, 0, 102));
@@ -440,6 +437,16 @@ public class MainView extends javax.swing.JFrame {
         jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelInvestCoef.setText("定投系数：");
         jPanelMain.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 250, -1, -1));
+
+        jLabelCurrentAsset.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
+        jLabelCurrentAsset.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCurrentAsset.setText("当前资产：----元");
+        jPanelMain.add(jLabelCurrentAsset, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, -1, -1));
+
+        jLabelCurrentRatio.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
+        jLabelCurrentRatio.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCurrentRatio.setText("当前收益：----%");
+        jPanelMain.add(jLabelCurrentRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 400));
 
@@ -671,6 +678,8 @@ public class MainView extends javax.swing.JFrame {
         SystemReport sr = updateSystemReport(strategy);
         updateTable(sr);
         updateMarket(eIdx);
+        jLabelCurrentAsset.setText(String.format("当前资产：%.2f元", strategy.getCurrentAsset()));
+        jLabelCurrentRatio.setText(String.format("当前收益：%.2f%%", strategy.getCurrentRatio()));
         evaluated = true;
     }//GEN-LAST:event_jButtonInvestEvaActionPerformed
 
@@ -829,15 +838,15 @@ public class MainView extends javax.swing.JFrame {
         double diffFactor = Double.parseDouble(jTextFieldDiffFactor.getText());
         double latestPoint = Double.parseDouble(jTextFieldLatestPoint.getText());
 
-        double basePoint = startPoint + (rows - 1) * (slope / 100);
+        double basePoint = startPoint + rows * (slope / 100);
         jLabelBasePoint.setText(String.format("基点：%.2f", basePoint));
         double diffRate = latestPoint / basePoint;
         investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
         double input = (basePoint / investCoef) / Math.pow(diffRate, diffFactor / 10);
         if (diffRate <= 1) {
-            jLabelInput.setText(String.format("%.2f元", input));
+            jLabelInput.setText(String.format("投入金额：%.2f元", input));
         } else {
-            jLabelInput.setText("停止定投");
+            jLabelInput.setText("投入金额：0.00元");
         }
     }//GEN-LAST:event_jTextFieldLatestPointActionPerformed
 
@@ -890,6 +899,8 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldSDate.setText(dateList.get(0));
         jTextFieldEDate.setText(dateList.get(rows - 1));
         updateMarket(rows - 1);
+        jLabelCurrentAsset.setText("当前资产：----元");
+        jLabelCurrentRatio.setText("当前收益：----%");
         evaluated = false;
     }
 
@@ -954,9 +965,9 @@ public class MainView extends javax.swing.JFrame {
         investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
         double input = (basePoint / investCoef) / Math.pow(diffRate, diffFactor / 10);
         if (diffRate <= 1) {
-            jLabelInput.setText(String.format("%.2f元", input));
+            jLabelInput.setText(String.format("投入金额：%.2f元", input));
         } else {
-            jLabelInput.setText("停止定投");
+            jLabelInput.setText("投入金额：0.00元");
         }
     }
 
@@ -1148,6 +1159,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInvestRecord;
     private javax.swing.JLabel jLabelBasePoint;
     private javax.swing.JLabel jLabelClose;
+    private javax.swing.JLabel jLabelCurrentAsset;
+    private javax.swing.JLabel jLabelCurrentRatio;
     private javax.swing.JLabel jLabelDash1;
     private javax.swing.JLabel jLabelDash2;
     private javax.swing.JLabel jLabelDash3;
@@ -1155,7 +1168,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelDiffFactor;
     private javax.swing.JLabel jLabelInput;
-    private javax.swing.JLabel jLabelInputText;
     private javax.swing.JLabel jLabelInvestCoef;
     private javax.swing.JLabel jLabelLatestPoint;
     private javax.swing.JLabel jLabelPara1;

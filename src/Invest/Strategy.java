@@ -26,9 +26,9 @@ public class Strategy {
 
     public boolean sysInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
         diffCoef = (double) diffFactor / 10;
-        double totalInput = 0;
-        double totalPrice = 0;
-        double totalNumber = 0;
+        totalInput = 0;
+        totalPrice = 0;
+        totalNumber = 0;
         double input = 0;
         double number = 0;
         double weight = 0;
@@ -111,9 +111,9 @@ public class Strategy {
 
     public boolean sysSimpleInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
         diffCoef = (double) diffFactor / 10;
-        double totalInput = 0;
-        double totalPrice = 0;
-        double totalNumber = 0;
+        totalInput = 0;
+        totalPrice = 0;
+        totalNumber = 0;
         double input = 0;
         double number = 0;
 
@@ -294,6 +294,14 @@ public class Strategy {
         return 1 / Math.pow(getMinDiffRate(), diffCoef);
     }
 
+    public double getCurrentAsset() {
+        return totalPrice;
+    }
+
+    public double getCurrentRatio() {
+        return profitRatio * 100;
+    }
+
     public class RecordData {
 
         public RecordData(String date, String type) {
@@ -330,6 +338,9 @@ public class Strategy {
 
     private double addInvest = 0;
     private double addOutput = 0;
+    public double totalInput = 0;
+    public double totalPrice = 0;
+    public double totalNumber = 0;
     private ArrayList<String> bsDateList = new ArrayList<>();
     private final ArrayList<Double> totalInputList = new ArrayList<>();
     private final ArrayList<Double> totalPriceList = new ArrayList<>();
