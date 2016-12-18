@@ -21,6 +21,7 @@ public class Strategy {
         items = pList.size();
         sIndex = mv.sIdx;
         eIndex = mv.eIdx;
+        investCoef = mv.investCoef;
     }
 
     public boolean sysInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
@@ -76,7 +77,7 @@ public class Strategy {
             diffRateList.add(diffRate);
             if (pList.get(i) < basePoint) {
                 RecordData recordData = new RecordData(dList.get(i), "投入");
-                input = (basePoint / 10) / Math.pow(diffRate, diffCoef);
+                input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
                 number = input / pList.get(i);
                 weight += input;
                 totalInput += input;
@@ -142,7 +143,7 @@ public class Strategy {
             diffRate = pList.get(i) / basePoint;
             diffRateList.add(diffRate);
             if (pList.get(i) < basePoint) {
-                input = (basePoint / 10) / Math.pow(diffRate, diffCoef);
+                input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
                 number = input / pList.get(i);
                 totalInput += input;
                 totalNumber += number;
@@ -341,6 +342,7 @@ public class Strategy {
     private double profit = 0;
     private double profitRatio = 0;
     private double diffCoef = 1;
+    public double investCoef = 1;
     private final ArrayList<Double> diffRateList = new ArrayList<>();
 
     public ArrayList<RecordData> recordDataList = new ArrayList<>();

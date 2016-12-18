@@ -121,6 +121,8 @@ public class MainView extends javax.swing.JFrame {
         jLabelInput = new javax.swing.JLabel();
         jLabelInputText = new javax.swing.JLabel();
         jLabelBasePoint = new javax.swing.JLabel();
+        jTextFieldInvestCoef = new javax.swing.JTextField();
+        jLabelInvestCoef = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -431,6 +433,14 @@ public class MainView extends javax.swing.JFrame {
         jLabelBasePoint.setText("基点：--");
         jPanelMain.add(jLabelBasePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
+        jTextFieldInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldInvestCoef.setText("10");
+        jPanelMain.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 70, -1));
+
+        jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelInvestCoef.setText("定投系数：");
+        jPanelMain.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 250, -1, -1));
+
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 400));
 
         jMenuFile.setText("文件");
@@ -639,6 +649,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void jButtonInvestEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestEvaActionPerformed
         boolean ret = false;
+        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
         dateProcess();
         if (investDays == 0) {
             return;
@@ -666,6 +677,7 @@ public class MainView extends javax.swing.JFrame {
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
         long time = System.currentTimeMillis();
         jTextAreaMain.setText("");
+        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
         dateProcess();
         if (investDays == 0) {
             return;
@@ -818,8 +830,10 @@ public class MainView extends javax.swing.JFrame {
         double latestPoint = Double.parseDouble(jTextFieldLatestPoint.getText());
 
         double basePoint = startPoint + (rows - 1) * (slope / 100);
+        jLabelBasePoint.setText(String.format("基点：%.2f", basePoint));
         double diffRate = latestPoint / basePoint;
-        double input = (basePoint / 10) / Math.pow(diffRate, diffFactor / 10);
+        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
+        double input = (basePoint / investCoef) / Math.pow(diffRate, diffFactor / 10);
         if (diffRate <= 1) {
             jLabelInput.setText(String.format("%.2f元", input));
         } else {
@@ -937,7 +951,8 @@ public class MainView extends javax.swing.JFrame {
         double latestPoint = closeList.get(idx);
         jTextFieldLatestPoint.setText(Double.toString(latestPoint));
         double diffRate = latestPoint / basePoint;
-        double input = (basePoint / 10) / Math.pow(diffRate, diffFactor / 10);
+        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
+        double input = (basePoint / investCoef) / Math.pow(diffRate, diffFactor / 10);
         if (diffRate <= 1) {
             jLabelInput.setText(String.format("%.2f元", input));
         } else {
@@ -1115,6 +1130,7 @@ public class MainView extends javax.swing.JFrame {
     public int eIdx = 0;
     public int investDays = 0;
     public double testYears = 0;
+    public double investCoef = 1;
 
     public Strategy strategy;
     public boolean evaluated = false;
@@ -1140,6 +1156,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDiffFactor;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JLabel jLabelInputText;
+    private javax.swing.JLabel jLabelInvestCoef;
     private javax.swing.JLabel jLabelLatestPoint;
     private javax.swing.JLabel jLabelPara1;
     private javax.swing.JLabel jLabelPara2;
@@ -1179,6 +1196,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaMain;
     private javax.swing.JTextField jTextFieldDiffFactor;
     private javax.swing.JTextField jTextFieldEDate;
+    private javax.swing.JTextField jTextFieldInvestCoef;
     private javax.swing.JTextField jTextFieldLatestPoint;
     private javax.swing.JTextField jTextFieldPE1;
     private javax.swing.JTextField jTextFieldPE2;
