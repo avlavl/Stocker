@@ -120,6 +120,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldLatestPoint = new javax.swing.JTextField();
         jLabelInput = new javax.swing.JLabel();
         jLabelInputText = new javax.swing.JLabel();
+        jLabelBasePoint = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -425,6 +426,11 @@ public class MainView extends javax.swing.JFrame {
         jLabelInputText.setText("投入金额：");
         jPanelMain.add(jLabelInputText, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 213, -1, -1));
 
+        jLabelBasePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelBasePoint.setForeground(new java.awt.Color(102, 0, 102));
+        jLabelBasePoint.setText("基点：--");
+        jPanelMain.add(jLabelBasePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
+
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 400));
 
         jMenuFile.setText("文件");
@@ -551,45 +557,45 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemImportActionPerformed
 
     private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
-        importFile("data\\W上证指数.txt");
         jTextFieldStartPoint.setText("410");
         jTextFieldSlope.setText("210");
+        importFile("data\\W上证指数.txt");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
 
     private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
-        importFile("data\\W深证成指.txt");
         jTextFieldStartPoint.setText("1000");
         jTextFieldSlope.setText("750");
+        importFile("data\\W深证成指.txt");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
     private void jMenuItemSWZQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSWZQActionPerformed
-        importFile("data\\W申万证券.txt");
         jTextFieldStartPoint.setText("1000");
         jTextFieldSlope.setText("700");
+        importFile("data\\W申万证券.txt");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
     private void jMenuItemZZJGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZJGActionPerformed
-        importFile("data\\W中证军工.txt");
         jTextFieldStartPoint.setText("2500");
         jTextFieldSlope.setText("1000");
+        importFile("data\\W中证军工.txt");
     }//GEN-LAST:event_jMenuItemZZJGActionPerformed
 
     private void jMenuItemZZHBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZHBActionPerformed
-        importFile("data\\W中证环保.txt");
         jTextFieldStartPoint.setText("850");
         jTextFieldSlope.setText("400");
+        importFile("data\\W中证环保.txt");
     }//GEN-LAST:event_jMenuItemZZHBActionPerformed
 
     private void jMenuItemGZYYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGZYYActionPerformed
-        importFile("data\\W国证医药.txt");
         jTextFieldStartPoint.setText("5000");
         jTextFieldSlope.setText("1800");
+        importFile("data\\W国证医药.txt");
     }//GEN-LAST:event_jMenuItemGZYYActionPerformed
 
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
-        importFile("data\\W养老产业.txt");
         jTextFieldStartPoint.setText("1400");
         jTextFieldSlope.setText("1000");
+        importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
@@ -811,13 +817,13 @@ public class MainView extends javax.swing.JFrame {
         double diffFactor = Double.parseDouble(jTextFieldDiffFactor.getText());
         double latestPoint = Double.parseDouble(jTextFieldLatestPoint.getText());
 
-        double baseLine = startPoint + rows * (slope / 100);
-        double diffRate = latestPoint / baseLine;
-        double input = (baseLine / 10) / Math.pow(diffRate, diffFactor / 10);
+        double basePoint = startPoint + (rows - 1) * (slope / 100);
+        double diffRate = latestPoint / basePoint;
+        double input = (basePoint / 10) / Math.pow(diffRate, diffFactor / 10);
         if (diffRate <= 1) {
             jLabelInput.setText(String.format("%.2f元", input));
         } else {
-            jLabelInput.setText(String.format("----元", input));
+            jLabelInput.setText("停止定投");
         }
     }//GEN-LAST:event_jTextFieldLatestPointActionPerformed
 
@@ -912,14 +918,30 @@ public class MainView extends javax.swing.JFrame {
 
     protected void updateMarket(int idx) {
         jLabelDate.setText("日期：" + dateList.get(idx));
+
         double margin = closeList.get(idx) - closeList.get(idx - 1);
         double ratio = 100 * (closeList.get(idx) - closeList.get(idx - 1)) / closeList.get(idx - 1);
         if (margin > 0) {
             jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
-            jLabelClose.setText(String.format("收盘：%s  上涨：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
+            jLabelClose.setText(String.format("收盘：%s  %.2f/%5.2f%%", closeList.get(idx), margin, ratio));
         } else {
             jLabelClose.setForeground(new java.awt.Color(0, 150, 0));
-            jLabelClose.setText(String.format("收盘：%s  下跌：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
+            jLabelClose.setText(String.format("收盘：%s  %.2f/%5.2f%%", closeList.get(idx), margin, ratio));
+        }
+
+        double startPoint = Double.parseDouble(jTextFieldStartPoint.getText());
+        double slope = Double.parseDouble(jTextFieldSlope.getText());
+        double diffFactor = Double.parseDouble(jTextFieldDiffFactor.getText());
+        double basePoint = startPoint + idx * (slope / 100);
+        jLabelBasePoint.setText(String.format("基点：%.2f", basePoint));
+        double latestPoint = closeList.get(idx);
+        jTextFieldLatestPoint.setText(Double.toString(latestPoint));
+        double diffRate = latestPoint / basePoint;
+        double input = (basePoint / 10) / Math.pow(diffRate, diffFactor / 10);
+        if (diffRate <= 1) {
+            jLabelInput.setText(String.format("%.2f元", input));
+        } else {
+            jLabelInput.setText("停止定投");
         }
     }
 
@@ -1108,6 +1130,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInvestChart;
     private javax.swing.JButton jButtonInvestEva;
     private javax.swing.JButton jButtonInvestRecord;
+    private javax.swing.JLabel jLabelBasePoint;
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelDash1;
     private javax.swing.JLabel jLabelDash2;
