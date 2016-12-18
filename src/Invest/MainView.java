@@ -356,11 +356,11 @@ public class MainView extends javax.swing.JFrame {
         jPanelCongfig.add(jLabelDiffFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 55, -1, -1));
 
         jTextFieldWinLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldWinLevel.setText("30");
+        jTextFieldWinLevel.setText("50");
         jPanelCongfig.add(jTextFieldWinLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 55, 40, -1));
 
         jTextFieldStartPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldStartPoint.setText("400");
+        jTextFieldStartPoint.setText("410");
         jPanelCongfig.add(jTextFieldStartPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 25, 40, -1));
 
         jLabelStartPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -552,30 +552,44 @@ public class MainView extends javax.swing.JFrame {
 
     private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
         importFile("data\\W上证指数.txt");
+        jTextFieldStartPoint.setText("410");
+        jTextFieldSlope.setText("210");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
 
     private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
         importFile("data\\W深证成指.txt");
+        jTextFieldStartPoint.setText("1000");
+        jTextFieldSlope.setText("750");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
     private void jMenuItemSWZQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSWZQActionPerformed
         importFile("data\\W申万证券.txt");
+        jTextFieldStartPoint.setText("1000");
+        jTextFieldSlope.setText("700");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
     private void jMenuItemZZJGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZJGActionPerformed
         importFile("data\\W中证军工.txt");
+        jTextFieldStartPoint.setText("2500");
+        jTextFieldSlope.setText("1000");
     }//GEN-LAST:event_jMenuItemZZJGActionPerformed
 
     private void jMenuItemZZHBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZHBActionPerformed
         importFile("data\\W中证环保.txt");
+        jTextFieldStartPoint.setText("850");
+        jTextFieldSlope.setText("400");
     }//GEN-LAST:event_jMenuItemZZHBActionPerformed
 
     private void jMenuItemGZYYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGZYYActionPerformed
         importFile("data\\W国证医药.txt");
+        jTextFieldStartPoint.setText("5000");
+        jTextFieldSlope.setText("1800");
     }//GEN-LAST:event_jMenuItemGZYYActionPerformed
 
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
         importFile("data\\W养老产业.txt");
+        jTextFieldStartPoint.setText("1400");
+        jTextFieldSlope.setText("1000");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
