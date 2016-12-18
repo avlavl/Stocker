@@ -122,12 +122,13 @@ public class InvestChart extends javax.swing.JDialog {
                     g.setColor(Color.PINK);
                     g.drawString(String.format("日期:"), 600, 15);
                     g.drawString(String.format("收盘:"), 700, 15);
-                    g.drawString(String.format("赢亏:"), 800, 15);
+                    g.drawString(String.format("基点:"), 800, 15);
+                    g.drawString(String.format("赢亏:"), 900, 15);
                     g.setColor(Color.WHITE);
                     g.drawString(mainView.dateList.get(offset + coordx), 630, 15);
                     g.drawString(String.format("%4.2f", mainView.priceList.get(offset + coordx)), 730, 15);
-                    double profit = strategy.profitRatios[offset + coordx];
-                    g.drawString(String.format("%4.2f%%", 100 * profit), 830, 15);
+                    g.drawString(String.format("%4.2f", strategy.basePoints[offset + coordx]), 830, 15);
+                    g.drawString(String.format("%4.2f%%", 100 * strategy.profitRatios[offset + coordx]), 930, 15);
                 }
 
                 /* Bottom date */
