@@ -37,6 +37,14 @@ public class InvestChart extends javax.swing.JDialog {
         strategy = mainView.strategy;
         items = pList.size();
 
+        double highVal = Collections.max(pList);
+        for (int i = 0; i < 17; i++) {
+            if (scalar_buf[i] * 500 * 0.9 > highVal) {
+                scalar = scalar_buf[i];
+                break;
+            }
+        }
+
         jPanel_xyChart = new javax.swing.JPanel() {
 
             @Override
