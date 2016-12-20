@@ -124,6 +124,8 @@ public class MainView extends javax.swing.JFrame {
         jLabelInvestCoef = new javax.swing.JLabel();
         jLabelCurrentAsset = new javax.swing.JLabel();
         jLabelCurrentRatio = new javax.swing.JLabel();
+        jLabelKeyPoint = new javax.swing.JLabel();
+        jLabelKeyRatio = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -418,12 +420,12 @@ public class MainView extends javax.swing.JFrame {
                 jTextFieldLatestPointActionPerformed(evt);
             }
         });
-        jPanelMain.add(jTextFieldLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 70, -1));
+        jPanelMain.add(jTextFieldLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 60, -1));
 
         jLabelInput.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
         jLabelInput.setForeground(new java.awt.Color(255, 0, 0));
         jLabelInput.setText("投入金额：----元");
-        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
+        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
 
         jLabelBasePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelBasePoint.setForeground(new java.awt.Color(102, 0, 102));
@@ -432,7 +434,7 @@ public class MainView extends javax.swing.JFrame {
 
         jTextFieldInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldInvestCoef.setText("10");
-        jPanelMain.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 70, -1));
+        jPanelMain.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 60, -1));
 
         jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelInvestCoef.setText("定投系数：");
@@ -441,12 +443,22 @@ public class MainView extends javax.swing.JFrame {
         jLabelCurrentAsset.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
         jLabelCurrentAsset.setForeground(new java.awt.Color(255, 0, 0));
         jLabelCurrentAsset.setText("当前资产：----元");
-        jPanelMain.add(jLabelCurrentAsset, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, -1, -1));
+        jPanelMain.add(jLabelCurrentAsset, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
 
         jLabelCurrentRatio.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
         jLabelCurrentRatio.setForeground(new java.awt.Color(255, 0, 0));
         jLabelCurrentRatio.setText("当前收益：----%");
-        jPanelMain.add(jLabelCurrentRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, -1));
+        jPanelMain.add(jLabelCurrentRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, -1, -1));
+
+        jLabelKeyPoint.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
+        jLabelKeyPoint.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelKeyPoint.setText("关键点位：----");
+        jPanelMain.add(jLabelKeyPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, -1));
+
+        jLabelKeyRatio.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
+        jLabelKeyRatio.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelKeyRatio.setText("关键比例：----%");
+        jPanelMain.add(jLabelKeyRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 400));
 
@@ -680,6 +692,8 @@ public class MainView extends javax.swing.JFrame {
         updateMarket(eIdx);
         jLabelCurrentAsset.setText(String.format("当前资产：%.2f元", strategy.getCurrentAsset()));
         jLabelCurrentRatio.setText(String.format("当前收益：%.2f%%", strategy.getCurrentRatio()));
+        jLabelKeyPoint.setText(String.format("关键点位：%.2f", strategy.getKeyPoint()));
+        jLabelKeyRatio.setText(String.format("关键比例：%.2f%%", strategy.getKeyRatio()));
         evaluated = true;
     }//GEN-LAST:event_jButtonInvestEvaActionPerformed
 
@@ -901,6 +915,8 @@ public class MainView extends javax.swing.JFrame {
         updateMarket(rows - 1);
         jLabelCurrentAsset.setText("当前资产：----元");
         jLabelCurrentRatio.setText("当前收益：----%");
+        jLabelKeyPoint.setText("关键点位：----");
+        jLabelKeyRatio.setText("关键比例：----%");
         evaluated = false;
     }
 
@@ -1169,6 +1185,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDiffFactor;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JLabel jLabelInvestCoef;
+    private javax.swing.JLabel jLabelKeyPoint;
+    private javax.swing.JLabel jLabelKeyRatio;
     private javax.swing.JLabel jLabelLatestPoint;
     private javax.swing.JLabel jLabelPara1;
     private javax.swing.JLabel jLabelPara2;

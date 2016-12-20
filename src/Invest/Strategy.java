@@ -24,7 +24,8 @@ public class Strategy {
         investCoef = mv.investCoef;
     }
 
-    public boolean sysInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
+    public boolean sysInvestEva(int startPoint, int slope, int wLevel, int diffFactor) {
+        winLevel = (double) wLevel / 100;
         diffCoef = (double) diffFactor / 10;
         totalInput = 0;
         totalPrice = 0;
@@ -43,9 +44,8 @@ public class Strategy {
                 profit = totalPrice - totalInput;
                 profitRatio = profit / totalInput;
                 profitList.add(profit);
-                profitRatioList.add(profitRatio);
                 profitRatios[i] = profitRatio;
-                if (profitRatio >= (double) winLevel / 100) {
+                if (profitRatio >= winLevel) {
                     weight -= totalPrice;
                     RecordData recordData = new RecordData(dList.get(i), "赎回");
                     bsDateList.add(dList.get(i));
@@ -80,6 +80,7 @@ public class Strategy {
                 input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
                 number = input / pList.get(i);
                 weight += input;
+                totalPrice += input;
                 totalInput += input;
                 totalNumber += number;
                 bsDateList.add(dList.get(i));
@@ -90,6 +91,8 @@ public class Strategy {
                 recordData.cost = totalInput / totalNumber;
                 recordData.totalInput = totalInput;
                 recordData.profit = profit;
+                profitRatio = profit / totalInput;
+                profitRatios[i] = profitRatio;
                 recordData.profitRatio = profitRatio * 100;
                 recordDataList.add(recordData);
             } else if (totalInput > 0) {
@@ -109,7 +112,8 @@ public class Strategy {
         return (getInvestRounds() > 0) ? true : false;
     }
 
-    public boolean sysSimpleInvestEva(int startPoint, int slope, int winLevel, int diffFactor) {
+    public boolean sysSimpleInvestEva(int startPoint, int slope, int wLevel, int diffFactor) {
+        winLevel = (double) wLevel / 100;
         diffCoef = (double) diffFactor / 10;
         totalInput = 0;
         totalPrice = 0;
@@ -122,7 +126,7 @@ public class Strategy {
                 totalPrice = totalNumber * pList.get(i);
                 profit = totalPrice - totalInput;
                 profitRatio = profit / totalInput;
-                if (profitRatio >= (double) winLevel / 100) {
+                if (profitRatio >= winLevel) {
                     bsDateList.add(dList.get(i));
                     roundDateLists.add(bsDateList);
                     bsDateList = new ArrayList<>();
@@ -259,7 +263,13 @@ public class Strategy {
     }
 
     public double getMaxLossRatio() {
-        return 100 * Collections.min(profitRatioList);
+        double loss = 0;
+        for (double ratio : profitRatios) {
+            if (ratio < loss) {
+                loss = ratio;
+            }
+        }
+        return loss * 100;
     }
 
     public double getMeanDiffRate() {
@@ -302,6 +312,22 @@ public class Strategy {
         return profitRatio * 100;
     }
 
+    public double getKeyPoint() {
+        if (totalInput > 0) {
+            double keyPoint = (totalInput / totalNumber) * (1 + winLevel);
+            return keyPoint;
+        }
+        return basePoint;
+    }
+
+    public double getKeyRatio() {
+        if (totalInput > 0) {
+            double keyRatio = totalInput * (1 + winLevel) / totalPrice - 1;
+            return 100 * keyRatio;
+        }
+        return 100 * (basePoint - pList.get(items - 1)) / pList.get(items - 1);
+    }
+
     public class RecordData {
 
         public RecordData(String date, String type) {
@@ -324,7 +350,7 @@ public class Strategy {
     public ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<String> dList = new ArrayList<>();
 
-    public double initPoint;
+    public double startPoint;
     public double slope;
     public double winLevel;
     public double dispersion;
@@ -347,7 +373,6 @@ public class Strategy {
     private final ArrayList<ArrayList<String>> roundDateLists = new ArrayList<>();
     private final ArrayList<Double> yieldList = new ArrayList<>();
     private final ArrayList<Double> profitList = new ArrayList<>();
-    private final ArrayList<Double> profitRatioList = new ArrayList<>();
     public double[] profitRatios;
     private double diffRate = 0;
     private double profit = 0;
