@@ -243,7 +243,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelPara1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPara1.setText("P1:");
-        jPanelSysFilter.add(jLabelPara1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 27, -1, -1));
+        jPanelSysFilter.add(jLabelPara1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 27, -1, -1));
 
         jLabelPara2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPara2.setText("P2:");
@@ -251,7 +251,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelPara3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPara3.setText("P3:");
-        jPanelSysFilter.add(jLabelPara3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 50, -1, -1));
+        jPanelSysFilter.add(jLabelPara3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jLabelPara4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelPara4.setText("P4:");
@@ -261,45 +261,45 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jLabelDash1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 29, -1, -1));
 
         jLabelDash2.setText("-");
-        jPanelSysFilter.add(jLabelDash2, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 30, -1, -1));
+        jPanelSysFilter.add(jLabelDash2, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 30, -1, -1));
 
         jLabelDash3.setText("-");
         jPanelSysFilter.add(jLabelDash3, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 52, -1, -1));
 
         jLabelDash4.setText("-");
-        jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 52, -1, -1));
+        jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS1.setText("350");
-        jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 26, 30, -1));
+        jTextFieldPS1.setText("360");
+        jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 26, 35, -1));
 
         jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE1.setText("450");
-        jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 30, -1));
+        jTextFieldPE1.setText("460");
+        jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 35, -1));
 
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPS2.setText("200");
-        jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 26, 30, -1));
+        jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 26, 35, -1));
 
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPE2.setText("220");
-        jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 26, 30, -1));
+        jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 35, -1));
 
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPS3.setText("20");
-        jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 30, -1));
+        jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 50, 35, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE3.setText("100");
-        jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 30, -1));
+        jTextFieldPE3.setText("200");
+        jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 35, -1));
 
         jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS4.setText("0");
-        jPanelSysFilter.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 50, 30, -1));
+        jTextFieldPS4.setText("10");
+        jPanelSysFilter.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 50, 35, -1));
 
         jTextFieldPE4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPE4.setText("20");
-        jPanelSysFilter.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 50, 30, -1));
+        jPanelSysFilter.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 35, -1));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonFilterStart.setText("开始");
@@ -309,7 +309,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonFilterStartActionPerformed(evt);
             }
         });
-        jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 23, -1, -1));
+        jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 23, -1, -1));
 
         jButtonFilterCheck.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonFilterCheck.setText("查看");
@@ -320,9 +320,9 @@ public class MainView extends javax.swing.JFrame {
                 jButtonFilterCheckActionPerformed(evt);
             }
         });
-        jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 48, -1, -1));
+        jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 48, -1, -1));
 
-        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 290, 90));
+        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 305, 290, 90));
 
         jButtonCheckUp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonCheckUp.setText("检测");
@@ -346,7 +346,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelCongfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextFieldDiffFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldDiffFactor.setText("10");
+        jTextFieldDiffFactor.setText("15");
         jPanelCongfig.add(jTextFieldDiffFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 55, 40, -1));
 
         jTextFieldSlope.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -362,7 +362,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelCongfig.add(jLabelDiffFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 55, -1, -1));
 
         jTextFieldWinLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldWinLevel.setText("50");
+        jTextFieldWinLevel.setText("20");
         jPanelCongfig.add(jTextFieldWinLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 55, 40, -1));
 
         jTextFieldStartPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -411,7 +411,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelLatestPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelLatestPoint.setText("最新点位：");
-        jPanelMain.add(jLabelLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 213, -1, -1));
+        jPanelMain.add(jLabelLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
 
         jTextFieldLatestPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldLatestPoint.setText("3000");
@@ -420,12 +420,12 @@ public class MainView extends javax.swing.JFrame {
                 jTextFieldLatestPointActionPerformed(evt);
             }
         });
-        jPanelMain.add(jTextFieldLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 60, -1));
+        jPanelMain.add(jTextFieldLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 227, 60, -1));
 
-        jLabelInput.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
+        jLabelInput.setFont(new java.awt.Font("黑体", 1, 14)); // NOI18N
         jLabelInput.setForeground(new java.awt.Color(255, 0, 0));
         jLabelInput.setText("投入金额：----元");
-        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
+        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
 
         jLabelBasePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelBasePoint.setForeground(new java.awt.Color(102, 0, 102));
@@ -434,31 +434,31 @@ public class MainView extends javax.swing.JFrame {
 
         jTextFieldInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldInvestCoef.setText("10");
-        jPanelMain.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 60, -1));
+        jPanelMain.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 227, 60, -1));
 
         jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelInvestCoef.setText("定投系数：");
-        jPanelMain.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 250, -1, -1));
+        jPanelMain.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 230, -1, -1));
 
-        jLabelCurrentAsset.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
-        jLabelCurrentAsset.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCurrentAsset.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCurrentAsset.setForeground(new java.awt.Color(204, 0, 0));
         jLabelCurrentAsset.setText("当前资产：----元");
-        jPanelMain.add(jLabelCurrentAsset, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
+        jPanelMain.add(jLabelCurrentAsset, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
 
-        jLabelCurrentRatio.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
-        jLabelCurrentRatio.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCurrentRatio.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCurrentRatio.setForeground(new java.awt.Color(204, 0, 0));
         jLabelCurrentRatio.setText("当前收益：----%");
-        jPanelMain.add(jLabelCurrentRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, -1, -1));
+        jPanelMain.add(jLabelCurrentRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, -1, -1));
 
-        jLabelKeyPoint.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
-        jLabelKeyPoint.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelKeyPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelKeyPoint.setForeground(new java.awt.Color(204, 0, 0));
         jLabelKeyPoint.setText("关键点位：----");
-        jPanelMain.add(jLabelKeyPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, -1));
+        jPanelMain.add(jLabelKeyPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
 
-        jLabelKeyRatio.setFont(new java.awt.Font("楷体", 0, 14)); // NOI18N
-        jLabelKeyRatio.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelKeyRatio.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelKeyRatio.setForeground(new java.awt.Color(204, 0, 0));
         jLabelKeyRatio.setText("关键比例：----%");
-        jPanelMain.add(jLabelKeyRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
+        jPanelMain.add(jLabelKeyRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 400));
 
@@ -588,42 +588,70 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
         jTextFieldStartPoint.setText("410");
         jTextFieldSlope.setText("210");
+        jTextFieldPS1.setText("360");
+        jTextFieldPE1.setText("460");
+        jTextFieldPS2.setText("200");
+        jTextFieldPE2.setText("220");
         importFile("data\\W上证指数.txt");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
 
     private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
         jTextFieldStartPoint.setText("1000");
         jTextFieldSlope.setText("750");
+        jTextFieldPS1.setText("900");
+        jTextFieldPE1.setText("1100");
+        jTextFieldPS2.setText("730");
+        jTextFieldPE2.setText("770");
         importFile("data\\W深证成指.txt");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
     private void jMenuItemSWZQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSWZQActionPerformed
         jTextFieldStartPoint.setText("1000");
         jTextFieldSlope.setText("700");
+        jTextFieldPS1.setText("900");
+        jTextFieldPE1.setText("1100");
+        jTextFieldPS2.setText("680");
+        jTextFieldPE2.setText("720");
         importFile("data\\W申万证券.txt");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
     private void jMenuItemZZJGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZJGActionPerformed
         jTextFieldStartPoint.setText("2500");
         jTextFieldSlope.setText("1000");
+        jTextFieldPS1.setText("2400");
+        jTextFieldPE1.setText("2600");
+        jTextFieldPS2.setText("980");
+        jTextFieldPE2.setText("1020");
         importFile("data\\W中证军工.txt");
     }//GEN-LAST:event_jMenuItemZZJGActionPerformed
 
     private void jMenuItemZZHBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZHBActionPerformed
         jTextFieldStartPoint.setText("850");
         jTextFieldSlope.setText("400");
+        jTextFieldPS1.setText("830");
+        jTextFieldPE1.setText("870");
+        jTextFieldPS2.setText("380");
+        jTextFieldPE2.setText("420");
         importFile("data\\W中证环保.txt");
     }//GEN-LAST:event_jMenuItemZZHBActionPerformed
 
     private void jMenuItemGZYYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGZYYActionPerformed
         jTextFieldStartPoint.setText("5000");
         jTextFieldSlope.setText("1800");
+        jTextFieldPS1.setText("4500");
+        jTextFieldPE1.setText("5500");
+        jTextFieldPS2.setText("1750");
+        jTextFieldPE2.setText("1850");
         importFile("data\\W国证医药.txt");
     }//GEN-LAST:event_jMenuItemGZYYActionPerformed
 
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
         jTextFieldStartPoint.setText("1400");
         jTextFieldSlope.setText("1000");
+        jTextFieldPS1.setText("1300");
+        jTextFieldPE1.setText("1500");
+        jTextFieldPS2.setText("960");
+        jTextFieldPE2.setText("1040");
         importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
 
@@ -719,7 +747,7 @@ public class MainView extends javax.swing.JFrame {
 
         for (int i = ps1; i <= pe1; i += 10) {
             for (int j = ps2; j <= pe2; j++) {
-                for (int k = ps3; k <= pe3; k += 5) {
+                for (int k = ps3; k <= pe3; k += 10) {
                     for (int l = ps4; l <= pe4; l++) {
                         strategy = new Strategy(this);
                         if (strategy.sysSimpleInvestEva(i, j, k, l)) {
