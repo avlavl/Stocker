@@ -102,8 +102,6 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE4 = new javax.swing.JTextField();
         jButtonFilterStart = new javax.swing.JButton();
         jButtonFilterCheck = new javax.swing.JButton();
-        jButtonCheckUp = new javax.swing.JButton();
-        jButtonEvaluate = new javax.swing.JButton();
         jPanelCongfig = new javax.swing.JPanel();
         jTextFieldDiffFactor = new javax.swing.JTextField();
         jTextFieldSlope = new javax.swing.JTextField();
@@ -165,8 +163,8 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelStockName.setFont(new java.awt.Font("微软雅黑", 0, 16)); // NOI18N
-        jLabelStockName.setForeground(new java.awt.Color(204, 0, 204));
+        jLabelStockName.setFont(new java.awt.Font("微软雅黑", 1, 16)); // NOI18N
+        jLabelStockName.setForeground(new java.awt.Color(255, 0, 0));
         jLabelStockName.setText("上证指数(000001)");
         jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
@@ -219,7 +217,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelSEDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelSEDate.setText("日期：");
-        jPanelMain.add(jLabelSEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        jPanelMain.add(jLabelSEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 273, -1, -1));
 
         jLabelSEDash.setText("-");
         jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 275, -1, -1));
@@ -324,24 +322,6 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 305, 290, 90));
 
-        jButtonCheckUp.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonCheckUp.setText("检测");
-        jButtonCheckUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCheckUpActionPerformed(evt);
-            }
-        });
-        jPanelMain.add(jButtonCheckUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, 30));
-
-        jButtonEvaluate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonEvaluate.setText("评估");
-        jButtonEvaluate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEvaluateActionPerformed(evt);
-            }
-        });
-        jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, 30));
-
         jPanelCongfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "定投配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelCongfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -425,7 +405,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelInput.setFont(new java.awt.Font("黑体", 1, 14)); // NOI18N
         jLabelInput.setForeground(new java.awt.Color(255, 0, 0));
         jLabelInput.setText("投入金额：----元");
-        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
+        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
 
         jLabelBasePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelBasePoint.setForeground(new java.awt.Color(102, 0, 102));
@@ -441,22 +421,22 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 230, -1, -1));
 
         jLabelCurrentAsset.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelCurrentAsset.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelCurrentAsset.setForeground(new java.awt.Color(0, 153, 153));
         jLabelCurrentAsset.setText("当前资产：----元");
         jPanelMain.add(jLabelCurrentAsset, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
 
         jLabelCurrentRatio.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelCurrentRatio.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelCurrentRatio.setForeground(new java.awt.Color(0, 153, 153));
         jLabelCurrentRatio.setText("当前收益：----%");
         jPanelMain.add(jLabelCurrentRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, -1, -1));
 
         jLabelKeyPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelKeyPoint.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelKeyPoint.setForeground(new java.awt.Color(0, 153, 153));
         jLabelKeyPoint.setText("关键点位：----");
         jPanelMain.add(jLabelKeyPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
 
         jLabelKeyRatio.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelKeyRatio.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelKeyRatio.setForeground(new java.awt.Color(0, 153, 153));
         jLabelKeyRatio.setText("关键比例：----%");
         jPanelMain.add(jLabelKeyRatio, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, -1, -1));
 
@@ -664,7 +644,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemTDXActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-基金定投 V16.10\n版权所有(C) 张向荣(Aioros Zhang)");
+        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-基金定投 V17.01\n版权所有(C) 张向荣(Aioros Zhang)");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
@@ -773,106 +753,6 @@ public class MainView extends javax.swing.JFrame {
     private void jButtonFilterCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterCheckActionPerformed
         rankTable.setVisible(true);
     }//GEN-LAST:event_jButtonFilterCheckActionPerformed
-
-    private void jButtonCheckUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckUpActionPerformed
-        ArrayList<String> modelList = new ArrayList<>();
-        chkDataList = new ArrayList<>();
-
-        try {
-            File file = new File("ini/" + stockName + ".ini");
-            if (!file.exists()) {
-                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + stockName + ".ini\"文件！");
-                return;
-            }
-            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
-            BufferedReader br = new BufferedReader(isr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.matches("^[A-Z].*")) {
-                    modelList.add(line);
-                }
-            }
-            br.close();
-            isr.close();
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        for (String line : modelList) {
-            String[] words = line.split(":");
-            String mode = words[0];
-            String para = words[1];
-            switch (mode) {
-                case "MA":
-                    //sysMAChk(para);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        CheckTable ct = new CheckTable(this, false, this);
-    }//GEN-LAST:event_jButtonCheckUpActionPerformed
-
-    private void jButtonEvaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEvaluateActionPerformed
-        ArrayList<String> modelList = new ArrayList<>();
-        chkDataList = new ArrayList<>();
-
-        try {
-            File file = new File("ini/" + stockName + ".ini");
-            if (!file.exists()) {
-                JOptionPane.showMessageDialog(new JFrame(), "没有对应的\"" + stockName + ".ini\"文件！");
-                return;
-            }
-            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
-            BufferedReader br = new BufferedReader(isr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.matches("^[A-Z].*")) {
-                    modelList.add(line);
-                }
-            }
-            br.close();
-            isr.close();
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        dateProcess();
-        if (investDays == 0) {
-            return;
-        }
-        SystemReport sr;
-        ArrayList<SystemReport> srList = new ArrayList<>();
-
-        int p1 = 0, p2 = 0, p3 = 0;
-        for (String line : modelList) {
-            String[] words = line.split(":");
-            String mode = words[0];
-            String paras[] = words[1].split(" ");
-            String[] ps = paras[0].split(",");
-            try {
-                p1 = Integer.parseInt(ps[0]);
-                p2 = Integer.parseInt(ps[1]);
-                p3 = Integer.parseInt(ps[2]);
-            } catch (Exception e) {
-            }
-            switch (mode) {
-                case "MA":
-//                    if (sysInvestEva(p1, p2)) {
-//                        String para = String.format("%d,%d", p1, p2);
-//                        sr = updateSimpleReport(mode, para, strategy);
-//                        srList.add(sr);
-//                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-        rankTable = new RankTable(this, false, this, srList);
-    }//GEN-LAST:event_jButtonEvaluateActionPerformed
 
     private void jTextFieldLatestPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLatestPointActionPerformed
         double startPoint = Double.parseDouble(jTextFieldStartPoint.getText());
@@ -1194,8 +1074,6 @@ public class MainView extends javax.swing.JFrame {
     public ArrayList<CheckData> chkDataList;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCheckUp;
-    private javax.swing.JButton jButtonEvaluate;
     private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;
     private javax.swing.JButton jButtonInvestChart;
