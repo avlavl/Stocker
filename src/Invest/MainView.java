@@ -592,6 +592,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("1100");
         jTextFieldPS2.setText("680");
         jTextFieldPE2.setText("720");
+        jTextFieldInvestCoef.setText("20");
         importFile("data\\W申万证券.txt");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
