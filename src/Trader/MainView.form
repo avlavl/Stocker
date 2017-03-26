@@ -60,7 +60,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSZZS">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+1"/>
+                  <KeyStroke key="Alt+0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x4e0a;&#x8bc1;&#x6307;&#x6570;"/>
               </Properties>
@@ -71,7 +71,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSZCZ">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+2"/>
+                  <KeyStroke key="Alt+1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x6df1;&#x8bc1;&#x6210;&#x6307;"/>
               </Properties>
@@ -79,21 +79,10 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSZCZActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCYBZ">
-              <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+3"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&#x521b;&#x4e1a;&#x677f;&#x6307;"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCYBZActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHS300">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+4"/>
+                  <KeyStroke key="Alt+2"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x6caa;&#x6df1;300"/>
               </Properties>
@@ -104,7 +93,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZZ500">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+5"/>
+                  <KeyStroke key="Alt+3"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x4e2d;&#x8bc1;500"/>
               </Properties>
@@ -112,15 +101,37 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemZZ500ActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCYBZ">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+4"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x521b;&#x4e1a;&#x677f;&#x6307;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCYBZActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemYLCY">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+6"/>
+                  <KeyStroke key="Alt+5"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x517b;&#x8001;&#x4ea7;&#x4e1a;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemYLCYActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemYY100">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+6"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x533b;&#x836f;100"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemYY100ActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemTJ100">

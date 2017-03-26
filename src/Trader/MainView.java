@@ -154,10 +154,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuIndex = new javax.swing.JMenu();
         jMenuItemSZZS = new javax.swing.JMenuItem();
         jMenuItemSZCZ = new javax.swing.JMenuItem();
-        jMenuItemCYBZ = new javax.swing.JMenuItem();
         jMenuItemHS300 = new javax.swing.JMenuItem();
         jMenuItemZZ500 = new javax.swing.JMenuItem();
+        jMenuItemCYBZ = new javax.swing.JMenuItem();
         jMenuItemYLCY = new javax.swing.JMenuItem();
+        jMenuItemYY100 = new javax.swing.JMenuItem();
         jMenuItemTJ100 = new javax.swing.JMenuItem();
         jMenuItemTXJA = new javax.swing.JMenuItem();
         jMenuItemBF100 = new javax.swing.JMenuItem();
@@ -620,7 +621,7 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuIndex.setText("常用指数");
 
-        jMenuItemSZZS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSZZS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemSZZS.setText("上证指数");
         jMenuItemSZZS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -629,7 +630,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemSZZS);
 
-        jMenuItemSZCZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSZCZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemSZCZ.setText("深证成指");
         jMenuItemSZCZ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -638,16 +639,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemSZCZ);
 
-        jMenuItemCYBZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemCYBZ.setText("创业板指");
-        jMenuItemCYBZ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCYBZActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemCYBZ);
-
-        jMenuItemHS300.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemHS300.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemHS300.setText("沪深300");
         jMenuItemHS300.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -656,7 +648,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemHS300);
 
-        jMenuItemZZ500.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemZZ500.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemZZ500.setText("中证500");
         jMenuItemZZ500.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -665,7 +657,16 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemZZ500);
 
-        jMenuItemYLCY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemCYBZ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemCYBZ.setText("创业板指");
+        jMenuItemCYBZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCYBZActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemCYBZ);
+
+        jMenuItemYLCY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemYLCY.setText("养老产业");
         jMenuItemYLCY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -673,6 +674,15 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jMenuIndex.add(jMenuItemYLCY);
+
+        jMenuItemYY100.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemYY100.setText("医药100");
+        jMenuItemYY100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemYY100ActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemYY100);
 
         jMenuItemTJ100.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemTJ100.setText("淘金100");
@@ -754,10 +764,6 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\深证成指.txt");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
-    private void jMenuItemCYBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCYBZActionPerformed
-        importFile("data\\创业板指.txt");
-    }//GEN-LAST:event_jMenuItemCYBZActionPerformed
-
     private void jMenuItemHS300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHS300ActionPerformed
         importFile("data\\沪深300.txt");
     }//GEN-LAST:event_jMenuItemHS300ActionPerformed
@@ -766,9 +772,17 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\中证500.txt");
     }//GEN-LAST:event_jMenuItemZZ500ActionPerformed
 
+    private void jMenuItemCYBZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCYBZActionPerformed
+        importFile("data\\创业板指.txt");
+    }//GEN-LAST:event_jMenuItemCYBZActionPerformed
+
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
         importFile("data\\养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
+
+    private void jMenuItemYY100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYY100ActionPerformed
+        importFile("data\\医药100.txt");
+    }//GEN-LAST:event_jMenuItemYY100ActionPerformed
 
     private void jMenuItemTJ100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTJ100ActionPerformed
         importFile("data\\淘金100.txt");
@@ -791,7 +805,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemTDXActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-证券交易 V16.10\n版权所有(C) 张向荣(Aioros Zhang)");
+        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-证券交易 V17.03\n版权所有(C) 张向荣(Aioros Zhang)");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
@@ -2265,6 +2279,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemTJ100;
     private javax.swing.JMenuItem jMenuItemTXJA;
     private javax.swing.JMenuItem jMenuItemYLCY;
+    private javax.swing.JMenuItem jMenuItemYY100;
     private javax.swing.JMenuItem jMenuItemZZ500;
     private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelLM;

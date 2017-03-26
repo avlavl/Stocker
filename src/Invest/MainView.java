@@ -131,10 +131,8 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemSZZS = new javax.swing.JMenuItem();
         jMenuItemSZCZ = new javax.swing.JMenuItem();
         jMenuItemSWZQ = new javax.swing.JMenuItem();
-        jMenuItemZZJG = new javax.swing.JMenuItem();
-        jMenuItemZZHB = new javax.swing.JMenuItem();
-        jMenuItemGZYY = new javax.swing.JMenuItem();
         jMenuItemYLCY = new javax.swing.JMenuItem();
+        jMenuItemYY100 = new javax.swing.JMenuItem();
         jMenuRun = new javax.swing.JMenu();
         jMenuItemDZH = new javax.swing.JMenuItem();
         jMenuItemTDX = new javax.swing.JMenuItem();
@@ -484,34 +482,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemSWZQ);
 
-        jMenuItemZZJG.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemZZJG.setText("中证军工");
-        jMenuItemZZJG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemZZJGActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemZZJG);
-
-        jMenuItemZZHB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemZZHB.setText("中证环保");
-        jMenuItemZZHB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemZZHBActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemZZHB);
-
-        jMenuItemGZYY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemGZYY.setText("国证医药");
-        jMenuItemGZYY.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemGZYYActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemGZYY);
-
-        jMenuItemYLCY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemYLCY.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemYLCY.setText("养老产业");
         jMenuItemYLCY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,6 +490,15 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jMenuIndex.add(jMenuItemYLCY);
+
+        jMenuItemYY100.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemYY100.setText("医药100");
+        jMenuItemYY100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemYY100ActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemYY100);
 
         jMenuBar.add(jMenuIndex);
 
@@ -572,6 +552,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("460");
         jTextFieldPS2.setText("200");
         jTextFieldPE2.setText("220");
+        jTextFieldInvestCoef.setText("10");
         importFile("data\\W上证指数.txt");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
 
@@ -582,6 +563,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("1100");
         jTextFieldPS2.setText("730");
         jTextFieldPE2.setText("770");
+        jTextFieldInvestCoef.setText("30");
         importFile("data\\W深证成指.txt");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
@@ -596,36 +578,6 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\W申万证券.txt");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
-    private void jMenuItemZZJGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZJGActionPerformed
-        jTextFieldStartPoint.setText("2500");
-        jTextFieldSlope.setText("1000");
-        jTextFieldPS1.setText("2400");
-        jTextFieldPE1.setText("2600");
-        jTextFieldPS2.setText("980");
-        jTextFieldPE2.setText("1020");
-        importFile("data\\W中证军工.txt");
-    }//GEN-LAST:event_jMenuItemZZJGActionPerformed
-
-    private void jMenuItemZZHBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZHBActionPerformed
-        jTextFieldStartPoint.setText("850");
-        jTextFieldSlope.setText("400");
-        jTextFieldPS1.setText("830");
-        jTextFieldPE1.setText("870");
-        jTextFieldPS2.setText("380");
-        jTextFieldPE2.setText("420");
-        importFile("data\\W中证环保.txt");
-    }//GEN-LAST:event_jMenuItemZZHBActionPerformed
-
-    private void jMenuItemGZYYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGZYYActionPerformed
-        jTextFieldStartPoint.setText("5000");
-        jTextFieldSlope.setText("1800");
-        jTextFieldPS1.setText("4500");
-        jTextFieldPE1.setText("5500");
-        jTextFieldPS2.setText("1750");
-        jTextFieldPE2.setText("1850");
-        importFile("data\\W国证医药.txt");
-    }//GEN-LAST:event_jMenuItemGZYYActionPerformed
-
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
         jTextFieldStartPoint.setText("1400");
         jTextFieldSlope.setText("1000");
@@ -633,8 +585,20 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("1500");
         jTextFieldPS2.setText("960");
         jTextFieldPE2.setText("1040");
+        jTextFieldInvestCoef.setText("20");
         importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
+
+    private void jMenuItemYY100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYY100ActionPerformed
+        jTextFieldStartPoint.setText("1000");
+        jTextFieldSlope.setText("1800");
+        jTextFieldPS1.setText("900");
+        jTextFieldPE1.setText("1100");
+        jTextFieldPS2.setText("1750");
+        jTextFieldPE2.setText("1850");
+        jTextFieldInvestCoef.setText("30");
+        importFile("data\\W医药100.txt");
+    }//GEN-LAST:event_jMenuItemYY100ActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
         runExeFile("C:\\dzh365\\dzh2.exe");
@@ -645,7 +609,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemTDXActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-基金定投 V17.01\n版权所有(C) 张向荣(Aioros Zhang)");
+        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-基金定投 V17.03\n版权所有(C) 张向荣(Aioros Zhang)");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
@@ -1113,15 +1077,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemDZH;
-    private javax.swing.JMenuItem jMenuItemGZYY;
     private javax.swing.JMenuItem jMenuItemImport;
     private javax.swing.JMenuItem jMenuItemSWZQ;
     private javax.swing.JMenuItem jMenuItemSZCZ;
     private javax.swing.JMenuItem jMenuItemSZZS;
     private javax.swing.JMenuItem jMenuItemTDX;
     private javax.swing.JMenuItem jMenuItemYLCY;
-    private javax.swing.JMenuItem jMenuItemZZHB;
-    private javax.swing.JMenuItem jMenuItemZZJG;
+    private javax.swing.JMenuItem jMenuItemYY100;
     private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelCongfig;
     private javax.swing.JPanel jPanelMain;
