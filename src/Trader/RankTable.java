@@ -88,7 +88,7 @@ public class RankTable extends javax.swing.JDialog {
             jTableRank.setValueAt(String.format("%.3f%%", SRList.get(i + idx).positionAnnualRate), i, 6);
             jTableRank.setValueAt(String.format("%.2f天", SRList.get(i + idx).meanPositionDays), i, 7);
             jTableRank.setValueAt(SRList.get(i + idx).tradeTimes, i, 8);
-            jTableRank.setValueAt(String.format("%.2f", SRList.get(i + idx).maxLossRatio), i, 9);
+            jTableRank.setValueAt(String.format("%.2f%%", SRList.get(i + idx).maxLossRatio), i, 9);
             jTableRank.setValueAt(String.format("%.4f", SRList.get(i + idx).expectation), i, 10);
         }
     }
@@ -178,11 +178,17 @@ public class RankTable extends javax.swing.JDialog {
     private void jTableRankMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jTableRankMouseWheelMoved
         if (evt.getWheelRotation() > 0) {
             if (rankIndex < rankSize - 20) {
-                rankIndex += 1;
+                rankIndex += 10;
+                if (rankIndex > rankSize - 20) {
+                    rankIndex = rankSize - 20;
+                }
                 updateTable(rankIndex);
             }
         } else if (rankIndex > 0) {
-            rankIndex -= 1;
+            rankIndex -= 10;
+            if (rankIndex < 0) {
+                rankIndex = 0;
+            }
             updateTable(rankIndex);
         }
     }//GEN-LAST:event_jTableRankMouseWheelMoved
