@@ -57,6 +57,7 @@ public class MainView extends javax.swing.JFrame {
         }
 
         importFile(fileIn);
+        importFile2(fileIn2);
     }
 
     /**
@@ -577,7 +578,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, 30));
 
         jComboBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "淘金100", "腾讯济安", "百发100", "养老产业" }));
+        jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "淘金100", "腾讯济安", "百发100", "养老产业", "医药100" }));
         jComboBox2dObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2dObjectActionPerformed(evt);
@@ -586,6 +587,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jComboBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 90, -1));
 
         jCheckBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jCheckBox2dObject.setSelected(true);
         jCheckBox2dObject.setText("选择二级标的");
         jCheckBox2dObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1259,6 +1261,9 @@ public class MainView extends javax.swing.JFrame {
                 break;
             case 3:
                 fileIn2 = "data\\养老产业.txt";
+                break;
+            case 4:
+                fileIn2 = "data\\医药100.txt";
                 break;
             default:
                 break;
@@ -2175,14 +2180,14 @@ public class MainView extends javax.swing.JFrame {
         return Integer.parseInt(String.valueOf(between_days));
     }
 
-    private String fileIn = "data\\上证指数.txt";
-    private String fileOut = "data\\上证指数_测试日志.txt";
+    private String fileIn = "data\\沪深300.txt";
+    private String fileOut = "data\\沪深300_测试日志.txt";
     private String fileIn2 = "data\\淘金100.txt";
     public FileWriter fileWriter;
 
-    public String stockName = "上证指数";
+    public String stockName = "沪深300";
     public String stockName2 = "淘金100";
-    public String stockCode = "000001";
+    public String stockCode = "000300";
     public int rows = 0;
     public int rows2 = 0;
     public ArrayList<String> dateList;
@@ -2214,7 +2219,7 @@ public class MainView extends javax.swing.JFrame {
     public int lmDays = 1;
     public boolean lmStatus = true;
 
-    public int gradeFlag = 0;
+    public int gradeFlag = 1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
