@@ -58,10 +58,16 @@ public class FormulaLib {
     }
 
     public static boolean CROSS(int idx, ArrayList<Double> lista, ArrayList<Double> listb) {
+        if ((REFD(lista, idx, 1) == REFD(listb, idx, 1))) {
+            return ((REFD(lista, idx, 2) < REFD(listb, idx, 2)) && (lista.get(idx) > listb.get(idx)));
+        }
         return ((REFD(lista, idx, 1) < REFD(listb, idx, 1)) && (lista.get(idx) > listb.get(idx)));
     }
 
     public static boolean CROSS(int idx, ArrayList<Double> lista, double value) {
+        if ((REFD(lista, idx, 1) == value)) {
+            return ((REFD(lista, idx, 2) < value) && (lista.get(idx) > value));
+        }
         return ((REFD(lista, idx, 1) < value) && (lista.get(idx) > value));
     }
 
