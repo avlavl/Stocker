@@ -162,7 +162,7 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemYY100 = new javax.swing.JMenuItem();
         jMenuItemTJ100 = new javax.swing.JMenuItem();
         jMenuItemTXJA = new javax.swing.JMenuItem();
-        jMenuItemBF100 = new javax.swing.JMenuItem();
+        jMenuItemZGHL = new javax.swing.JMenuItem();
         jMenuRun = new javax.swing.JMenu();
         jMenuItemDZH = new javax.swing.JMenuItem();
         jMenuItemTDX = new javax.swing.JMenuItem();
@@ -704,14 +704,14 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemTXJA);
 
-        jMenuItemBF100.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemBF100.setText("百发100");
-        jMenuItemBF100.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemZGHL.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemZGHL.setText("中国互联");
+        jMenuItemZGHL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemBF100ActionPerformed(evt);
+                jMenuItemZGHLActionPerformed(evt);
             }
         });
-        jMenuIndex.add(jMenuItemBF100);
+        jMenuIndex.add(jMenuItemZGHL);
 
         jMenuBar.add(jMenuIndex);
 
@@ -794,9 +794,10 @@ public class MainView extends javax.swing.JFrame {
         importFile("data\\腾讯济安.txt");
     }//GEN-LAST:event_jMenuItemTXJAActionPerformed
 
-    private void jMenuItemBF100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBF100ActionPerformed
-        importFile("data\\百发100.txt");
-    }//GEN-LAST:event_jMenuItemBF100ActionPerformed
+    private void jMenuItemZGHLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZGHLActionPerformed
+        importFile("data\\中国互联.txt");
+        jComboBoxPriceFactor.setSelectedIndex(3);
+    }//GEN-LAST:event_jMenuItemZGHLActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
         runExeFile("C:\\dzh365\\dzh2.exe");
@@ -2271,7 +2272,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuIndex;
     private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemBF100;
     private javax.swing.JMenuItem jMenuItemCYBZ;
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
@@ -2285,6 +2285,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemTXJA;
     private javax.swing.JMenuItem jMenuItemYLCY;
     private javax.swing.JMenuItem jMenuItemYY100;
+    private javax.swing.JMenuItem jMenuItemZGHL;
     private javax.swing.JMenuItem jMenuItemZZ500;
     private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelLM;
