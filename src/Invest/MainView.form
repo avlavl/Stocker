@@ -95,15 +95,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemYLCYActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemYY100">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZZCM">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+5"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x533b;&#x836f;100"/>
+                <Property name="text" type="java.lang.String" value="&#x4e2d;&#x8bc1;&#x4f20;&#x5a92;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemYY100ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemZZCMActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
