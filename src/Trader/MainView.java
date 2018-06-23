@@ -149,6 +149,7 @@ public class MainView extends javax.swing.JFrame {
         jCheckBox2dObject = new javax.swing.JCheckBox();
         jLabelDate2 = new javax.swing.JLabel();
         jLabelClose2 = new javax.swing.JLabel();
+        jButtonTest = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -566,7 +567,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonCheckUpActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonCheckUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, 30));
+        jPanelMain.add(jButtonCheckUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
 
         jButtonEvaluate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonEvaluate.setText("评估");
@@ -575,7 +576,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonEvaluateActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, 30));
+        jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
 
         jComboBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "淘金100", "腾讯济安", "百发100", "养老产业", "医药100" }));
@@ -605,6 +606,15 @@ public class MainView extends javax.swing.JFrame {
         jLabelClose2.setForeground(new java.awt.Color(250, 0, 0));
         jLabelClose2.setText("收盘：--");
         jPanelMain.add(jLabelClose2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, -1, -1));
+
+        jButtonTest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonTest.setLabel("测试");
+        jButtonTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTestActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 478));
 
@@ -1278,6 +1288,43 @@ public class MainView extends javax.swing.JFrame {
             importFile2(fileIn2);
         }
     }//GEN-LAST:event_jCheckBox2dObjectActionPerformed
+
+    private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestActionPerformed
+        String[] stockArray = {"银华日利", "华宝添益", "理财金H", "建信添益", "交易货币", "华泰货币", "富国货币", "华夏快线", "财富宝E", "现金添富"};
+        for (String stock : stockArray) {
+            importFile("data/metf/" + stock + ".txt");
+            int falls = 0;
+            int rises = 0;
+            int evens = 0;
+            double totalFall = 0;
+            double totalRise = 0;
+            for (int i = 0; i < rows; i++) {
+                if (openList.get(i) < closeList.get(i)) {
+                    totalRise += (closeList.get(i) - openList.get(i)) * 1000;
+                    rises++;
+                } else if (openList.get(i) > closeList.get(i)) {
+                    totalFall += (openList.get(i) - closeList.get(i)) * 1000;
+                    falls++;
+                } else {
+                    evens++;
+                }
+            }
+            double riseRatio = (double) 100 * rises / rows;
+            double fallRatio = (double) 100 * falls / rows;
+            double earning = totalRise - totalFall;
+            double aveFall = totalFall / falls;
+            double aveRise = totalRise / rises;
+            double totalAve = earning / rows;
+            double years = daysBetween(dateList, 0, rows - 1) / 365.25;
+            double annualRate = earning / (years * 1000);
+            System.out.println("ETF Name: " + stockName);
+            System.out.println("Rise times: " + rises + "\tEven times: " + evens + "\tFall times: " + falls);
+            System.out.println(String.format("Rise ratio: %.2f%%\tFall ratio: %.2f%%", riseRatio, fallRatio));
+            System.out.println(String.format("Total Rise: %.2f\tTotal Fall: %.2f\tEarning: %.2f", totalRise, totalFall, earning));
+            System.out.println(String.format("Average Rise: %.3f\tAverage Fall: %.3f\tTotal Average: %.3f", aveRise, aveFall, totalAve));
+            System.out.println(String.format("Total years: %.2f\tAnnual Rate: %.2f%%", years, annualRate));
+        }
+    }//GEN-LAST:event_jButtonTestActionPerformed
 
     /**
      ********************* Start of User-defined function ********************
@@ -2230,6 +2277,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEvaluate;
     private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;
+    private javax.swing.JButton jButtonTest;
     private javax.swing.JButton jButtonTradeChart;
     private javax.swing.JButton jButtonTradeEva;
     private javax.swing.JButton jButtonTradeRecord;
