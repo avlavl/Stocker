@@ -552,6 +552,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("460");
         jTextFieldPS2.setText("200");
         jTextFieldPE2.setText("220");
+        jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("10");
         importFile("data\\W上证指数.txt");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
@@ -563,6 +564,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("1100");
         jTextFieldPS2.setText("730");
         jTextFieldPE2.setText("770");
+        jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("30");
         importFile("data\\W深证成指.txt");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
@@ -574,6 +576,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("1100");
         jTextFieldPS2.setText("680");
         jTextFieldPE2.setText("720");
+        jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("20");
         importFile("data\\W申万证券.txt");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
@@ -585,6 +588,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("1300");
         jTextFieldPS2.setText("1050");
         jTextFieldPE2.setText("1150");
+        jTextFieldWinLevel.setText("30");
         jTextFieldInvestCoef.setText("30");
         importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
@@ -596,6 +600,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE1.setText("2400");
         jTextFieldPS2.setText("180");
         jTextFieldPE2.setText("220");
+        jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("8");
         importFile("data\\W中证传媒.txt");
     }//GEN-LAST:event_jMenuItemZZCMActionPerformed
