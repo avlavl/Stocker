@@ -150,6 +150,7 @@ public class MainView extends javax.swing.JFrame {
         jLabelDate2 = new javax.swing.JLabel();
         jLabelClose2 = new javax.swing.JLabel();
         jButtonTest = new javax.swing.JButton();
+        jLabelStockName2 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemImport = new javax.swing.JMenuItem();
@@ -579,13 +580,13 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
 
         jComboBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "淘金100", "腾讯济安", "百发100", "养老产业", "医药100" }));
+        jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "淘金100", "全指医药", "导入..." }));
         jComboBox2dObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2dObjectActionPerformed(evt);
             }
         });
-        jPanelMain.add(jComboBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 90, -1));
+        jPanelMain.add(jComboBox2dObject, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, -1, -1));
 
         jCheckBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jCheckBox2dObject.setSelected(true);
@@ -599,13 +600,13 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelDate2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelDate2.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate2.setText("日期：----/--/--");
-        jPanelMain.add(jLabelDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
+        jLabelDate2.setText("----/--/--");
+        jPanelMain.add(jLabelDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 270, -1, -1));
 
         jLabelClose2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelClose2.setForeground(new java.awt.Color(250, 0, 0));
         jLabelClose2.setText("收盘：--");
-        jPanelMain.add(jLabelClose2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, -1, -1));
+        jPanelMain.add(jLabelClose2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
 
         jButtonTest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonTest.setLabel("测试");
@@ -615,6 +616,11 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jPanelMain.add(jButtonTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
+
+        jLabelStockName2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelStockName2.setForeground(new java.awt.Color(51, 0, 51));
+        jLabelStockName2.setText("淘金100");
+        jPanelMain.add(jLabelStockName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 478));
 
@@ -1265,18 +1271,10 @@ public class MainView extends javax.swing.JFrame {
                 fileIn2 = "data\\淘金100.txt";
                 break;
             case 1:
-                fileIn2 = "data\\腾讯济安.txt";
-                break;
-            case 2:
-                fileIn2 = "data\\百发100.txt";
-                break;
-            case 3:
-                fileIn2 = "data\\养老产业.txt";
-                break;
-            case 4:
-                fileIn2 = "data\\医药100.txt";
+                fileIn2 = "data\\全指医药.txt";
                 break;
             default:
+                fileIn2 = null;
                 break;
         }
         importFile2(fileIn2);
@@ -2053,15 +2051,16 @@ public class MainView extends javax.swing.JFrame {
                 jLabelClose.setText(String.format("收盘：%s  下跌：%.2f/%5.2f%%", closeList.get(idx), margin, ratio));
             }
         } else {
-            jLabelDate2.setText("日期：" + dateList2.get(idx));
+            jLabelStockName2.setText(stockName2);
+            jLabelDate2.setText(dateList2.get(idx));
             double margin = closeList2.get(idx) - closeList2.get(idx - 1);
             double ratio = 100 * (closeList2.get(idx) - closeList2.get(idx - 1)) / closeList2.get(idx - 1);
             if (margin > 0) {
                 jLabelClose2.setForeground(new java.awt.Color(250, 0, 0));
-                jLabelClose2.setText(String.format("收盘：%s  %.2f/%5.2f%%", closeList2.get(idx), margin, ratio));
+                jLabelClose2.setText(String.format("%s  %.2f/%5.2f%%", closeList2.get(idx), margin, ratio));
             } else {
                 jLabelClose2.setForeground(new java.awt.Color(0, 150, 0));
-                jLabelClose2.setText(String.format("收盘：%s  %.2f/%5.2f%%", closeList2.get(idx), margin, ratio));
+                jLabelClose2.setText(String.format("%s  %.2f/%5.2f%%", closeList2.get(idx), margin, ratio));
             }
         }
     }
@@ -2311,6 +2310,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSEDate;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStockName;
+    private javax.swing.JLabel jLabelStockName2;
     private javax.swing.JLabel jLabelTp1;
     private javax.swing.JLabel jLabelTp2;
     private javax.swing.JLabel jLabelbp0;
