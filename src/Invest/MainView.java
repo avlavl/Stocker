@@ -103,23 +103,25 @@ public class MainView extends javax.swing.JFrame {
         jButtonFilterStart = new javax.swing.JButton();
         jButtonFilterCheck = new javax.swing.JButton();
         jPanelCongfig = new javax.swing.JPanel();
-        jTextFieldDiffFactor = new javax.swing.JTextField();
+        jTextFieldDiffCoef = new javax.swing.JTextField();
         jTextFieldSlope = new javax.swing.JTextField();
         jLabelSlope = new javax.swing.JLabel();
-        jLabelDiffFactor = new javax.swing.JLabel();
+        jLabelDiffCoef = new javax.swing.JLabel();
         jTextFieldWinLevel = new javax.swing.JTextField();
-        jTextFieldStartPoint = new javax.swing.JTextField();
+        jTextFieldStart = new javax.swing.JTextField();
         jLabelStartPoint = new javax.swing.JLabel();
         jLabelWinLevel = new javax.swing.JLabel();
         jButtonInvestEva = new javax.swing.JButton();
         jButtonInvestRecord = new javax.swing.JButton();
+        jLabelInvestCoef = new javax.swing.JLabel();
+        jTextFieldInvestCoef = new javax.swing.JTextField();
+        jLabelInvestLevel = new javax.swing.JLabel();
+        jTextFieldInvestLevel = new javax.swing.JTextField();
         jButtonInvestChart = new javax.swing.JButton();
         jLabelLatestPoint = new javax.swing.JLabel();
         jTextFieldLatestPoint = new javax.swing.JTextField();
         jLabelInput = new javax.swing.JLabel();
         jLabelBasePoint = new javax.swing.JLabel();
-        jTextFieldInvestCoef = new javax.swing.JTextField();
-        jLabelInvestCoef = new javax.swing.JLabel();
         jLabelCurrentAsset = new javax.swing.JLabel();
         jLabelCurrentRatio = new javax.swing.JLabel();
         jLabelKeyPoint = new javax.swing.JLabel();
@@ -266,35 +268,33 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS1.setText("360");
+        jTextFieldPS1.setText("10");
         jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 26, 35, -1));
 
         jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE1.setText("460");
+        jTextFieldPE1.setText("300");
         jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 35, -1));
 
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS2.setText("200");
+        jTextFieldPS2.setText("1.0");
         jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 26, 35, -1));
 
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE2.setText("220");
+        jTextFieldPE2.setText("2.5");
         jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 35, -1));
 
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS3.setText("20");
+        jTextFieldPS3.setText("0.7");
         jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 50, 35, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE3.setText("200");
+        jTextFieldPE3.setText("1.0");
         jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 35, -1));
 
         jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS4.setText("10");
         jPanelSysFilter.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 50, 35, -1));
 
         jTextFieldPE4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE4.setText("20");
         jPanelSysFilter.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 35, -1));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -323,37 +323,41 @@ public class MainView extends javax.swing.JFrame {
         jPanelCongfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "定投配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelCongfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextFieldDiffFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldDiffFactor.setText("15");
-        jPanelCongfig.add(jTextFieldDiffFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 55, 40, -1));
+        jTextFieldDiffCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldDiffCoef.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldDiffCoef.setText("1.5");
+        jPanelCongfig.add(jTextFieldDiffCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 52, 50, -1));
 
         jTextFieldSlope.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldSlope.setText("210");
-        jPanelCongfig.add(jTextFieldSlope, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 25, 40, -1));
+        jTextFieldSlope.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldSlope.setText("2.1");
+        jPanelCongfig.add(jTextFieldSlope, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 22, 50, -1));
 
         jLabelSlope.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelSlope.setText("斜率(X100)：");
-        jPanelCongfig.add(jLabelSlope, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, -1, -1));
+        jLabelSlope.setText("斜率：");
+        jPanelCongfig.add(jLabelSlope, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 25, -1, -1));
 
-        jLabelDiffFactor.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDiffFactor.setText("离差因子(X10)：");
-        jPanelCongfig.add(jLabelDiffFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 55, -1, -1));
+        jLabelDiffCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDiffCoef.setText("离差因子：");
+        jPanelCongfig.add(jLabelDiffCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 55, -1, -1));
 
         jTextFieldWinLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldWinLevel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldWinLevel.setText("20");
-        jPanelCongfig.add(jTextFieldWinLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 55, 40, -1));
+        jPanelCongfig.add(jTextFieldWinLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 52, 50, -1));
 
-        jTextFieldStartPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldStartPoint.setText("410");
-        jPanelCongfig.add(jTextFieldStartPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 25, 40, -1));
+        jTextFieldStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldStart.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldStart.setText("410");
+        jPanelCongfig.add(jTextFieldStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 22, 50, -1));
 
         jLabelStartPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelStartPoint.setText("起始值：");
-        jPanelCongfig.add(jLabelStartPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 25, -1, -1));
+        jPanelCongfig.add(jLabelStartPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 25, -1, -1));
 
         jLabelWinLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelWinLevel.setText("止赢位：");
-        jPanelCongfig.add(jLabelWinLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 55, -1, -1));
+        jPanelCongfig.add(jLabelWinLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 55, -1, -1));
 
         jButtonInvestEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonInvestEva.setText("投资评测");
@@ -363,7 +367,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonInvestEvaActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonInvestEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, 30));
+        jPanelCongfig.add(jButtonInvestEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 30));
 
         jButtonInvestRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonInvestRecord.setText("投资记录");
@@ -373,7 +377,25 @@ public class MainView extends javax.swing.JFrame {
                 jButtonInvestRecordActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonInvestRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, 30));
+        jPanelCongfig.add(jButtonInvestRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, 30));
+
+        jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelInvestCoef.setText("定投系数：");
+        jPanelCongfig.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 85, -1, -1));
+
+        jTextFieldInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldInvestCoef.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldInvestCoef.setText("10");
+        jPanelCongfig.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 82, 50, -1));
+
+        jLabelInvestLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelInvestLevel.setText("投资位比：");
+        jPanelCongfig.add(jLabelInvestLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 85, -1, -1));
+
+        jTextFieldInvestLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldInvestLevel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldInvestLevel.setText("0.80");
+        jPanelCongfig.add(jTextFieldInvestLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 82, 50, -1));
 
         jButtonInvestChart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonInvestChart.setText("投资曲线");
@@ -383,13 +405,13 @@ public class MainView extends javax.swing.JFrame {
                 jButtonInvestChartActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonInvestChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, 30));
+        jPanelCongfig.add(jButtonInvestChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, 30));
 
-        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 290, 140));
+        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 45, 290, 165));
 
         jLabelLatestPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelLatestPoint.setText("最新点位：");
-        jPanelMain.add(jLabelLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
+        jPanelMain.add(jLabelLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
 
         jTextFieldLatestPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTextFieldLatestPoint.setText("3000");
@@ -398,25 +420,17 @@ public class MainView extends javax.swing.JFrame {
                 jTextFieldLatestPointActionPerformed(evt);
             }
         });
-        jPanelMain.add(jTextFieldLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 227, 60, -1));
+        jPanelMain.add(jTextFieldLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 227, 60, -1));
 
         jLabelInput.setFont(new java.awt.Font("黑体", 1, 14)); // NOI18N
         jLabelInput.setForeground(new java.awt.Color(255, 0, 0));
         jLabelInput.setText("投入金额：----元");
-        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
+        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 12, -1, -1));
 
         jLabelBasePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelBasePoint.setForeground(new java.awt.Color(102, 0, 102));
         jLabelBasePoint.setText("基点：--");
-        jPanelMain.add(jLabelBasePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
-
-        jTextFieldInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldInvestCoef.setText("10");
-        jPanelMain.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 227, 60, -1));
-
-        jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelInvestCoef.setText("定投系数：");
-        jPanelMain.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 230, -1, -1));
+        jPanelMain.add(jLabelBasePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
 
         jLabelCurrentAsset.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelCurrentAsset.setForeground(new java.awt.Color(0, 153, 153));
@@ -546,60 +560,40 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemImportActionPerformed
 
     private void jMenuItemSZZSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZZSActionPerformed
-        jTextFieldStartPoint.setText("410");
-        jTextFieldSlope.setText("210");
-        jTextFieldPS1.setText("360");
-        jTextFieldPE1.setText("460");
-        jTextFieldPS2.setText("200");
-        jTextFieldPE2.setText("220");
+        jTextFieldStart.setText("410");
+        jTextFieldSlope.setText("2.1");
         jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("10");
         importFile("data\\W上证指数.txt");
     }//GEN-LAST:event_jMenuItemSZZSActionPerformed
 
     private void jMenuItemSZCZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSZCZActionPerformed
-        jTextFieldStartPoint.setText("1000");
-        jTextFieldSlope.setText("750");
-        jTextFieldPS1.setText("900");
-        jTextFieldPE1.setText("1100");
-        jTextFieldPS2.setText("730");
-        jTextFieldPE2.setText("770");
+        jTextFieldStart.setText("1000");
+        jTextFieldSlope.setText("7.5");
         jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("30");
         importFile("data\\W深证成指.txt");
     }//GEN-LAST:event_jMenuItemSZCZActionPerformed
 
     private void jMenuItemSWZQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSWZQActionPerformed
-        jTextFieldStartPoint.setText("1000");
-        jTextFieldSlope.setText("700");
-        jTextFieldPS1.setText("900");
-        jTextFieldPE1.setText("1100");
-        jTextFieldPS2.setText("680");
-        jTextFieldPE2.setText("720");
+        jTextFieldStart.setText("1000");
+        jTextFieldSlope.setText("7");
         jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("20");
         importFile("data\\W申万证券.txt");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
-        jTextFieldStartPoint.setText("1400");
-        jTextFieldSlope.setText("1000");
-        jTextFieldPS1.setText("1300");
-        jTextFieldPE1.setText("1500");
-        jTextFieldPS2.setText("950");
-        jTextFieldPE2.setText("1150");
+        jTextFieldStart.setText("1400");
+        jTextFieldSlope.setText("10");
         jTextFieldWinLevel.setText("30");
         jTextFieldInvestCoef.setText("27");
         importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
 
     private void jMenuItemZZCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZCMActionPerformed
-        jTextFieldStartPoint.setText("1800");
-        jTextFieldSlope.setText("290");
-        jTextFieldPS1.setText("1700");
-        jTextFieldPE1.setText("1900");
-        jTextFieldPS2.setText("250");
-        jTextFieldPE2.setText("350");
+        jTextFieldStart.setText("1800");
+        jTextFieldSlope.setText("2.9");
         jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("8");
         importFile("data\\W中证传媒.txt");
@@ -646,21 +640,25 @@ public class MainView extends javax.swing.JFrame {
 
     private void jButtonInvestEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestEvaActionPerformed
         boolean ret = false;
-        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
         dateProcess();
         if (investDays == 0) {
             return;
         }
-        getInvestMode();
-        int p1 = 0, p2 = 0, p3 = 0, p4 = 0;
-        String[] words = investPara.split(",");
-        p1 = Integer.parseInt(words[0]);
-        p2 = Integer.parseInt(words[1]);
-        p3 = Integer.parseInt(words[2]);
-        p4 = Integer.parseInt(words[3]);
 
-        strategy = new Strategy(this);
-        ret = strategy.sysInvestEva(p1, p2, p3, p4);
+        double start = Double.parseDouble(jTextFieldStart.getText());
+        double slope = Double.parseDouble(jTextFieldSlope.getText());
+        strategy = new Strategy(this, start, slope);
+
+        investLevel = Double.parseDouble(jTextFieldInvestLevel.getText());
+
+        getInvestMode();
+        double p1 = 0, p2 = 0, p3 = 0;
+        String[] words = investPara.split(",");
+        p1 = Double.parseDouble(words[0]);
+        p2 = Double.parseDouble(words[1]);
+        p3 = Double.parseDouble(words[2]);
+
+        ret = strategy.sysInvestEva(p1, p2, p3);
         if (!ret) {
             JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
             return;
@@ -678,33 +676,31 @@ public class MainView extends javax.swing.JFrame {
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
         long time = System.currentTimeMillis();
         jTextAreaMain.setText("");
-        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
         dateProcess();
         if (investDays == 0) {
             return;
         }
+        double start = Double.parseDouble(jTextFieldStart.getText());
+        double slope = Double.parseDouble(jTextFieldSlope.getText());
+
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         SystemReport sr;
         ArrayList<SystemReport> srList = new ArrayList<>();
-        int ps1 = Integer.parseInt(jTextFieldPS1.getText());
-        int pe1 = Integer.parseInt(jTextFieldPE1.getText());
-        int ps2 = Integer.parseInt(jTextFieldPS2.getText());
-        int pe2 = Integer.parseInt(jTextFieldPE2.getText());
-        int ps3 = Integer.parseInt(jTextFieldPS3.getText());
-        int pe3 = Integer.parseInt(jTextFieldPE3.getText());
-        int ps4 = Integer.parseInt(jTextFieldPS4.getText());
-        int pe4 = Integer.parseInt(jTextFieldPE4.getText());
+        double ps1 = Double.parseDouble(jTextFieldPS1.getText());
+        double pe1 = Double.parseDouble(jTextFieldPE1.getText());
+        double ps2 = Double.parseDouble(jTextFieldPS2.getText());
+        double pe2 = Double.parseDouble(jTextFieldPE2.getText());
+        double ps3 = Double.parseDouble(jTextFieldPS3.getText());
+        double pe3 = Double.parseDouble(jTextFieldPE3.getText());
 
-        for (int i = ps1; i <= pe1; i += 10) {
-            for (int j = ps2; j <= pe2; j++) {
-                for (int k = ps3; k <= pe3; k += 10) {
-                    for (int l = ps4; l <= pe4; l++) {
-                        strategy = new Strategy(this);
-                        if (strategy.sysSimpleInvestEva(i, j, k, l)) {
-                            String para = String.format("%d,%d,%d,%d", i, j, k, l);
-                            sr = updateSimpleReport(para, strategy);
-                            srList.add(sr);
-                        }
+        strategy = new Strategy(this, start, slope);
+        for (double i = ps1; i <= pe1; i += 10) {
+            for (double j = ps2; j <= pe2; j += 0.1) {
+                for (double k = ps3; k <= pe3; k += 0.1) {
+                    if (strategy.sysSimpleInvestEva(i, j, k)) {
+                        String para = String.format("%d,%.1f,%.1f", (int) i, j, k);
+                        sr = updateSimpleReport(para, strategy);
+                        srList.add(sr);
                     }
                 }
             }
@@ -725,17 +721,18 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFilterCheckActionPerformed
 
     private void jTextFieldLatestPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLatestPointActionPerformed
-        double startPoint = Double.parseDouble(jTextFieldStartPoint.getText());
+        double start = Double.parseDouble(jTextFieldStart.getText());
         double slope = Double.parseDouble(jTextFieldSlope.getText());
-        double diffFactor = Double.parseDouble(jTextFieldDiffFactor.getText());
+        double diffCoef = Double.parseDouble(jTextFieldDiffCoef.getText());
         double latestPoint = Double.parseDouble(jTextFieldLatestPoint.getText());
 
-        double basePoint = startPoint + rows * (slope / 100);
+        double basePoint = start + rows * slope;
         jLabelBasePoint.setText(String.format("基点：%.2f", basePoint));
-        double diffRate = latestPoint / basePoint;
+        investLevel = Double.parseDouble(jTextFieldInvestLevel.getText());
         investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
-        double input = (basePoint / investCoef) / Math.pow(diffRate, diffFactor / 10);
-        if (diffRate <= 1) {
+        double diffRate = latestPoint / basePoint;
+        if (diffRate <= investLevel) {
+            double input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
             jLabelInput.setText(String.format("投入金额：%.2f元", input));
         } else {
             jLabelInput.setText("投入金额：0.00元");
@@ -800,16 +797,15 @@ public class MainView extends javax.swing.JFrame {
 
     public void investParaEva(String para) {
         String[] paras = para.replaceAll(" ", "").split(",");
-        jTextFieldStartPoint.setText(paras[0]);
-        jTextFieldSlope.setText(paras[1]);
-        jTextFieldWinLevel.setText(paras[2]);
-        jTextFieldDiffFactor.setText(paras[3]);
+        jTextFieldWinLevel.setText(paras[0]);
+        jTextFieldDiffCoef.setText(paras[1]);
+        jTextFieldInvestLevel.setText(paras[2]);
 
         jButtonInvestEva.doClick();
     }
 
     public void getInvestMode() {
-        investPara = jTextFieldStartPoint.getText() + "," + jTextFieldSlope.getText() + "," + jTextFieldWinLevel.getText() + "," + jTextFieldDiffFactor.getText();
+        investPara = jTextFieldWinLevel.getText() + "," + jTextFieldDiffCoef.getText() + "," + jTextFieldInvestLevel.getText();
     }
 
     private void dateProcess() {
@@ -848,17 +844,18 @@ public class MainView extends javax.swing.JFrame {
             jLabelClose.setText(String.format("收盘：%s  %.2f/%5.2f%%", closeList.get(idx), margin, ratio));
         }
 
-        double startPoint = Double.parseDouble(jTextFieldStartPoint.getText());
+        double start = Double.parseDouble(jTextFieldStart.getText());
         double slope = Double.parseDouble(jTextFieldSlope.getText());
-        double diffFactor = Double.parseDouble(jTextFieldDiffFactor.getText());
-        double basePoint = startPoint + idx * (slope / 100);
+        double diffCoef = Double.parseDouble(jTextFieldDiffCoef.getText());
+        double basePoint = start + idx * slope;
         jLabelBasePoint.setText(String.format("基点：%.2f", basePoint));
         double latestPoint = closeList.get(idx);
         jTextFieldLatestPoint.setText(Double.toString(latestPoint));
-        double diffRate = latestPoint / basePoint;
+        investLevel = Double.parseDouble(jTextFieldInvestLevel.getText());
         investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
-        double input = (basePoint / investCoef) / Math.pow(diffRate, diffFactor / 10);
-        if (diffRate <= 1) {
+        double diffRate = latestPoint / basePoint;
+        if (diffRate <= investLevel) {
+            double input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
             jLabelInput.setText(String.format("投入金额：%.2f元", input));
         } else {
             jLabelInput.setText("投入金额：0.00元");
@@ -1036,6 +1033,7 @@ public class MainView extends javax.swing.JFrame {
     public int investDays = 0;
     public double testYears = 0;
     public double investCoef = 1;
+    public double investLevel = 1;
 
     public Strategy strategy;
     public boolean evaluated = false;
@@ -1058,9 +1056,10 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDash3;
     private javax.swing.JLabel jLabelDash4;
     private javax.swing.JLabel jLabelDate;
-    private javax.swing.JLabel jLabelDiffFactor;
+    private javax.swing.JLabel jLabelDiffCoef;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JLabel jLabelInvestCoef;
+    private javax.swing.JLabel jLabelInvestLevel;
     private javax.swing.JLabel jLabelKeyPoint;
     private javax.swing.JLabel jLabelKeyRatio;
     private javax.swing.JLabel jLabelLatestPoint;
@@ -1098,9 +1097,10 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablePoint;
     private javax.swing.JTextArea jTextAreaMain;
-    private javax.swing.JTextField jTextFieldDiffFactor;
+    private javax.swing.JTextField jTextFieldDiffCoef;
     private javax.swing.JTextField jTextFieldEDate;
     private javax.swing.JTextField jTextFieldInvestCoef;
+    private javax.swing.JTextField jTextFieldInvestLevel;
     private javax.swing.JTextField jTextFieldLatestPoint;
     private javax.swing.JTextField jTextFieldPE1;
     private javax.swing.JTextField jTextFieldPE2;
@@ -1112,7 +1112,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldPS4;
     private javax.swing.JTextField jTextFieldSDate;
     private javax.swing.JTextField jTextFieldSlope;
-    private javax.swing.JTextField jTextFieldStartPoint;
+    private javax.swing.JTextField jTextFieldStart;
     private javax.swing.JTextField jTextFieldWinLevel;
     // End of variables declaration//GEN-END:variables
 }

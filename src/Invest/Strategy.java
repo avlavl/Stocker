@@ -14,7 +14,7 @@ import java.util.Collections;
  */
 public class Strategy {
 
-    public Strategy(MainView mv) {
+    public Strategy(MainView mv, double start, double slope) {
         mainView = mv;
         pList = mv.priceList;
         dList = mv.dateList;
@@ -22,11 +22,13 @@ public class Strategy {
         sIndex = mv.sIdx;
         eIndex = mv.eIdx;
         investCoef = mv.investCoef;
+        this.start = start;
+        this.slope = slope;
     }
 
-    public boolean sysInvestEva(int startPoint, int slope, int wLevel, int diffFactor) {
-        winLevel = (double) wLevel / 100;
-        diffCoef = (double) diffFactor / 10;
+    public boolean sysInvestEva(double wLevel, double dCoef, double iLevel) {
+        winLevel = wLevel / 100;
+        diffCoef = dCoef;
         totalInput = 0;
         totalPrice = 0;
         totalNumber = 0;
@@ -71,11 +73,11 @@ public class Strategy {
                 }
             }
 
-            basePoint = startPoint + i * ((double) slope / 100);
+            basePoint = start + i * slope;
             basePoints[i] = basePoint;
             diffRate = pList.get(i) / basePoint;
             diffRateList.add(diffRate);
-            if (pList.get(i) < basePoint) {
+            if (pList.get(i) < basePoint * iLevel) {
                 RecordData recordData = new RecordData(dList.get(i), "投入");
                 input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
                 number = input / pList.get(i);
@@ -112,9 +114,9 @@ public class Strategy {
         return (getInvestRounds() > 0) ? true : false;
     }
 
-    public boolean sysSimpleInvestEva(int startPoint, int slope, int wLevel, int diffFactor) {
-        winLevel = (double) wLevel / 100;
-        diffCoef = (double) diffFactor / 10;
+    public boolean sysSimpleInvestEva(double wLevel, double dCoef, double iLevel) {
+        winLevel = wLevel / 100;
+        diffCoef = dCoef;
         totalInput = 0;
         totalPrice = 0;
         totalNumber = 0;
@@ -143,10 +145,10 @@ public class Strategy {
                 }
             }
 
-            basePoint = startPoint + i * ((double) slope / 100);
+            basePoint = start + i * ((double) slope / 100);
             diffRate = pList.get(i) / basePoint;
             diffRateList.add(diffRate);
-            if (pList.get(i) < basePoint) {
+            if (pList.get(i) < basePoint * iLevel) {
                 input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
                 number = input / pList.get(i);
                 totalInput += input;
@@ -350,7 +352,7 @@ public class Strategy {
     public ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<String> dList = new ArrayList<>();
 
-    public double startPoint;
+    public double start;
     public double slope;
     public double winLevel;
     public double dispersion;
