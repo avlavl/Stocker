@@ -582,24 +582,24 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
-        jTextFieldStartPoint.setText("1200");
-        jTextFieldSlope.setText("1100");
-        jTextFieldPS1.setText("1100");
-        jTextFieldPE1.setText("1300");
-        jTextFieldPS2.setText("1050");
+        jTextFieldStartPoint.setText("1400");
+        jTextFieldSlope.setText("1000");
+        jTextFieldPS1.setText("1300");
+        jTextFieldPE1.setText("1500");
+        jTextFieldPS2.setText("950");
         jTextFieldPE2.setText("1150");
         jTextFieldWinLevel.setText("30");
-        jTextFieldInvestCoef.setText("30");
+        jTextFieldInvestCoef.setText("27");
         importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
 
     private void jMenuItemZZCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZCMActionPerformed
-        jTextFieldStartPoint.setText("2200");
-        jTextFieldSlope.setText("200");
-        jTextFieldPS1.setText("2000");
-        jTextFieldPE1.setText("2400");
-        jTextFieldPS2.setText("180");
-        jTextFieldPE2.setText("220");
+        jTextFieldStartPoint.setText("1800");
+        jTextFieldSlope.setText("290");
+        jTextFieldPS1.setText("1700");
+        jTextFieldPE1.setText("1900");
+        jTextFieldPS2.setText("250");
+        jTextFieldPE2.setText("350");
         jTextFieldWinLevel.setText("20");
         jTextFieldInvestCoef.setText("8");
         importFile("data\\W中证传媒.txt");
