@@ -111,7 +111,7 @@ public class Strategy {
             weights[i] = weight;
         }
 
-        return (getInvestRounds() > 0) ? true : false;
+        return (getInvestRounds() > 0);
     }
 
     public boolean sysSimpleInvestEva(double wLevel, double dCoef, double iLevel) {
@@ -145,7 +145,7 @@ public class Strategy {
                 }
             }
 
-            basePoint = start + i * ((double) slope / 100);
+            basePoint = start + i * slope;
             diffRate = pList.get(i) / basePoint;
             diffRateList.add(diffRate);
             if (pList.get(i) < basePoint * iLevel) {
@@ -157,7 +157,7 @@ public class Strategy {
             }
         }
 
-        return (getInvestRounds() > 0) ? true : false;
+        return (getInvestRounds() > 0);
     }
 
     public int getInvestRounds() {

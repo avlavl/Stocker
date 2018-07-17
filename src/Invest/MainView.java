@@ -693,10 +693,10 @@ public class MainView extends javax.swing.JFrame {
         double ps3 = Double.parseDouble(jTextFieldPS3.getText());
         double pe3 = Double.parseDouble(jTextFieldPE3.getText());
 
-        strategy = new Strategy(this, start, slope);
         for (double i = ps1; i <= pe1; i += 10) {
             for (double j = ps2; j <= pe2; j += 0.1) {
                 for (double k = ps3; k <= pe3; k += 0.1) {
+                    strategy = new Strategy(this, start, slope);
                     if (strategy.sysSimpleInvestEva(i, j, k)) {
                         String para = String.format("%d,%.1f,%.1f", (int) i, j, k);
                         sr = updateSimpleReport(para, strategy);
