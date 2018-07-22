@@ -268,23 +268,23 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS1.setText("10");
+        jTextFieldPS1.setText("20");
         jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 26, 35, -1));
 
         jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE1.setText("300");
+        jTextFieldPE1.setText("200");
         jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 35, -1));
 
         jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS2.setText("1.0");
+        jTextFieldPS2.setText("1.5");
         jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 26, 35, -1));
 
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE2.setText("2.5");
+        jTextFieldPE2.setText("2.0");
         jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 35, -1));
 
         jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS3.setText("0.7");
+        jTextFieldPS3.setText("0.8");
         jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 50, 35, -1));
 
         jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
@@ -577,24 +577,30 @@ public class MainView extends javax.swing.JFrame {
 
     private void jMenuItemSWZQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSWZQActionPerformed
         jTextFieldStart.setText("1000");
-        jTextFieldSlope.setText("7");
+        jTextFieldSlope.setText("6.9");
         jTextFieldWinLevel.setText("20");
+        jTextFieldDiffCoef.setText("1.5");
+        jTextFieldInvestLevel.setText("0.80");
         jTextFieldInvestCoef.setText("20");
         importFile("data\\W申万证券.txt");
     }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
     private void jMenuItemYLCYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemYLCYActionPerformed
-        jTextFieldStart.setText("1400");
-        jTextFieldSlope.setText("10");
-        jTextFieldWinLevel.setText("30");
+        jTextFieldStart.setText("1250");
+        jTextFieldSlope.setText("10.3");
+        jTextFieldWinLevel.setText("50");
+        jTextFieldDiffCoef.setText("2.0");
+        jTextFieldInvestLevel.setText("1.0");
         jTextFieldInvestCoef.setText("27");
         importFile("data\\W养老产业.txt");
     }//GEN-LAST:event_jMenuItemYLCYActionPerformed
 
     private void jMenuItemZZCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZCMActionPerformed
-        jTextFieldStart.setText("1800");
+        jTextFieldStart.setText("1780");
         jTextFieldSlope.setText("2.9");
-        jTextFieldWinLevel.setText("20");
+        jTextFieldWinLevel.setText("50");
+        jTextFieldDiffCoef.setText("2.0");
+        jTextFieldInvestLevel.setText("0.90");
         jTextFieldInvestCoef.setText("8");
         importFile("data\\W中证传媒.txt");
     }//GEN-LAST:event_jMenuItemZZCMActionPerformed
@@ -647,9 +653,9 @@ public class MainView extends javax.swing.JFrame {
 
         double start = Double.parseDouble(jTextFieldStart.getText());
         double slope = Double.parseDouble(jTextFieldSlope.getText());
-        strategy = new Strategy(this, start, slope);
-
         investLevel = Double.parseDouble(jTextFieldInvestLevel.getText());
+        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
+        strategy = new Strategy(this, start, slope);
 
         getInvestMode();
         double p1 = 0, p2 = 0, p3 = 0;
