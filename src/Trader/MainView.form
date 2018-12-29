@@ -134,32 +134,10 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemZZJGActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemTJ100">
-              <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+7"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&#x6dd8;&#x91d1;100"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemTJ100ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHLJR">
-              <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+8"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&#x4e92;&#x8054;&#x91d1;&#x878d;"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHLJRActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZGHL">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+9"/>
+                  <KeyStroke key="Alt+7"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x4e2d;&#x56fd;&#x4e92;&#x8054;"/>
               </Properties>
@@ -1386,10 +1364,9 @@
               <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="&#x6dd8;&#x91d1;100"/>
-                <StringItem index="1" value="&#x5168;&#x6307;&#x533b;&#x836f;"/>
-                <StringItem index="2" value="&#x5bfc;&#x5165;..."/>
+              <StringArray count="2">
+                <StringItem index="0" value="&#x5168;&#x6307;&#x533b;&#x836f;"/>
+                <StringItem index="1" value="&#x5bfc;&#x5165;..."/>
               </StringArray>
             </Property>
           </Properties>
@@ -1478,7 +1455,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="0" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x6dd8;&#x91d1;100"/>
+            <Property name="text" type="java.lang.String" value="&#x5168;&#x6307;&#x533b;&#x836f;"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

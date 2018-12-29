@@ -162,8 +162,6 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemCYBZ = new javax.swing.JMenuItem();
         jMenuItemQZYY = new javax.swing.JMenuItem();
         jMenuItemZZJG = new javax.swing.JMenuItem();
-        jMenuItemTJ100 = new javax.swing.JMenuItem();
-        jMenuItemHLJR = new javax.swing.JMenuItem();
         jMenuItemZGHL = new javax.swing.JMenuItem();
         jMenuRun = new javax.swing.JMenu();
         jMenuItemDZH = new javax.swing.JMenuItem();
@@ -580,7 +578,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelMain.add(jButtonEvaluate, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
 
         jComboBox2dObject.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "淘金100", "全指医药", "导入..." }));
+        jComboBox2dObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "全指医药", "导入..." }));
         jComboBox2dObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2dObjectActionPerformed(evt);
@@ -619,7 +617,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabelStockName2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelStockName2.setForeground(new java.awt.Color(51, 0, 51));
-        jLabelStockName2.setText("淘金100");
+        jLabelStockName2.setText("全指医药");
         jPanelMain.add(jLabelStockName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 478));
@@ -702,25 +700,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemZZJG);
 
-        jMenuItemTJ100.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemTJ100.setText("淘金100");
-        jMenuItemTJ100.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTJ100ActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemTJ100);
-
-        jMenuItemHLJR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemHLJR.setText("互联金融");
-        jMenuItemHLJR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemHLJRActionPerformed(evt);
-            }
-        });
-        jMenuIndex.add(jMenuItemHLJR);
-
-        jMenuItemZGHL.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemZGHL.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemZGHL.setText("中国互联");
         jMenuItemZGHL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -801,14 +781,6 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemZZJGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZJGActionPerformed
         importFile("data\\中证军工.txt");
     }//GEN-LAST:event_jMenuItemZZJGActionPerformed
-
-    private void jMenuItemTJ100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTJ100ActionPerformed
-        importFile("data\\淘金100.txt");
-    }//GEN-LAST:event_jMenuItemTJ100ActionPerformed
-
-    private void jMenuItemHLJRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHLJRActionPerformed
-        importFile("data\\互联金融.txt");
-    }//GEN-LAST:event_jMenuItemHLJRActionPerformed
 
     private void jMenuItemZGHLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZGHLActionPerformed
         importFile("data\\中国互联.txt");
@@ -1268,9 +1240,6 @@ public class MainView extends javax.swing.JFrame {
         int index = jComboBox2dObject.getSelectedIndex();
         switch (index) {
             case 0:
-                fileIn2 = "data\\淘金100.txt";
-                break;
-            case 1:
                 fileIn2 = "data\\全指医药.txt";
                 break;
             default:
@@ -2229,11 +2198,11 @@ public class MainView extends javax.swing.JFrame {
 
     private String fileIn = "data\\沪深300.txt";
     private String fileOut = "data\\沪深300_测试日志.txt";
-    private String fileIn2 = "data\\淘金100.txt";
+    private String fileIn2 = "data\\全指医药.txt";
     public FileWriter fileWriter;
 
     public String stockName = "沪深300";
-    public String stockName2 = "淘金100";
+    public String stockName2 = "全指医药";
     public String stockCode = "000300";
     public int rows = 0;
     public int rows2 = 0;
@@ -2324,14 +2293,12 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemDZH;
-    private javax.swing.JMenuItem jMenuItemHLJR;
     private javax.swing.JMenuItem jMenuItemHS300;
     private javax.swing.JMenuItem jMenuItemImport;
     private javax.swing.JMenuItem jMenuItemQZYY;
     private javax.swing.JMenuItem jMenuItemSZCZ;
     private javax.swing.JMenuItem jMenuItemSZZS;
     private javax.swing.JMenuItem jMenuItemTDX;
-    private javax.swing.JMenuItem jMenuItemTJ100;
     private javax.swing.JMenuItem jMenuItemZGHL;
     private javax.swing.JMenuItem jMenuItemZZ500;
     private javax.swing.JMenuItem jMenuItemZZJG;
