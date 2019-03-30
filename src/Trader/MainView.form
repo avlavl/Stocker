@@ -134,10 +134,21 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemZZJGActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZGHL">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSWZQ">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+7"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x7533;&#x4e07;&#x8bc1;&#x5238;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSWZQActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZGHL">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+8"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x4e2d;&#x56fd;&#x4e92;&#x8054;"/>
               </Properties>

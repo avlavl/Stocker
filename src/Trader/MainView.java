@@ -162,6 +162,7 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemCYBZ = new javax.swing.JMenuItem();
         jMenuItemQZYY = new javax.swing.JMenuItem();
         jMenuItemZZJG = new javax.swing.JMenuItem();
+        jMenuItemSWZQ = new javax.swing.JMenuItem();
         jMenuItemZGHL = new javax.swing.JMenuItem();
         jMenuRun = new javax.swing.JMenu();
         jMenuItemDZH = new javax.swing.JMenuItem();
@@ -700,7 +701,16 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuIndex.add(jMenuItemZZJG);
 
-        jMenuItemZGHL.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSWZQ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemSWZQ.setText("申万证券");
+        jMenuItemSWZQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSWZQActionPerformed(evt);
+            }
+        });
+        jMenuIndex.add(jMenuItemSWZQ);
+
+        jMenuItemZGHL.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemZGHL.setText("中国互联");
         jMenuItemZGHL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -781,6 +791,10 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemZZJGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZZJGActionPerformed
         importFile("data\\中证军工.txt");
     }//GEN-LAST:event_jMenuItemZZJGActionPerformed
+
+    private void jMenuItemSWZQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSWZQActionPerformed
+        importFile("data\\申万证券.txt");
+    }//GEN-LAST:event_jMenuItemSWZQActionPerformed
 
     private void jMenuItemZGHLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemZGHLActionPerformed
         importFile("data\\中国互联.txt");
@@ -2296,6 +2310,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemHS300;
     private javax.swing.JMenuItem jMenuItemImport;
     private javax.swing.JMenuItem jMenuItemQZYY;
+    private javax.swing.JMenuItem jMenuItemSWZQ;
     private javax.swing.JMenuItem jMenuItemSZCZ;
     private javax.swing.JMenuItem jMenuItemSZZS;
     private javax.swing.JMenuItem jMenuItemTDX;
