@@ -46,7 +46,7 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents();
         setLocationRelativeTo(null);
-        final URL filename = getClass().getResource("/resource/Livermore2.jpg");
+        final URL filename = getClass().getResource("/resource/Livermore3.jpg");
         if (filename != null) {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
         }
@@ -66,16 +66,10 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemClear = new javax.swing.JMenuItem();
         jPanelMain = new javax.swing.JPanel();
         jLabelStockName = new javax.swing.JLabel();
-        jLabelDate = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePoint = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaMain = new javax.swing.JTextArea();
-        jLabelSEDate = new javax.swing.JLabel();
-        jLabelSEDash = new javax.swing.JLabel();
-        jTextFieldSDate = new javax.swing.JTextField();
-        jTextFieldEDate = new javax.swing.JTextField();
-        jLabelClose = new javax.swing.JLabel();
         jPanelSysFilter = new javax.swing.JPanel();
         jLabelPara1 = new javax.swing.JLabel();
         jLabelPara2 = new javax.swing.JLabel();
@@ -105,18 +99,16 @@ public class MainView extends javax.swing.JFrame {
         jLabelStartPoint = new javax.swing.JLabel();
         jLabelWinLevel = new javax.swing.JLabel();
         jButtonInvestEva = new javax.swing.JButton();
-        jButtonInvestRecord = new javax.swing.JButton();
+        jButtonIpoInfo = new javax.swing.JButton();
         jLabelInvestCoef = new javax.swing.JLabel();
         jTextFieldInvestCoef = new javax.swing.JTextField();
         jLabelInvestLevel = new javax.swing.JLabel();
         jTextFieldInvestLevel = new javax.swing.JTextField();
         jButtonInvestEva1 = new javax.swing.JButton();
-        jLabelLatestPoint = new javax.swing.JLabel();
-        jTextFieldLatestPoint = new javax.swing.JTextField();
         jLabelInput = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
-        jMenuItemImport = new javax.swing.JMenuItem();
+        jMenuItemOpen = new javax.swing.JMenuItem();
         jMenuRun = new javax.swing.JMenu();
         jMenuItemDZH = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
@@ -149,11 +141,6 @@ public class MainView extends javax.swing.JFrame {
         jLabelStockName.setText("上证指数(000001)");
         jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
-
-        jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate.setText("日期：----/--/--");
-        jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         jTablePoint.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -195,26 +182,6 @@ public class MainView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextAreaMain);
 
         jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 340, 80));
-
-        jLabelSEDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelSEDate.setText("日期：");
-        jPanelMain.add(jLabelSEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 273, -1, -1));
-
-        jLabelSEDash.setText("-");
-        jPanelMain.add(jLabelSEDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 275, -1, -1));
-
-        jTextFieldSDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldSDate.setText("----/--/--");
-        jPanelMain.add(jTextFieldSDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 75, -1));
-
-        jTextFieldEDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldEDate.setText("----/--/--");
-        jPanelMain.add(jTextFieldEDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 75, -1));
-
-        jLabelClose.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelClose.setForeground(new java.awt.Color(250, 0, 0));
-        jLabelClose.setText("收盘：--");
-        jPanelMain.add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
         jPanelSysFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "优选系统", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelSysFilter.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -350,15 +317,15 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelCongfig.add(jButtonInvestEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, 30));
 
-        jButtonInvestRecord.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonInvestRecord.setText("投资记录");
-        jButtonInvestRecord.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonInvestRecord.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIpoInfo.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonIpoInfo.setText("新股信息");
+        jButtonIpoInfo.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonIpoInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInvestRecordActionPerformed(evt);
+                jButtonIpoInfoActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonInvestRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, 30));
+        jPanelCongfig.add(jButtonIpoInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, 30));
 
         jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelInvestCoef.setText("定投系数：");
@@ -379,7 +346,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelCongfig.add(jTextFieldInvestLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 82, 50, -1));
 
         jButtonInvestEva1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonInvestEva1.setText("投资评测");
+        jButtonInvestEva1.setText("评测");
         jButtonInvestEva1.setMargin(new java.awt.Insets(2, 8, 2, 8));
         jButtonInvestEva1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -390,19 +357,6 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 45, 290, 165));
 
-        jLabelLatestPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelLatestPoint.setText("最新点位：");
-        jPanelMain.add(jLabelLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
-
-        jTextFieldLatestPoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldLatestPoint.setText("3000");
-        jTextFieldLatestPoint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldLatestPointActionPerformed(evt);
-            }
-        });
-        jPanelMain.add(jTextFieldLatestPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 227, 60, -1));
-
         jLabelInput.setFont(new java.awt.Font("黑体", 1, 14)); // NOI18N
         jLabelInput.setForeground(new java.awt.Color(255, 0, 0));
         jLabelInput.setText("投入金额：----元");
@@ -412,14 +366,14 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuFile.setText("文件");
 
-        jMenuItemImport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemImport.setText("导入...");
-        jMenuItemImport.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemOpen.setText("打开...");
+        jMenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemImportActionPerformed(evt);
+                jMenuItemOpenActionPerformed(evt);
             }
         });
-        jMenuFile.add(jMenuItemImport);
+        jMenuFile.add(jMenuItemOpen);
 
         jMenuBar.add(jMenuFile);
 
@@ -453,9 +407,9 @@ public class MainView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImportActionPerformed
+    private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
 
-    }//GEN-LAST:event_jMenuItemImportActionPerformed
+    }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
         runExeFile("C:\\dzh365\\dzh2.exe");
@@ -480,10 +434,10 @@ public class MainView extends javax.swing.JFrame {
         jTextAreaMain.copy();
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
-    private void jButtonInvestRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestRecordActionPerformed
+    private void jButtonIpoInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIpoInfoActionPerformed
         importData();
         IpoTable ipoTable = new IpoTable(this, false, ipoInfoList);
-    }//GEN-LAST:event_jButtonInvestRecordActionPerformed
+    }//GEN-LAST:event_jButtonIpoInfoActionPerformed
 
     private void jButtonInvestEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestEvaActionPerformed
         boolean ret = false;
@@ -556,24 +510,6 @@ public class MainView extends javax.swing.JFrame {
         //rankTable.setVisible(true);
     }//GEN-LAST:event_jButtonFilterCheckActionPerformed
 
-    private void jTextFieldLatestPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLatestPointActionPerformed
-        double start = Double.parseDouble(jTextFieldStart.getText());
-        double slope = Double.parseDouble(jTextFieldSlope.getText());
-        double diffCoef = Double.parseDouble(jTextFieldDiffCoef.getText());
-        double latestPoint = Double.parseDouble(jTextFieldLatestPoint.getText());
-
-        double basePoint = start + stocks * slope;
-        investLevel = Double.parseDouble(jTextFieldInvestLevel.getText());
-        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
-        double diffRate = latestPoint / basePoint;
-        if (diffRate <= investLevel) {
-            double input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
-            jLabelInput.setText(String.format("投入金额：%.2f元", input));
-        } else {
-            jLabelInput.setText("投入金额：0.00元");
-        }
-    }//GEN-LAST:event_jTextFieldLatestPointActionPerformed
-
     private void jButtonInvestEva1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestEva1ActionPerformed
         double blackTotal = 0;
         double openTotal = 0;
@@ -610,17 +546,15 @@ public class MainView extends javax.swing.JFrame {
                 ipoInfo.luckyRate = Float.parseFloat(words[6].substring(0, words[6].length() - 1));
                 ipoInfo.offerPrice = Float.parseFloat(words[7]);
                 ipoInfo.offerPe = words[8];
-                ipoInfo.subscribeSuggestion = words[9];
-                ipoInfo.expectedFirstdayGain = words[10];
-                ipoInfo.comparableCompany = words[11];
-                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[12]);
-                ipoInfo.totalRaiseFunds = Float.parseFloat(words[13]);
-                ipoInfo.blackGain = Float.parseFloat(words[14].substring(0, words[14].length() - 1));
+                ipoInfo.comparableCompany = words[9];
+                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[10]);
+                ipoInfo.totalRaiseFunds = Float.parseFloat(words[11]);
+                ipoInfo.blackGain = Float.parseFloat(words[12].substring(0, words[12].length() - 1));
                 ipoInfo.blackPrice = ipoInfo.offerPrice * (1 + ipoInfo.blackGain / 100);
-                ipoInfo.closeGain = Float.parseFloat(words[15].substring(0, words[15].length() - 1));
-                ipoInfo.openPrice = Float.parseFloat(words[16]);
+                ipoInfo.closeGain = Float.parseFloat(words[13].substring(0, words[13].length() - 1));
+                ipoInfo.openPrice = Float.parseFloat(words[14]);
                 ipoInfo.openGain = 100 * (ipoInfo.openPrice - ipoInfo.offerPrice) / ipoInfo.offerPrice;
-                ipoInfo.closePrice = Float.parseFloat(words[19]);
+                ipoInfo.closePrice = Float.parseFloat(words[17]);
                 ipoInfoList.add(ipoInfo);
             }
             stocks = ipoInfoList.size();
@@ -795,24 +729,19 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonFilterStart;
     private javax.swing.JButton jButtonInvestEva;
     private javax.swing.JButton jButtonInvestEva1;
-    private javax.swing.JButton jButtonInvestRecord;
-    private javax.swing.JLabel jLabelClose;
+    private javax.swing.JButton jButtonIpoInfo;
     private javax.swing.JLabel jLabelDash1;
     private javax.swing.JLabel jLabelDash2;
     private javax.swing.JLabel jLabelDash3;
     private javax.swing.JLabel jLabelDash4;
-    private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelDiffCoef;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JLabel jLabelInvestCoef;
     private javax.swing.JLabel jLabelInvestLevel;
-    private javax.swing.JLabel jLabelLatestPoint;
     private javax.swing.JLabel jLabelPara1;
     private javax.swing.JLabel jLabelPara2;
     private javax.swing.JLabel jLabelPara3;
     private javax.swing.JLabel jLabelPara4;
-    private javax.swing.JLabel jLabelSEDash;
-    private javax.swing.JLabel jLabelSEDate;
     private javax.swing.JLabel jLabelSlope;
     private javax.swing.JLabel jLabelStartPoint;
     private javax.swing.JLabel jLabelStockName;
@@ -824,7 +753,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemDZH;
-    private javax.swing.JMenuItem jMenuItemImport;
+    private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelCongfig;
     private javax.swing.JPanel jPanelMain;
@@ -835,10 +764,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTable jTablePoint;
     private javax.swing.JTextArea jTextAreaMain;
     private javax.swing.JTextField jTextFieldDiffCoef;
-    private javax.swing.JTextField jTextFieldEDate;
     private javax.swing.JTextField jTextFieldInvestCoef;
     private javax.swing.JTextField jTextFieldInvestLevel;
-    private javax.swing.JTextField jTextFieldLatestPoint;
     private javax.swing.JTextField jTextFieldPE1;
     private javax.swing.JTextField jTextFieldPE2;
     private javax.swing.JTextField jTextFieldPE3;
@@ -847,7 +774,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldPS2;
     private javax.swing.JTextField jTextFieldPS3;
     private javax.swing.JTextField jTextFieldPS4;
-    private javax.swing.JTextField jTextFieldSDate;
     private javax.swing.JTextField jTextFieldSlope;
     private javax.swing.JTextField jTextFieldStart;
     private javax.swing.JTextField jTextFieldWinLevel;

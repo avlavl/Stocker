@@ -31,7 +31,7 @@ public class IpoTable extends javax.swing.JDialog {
 
         ipoInfoList = list;
         listSize = list.size();
-        String[][] tableContent = new String[tableRows][20];
+        String[][] tableContent = new String[tableRows][18];
         for (int i = 0; i < tableRows; i++) {
             tableContent[i][0] = ipoInfoList.get(i).stockCode;
             tableContent[i][1] = ipoInfoList.get(i).stockName;
@@ -51,18 +51,16 @@ public class IpoTable extends javax.swing.JDialog {
             tableContent[i][15] = ipoInfoList.get(i).blackGain + "%";
             tableContent[i][16] = String.format("%.2f%%", ipoInfoList.get(i).openGain);
             tableContent[i][17] = ipoInfoList.get(i).closeGain + "%";
-            tableContent[i][18] = ipoInfoList.get(i).expectedFirstdayGain;
-            tableContent[i][19] = ipoInfoList.get(i).subscribeSuggestion;
         }
         jTableIpo.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
         jTableIpo.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "代码", "名称", "可比公司", "上市日", "板块", "询价区间", "中签率", "发行市盈率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅", "预计涨幅", "申购建议"
+                    "代码", "名称", "可比公司", "上市日", "板块", "询价区间", "中签率", "发行市盈率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             @Override
@@ -91,9 +89,9 @@ public class IpoTable extends javax.swing.JDialog {
         }
 
         //setTableRowColor(jTableIpo, new Color(0, 128, 0), new Color(220, 0, 0));
-        setPreferredSize(new java.awt.Dimension(1415, 60 * (listSize < 10 ? listSize : 10) + 90));
-        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(1320, 60 * (listSize < 10 ? listSize : 10) + 31));
-        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1380, -1));
+        setPreferredSize(new java.awt.Dimension(1215, 60 * (listSize < 10 ? listSize : 10) + 90));
+        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(1120, 60 * (listSize < 10 ? listSize : 10) + 31));
+        getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1180, -1));
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
@@ -148,8 +146,6 @@ public class IpoTable extends javax.swing.JDialog {
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).blackGain + "%", i, 15);
             jTableIpo.setValueAt(String.format("%.2f%%", ipoInfoList.get(i + idx).openGain), i, 16);
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).closeGain + "%", i, 17);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).expectedFirstdayGain, i, 18);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).subscribeSuggestion, i, 19);
         }
     }
 
@@ -166,7 +162,7 @@ public class IpoTable extends javax.swing.JDialog {
         jTableIpo = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("交易记录");
+        setTitle("新股信息");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPaneInvest.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -180,14 +176,14 @@ public class IpoTable extends javax.swing.JDialog {
         jTableIpo.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTableIpo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "代码", "名称", "板块", "上市日", "中签率", "询价区间", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "首日涨幅", "null", "null", "null", "null"
+                "代码", "名称", "板块", "上市日", "中签率", "询价区间", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "首日涨幅", "null", "null"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -237,6 +233,21 @@ public class IpoTable extends javax.swing.JDialog {
             jTableIpo.setRowSelectionAllowed(false);
             jTableIpo.setColumnSelectionInterval(index, index);
             switch (index) {
+                case 3:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new String(arg1.offerDate).compareTo(arg0.offerDate));
+                    break;
+                case 6:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg0.luckyRate).compareTo(arg1.luckyRate));
+                    break;
+                case 8:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.superPurchaseMultiples).compareTo(arg0.superPurchaseMultiples));
+                    break;
+                case 9:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.totalRaiseFunds).compareTo(arg0.totalRaiseFunds));
+                    break;
+                case 11:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.offerPrice).compareTo(arg0.offerPrice));
+                    break;
                 case 15:
                     Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.blackGain).compareTo(arg0.blackGain));
                     break;
