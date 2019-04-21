@@ -44,11 +44,11 @@ public class InvestTable extends javax.swing.JDialog {
             tableContent[i][9] = ipoInfoList.get(i).totalRaiseFunds + "";
             tableContent[i][10] = ipoInfoList.get(i).handFund + "";
             tableContent[i][11] = ipoInfoList.get(i).offerPrice + "";
-            tableContent[i][12] = ipoInfoList.get(i).blackPrice + "";
+            tableContent[i][12] = String.format("%.3f", ipoInfoList.get(i).blackPrice);
             tableContent[i][13] = ipoInfoList.get(i).openPrice + "";
             tableContent[i][14] = ipoInfoList.get(i).closePrice + "";
             tableContent[i][15] = ipoInfoList.get(i).blackGain + "%";
-            tableContent[i][16] = ipoInfoList.get(i).openGain + "%";
+            tableContent[i][16] = String.format("%.2f%%", ipoInfoList.get(i).openGain);
             tableContent[i][17] = ipoInfoList.get(i).closeGain + "%";
             tableContent[i][18] = ipoInfoList.get(i).expectedFirstdayGain;
             tableContent[i][19] = ipoInfoList.get(i).subscribeSuggestion;
@@ -88,7 +88,7 @@ public class InvestTable extends javax.swing.JDialog {
             jTableInvest.getColumnModel().getColumn(14).setPreferredWidth(50);
         }
 
-        //setTableRowColor(jTableInvest, new Color(0, 128, 0), new Color(220, 0, 0));
+        setTableRowColor(jTableInvest, new Color(0, 128, 0), new Color(220, 0, 0));
         setPreferredSize(new java.awt.Dimension(1415, 40 * (lists < 10 ? lists : 10) + 90));
         jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(1320, 40 * (lists < 10 ? lists : 10) + 31));
         getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1380, -1));
@@ -103,7 +103,7 @@ public class InvestTable extends javax.swing.JDialog {
                 @Override
                 public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                     String status = (String) Table.getValueAt(row, column);
-                    if (column > 10) {
+                    if ((column > 14) && (column < 18)) {
                         if (status.startsWith("-")) {
                             setForeground(color1);
                         } else if (Double.parseDouble(status.substring(0, status.length() - 1)) == 0) {
@@ -114,6 +114,7 @@ public class InvestTable extends javax.swing.JDialog {
                     } else {
                         setForeground(new Color(0, 0, 0));
                     }
+                    setHorizontalAlignment(JLabel.CENTER);
                     return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 }
             };
