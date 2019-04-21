@@ -8,6 +8,7 @@ package Stagging;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -16,22 +17,22 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Aioros
  */
-public class InvestTable extends javax.swing.JDialog {
+public class IpoTable extends javax.swing.JDialog {
 
     /**
-     * Creates new form InvestTable
+     * Creates new form IpoTable
      *
      * @param parent
      * @param modal
      */
-    public InvestTable(java.awt.Frame parent, boolean modal, ArrayList<IpoInfo> list) {
+    public IpoTable(java.awt.Frame parent, boolean modal, ArrayList<IpoInfo> list) {
         super(parent, modal);
         initComponents();
 
         ipoInfoList = list;
-        lists = list.size();
-        String[][] tableContent = new String[lists][20];
-        for (int i = 0; i < lists; i++) {
+        listSize = list.size();
+        String[][] tableContent = new String[tableRows][20];
+        for (int i = 0; i < tableRows; i++) {
             tableContent[i][0] = ipoInfoList.get(i).stockCode;
             tableContent[i][1] = ipoInfoList.get(i).stockName;
             tableContent[i][2] = ipoInfoList.get(i).comparableCompany;
@@ -53,8 +54,8 @@ public class InvestTable extends javax.swing.JDialog {
             tableContent[i][18] = ipoInfoList.get(i).expectedFirstdayGain;
             tableContent[i][19] = ipoInfoList.get(i).subscribeSuggestion;
         }
-        jTableInvest.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
-        jTableInvest.setModel(new javax.swing.table.DefaultTableModel(
+        jTableIpo.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 13));
+        jTableIpo.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
                     "代码", "名称", "可比公司", "上市日", "板块", "询价区间", "中签率", "发行市盈率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅", "预计涨幅", "申购建议"
@@ -64,33 +65,34 @@ public class InvestTable extends javax.swing.JDialog {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
         });
-        jTableInvest.setRowHeight(20);
-        jScrollPaneInvest.setViewportView(jTableInvest);
-        if (jTableInvest.getColumnModel().getColumnCount() > 0) {
-            jTableInvest.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTableInvest.getColumnModel().getColumn(1).setPreferredWidth(90);
-            jTableInvest.getColumnModel().getColumn(2).setPreferredWidth(90);
-            jTableInvest.getColumnModel().getColumn(3).setPreferredWidth(120);
-            jTableInvest.getColumnModel().getColumn(4).setPreferredWidth(50);
-            jTableInvest.getColumnModel().getColumn(5).setPreferredWidth(80);
-            jTableInvest.getColumnModel().getColumn(6).setPreferredWidth(60);
-            jTableInvest.getColumnModel().getColumn(7).setPreferredWidth(90);
-            jTableInvest.getColumnModel().getColumn(8).setPreferredWidth(70);
-            jTableInvest.getColumnModel().getColumn(9).setPreferredWidth(70);
-            jTableInvest.getColumnModel().getColumn(10).setPreferredWidth(70);
-            jTableInvest.getColumnModel().getColumn(11).setPreferredWidth(60);
-            jTableInvest.getColumnModel().getColumn(12).setPreferredWidth(50);
-            jTableInvest.getColumnModel().getColumn(13).setPreferredWidth(50);
-            jTableInvest.getColumnModel().getColumn(14).setPreferredWidth(50);
+        jTableIpo.setRowHeight(20);
+        jScrollPaneInvest.setViewportView(jTableIpo);
+        if (jTableIpo.getColumnModel().getColumnCount() > 0) {
+            jTableIpo.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTableIpo.getColumnModel().getColumn(1).setPreferredWidth(90);
+            jTableIpo.getColumnModel().getColumn(2).setPreferredWidth(90);
+            jTableIpo.getColumnModel().getColumn(3).setPreferredWidth(90);
+            jTableIpo.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jTableIpo.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTableIpo.getColumnModel().getColumn(6).setPreferredWidth(60);
+            jTableIpo.getColumnModel().getColumn(7).setPreferredWidth(90);
+            jTableIpo.getColumnModel().getColumn(8).setPreferredWidth(70);
+            jTableIpo.getColumnModel().getColumn(9).setPreferredWidth(70);
+            jTableIpo.getColumnModel().getColumn(10).setPreferredWidth(70);
+            jTableIpo.getColumnModel().getColumn(11).setPreferredWidth(60);
+            jTableIpo.getColumnModel().getColumn(12).setPreferredWidth(60);
+            jTableIpo.getColumnModel().getColumn(13).setPreferredWidth(60);
+            jTableIpo.getColumnModel().getColumn(14).setPreferredWidth(60);
         }
 
-        setTableRowColor(jTableInvest, new Color(0, 128, 0), new Color(220, 0, 0));
-        setPreferredSize(new java.awt.Dimension(1415, 40 * (lists < 10 ? lists : 10) + 90));
-        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(1320, 40 * (lists < 10 ? lists : 10) + 31));
+        //setTableRowColor(jTableIpo, new Color(0, 128, 0), new Color(220, 0, 0));
+        setPreferredSize(new java.awt.Dimension(1415, 60 * (listSize < 10 ? listSize : 10) + 90));
+        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(1320, 60 * (listSize < 10 ? listSize : 10) + 31));
         getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1380, -1));
         pack();
         setLocationRelativeTo(parent);
@@ -127,46 +129,27 @@ public class InvestTable extends javax.swing.JDialog {
     }
 
     public void updateTable(int idx) {
-        int rows = (lists > 20) ? 20 : lists;
-        for (int i = 0; i < rows; i++) {
-//            jTableInvest.setValueAt(mv.codeList.get(i + idx), i, 0);
-//            jTableInvest.setValueAt(mv.nameList.get(i + idx), i, 1);
-//            jTableInvest.setValueAt(mv.plateList.get(i + idx), i, 2);
-//            jTableInvest.setValueAt(mv.dateList.get(i + idx), i, 3);
-//            jTableInvest.setValueAt(mv.luckyRateList.get(i + idx), i, 4);
-//            jTableInvest.setValueAt(mv.inquiryRangeList.get(i + idx), i, 5);
-//            jTableInvest.setValueAt(mv.blockMoneyList.get(i + idx), i, 6);
-//            jTableInvest.setValueAt(mv.issuePriceList.get(i + idx), i, 7);
-//            jTableInvest.setValueAt(String.format("%.3f", mv.blackList.get(i)), i, 8);
-//            jTableInvest.setValueAt(mv.openList.get(i + idx), i, 9);
-//            jTableInvest.setValueAt(mv.closeList.get(i + idx), i, 10);
-//            jTableInvest.setValueAt(mv.blackRisingRateList.get(i + idx), i, 11);
-//            jTableInvest.setValueAt(String.format("%.2f%%", mv.openRisingRateList.get(i)), i, 7);
-//            jTableInvest.setValueAt(mv.closeRisingRateList.get(i + idx), i, 7);
-        }
-    }
-
-    private void jTableRankHeaderMouseClicked(java.awt.event.MouseEvent evt) {
-        if (evt.getClickCount() > 1) {
-            int index = jTableInvest.columnAtPoint(evt.getPoint());
-            jTableInvest.setColumnSelectionAllowed(true);
-            jTableInvest.setRowSelectionAllowed(false);
-            jTableInvest.setColumnSelectionInterval(index, index);
-            switch (index) {
-//                case 11:
-//                    Collections.sort(SRList, (Trader.SystemReport arg0, Trader.SystemReport arg1) -> new Float(arg1.currentAsset).compareTo(arg0.currentAsset));
-//                    break;
-//                case 12:
-//                    Collections.sort(SRList, (Trader.SystemReport arg0, Trader.SystemReport arg1) -> new Float(arg1.standardAnnualRate).compareTo(arg0.standardAnnualRate));
-//                    break;
-//                case 13:
-//                    Collections.sort(SRList, (Trader.SystemReport arg0, Trader.SystemReport arg1) -> new Float(arg0.positionDaysRate).compareTo(arg1.positionDaysRate));
-//                    break;
-//                default:
-//                    break;
-            }
-            rankIndex = 0;
-            updateTable(rankIndex);
+        for (int i = 0; i < tableRows; i++) {
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockCode, i, 0);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockName, i, 1);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).comparableCompany, i, 2);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerDate, i, 3);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).marketPlate, i, 4);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).inquiryRange, i, 5);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).luckyRate + "%", i, 6);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerPe, i, 7);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).superPurchaseMultiples, i, 8);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).totalRaiseFunds, i, 9);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).handFund, i, 10);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerPrice, i, 11);
+            jTableIpo.setValueAt(String.format("%.3f", ipoInfoList.get(i + idx).blackPrice), i, 12);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).openPrice, i, 13);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).closePrice, i, 14);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).blackGain + "%", i, 15);
+            jTableIpo.setValueAt(String.format("%.2f%%", ipoInfoList.get(i + idx).openGain), i, 16);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).closeGain + "%", i, 17);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).expectedFirstdayGain, i, 18);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).subscribeSuggestion, i, 19);
         }
     }
 
@@ -180,7 +163,7 @@ public class InvestTable extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPaneInvest = new javax.swing.JScrollPane();
-        jTableInvest = new javax.swing.JTable();
+        jTableIpo = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("交易记录");
@@ -191,11 +174,11 @@ public class InvestTable extends javax.swing.JDialog {
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(JLabel.CENTER);
-        jTableInvest.setDefaultRenderer(Object.class, tcr);
-        jTableInvest.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTableInvest.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
-        jTableInvest.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTableInvest.setModel(new javax.swing.table.DefaultTableModel(
+        jTableIpo.setDefaultRenderer(Object.class, tcr);
+        jTableIpo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableIpo.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
+        jTableIpo.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTableIpo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
@@ -211,24 +194,72 @@ public class InvestTable extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTableInvest.setRowHeight(20);
-        jTableInvest.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableIpo.setRowHeight(20);
+        jTableIpo.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                //jTableInvestHeaderMouseClicked(evt);
+                jTableIpoHeaderMouseClicked(evt);
             }
         });
-        jScrollPaneInvest.setViewportView(jTableInvest);
+        jTableIpo.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                jTableIpoMouseWheelMoved(evt);
+            }
+        });
+        jScrollPaneInvest.setViewportView(jTableIpo);
 
         getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1160, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTableIpoMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jTableIpoMouseWheelMoved
+        if (evt.getWheelRotation() > 0) {
+            if (listIndex < listSize - tableRows) {
+                listIndex += 10;
+                if (listIndex > listSize - tableRows) {
+                    listIndex = listSize - tableRows;
+                }
+                updateTable(listIndex);
+            }
+        } else if (listIndex > 0) {
+            listIndex -= 10;
+            if (listIndex < 0) {
+                listIndex = 0;
+            }
+            updateTable(listIndex);
+        }
+    }//GEN-LAST:event_jTableIpoMouseWheelMoved
+
+    private void jTableIpoHeaderMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getClickCount() > 1) {
+            int index = jTableIpo.columnAtPoint(evt.getPoint());
+            jTableIpo.setColumnSelectionAllowed(true);
+            jTableIpo.setRowSelectionAllowed(false);
+            jTableIpo.setColumnSelectionInterval(index, index);
+            switch (index) {
+                case 15:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.blackGain).compareTo(arg0.blackGain));
+                    break;
+                case 16:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.openGain).compareTo(arg0.openGain));
+                    break;
+                case 17:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.closeGain).compareTo(arg0.closeGain));
+                    break;
+                default:
+                    break;
+            }
+            listIndex = 0;
+            updateTable(listIndex);
+        }
+    }
+
+    private int listSize = 0;
+    private int listIndex = 0;
+    private int tableRows = 30;
+    private ArrayList<IpoInfo> ipoInfoList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPaneInvest;
-    private javax.swing.JTable jTableInvest;
+    private javax.swing.JTable jTableIpo;
     // End of variables declaration//GEN-END:variables
-    private int lists = 0;
-    private int rankIndex = 0;
-    private ArrayList<IpoInfo> ipoInfoList;
 }

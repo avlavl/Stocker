@@ -50,8 +50,6 @@ public class MainView extends javax.swing.JFrame {
         if (filename != null) {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
         }
-
-        importData();
     }
 
     /**
@@ -483,7 +481,8 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCopyActionPerformed
 
     private void jButtonInvestRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestRecordActionPerformed
-        InvestTable investTable = new InvestTable(this, false, ipoInfoList);
+        importData();
+        IpoTable ipoTable = new IpoTable(this, false, ipoInfoList);
     }//GEN-LAST:event_jButtonInvestRecordActionPerformed
 
     private void jButtonInvestEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestEvaActionPerformed
@@ -598,9 +597,6 @@ public class MainView extends javax.swing.JFrame {
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
             BufferedReader br = new BufferedReader(isr);
             String[] words = br.readLine().split("\t");
-            stockName = words[1];
-            stockCode = words[0].replaceAll("[\\pP\\p{Punct}]", "");
-            jLabelStockName.setText(stockName + "(" + stockCode + ")");
             column = words.length;
             ipoInfoList = new ArrayList<>();
             String line;
@@ -628,7 +624,6 @@ public class MainView extends javax.swing.JFrame {
                 ipoInfoList.add(ipoInfo);
             }
             stocks = ipoInfoList.size();
-
             br.close();
             isr.close();
         } catch (IOException | NumberFormatException e) {

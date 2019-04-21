@@ -46,9 +46,9 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTableInvest">
+        <Component class="javax.swing.JTable" name="jTableIpo">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="jTableInvest.getTableHeader().setFont(new java.awt.Font(&quot;&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;&quot;, 0, 12));">
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="jTableIpo.getTableHeader().setFont(new java.awt.Font(&quot;&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;&quot;, 0, 12));">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder/>
               </Border>
@@ -177,9 +177,12 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseWheelMoved" listener="java.awt.event.MouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="jTableIpoMouseWheelMoved"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableInvest.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {&#xd;&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xd;&#xa;        //jTableInvestHeaderMouseClicked(evt);&#xd;&#xa;    }&#xd;&#xa;});"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();&#xa;tcr.setHorizontalAlignment(JLabel.CENTER);&#xa;jTableInvest.setDefaultRenderer(Object.class, tcr);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTableIpo.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {&#xd;&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xd;&#xa;        jTableIpoHeaderMouseClicked(evt);&#xd;&#xa;    }&#xd;&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();&#xa;tcr.setHorizontalAlignment(JLabel.CENTER);&#xa;jTableIpo.setDefaultRenderer(Object.class, tcr);"/>
           </AuxValues>
         </Component>
       </SubComponents>
