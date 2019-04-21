@@ -20,16 +20,16 @@ public class SystemReport {
 
     public String parameter;
 
-    public int investRounds;
-    public float addInvest;
-    public float addOutput;
-    public float netProfit;
-    public float yieldRate;
-    public float testYears;
+    public float backTotalGain;
+    public float openTotalGain;
+    public float closeTotalGain;
+    public float backTotalEarning;
+    public float openTotalEarning;
+    public float closeTotalEarning;
     public int investCounts;
-    public float investTimeRatio;
-    public float maxRoundTime;
-    public int maxInvestCount;
+    public float blackWeightEarning;
+    public float openWeightEarning;
+    public float closeWeightEarning;
     public float meanInvestCount;
     public float meanDailyRate;
     public float meanPositionDays;

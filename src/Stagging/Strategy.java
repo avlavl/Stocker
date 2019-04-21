@@ -14,105 +14,11 @@ import java.util.Collections;
  */
 public class Strategy {
 
-    public Strategy(MainView mv, double start, double slope) {
-        mainView = mv;
-        items = pList.size();
-        sIndex = mv.sIdx;
-        eIndex = mv.eIdx;
-        investCoef = mv.investCoef;
-        this.start = start;
-        this.slope = slope;
+    public Strategy(ArrayList<IpoInfo> list) {
+        ipoInfoList = list;
     }
 
-    public boolean sysInvestEva(double wLevel, double dCoef, double iLevel) {
-        winLevel = wLevel / 100;
-        diffCoef = dCoef;
-        totalInput = 0;
-        totalPrice = 0;
-        totalNumber = 0;
-        double input = 0;
-        double number = 0;
-        double weight = 0;
-        weights = new double[items];
-        basePoints = new double[items];
-        profitRatios = new double[items];
-
-        for (int i = sIndex; i <= eIndex; i++) {
-            weight = 0;
-            if (totalInput > 0) {
-                totalPrice = totalNumber * pList.get(i);
-                profit = totalPrice - totalInput;
-                profitRatio = profit / totalInput;
-                profitList.add(profit);
-                profitRatios[i] = profitRatio;
-                if (profitRatio >= winLevel) {
-                    weight -= totalPrice;
-                    RecordData recordData = new RecordData(dList.get(i), "赎回");
-                    bsDateList.add(dList.get(i));
-                    roundDateLists.add(bsDateList);
-                    bsDateList = new ArrayList<>();
-                    totalInputList.add(totalInput);
-                    totalPriceList.add(totalPrice);
-                    yieldList.add(profitRatio);
-                    addInvest += totalInput;
-                    addOutput += totalPrice;
-                    recordData.price = pList.get(i);
-                    recordData.number = totalNumber;
-                    recordData.cost = totalInput / totalNumber;
-                    recordData.totalInput = totalInput;
-                    recordData.profit = profit;
-                    recordData.profitRatio = profitRatio * 100;
-                    recordDataList.add(recordData);
-                    totalInput = 0;
-                    totalPrice = 0;
-                    totalNumber = 0;
-                    profit = 0;
-                    profitRatio = 0;
-                }
-            }
-
-            basePoint = start + i * slope;
-            basePoints[i] = basePoint;
-            diffRate = pList.get(i) / basePoint;
-            diffRateList.add(diffRate);
-            if (pList.get(i) < basePoint * iLevel) {
-                RecordData recordData = new RecordData(dList.get(i), "投入");
-                input = (basePoint / investCoef) / Math.pow(diffRate, diffCoef);
-                number = input / pList.get(i);
-                weight += input;
-                totalPrice += input;
-                totalInput += input;
-                totalNumber += number;
-                bsDateList.add(dList.get(i));
-                recordData.price = pList.get(i);
-                recordData.diff = diffRate;
-                recordData.input = input;
-                recordData.number = number;
-                recordData.cost = totalInput / totalNumber;
-                recordData.totalInput = totalInput;
-                recordData.profit = profit;
-                profitRatio = profit / totalInput;
-                profitRatios[i] = profitRatio;
-                recordData.profitRatio = profitRatio * 100;
-                recordDataList.add(recordData);
-            } else if (totalInput > 0) {
-                RecordData recordData = new RecordData(dList.get(i), "持有");
-                recordData.price = pList.get(i);
-                recordData.diff = diffRate;
-                recordData.number = totalNumber;
-                recordData.cost = totalInput / totalNumber;
-                recordData.totalInput = totalInput;
-                recordData.profit = profit;
-                recordData.profitRatio = profitRatio * 100;
-                recordDataList.add(recordData);
-            }
-            weights[i] = weight;
-        }
-
-        return (getInvestRounds() > 0);
-    }
-
-    public boolean sysSimpleInvestEva(double wLevel, double dCoef, double iLevel) {
+    public boolean sysEva(double wLevel, double dCoef, double iLevel) {
         winLevel = wLevel / 100;
         diffCoef = dCoef;
         totalInput = 0;
@@ -155,58 +61,79 @@ public class Strategy {
             }
         }
 
-        return (getInvestRounds() > 0);
+        return (getBlackTotalGain() > 0);
     }
 
-    public int getInvestRounds() {
-        return totalInputList.size();
-    }
-
-    public double getAddInvest() {
-        return addInvest;
-    }
-
-    public double getAddOutput() {
-        return addOutput;
-    }
-
-    public double getNetProfit() {
-        return addOutput - addInvest;
-    }
-
-    public double getYieldRate() {
-        return 100 * (addOutput - addInvest) / addInvest;
-    }
-
-    public int getInvestCounts() {
-        int times = 0;
-        for (ArrayList<String> roundDateList : roundDateLists) {
-            times += roundDateList.size() - 1;
+    public float getBlackTotalGain() {
+        float totalGain = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalGain += ipoInfo.blackGain;
         }
-        times += bsDateList.size();
-        return times;
+        return totalGain;
     }
 
-    public double getInvestTimeRatio() {
-        return 100 * (double) getInvestCounts() * 7 / (mainView.testYears * 365.25);
-    }
-
-    public double getMaxRoundTime() {
-        ArrayList<Integer> cycleList = new ArrayList<>();
-        for (ArrayList<String> roundList : roundDateLists) {
-//            int time = mainView.daysBetween(roundList.get(0), roundList.get(roundList.size() - 1));
-//            cycleList.add(time);
+    public float getOpenTotalGain() {
+        float totalGain = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalGain += ipoInfo.openGain;
         }
-        double years = (double) Collections.max(cycleList) / 365.25;
-        return years;
+        return totalGain;
     }
 
-    public int getMaxInvestCount() {
-        ArrayList<Integer> timesList = new ArrayList<>();
-        for (ArrayList<String> roundDateList : roundDateLists) {
-            timesList.add(roundDateList.size() - 1);
+    public float getCloseTotalGain() {
+        float totalGain = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalGain += ipoInfo.closeGain;
         }
-        return Collections.max(timesList);
+        return totalGain;
+    }
+
+    public float getBlackTotalEarning() {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarning += ipoInfo.handFund * ipoInfo.blackGain / 100;
+        }
+        return totalEarning;
+    }
+
+    public float getOpenTotalEarning() {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarning += ipoInfo.handFund * ipoInfo.openGain / 100;
+        }
+        return totalEarning;
+    }
+
+    public float getCloseTotalEarning() {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarning += ipoInfo.handFund * ipoInfo.closeGain / 100;
+        }
+        return totalEarning;
+    }
+
+    public float getBlackWeightEarning() {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.blackGain / 10000;
+        }
+        return totalEarning;
+    }
+
+    public float getOpenWeightEarning() {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+        }
+        return totalEarning;
+    }
+
+    public float getCloseWeightEarning() {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+        }
+        return totalEarning;
     }
 
     public double getMeanInvestCount() {
@@ -347,6 +274,7 @@ public class Strategy {
     }
 
     public MainView mainView;
+    ArrayList<IpoInfo> ipoInfoList;
     public ArrayList<Double> pList = new ArrayList<>();
     public ArrayList<String> dList = new ArrayList<>();
 

@@ -50,6 +50,7 @@ public class MainView extends javax.swing.JFrame {
         if (filename != null) {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
         }
+        importData();
     }
 
     /**
@@ -164,8 +165,8 @@ public class MainView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTablePoint);
         if (jTablePoint.getColumnModel().getColumnCount() > 0) {
-            jTablePoint.getColumnModel().getColumn(0).setMaxWidth(75);
-            jTablePoint.getColumnModel().getColumn(2).setMaxWidth(75);
+            jTablePoint.getColumnModel().getColumn(0).setMinWidth(80);
+            jTablePoint.getColumnModel().getColumn(2).setMinWidth(80);
         }
 
         jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 340, 206));
@@ -446,7 +447,7 @@ public class MainView extends javax.swing.JFrame {
         double slope = Double.parseDouble(jTextFieldSlope.getText());
         investLevel = Double.parseDouble(jTextFieldInvestLevel.getText());
         investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
-        strategy = new Strategy(this, start, slope);
+        strategy = new Strategy(ipoInfoList);
 
         getInvestMode();
         double p1 = 0, p2 = 0, p3 = 0;
@@ -455,13 +456,13 @@ public class MainView extends javax.swing.JFrame {
         p2 = Double.parseDouble(words[1]);
         p3 = Double.parseDouble(words[2]);
 
-        ret = strategy.sysInvestEva(p1, p2, p3);
-        if (!ret) {
-            JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
-            return;
-        }
-//        IpoInfo sr = updateSystemReport(strategy);
-//        updateTable(sr);
+//        ret = strategy.sysEva(p1, p2, p3);
+//        if (!ret) {
+//            JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
+//            return;
+//        }
+        SystemReport sr = updateSystemReport(strategy);
+        updateTable(sr);
 
         evaluated = true;
     }//GEN-LAST:event_jButtonInvestEvaActionPerformed
@@ -486,19 +487,19 @@ public class MainView extends javax.swing.JFrame {
         for (double i = ps1; i <= pe1; i += 10) {
             for (double j = ps2; j <= pe2; j += 0.1) {
                 for (double k = ps3; k <= pe3; k += 0.1) {
-                    strategy = new Strategy(this, start, slope);
-                    if (strategy.sysSimpleInvestEva(i, j, k)) {
-                        String para = String.format("%d,%.1f,%.1f", (int) i, j, k);
-                        sr = updateSimpleReport(para, strategy);
-                        srList.add(sr);
-                    }
+//                    strategy = new Strategy(this, start, slope);
+//                    if (strategy.sysSimpleInvestEva(i, j, k)) {
+//                        String para = String.format("%d,%.1f,%.1f", (int) i, j, k);
+//                        sr = updateSimpleReport(para, strategy);
+//                        srList.add(sr);
+//                    }
                 }
             }
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
         jButtonFilterCheck.setEnabled(true);
-        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.netProfit).compareTo(arg0.netProfit));
+        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.backTotalEarning).compareTo(arg0.backTotalEarning));
         //rankTable = new RankTable(this, false, this, srList);
 
         time = System.currentTimeMillis() - time;
@@ -583,29 +584,28 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSystemReport(Strategy stg) {
         SystemReport sr = new SystemReport();
 
-        sr.investRounds = stg.getInvestRounds();
-        sr.addInvest = (float) stg.getAddInvest();
-        sr.addOutput = (float) stg.getAddOutput();
-        sr.netProfit = (float) stg.getNetProfit();
-        sr.yieldRate = (float) stg.getYieldRate();
-        sr.testYears = (float) testYears;
-        sr.investCounts = stg.getInvestCounts();
-        sr.investTimeRatio = (float) stg.getInvestTimeRatio();
-        sr.maxRoundTime = (float) stg.getMaxRoundTime();
-        sr.maxInvestCount = stg.getMaxInvestCount();
-        sr.meanInvestCount = (float) stg.getMeanInvestCount();
-
-        sr.meanDailyRate = (float) stg.getMeanDailyRate();
-        sr.meanPositionDays = (float) stg.getMeanPositionDays();
-        sr.maxInvest = (float) stg.getMaxInvest();
-        sr.meanInvest = (float) stg.getMeanInvest();
-        sr.maxLoss = (float) stg.getMaxLoss();
-        sr.maxLossRatio = (float) stg.getMaxLossRatio();
-        sr.meanDiffRate = (float) stg.getMeanDiffRate();
-        sr.meanNegaDiffRate = (float) stg.getMeanNegaDiffRate();
-        sr.minDiffRate = (float) stg.getMinDiffRate();
-        sr.meanInvestRate = (float) stg.getMeanInvestRate();
-        sr.maxInvestRate = (float) stg.getMaxInvestRate();
+        sr.backTotalGain = stg.getBlackTotalGain();
+        sr.openTotalGain = stg.getOpenTotalGain();
+        sr.closeTotalGain = stg.getCloseTotalGain();
+        sr.backTotalEarning = stg.getBlackTotalEarning();
+        sr.openTotalEarning = stg.getOpenTotalEarning();
+        sr.closeTotalEarning = stg.getCloseTotalEarning();
+        sr.blackWeightEarning = stg.getBlackWeightEarning();
+        sr.openWeightEarning = stg.getOpenWeightEarning();
+        sr.closeWeightEarning = stg.getCloseWeightEarning();
+//        sr.meanInvestCount = (float) stg.getMeanInvestCount();
+//
+//        sr.meanDailyRate = (float) stg.getMeanDailyRate();
+//        sr.meanPositionDays = (float) stg.getMeanPositionDays();
+//        sr.maxInvest = (float) stg.getMaxInvest();
+//        sr.meanInvest = (float) stg.getMeanInvest();
+//        sr.maxLoss = (float) stg.getMaxLoss();
+//        sr.maxLossRatio = (float) stg.getMaxLossRatio();
+//        sr.meanDiffRate = (float) stg.getMeanDiffRate();
+//        sr.meanNegaDiffRate = (float) stg.getMeanNegaDiffRate();
+//        sr.minDiffRate = (float) stg.getMinDiffRate();
+//        sr.meanInvestRate = (float) stg.getMeanInvestRate();
+//        sr.maxInvestRate = (float) stg.getMaxInvestRate();
 
         return sr;
     }
@@ -613,11 +613,11 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSimpleReport(String para, Strategy stg) {
         SystemReport sr = new SystemReport(para);
 
-        sr.netProfit = (float) stg.getNetProfit();
+        sr.backTotalEarning = (float) stg.getBlackTotalEarning();
         sr.meanDailyRate = (float) stg.getMeanDailyRate();
-        sr.maxRoundTime = (float) stg.getMaxRoundTime();
+        sr.openWeightEarning = (float) stg.getOpenWeightEarning();
         sr.maxInvest = (float) stg.getMaxInvest();
-        sr.investTimeRatio = (float) stg.getInvestTimeRatio();
+        sr.blackWeightEarning = (float) stg.getBlackWeightEarning();
         sr.meanInvestRate = (float) stg.getMeanInvestRate();
         sr.maxInvestRate = (float) stg.getMaxInvestRate();
 
@@ -625,26 +625,26 @@ public class MainView extends javax.swing.JFrame {
     }
 
     protected void updateTable(SystemReport sr) {
-        jTablePoint.setValueAt("定投轮数", 0, 0);
-        jTablePoint.setValueAt(sr.investRounds + "轮", 0, 1);
-        jTablePoint.setValueAt("累加投入", 1, 0);
-        jTablePoint.setValueAt(sr.addInvest + "元", 1, 1);
-        jTablePoint.setValueAt("累加产出", 2, 0);
-        jTablePoint.setValueAt(sr.addOutput + "元", 2, 1);
-        jTablePoint.setValueAt("净利润", 3, 0);
-        jTablePoint.setValueAt(sr.netProfit + "元", 3, 1);
-        jTablePoint.setValueAt("总收益率", 4, 0);
-        jTablePoint.setValueAt(sr.yieldRate + "%", 4, 1);
-        jTablePoint.setValueAt("测试年限", 5, 0);
-        jTablePoint.setValueAt(sr.testYears + "年", 5, 1);
-        jTablePoint.setValueAt("定投笔数", 6, 0);
-        jTablePoint.setValueAt(sr.investCounts + "笔", 6, 1);
-        jTablePoint.setValueAt("定投时间比", 7, 0);
-        jTablePoint.setValueAt(sr.investTimeRatio + "%", 7, 1);
-        jTablePoint.setValueAt("最长周期", 8, 0);
-        jTablePoint.setValueAt(sr.maxRoundTime + "年", 8, 1);
+        jTablePoint.setValueAt("暗盘累计涨幅", 0, 0);
+        jTablePoint.setValueAt(sr.backTotalGain + "%", 0, 1);
+        jTablePoint.setValueAt("开盘累计涨幅", 1, 0);
+        jTablePoint.setValueAt(sr.openTotalGain + "%", 1, 1);
+        jTablePoint.setValueAt("收盘累计涨幅", 2, 0);
+        jTablePoint.setValueAt(sr.closeTotalGain + "%", 2, 1);
+        jTablePoint.setValueAt("暗盘累计收益", 3, 0);
+        jTablePoint.setValueAt(sr.backTotalEarning + "元", 3, 1);
+        jTablePoint.setValueAt("开盘累计收益", 4, 0);
+        jTablePoint.setValueAt(sr.openTotalEarning + "元", 4, 1);
+        jTablePoint.setValueAt("收盘累计收益", 5, 0);
+        jTablePoint.setValueAt(sr.closeTotalEarning + "元", 5, 1);
+        jTablePoint.setValueAt("暗盘加权收益", 6, 0);
+        jTablePoint.setValueAt(sr.blackWeightEarning + "元", 6, 1);
+        jTablePoint.setValueAt("开盘加权收益", 7, 0);
+        jTablePoint.setValueAt(sr.openWeightEarning + "元", 7, 1);
+        jTablePoint.setValueAt("收盘加权收益", 8, 0);
+        jTablePoint.setValueAt(sr.closeWeightEarning + "元", 8, 1);
         jTablePoint.setValueAt("最长定投轮", 9, 0);
-        jTablePoint.setValueAt(sr.maxInvestCount + "次", 9, 1);
+
         jTablePoint.setValueAt("平均定投轮", 10, 0);
         jTablePoint.setValueAt(sr.meanInvestCount + "次", 10, 1);
 
