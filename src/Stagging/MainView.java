@@ -409,70 +409,6 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
-        importDataTest();
-        priceInfoList1 = new ArrayList<>();
-        priceInfoList2 = new ArrayList<>();
-        priceInfoList3 = new ArrayList<>();
-        priceInfoList4 = new ArrayList<>();
-        priceInfoList5 = new ArrayList<>();
-
-        for (PriceInfo priceInfo : priceInfoList) {
-            if (priceInfo.date.contains("一")) {
-                priceInfoList1.add(priceInfo);
-            }
-            if (priceInfo.date.contains("二")) {
-                priceInfoList2.add(priceInfo);
-            }
-            if (priceInfo.date.contains("三")) {
-                priceInfoList3.add(priceInfo);
-            }
-            if (priceInfo.date.contains("四")) {
-                priceInfoList4.add(priceInfo);
-            }
-            if (priceInfo.date.contains("五")) {
-                priceInfoList5.add(priceInfo);
-            }
-        }
-
-        float evenPrice = 0;
-        float totalPrice = 0;
-        for (PriceInfo priceInfo : priceInfoList1) {
-            totalPrice += priceInfo.closePrice;
-        }
-        evenPrice = totalPrice / priceInfoList1.size();
-        System.out.println("一 times:" + priceInfoList1.size() + "\ttotal:" + totalPrice + "\teven:" + evenPrice);
-
-        evenPrice = 0;
-        totalPrice = 0;
-        for (PriceInfo priceInfo : priceInfoList2) {
-            totalPrice += priceInfo.closePrice;
-        }
-        evenPrice = totalPrice / priceInfoList2.size();
-        System.out.println("二 times:" + priceInfoList2.size() + "\ttotal:" + totalPrice + "\teven:" + evenPrice);
-
-        evenPrice = 0;
-        totalPrice = 0;
-        for (PriceInfo priceInfo : priceInfoList3) {
-            totalPrice += priceInfo.closePrice;
-        }
-        evenPrice = totalPrice / priceInfoList3.size();
-        System.out.println("三 times:" + priceInfoList3.size() + "\ttotal:" + totalPrice + "\teven:" + evenPrice);
-
-        evenPrice = 0;
-        totalPrice = 0;
-        for (PriceInfo priceInfo : priceInfoList4) {
-            totalPrice += priceInfo.closePrice;
-        }
-        evenPrice = totalPrice / priceInfoList4.size();
-        System.out.println("四 times:" + priceInfoList4.size() + "\ttotal:" + totalPrice + "\teven:" + evenPrice);
-
-        evenPrice = 0;
-        totalPrice = 0;
-        for (PriceInfo priceInfo : priceInfoList5) {
-            totalPrice += priceInfo.closePrice;
-        }
-        evenPrice = totalPrice / priceInfoList5.size();
-        System.out.println("五 times:" + priceInfoList5.size() + "\ttotal:" + totalPrice + "\teven:" + evenPrice);
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
     private void jMenuItemDZHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDZHActionPerformed
@@ -609,16 +545,14 @@ public class MainView extends javax.swing.JFrame {
                 ipoInfo.handFund = Float.parseFloat(words[5]);
                 ipoInfo.luckyRate = Float.parseFloat(words[6].substring(0, words[6].length() - 1));
                 ipoInfo.offerPrice = Float.parseFloat(words[7]);
-                ipoInfo.offerPe = words[8];
-                ipoInfo.comparableCompany = words[9];
-                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[10]);
-                ipoInfo.totalRaiseFunds = Float.parseFloat(words[11]);
-                ipoInfo.blackGain = Float.parseFloat(words[12].substring(0, words[12].length() - 1));
+                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[8]);
+                ipoInfo.totalRaiseFunds = Float.parseFloat(words[9]);
+                ipoInfo.blackGain = Float.parseFloat(words[10].substring(0, words[10].length() - 1));
                 ipoInfo.blackPrice = ipoInfo.offerPrice * (1 + ipoInfo.blackGain / 100);
-                ipoInfo.closeGain = Float.parseFloat(words[13].substring(0, words[13].length() - 1));
-                ipoInfo.openPrice = Float.parseFloat(words[14]);
+                ipoInfo.closeGain = Float.parseFloat(words[11].substring(0, words[11].length() - 1));
+                ipoInfo.openPrice = Float.parseFloat(words[12]);
                 ipoInfo.openGain = 100 * (ipoInfo.openPrice - ipoInfo.offerPrice) / ipoInfo.offerPrice;
-                ipoInfo.closePrice = Float.parseFloat(words[17]);
+                ipoInfo.closePrice = Float.parseFloat(words[15]);
                 ipoInfoList.add(ipoInfo);
             }
             stocks = ipoInfoList.size();
@@ -629,28 +563,6 @@ public class MainView extends javax.swing.JFrame {
         }
 
         evaluated = false;
-    }
-
-    protected void importDataTest() {
-        try {
-            File file = new File(fileTest);
-            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
-            BufferedReader br = new BufferedReader(isr);
-            String[] words = br.readLine().split("\t+");
-            column = words.length;
-            priceInfoList = new ArrayList<>();
-            String line;
-            while ((line = br.readLine()) != null) {
-                words = line.split("\t+");
-                PriceInfo priceInfo = new PriceInfo(words[0], Float.parseFloat(words[1]), Float.parseFloat(words[2]));
-                priceInfoList.add(priceInfo);
-            }
-            stocks = priceInfoList.size();
-            br.close();
-            isr.close();
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-        }
     }
 
     public void investParaEva(String para) {
@@ -808,25 +720,6 @@ public class MainView extends javax.swing.JFrame {
 
     ArrayList<IpoInfo> ipoInfoList;
 
-    public class PriceInfo {
-
-        public PriceInfo(String date, float open, float close) {
-            this.date = date;
-            openPrice = open;
-            closePrice = close;
-        }
-
-        public String date;
-        public float openPrice;
-        public float closePrice;
-    }
-    ArrayList<PriceInfo> priceInfoList;
-    ArrayList<PriceInfo> priceInfoList1;
-    ArrayList<PriceInfo> priceInfoList2;
-    ArrayList<PriceInfo> priceInfoList3;
-    ArrayList<PriceInfo> priceInfoList4;
-    ArrayList<PriceInfo> priceInfoList5;
-    private String fileTest = "data\\399905.txt";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonFilterCheck;
     private javax.swing.JButton jButtonFilterStart;

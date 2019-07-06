@@ -25,8 +25,6 @@ public class IpoInfo {
     public float handFund;
     public float luckyRate;
     public float offerPrice;
-    public String offerPe;
-    public String comparableCompany;
     public float superPurchaseMultiples;
     public float totalRaiseFunds;
     public float blackGain;
