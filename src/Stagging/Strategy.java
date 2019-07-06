@@ -136,12 +136,20 @@ public class Strategy {
         return totalEarning;
     }
 
-    public double getMeanInvestCount() {
+    public int getMeanInvestCount() {
         int times = 0;
-        for (ArrayList<String> roundDateList : roundDateLists) {
-            times += roundDateList.size() - 1;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (((int) (ipoInfo.blackPrice * 100) > (int) (ipoInfo.openPrice * 100)) && ((int) (ipoInfo.openPrice * 100) > (int) (ipoInfo.closePrice * 100))) {
+                times++;
+            }
+            if (((int) (ipoInfo.blackPrice * 100) < (int) (ipoInfo.openPrice * 100)) && ((int) (ipoInfo.openPrice * 100) < (int) (ipoInfo.closePrice * 100))) {
+                times++;
+            }
+//            if ((int) (ipoInfo.blackPrice * 100) == (int) (ipoInfo.openPrice * 100)) {
+//                times++;
+//            }
         }
-        return (double) times / roundDateLists.size();
+        return times;
     }
 
     public double getMeanDailyRate() {
