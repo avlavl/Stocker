@@ -20,26 +20,13 @@ public class SystemReport {
 
     public String parameter;
 
-    public float backTotalGain;
     public float openTotalGain;
     public float closeTotalGain;
-    public float backTotalEarning;
     public float openTotalEarning;
     public float closeTotalEarning;
     public int investCounts;
-    public float blackWeightEarning;
     public float openWeightEarning;
     public float closeWeightEarning;
-    public float blackWeightRestictEarning;
     public float openWeightRestictEarning;
     public float closeWeightRestictEarning;
-    public float maxInvest;
-    public float meanInvest;
-    public float maxLoss;
-    public float maxLossRatio;
-    public float meanDiffRate;
-    public float meanNegaDiffRate;
-    public float minDiffRate;
-    public float meanInvestRate;
-    public float maxInvestRate;
 }

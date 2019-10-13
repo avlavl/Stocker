@@ -61,15 +61,7 @@ public class Strategy {
             }
         }
 
-        return (getBlackTotalGain() > 0);
-    }
-
-    public float getBlackTotalGain() {
-        float totalGain = 0;
-        for (IpoInfo ipoInfo : ipoInfoList) {
-            totalGain += ipoInfo.blackGain;
-        }
-        return totalGain;
+        return (getOpenTotalGain() > 0);
     }
 
     public float getOpenTotalGain() {
@@ -88,14 +80,6 @@ public class Strategy {
         return totalGain;
     }
 
-    public float getBlackTotalEarning() {
-        float totalEarning = 0;
-        for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarning += ipoInfo.handFund * ipoInfo.blackGain / 100;
-        }
-        return totalEarning;
-    }
-
     public float getOpenTotalEarning() {
         float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
@@ -112,14 +96,6 @@ public class Strategy {
         return totalEarning;
     }
 
-    public float getBlackWeightEarning() {
-        float totalEarning = 0;
-        for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.blackGain / 10000;
-        }
-        return totalEarning;
-    }
-
     public float getOpenWeightEarning() {
         float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
@@ -132,16 +108,6 @@ public class Strategy {
         float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
             totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
-        }
-        return totalEarning;
-    }
-
-    public float getBlackWeightRestictEarning(float price) {
-        float totalEarning = 0;
-        for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.totalRaiseFunds < price) {
-                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.blackGain / 10000;
-            }
         }
         return totalEarning;
     }
