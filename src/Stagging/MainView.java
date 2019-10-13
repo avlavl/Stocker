@@ -395,9 +395,13 @@ public class MainView extends javax.swing.JFrame {
 //        }
 
         strategy = new Strategy(ipoInfoList);
+        float oldOWeightRestictEarn = 0;
         for (int i = 1; i < 100; i++) {
             sr = updateSimpleReport((float) i / 10, strategy);
-            srList.add(sr);
+            if (sr.OWeightRestictEarn != oldOWeightRestictEarn) {
+                oldOWeightRestictEarn = sr.OWeightRestictEarn;
+                srList.add(sr);
+            }
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
@@ -477,7 +481,6 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSimpleReport(float i, Strategy stg) {
         SystemReport sr = new SystemReport(i);
 
-        sr.OWeightEarn = (float) stg.getOWeightEarn();
         sr.OWeightRestictEarn = strategy.getOWeightRestictEarn(i);
         sr.CWeightRestictEarn = strategy.getCWeightRestictEarn(i);
         sr.OCWeightRestictEarn = strategy.getOCWeightRestictEarn(i);
