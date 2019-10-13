@@ -30,9 +30,9 @@ public class SystemReport {
     public float blackWeightEarning;
     public float openWeightEarning;
     public float closeWeightEarning;
-    public int meanInvestCount;
-    public float meanDailyRate;
-    public float meanPositionDays;
+    public float blackWeightRestictEarning;
+    public float openWeightRestictEarning;
+    public float closeWeightRestictEarning;
     public float maxInvest;
     public float meanInvest;
     public float maxLoss;

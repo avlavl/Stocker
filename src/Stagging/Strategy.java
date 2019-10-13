@@ -136,49 +136,34 @@ public class Strategy {
         return totalEarning;
     }
 
-    public int getMeanInvestCount() {
-        int times = 0;
+    public float getBlackWeightRestictEarning(float price) {
+        float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (((int) (ipoInfo.blackPrice * 100) > (int) (ipoInfo.openPrice * 100)) && ((int) (ipoInfo.openPrice * 100) > (int) (ipoInfo.closePrice * 100))) {
-                times++;
+            if (ipoInfo.totalRaiseFunds < price) {
+                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.blackGain / 10000;
             }
-            if (((int) (ipoInfo.blackPrice * 100) < (int) (ipoInfo.openPrice * 100)) && ((int) (ipoInfo.openPrice * 100) < (int) (ipoInfo.closePrice * 100))) {
-                times++;
-            }
-//            if ((int) (ipoInfo.blackPrice * 100) == (int) (ipoInfo.openPrice * 100)) {
-//                times++;
-//            }
         }
-        return times;
+        return totalEarning;
     }
 
-    public double getMeanDailyRate() {
-        int num = 0;
-        double yield = 0;
-        for (int i = 0; i < yieldList.size(); i++) {
-            ArrayList<String> roundDateList = roundDateLists.get(i);
-            String endDate = roundDateList.get(roundDateList.size() - 1);
-            num += roundDateList.size() - 1;
-            for (int j = 0; j < roundDateList.size() - 1; j++) {
-//                int time = mainView.daysBetween(roundDateList.get(j), endDate);
-//                yield += (double) yieldList.get(i) / time;
+    public float getOpenWeightRestictEarning(float price) {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.totalRaiseFunds < price) {
+                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
             }
         }
-        return 10000 * yield / num;
+        return totalEarning;
     }
 
-    public double getMeanPositionDays() {
-        int num = 0;
-        int days = 0;
-        for (int i = 0; i < roundDateLists.size(); i++) {
-            ArrayList<String> roundDateList = roundDateLists.get(i);
-            String endDate = roundDateList.get(roundDateList.size() - 1);
-            num += roundDateList.size() - 1;
-            for (int j = 0; j < roundDateList.size() - 1; j++) {
-//                days += mainView.daysBetween(roundDateList.get(j), endDate);
+    public float getCloseWeightRestictEarning(float price) {
+        float totalEarning = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.totalRaiseFunds < price) {
+                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
             }
         }
-        return (double) days / num;
+        return totalEarning;
     }
 
     public double getMaxInvest() {

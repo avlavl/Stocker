@@ -66,7 +66,6 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemCopy = new javax.swing.JMenuItem();
         jMenuItemClear = new javax.swing.JMenuItem();
         jPanelMain = new javax.swing.JPanel();
-        jLabelStockName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePoint = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -106,7 +105,6 @@ public class MainView extends javax.swing.JFrame {
         jLabelInvestLevel = new javax.swing.JLabel();
         jTextFieldInvestLevel = new javax.swing.JTextField();
         jButtonInvestEva1 = new javax.swing.JButton();
-        jLabelInput = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -136,12 +134,6 @@ public class MainView extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelStockName.setFont(new java.awt.Font("微软雅黑", 1, 16)); // NOI18N
-        jLabelStockName.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelStockName.setText("上证指数(000001)");
-        jLabelStockName.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jPanelMain.add(jLabelStockName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
 
         jTablePoint.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -354,14 +346,9 @@ public class MainView extends javax.swing.JFrame {
                 jButtonInvestEva1ActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonInvestEva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 30));
+        jPanelCongfig.add(jButtonInvestEva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 70, 30));
 
         jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 45, 290, 165));
-
-        jLabelInput.setFont(new java.awt.Font("黑体", 1, 14)); // NOI18N
-        jLabelInput.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelInput.setText("投入金额：----元");
-        jPanelMain.add(jLabelInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 12, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 400));
 
@@ -511,17 +498,16 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFilterCheckActionPerformed
 
     private void jButtonInvestEva1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInvestEva1ActionPerformed
-        double blackTotal = 0;
-        double openTotal = 0;
-        double closeTotal = 0;
-        for (int i = 0; i < stocks; i++) {
-//            blackTotal += blackRisingRateList.get(i);
-//            openTotal += openRisingRateList.get(i);
-//            closeTotal += closeRisingRateList.get(i);
+        float blackTotal = 0;
+        float openTotal = 0;
+        float closeTotal = 0;
+        strategy = new Strategy(ipoInfoList);
+        for (int i = 1; i < 50; i++) {
+            blackTotal = strategy.getBlackWeightRestictEarning((float) i / 10);
+            openTotal = strategy.getOpenWeightRestictEarning((float) i / 10);
+            closeTotal = strategy.getCloseWeightRestictEarning((float) i / 10);
+            msgLogger(i + "\tblack:" + blackTotal + "\topen:" + openTotal + "\tclose:" + closeTotal);
         }
-        msgLogger("black:" + blackTotal);
-        msgLogger("open" + openTotal);
-        msgLogger("close" + closeTotal);
     }//GEN-LAST:event_jButtonInvestEva1ActionPerformed
 
     /**
@@ -541,18 +527,17 @@ public class MainView extends javax.swing.JFrame {
                 IpoInfo ipoInfo = new IpoInfo(words[0], words[1]);
                 ipoInfo.marketPlate = words[2];
                 ipoInfo.offerDate = words[3];
-                ipoInfo.inquiryRange = words[4];
-                ipoInfo.handFund = Float.parseFloat(words[5]);
-                ipoInfo.luckyRate = Float.parseFloat(words[6].substring(0, words[6].length() - 1));
-                ipoInfo.offerPrice = Float.parseFloat(words[7]);
-                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[8]);
-                ipoInfo.totalRaiseFunds = Float.parseFloat(words[9]);
-                ipoInfo.blackGain = Float.parseFloat(words[10].substring(0, words[10].length() - 1));
+                ipoInfo.handFund = Float.parseFloat(words[4]);
+                ipoInfo.luckyRate = Float.parseFloat(words[5].substring(0, words[5].length() - 1));
+                ipoInfo.offerPrice = Float.parseFloat(words[6]);
+                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[7]);
+                ipoInfo.totalRaiseFunds = Float.parseFloat(words[8]);
+                ipoInfo.blackGain = Float.parseFloat(words[9].substring(0, words[9].length() - 1));
                 ipoInfo.blackPrice = ipoInfo.offerPrice * (1 + ipoInfo.blackGain / 100);
-                ipoInfo.closeGain = Float.parseFloat(words[11].substring(0, words[11].length() - 1));
-                ipoInfo.openPrice = Float.parseFloat(words[12]);
+                ipoInfo.closeGain = Float.parseFloat(words[10].substring(0, words[10].length() - 1));
+                ipoInfo.openPrice = Float.parseFloat(words[11]);
                 ipoInfo.openGain = 100 * (ipoInfo.openPrice - ipoInfo.offerPrice) / ipoInfo.offerPrice;
-                ipoInfo.closePrice = Float.parseFloat(words[15]);
+                ipoInfo.closePrice = Float.parseFloat(words[14]);
                 ipoInfoList.add(ipoInfo);
             }
             stocks = ipoInfoList.size();
@@ -590,10 +575,9 @@ public class MainView extends javax.swing.JFrame {
         sr.blackWeightEarning = stg.getBlackWeightEarning();
         sr.openWeightEarning = stg.getOpenWeightEarning();
         sr.closeWeightEarning = stg.getCloseWeightEarning();
-        sr.meanInvestCount = stg.getMeanInvestCount();
-
-//        sr.meanDailyRate = (float) stg.getMeanDailyRate();
-//        sr.meanPositionDays = (float) stg.getMeanPositionDays();
+        sr.blackWeightRestictEarning = stg.getBlackWeightRestictEarning(1);
+        sr.openWeightRestictEarning = stg.getOpenWeightRestictEarning(1);
+        sr.closeWeightRestictEarning = stg.getCloseWeightRestictEarning(1);
 //        sr.maxInvest = (float) stg.getMaxInvest();
 //        sr.meanInvest = (float) stg.getMeanInvest();
 //        sr.maxLoss = (float) stg.getMaxLoss();
@@ -610,7 +594,7 @@ public class MainView extends javax.swing.JFrame {
         SystemReport sr = new SystemReport(para);
 
         sr.backTotalEarning = (float) stg.getBlackTotalEarning();
-        sr.meanDailyRate = (float) stg.getMeanDailyRate();
+        sr.blackWeightRestictEarning = (float) stg.getBlackWeightRestictEarning(1);
         sr.openWeightEarning = (float) stg.getOpenWeightEarning();
         sr.maxInvest = (float) stg.getMaxInvest();
         sr.blackWeightEarning = (float) stg.getBlackWeightEarning();
@@ -639,15 +623,15 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(sr.openWeightEarning + "元", 7, 1);
         jTablePoint.setValueAt("收盘加权收益", 8, 0);
         jTablePoint.setValueAt(sr.closeWeightEarning + "元", 8, 1);
-        jTablePoint.setValueAt("最长定投轮", 9, 0);
-        jTablePoint.setValueAt(sr.meanInvestCount + "次", 9, 1);
-        jTablePoint.setValueAt("平均定投轮", 10, 0);
-        jTablePoint.setValueAt(sr.meanInvestCount + "次", 10, 1);
+        jTablePoint.setValueAt("暗盘加权收益R", 9, 0);
+        jTablePoint.setValueAt(sr.blackWeightRestictEarning + "元", 9, 1);
+        jTablePoint.setValueAt("开盘加权收益R", 10, 0);
+        jTablePoint.setValueAt(sr.openWeightRestictEarning + "元", 10, 1);
+        jTablePoint.setValueAt("收盘加权收益R", 0, 2);
+        jTablePoint.setValueAt(sr.closeWeightRestictEarning + "元", 0, 3);
 
-        jTablePoint.setValueAt("平均日化率", 0, 2);
-        jTablePoint.setValueAt("万" + sr.meanDailyRate, 0, 3);
         jTablePoint.setValueAt("平均持仓期", 1, 2);
-        jTablePoint.setValueAt(sr.meanPositionDays + "天", 1, 3);
+        jTablePoint.setValueAt(sr.openWeightRestictEarning + "天", 1, 3);
         jTablePoint.setValueAt("最大投入", 2, 2);
         jTablePoint.setValueAt(sr.maxInvest + "元", 2, 3);
         jTablePoint.setValueAt("平均投入", 3, 2);
@@ -731,7 +715,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDash3;
     private javax.swing.JLabel jLabelDash4;
     private javax.swing.JLabel jLabelDiffCoef;
-    private javax.swing.JLabel jLabelInput;
     private javax.swing.JLabel jLabelInvestCoef;
     private javax.swing.JLabel jLabelInvestLevel;
     private javax.swing.JLabel jLabelPara1;
@@ -740,7 +723,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPara4;
     private javax.swing.JLabel jLabelSlope;
     private javax.swing.JLabel jLabelStartPoint;
-    private javax.swing.JLabel jLabelStockName;
     private javax.swing.JLabel jLabelWinLevel;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;

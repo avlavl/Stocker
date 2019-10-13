@@ -33,11 +33,11 @@ public class IpoTable extends javax.swing.JDialog {
         listSize = list.size();
         String[][] tableContent = new String[tableRows][16];
         for (int i = 0; i < tableRows; i++) {
-            tableContent[i][0] = ipoInfoList.get(i).stockCode;
-            tableContent[i][1] = ipoInfoList.get(i).stockName;
-            tableContent[i][2] = ipoInfoList.get(i).offerDate;
-            tableContent[i][3] = ipoInfoList.get(i).marketPlate;
-            tableContent[i][4] = ipoInfoList.get(i).inquiryRange;
+            tableContent[i][0] = String.format("%d", i + 1);
+            tableContent[i][1] = ipoInfoList.get(i).stockCode;
+            tableContent[i][2] = ipoInfoList.get(i).stockName;
+            tableContent[i][3] = ipoInfoList.get(i).offerDate;
+            tableContent[i][4] = ipoInfoList.get(i).marketPlate;
             tableContent[i][5] = ipoInfoList.get(i).luckyRate + "%";
             tableContent[i][6] = ipoInfoList.get(i).superPurchaseMultiples + "";
             tableContent[i][7] = ipoInfoList.get(i).totalRaiseFunds + "";
@@ -54,7 +54,7 @@ public class IpoTable extends javax.swing.JDialog {
         jTableIpo.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "代码", "名称", "上市日", "板块", "询价区间", "中签率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
+                    "序号", "代码", "名称", "上市日", "板块", "中签率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
@@ -69,11 +69,11 @@ public class IpoTable extends javax.swing.JDialog {
         jTableIpo.setRowHeight(20);
         jScrollPaneInvest.setViewportView(jTableIpo);
         if (jTableIpo.getColumnModel().getColumnCount() > 0) {
-            jTableIpo.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTableIpo.getColumnModel().getColumn(1).setPreferredWidth(90);
-            jTableIpo.getColumnModel().getColumn(2).setPreferredWidth(80);
-            jTableIpo.getColumnModel().getColumn(3).setPreferredWidth(50);
-            jTableIpo.getColumnModel().getColumn(4).setPreferredWidth(80);
+            jTableIpo.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTableIpo.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTableIpo.getColumnModel().getColumn(2).setPreferredWidth(90);
+            jTableIpo.getColumnModel().getColumn(3).setPreferredWidth(80);
+            jTableIpo.getColumnModel().getColumn(4).setPreferredWidth(50);
             jTableIpo.getColumnModel().getColumn(5).setPreferredWidth(60);
             jTableIpo.getColumnModel().getColumn(6).setPreferredWidth(60);
             jTableIpo.getColumnModel().getColumn(7).setPreferredWidth(60);
@@ -127,11 +127,11 @@ public class IpoTable extends javax.swing.JDialog {
 
     public void updateTable(int idx) {
         for (int i = 0; i < tableRows; i++) {
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockCode, i, 0);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockName, i, 1);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerDate, i, 2);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).marketPlate, i, 3);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).inquiryRange, i, 4);
+            jTableIpo.setValueAt(String.format("%d", i + 1 + idx), i, 0);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockCode, i, 1);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockName, i, 2);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerDate, i, 3);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).marketPlate, i, 4);
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).luckyRate + "%", i, 5);
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).superPurchaseMultiples, i, 6);
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).totalRaiseFunds, i, 7);
@@ -176,7 +176,7 @@ public class IpoTable extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "代码", "名称", "板块", "上市日", "中签率", "询价区间", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "首日涨幅", "null", "null"
+                "序号", "代码", "名称", "上市日", "板块", "中签率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -21,7 +21,6 @@ public class IpoInfo {
 
     public String marketPlate;
     public String offerDate;
-    public String inquiryRange;
     public float handFund;
     public float luckyRate;
     public float offerPrice;
