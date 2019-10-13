@@ -73,20 +73,12 @@ public class MainView extends javax.swing.JFrame {
         jPanelSysFilter = new javax.swing.JPanel();
         jLabelPara1 = new javax.swing.JLabel();
         jLabelPara2 = new javax.swing.JLabel();
-        jLabelPara3 = new javax.swing.JLabel();
-        jLabelPara4 = new javax.swing.JLabel();
         jLabelDash1 = new javax.swing.JLabel();
         jLabelDash2 = new javax.swing.JLabel();
-        jLabelDash3 = new javax.swing.JLabel();
-        jLabelDash4 = new javax.swing.JLabel();
         jTextFieldPS1 = new javax.swing.JTextField();
         jTextFieldPE1 = new javax.swing.JTextField();
         jTextFieldPS2 = new javax.swing.JTextField();
         jTextFieldPE2 = new javax.swing.JTextField();
-        jTextFieldPS3 = new javax.swing.JTextField();
-        jTextFieldPE3 = new javax.swing.JTextField();
-        jTextFieldPS4 = new javax.swing.JTextField();
-        jTextFieldPE4 = new javax.swing.JTextField();
         jButtonFilterStart = new javax.swing.JButton();
         jButtonFilterCheck = new javax.swing.JButton();
         jPanelCongfig = new javax.swing.JPanel();
@@ -181,25 +173,11 @@ public class MainView extends javax.swing.JFrame {
         jLabelPara2.setText("P2:");
         jPanelSysFilter.add(jLabelPara2, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 27, -1, -1));
 
-        jLabelPara3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelPara3.setText("P3:");
-        jPanelSysFilter.add(jLabelPara3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
-
-        jLabelPara4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelPara4.setText("P4:");
-        jPanelSysFilter.add(jLabelPara4, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 51, -1, -1));
-
         jLabelDash1.setText("-");
         jPanelSysFilter.add(jLabelDash1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 29, -1, -1));
 
         jLabelDash2.setText("-");
         jPanelSysFilter.add(jLabelDash2, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 30, -1, -1));
-
-        jLabelDash3.setText("-");
-        jPanelSysFilter.add(jLabelDash3, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 52, -1, -1));
-
-        jLabelDash4.setText("-");
-        jPanelSysFilter.add(jLabelDash4, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 52, -1, -1));
 
         jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPS1.setText("20");
@@ -216,20 +194,6 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTextFieldPE2.setText("2.0");
         jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 35, -1));
-
-        jTextFieldPS3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS3.setText("0.8");
-        jPanelSysFilter.add(jTextFieldPS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 50, 35, -1));
-
-        jTextFieldPE3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE3.setText("1.0");
-        jPanelSysFilter.add(jTextFieldPE3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 35, -1));
-
-        jTextFieldPS4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jPanelSysFilter.add(jTextFieldPS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 50, 35, -1));
-
-        jTextFieldPE4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jPanelSysFilter.add(jTextFieldPE4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 35, -1));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonFilterStart.setText("开始");
@@ -409,7 +373,6 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIpoEvaActionPerformed
 
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
-        long time = System.currentTimeMillis();
         jTextAreaMain.setText("");
 
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -419,30 +382,28 @@ public class MainView extends javax.swing.JFrame {
         double pe1 = Double.parseDouble(jTextFieldPE1.getText());
         double ps2 = Double.parseDouble(jTextFieldPS2.getText());
         double pe2 = Double.parseDouble(jTextFieldPE2.getText());
-        double ps3 = Double.parseDouble(jTextFieldPS3.getText());
-        double pe3 = Double.parseDouble(jTextFieldPE3.getText());
+//
+//        for (double i = ps1; i <= pe1; i += 10) {
+//            for (double j = ps2; j <= pe2; j += 0.1) {
+//                strategy = new Strategy(this, start, slope);
+//                if (strategy.sysSimpleInvestEva(i, j, k)) {
+//                    String para = String.format("%d,%.1f,%.1f", (int) i, j, k);
+//                    sr = updateSimpleReport(para, strategy);
+//                    srList.add(sr);
+//                }
+//            }
+//        }
 
-        for (double i = ps1; i <= pe1; i += 10) {
-            for (double j = ps2; j <= pe2; j += 0.1) {
-                for (double k = ps3; k <= pe3; k += 0.1) {
-//                    strategy = new Strategy(this, start, slope);
-//                    if (strategy.sysSimpleInvestEva(i, j, k)) {
-//                        String para = String.format("%d,%.1f,%.1f", (int) i, j, k);
-//                        sr = updateSimpleReport(para, strategy);
-//                        srList.add(sr);
-//                    }
-                }
-            }
+        strategy = new Strategy(ipoInfoList);
+        for (int i = 1; i < 100; i++) {
+            sr = updateSimpleReport((float) i / 10, strategy);
+            srList.add(sr);
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
         jButtonFilterCheck.setEnabled(true);
-        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.openTotalEarning).compareTo(arg0.openTotalEarning));
-        //rankTable = new RankTable(this, false, this, srList);
-
-        time = System.currentTimeMillis() - time;
-        float excTime = (float) time / 1000;
-        System.out.println("Elapsed time: " + excTime + "s");
+        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.OWeightEarn).compareTo(arg0.OWeightEarn));
+        RankTable rankTable = new RankTable(this, false, this, srList);
     }//GEN-LAST:event_jButtonFilterStartActionPerformed
 
     private void jButtonFilterCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterCheckActionPerformed
@@ -502,41 +463,45 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSystemReport(Strategy stg) {
         SystemReport sr = new SystemReport();
 
-        sr.openTotalGain = stg.getOpenTotalGain();
-        sr.closeTotalGain = stg.getCloseTotalGain();
-        sr.openTotalEarning = stg.getOpenTotalEarning();
-        sr.closeTotalEarning = stg.getCloseTotalEarning();
-        sr.openWeightEarning = stg.getOpenWeightEarning();
-        sr.closeWeightEarning = stg.getCloseWeightEarning();
-        sr.openWeightRestictEarning = stg.getOpenWeightRestictEarning(1);
-        sr.closeWeightRestictEarning = stg.getCloseWeightRestictEarning(1);
+        sr.OTotalGain = stg.getOTotalGain();
+        sr.CTotalGain = stg.getCTotalGain();
+        sr.OTotalEarn = stg.getOTotalEarn();
+        sr.CTotalEarn = stg.getCTotalEarn();
+        sr.OWeightEarn = stg.getOWeightEarn();
+        sr.CWeightEarn = stg.getCWeightEarn();
+        sr.OWeightRestictEarn = stg.getOWeightRestictEarn(1);
+        sr.CWeightRestictEarn = stg.getCWeightRestictEarn(1);
         return sr;
     }
 
-    protected SystemReport updateSimpleReport(String para, Strategy stg) {
-        SystemReport sr = new SystemReport(para);
+    protected SystemReport updateSimpleReport(float i, Strategy stg) {
+        SystemReport sr = new SystemReport(i);
 
-        sr.openWeightEarning = (float) stg.getOpenWeightEarning();
+        sr.OWeightEarn = (float) stg.getOWeightEarn();
+        sr.OWeightRestictEarn = strategy.getOWeightRestictEarn(i);
+        sr.CWeightRestictEarn = strategy.getCWeightRestictEarn(i);
+        sr.OCWeightRestictEarn = strategy.getOCWeightRestictEarn(i);
+        sr.COWeightRestictEarn = strategy.getCOWeightRestictEarn(i);
         return sr;
     }
 
     protected void updateTable(SystemReport sr) {
         jTablePoint.setValueAt("开盘累计涨幅", 0, 0);
-        jTablePoint.setValueAt(sr.openTotalGain + "%", 0, 1);
+        jTablePoint.setValueAt(sr.OTotalGain + "%", 0, 1);
         jTablePoint.setValueAt("收盘累计涨幅", 0, 2);
-        jTablePoint.setValueAt(sr.closeTotalGain + "%", 0, 3);
+        jTablePoint.setValueAt(sr.CTotalGain + "%", 0, 3);
         jTablePoint.setValueAt("开盘累计收益", 1, 0);
-        jTablePoint.setValueAt(sr.openTotalEarning + "元", 1, 1);
+        jTablePoint.setValueAt(sr.OTotalEarn + "元", 1, 1);
         jTablePoint.setValueAt("收盘累计收益", 1, 2);
-        jTablePoint.setValueAt(sr.closeTotalEarning + "元", 1, 3);
+        jTablePoint.setValueAt(sr.CTotalEarn + "元", 1, 3);
         jTablePoint.setValueAt("开盘加权收益", 2, 0);
-        jTablePoint.setValueAt(sr.openWeightEarning + "元", 2, 1);
+        jTablePoint.setValueAt(sr.OWeightEarn + "元", 2, 1);
         jTablePoint.setValueAt("收盘加权收益", 2, 2);
-        jTablePoint.setValueAt(sr.closeWeightEarning + "元", 2, 3);
+        jTablePoint.setValueAt(sr.CWeightEarn + "元", 2, 3);
         jTablePoint.setValueAt("开盘加权收益R", 3, 0);
-        jTablePoint.setValueAt(sr.openWeightRestictEarning + "元", 3, 1);
+        jTablePoint.setValueAt(sr.OWeightRestictEarn + "元", 3, 1);
         jTablePoint.setValueAt("收盘加权收益R", 3, 2);
-        jTablePoint.setValueAt(sr.closeWeightRestictEarning + "元", 3, 3);
+        jTablePoint.setValueAt(sr.CWeightRestictEarn + "元", 3, 3);
     }
 
     public void msgLogger(String str) {
@@ -598,14 +563,10 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonIpoInfo;
     private javax.swing.JLabel jLabelDash1;
     private javax.swing.JLabel jLabelDash2;
-    private javax.swing.JLabel jLabelDash3;
-    private javax.swing.JLabel jLabelDash4;
     private javax.swing.JLabel jLabelInvestCoef;
     private javax.swing.JLabel jLabelInvestLevel;
     private javax.swing.JLabel jLabelPara1;
     private javax.swing.JLabel jLabelPara2;
-    private javax.swing.JLabel jLabelPara3;
-    private javax.swing.JLabel jLabelPara4;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
@@ -630,11 +591,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldInvestLevel;
     private javax.swing.JTextField jTextFieldPE1;
     private javax.swing.JTextField jTextFieldPE2;
-    private javax.swing.JTextField jTextFieldPE3;
-    private javax.swing.JTextField jTextFieldPE4;
     private javax.swing.JTextField jTextFieldPS1;
     private javax.swing.JTextField jTextFieldPS2;
-    private javax.swing.JTextField jTextFieldPS3;
-    private javax.swing.JTextField jTextFieldPS4;
     // End of variables declaration//GEN-END:variables
 }

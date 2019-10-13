@@ -14,19 +14,21 @@ public class SystemReport {
     public SystemReport() {
     }
 
-    public SystemReport(String para) {
-        parameter = para;
+    public SystemReport(float point) {
+        criticalPoint = point;
     }
 
-    public String parameter;
+    public float criticalPoint;
 
-    public float openTotalGain;
-    public float closeTotalGain;
-    public float openTotalEarning;
-    public float closeTotalEarning;
+    public float OTotalGain;
+    public float CTotalGain;
+    public float OTotalEarn;
+    public float CTotalEarn;
     public int investCounts;
-    public float openWeightEarning;
-    public float closeWeightEarning;
-    public float openWeightRestictEarning;
-    public float closeWeightRestictEarning;
+    public float OWeightEarn;
+    public float CWeightEarn;
+    public float OWeightRestictEarn;
+    public float CWeightRestictEarn;
+    public float OCWeightRestictEarn;
+    public float COWeightRestictEarn;
 }
