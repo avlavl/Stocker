@@ -65,32 +65,22 @@ public class MainView extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItemCopy = new javax.swing.JMenuItem();
         jMenuItemClear = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanelMain = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPaneTable = new javax.swing.JScrollPane();
         jTablePoint = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPaneMsg = new javax.swing.JScrollPane();
         jTextAreaMain = new javax.swing.JTextArea();
-        jPanelSysFilter = new javax.swing.JPanel();
-        jLabelPara1 = new javax.swing.JLabel();
-        jLabelPara2 = new javax.swing.JLabel();
-        jLabelDash1 = new javax.swing.JLabel();
-        jLabelDash2 = new javax.swing.JLabel();
-        jTextFieldPS1 = new javax.swing.JTextField();
-        jTextFieldPE1 = new javax.swing.JTextField();
-        jTextFieldPS2 = new javax.swing.JTextField();
-        jTextFieldPE2 = new javax.swing.JTextField();
-        jButtonFilterStart = new javax.swing.JButton();
-        jButtonFilterCheck = new javax.swing.JButton();
         jPanelCongfig = new javax.swing.JPanel();
         jButtonIpoEva = new javax.swing.JButton();
         jButtonIpoInfo = new javax.swing.JButton();
-        jLabelInvestCoef = new javax.swing.JLabel();
-        jTextFieldInvestCoef = new javax.swing.JTextField();
-        jLabelInvestLevel = new javax.swing.JLabel();
-        jTextFieldInvestLevel = new javax.swing.JTextField();
+        jLabelCriticalValue = new javax.swing.JLabel();
+        jTextFieldCriticalValue = new javax.swing.JTextField();
         jRadioButtonAddLm = new javax.swing.JRadioButton();
         jRadioButtonAddMa = new javax.swing.JRadioButton();
         jRadioButtonAddDif = new javax.swing.JRadioButton();
+        jButtonFilterStart = new javax.swing.JButton();
+        jRadioButtonAddLm1 = new javax.swing.JRadioButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -116,7 +106,7 @@ public class MainView extends javax.swing.JFrame {
         jPopupMenu1.add(jMenuItemClear);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("智能证券系统-基金定投");
+        setTitle("智能证券系统-港股打新");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,23 +120,20 @@ public class MainView extends javax.swing.JFrame {
                 {"开盘加权收益", null, "收盘加权收益", ""},
                 {"开盘加权收益R", null, "收盘加权收益R", null},
                 {"", null, "", null},
-                {"", null, "", ""},
-                {"", "", "", null},
-                {"", null, "", null},
-                {"", "", "", null},
                 {"", null, "", null}
             },
             new String [] {
                 "统计指标", "全部交易", "统计指标", "全部交易"
             }
         ));
-        jScrollPane1.setViewportView(jTablePoint);
+        jTablePoint.setPreferredSize(new java.awt.Dimension(310, 96));
+        jScrollPaneTable.setViewportView(jTablePoint);
         if (jTablePoint.getColumnModel().getColumnCount() > 0) {
             jTablePoint.getColumnModel().getColumn(0).setMinWidth(80);
             jTablePoint.getColumnModel().getColumn(2).setMinWidth(80);
         }
 
-        jPanelMain.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 440, 190));
+        jPanelMain.add(jScrollPaneTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 370, 126));
 
         jTextAreaMain.setColumns(20);
         jTextAreaMain.setFont(new java.awt.Font("仿宋", 0, 11)); // NOI18N
@@ -157,66 +144,9 @@ public class MainView extends javax.swing.JFrame {
                 jTextAreaMainMouseReleased(evt);
             }
         });
-        jScrollPane2.setViewportView(jTextAreaMain);
+        jScrollPaneMsg.setViewportView(jTextAreaMain);
 
-        jPanelMain.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 340, 40));
-
-        jPanelSysFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "优选系统", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
-        jPanelSysFilter.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jPanelSysFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelPara1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelPara1.setText("P1:");
-        jPanelSysFilter.add(jLabelPara1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 27, -1, -1));
-
-        jLabelPara2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelPara2.setText("P2:");
-        jPanelSysFilter.add(jLabelPara2, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 27, -1, -1));
-
-        jLabelDash1.setText("-");
-        jPanelSysFilter.add(jLabelDash1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 29, -1, -1));
-
-        jLabelDash2.setText("-");
-        jPanelSysFilter.add(jLabelDash2, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 30, -1, -1));
-
-        jTextFieldPS1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS1.setText("20");
-        jPanelSysFilter.add(jTextFieldPS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 26, 35, -1));
-
-        jTextFieldPE1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE1.setText("200");
-        jPanelSysFilter.add(jTextFieldPE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 26, 35, -1));
-
-        jTextFieldPS2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPS2.setText("1.5");
-        jPanelSysFilter.add(jTextFieldPS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 26, 35, -1));
-
-        jTextFieldPE2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextFieldPE2.setText("2.0");
-        jPanelSysFilter.add(jTextFieldPE2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 26, 35, -1));
-
-        jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonFilterStart.setText("开始");
-        jButtonFilterStart.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonFilterStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFilterStartActionPerformed(evt);
-            }
-        });
-        jPanelSysFilter.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 23, -1, -1));
-
-        jButtonFilterCheck.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonFilterCheck.setText("查看");
-        jButtonFilterCheck.setEnabled(false);
-        jButtonFilterCheck.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonFilterCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFilterCheckActionPerformed(evt);
-            }
-        });
-        jPanelSysFilter.add(jButtonFilterCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 48, -1, -1));
-
-        jPanelMain.add(jPanelSysFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 290, 90));
+        jPanelMain.add(jScrollPaneMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 370, 70));
 
         jPanelCongfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "定投配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelCongfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -229,7 +159,7 @@ public class MainView extends javax.swing.JFrame {
                 jButtonIpoEvaActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonIpoEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, 30));
+        jPanelCongfig.add(jButtonIpoEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 30));
 
         jButtonIpoInfo.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonIpoInfo.setText("新股信息");
@@ -239,42 +169,51 @@ public class MainView extends javax.swing.JFrame {
                 jButtonIpoInfoActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonIpoInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, 30));
+        jPanelCongfig.add(jButtonIpoInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
-        jLabelInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelInvestCoef.setText("定投系数：");
-        jPanelCongfig.add(jLabelInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        jLabelCriticalValue.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCriticalValue.setText("临界位：");
+        jPanelCongfig.add(jLabelCriticalValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        jTextFieldInvestCoef.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldInvestCoef.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldInvestCoef.setText("10");
-        jPanelCongfig.add(jTextFieldInvestCoef, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 50, -1));
+        jTextFieldCriticalValue.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue.setText("1.0");
+        jPanelCongfig.add(jTextFieldCriticalValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 68, 110, -1));
 
-        jLabelInvestLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelInvestLevel.setText("临界位：");
-        jPanelCongfig.add(jLabelInvestLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
-
-        jTextFieldInvestLevel.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jTextFieldInvestLevel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldInvestLevel.setText("0.80");
-        jPanelCongfig.add(jTextFieldInvestLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 70, -1));
-
+        buttonGroup1.add(jRadioButtonAddLm);
         jRadioButtonAddLm.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonAddLm.setText("募资总额");
-        jPanelCongfig.add(jRadioButtonAddLm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
+        jRadioButtonAddLm.setText("超购倍数");
+        jPanelCongfig.add(jRadioButtonAddLm, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
+        buttonGroup1.add(jRadioButtonAddMa);
         jRadioButtonAddMa.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jRadioButtonAddMa.setText("发行价");
-        jPanelCongfig.add(jRadioButtonAddMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
+        jPanelCongfig.add(jRadioButtonAddMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
 
+        buttonGroup1.add(jRadioButtonAddDif);
         jRadioButtonAddDif.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jRadioButtonAddDif.setSelected(true);
         jRadioButtonAddDif.setText("中签率");
-        jPanelCongfig.add(jRadioButtonAddDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanelCongfig.add(jRadioButtonAddDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 290, 210));
+        jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonFilterStart.setText("统计分析");
+        jButtonFilterStart.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonFilterStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFilterStartActionPerformed(evt);
+            }
+        });
+        jPanelCongfig.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 70, 30));
 
-        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 480));
+        buttonGroup1.add(jRadioButtonAddLm1);
+        jRadioButtonAddLm1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonAddLm1.setText("募资总额");
+        jPanelCongfig.add(jRadioButtonAddLm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 370, 160));
+
+        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 390));
 
         jMenuFile.setText("文件");
 
@@ -327,7 +266,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemDZHActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-港股打新 V19.04\n版权所有(C) 张向荣(Aioros Zhang)");
+        JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-港股打新 V19.10\n版权所有(C) 张向荣(Aioros Zhang)");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
@@ -351,8 +290,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIpoInfoActionPerformed
 
     private void jButtonIpoEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIpoEvaActionPerformed
-        investLevel = Double.parseDouble(jTextFieldInvestLevel.getText());
-        investCoef = Double.parseDouble(jTextFieldInvestCoef.getText());
+        float critPoint = Float.parseFloat(jTextFieldCriticalValue.getText());
         strategy = new Strategy(ipoInfoList);
 
 //        getInvestMode();
@@ -366,7 +304,7 @@ public class MainView extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
 //            return;
 //        }
-        SystemReport sr = updateSystemReport(strategy);
+        SystemReport sr = updateSystemReport(strategy, critPoint);
         updateTable(sr);
 
         evaluated = true;
@@ -378,10 +316,6 @@ public class MainView extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         SystemReport sr;
         ArrayList<SystemReport> srList = new ArrayList<>();
-        double ps1 = Double.parseDouble(jTextFieldPS1.getText());
-        double pe1 = Double.parseDouble(jTextFieldPE1.getText());
-        double ps2 = Double.parseDouble(jTextFieldPS2.getText());
-        double pe2 = Double.parseDouble(jTextFieldPE2.getText());
 //
 //        for (double i = ps1; i <= pe1; i += 10) {
 //            for (double j = ps2; j <= pe2; j += 0.1) {
@@ -405,14 +339,9 @@ public class MainView extends javax.swing.JFrame {
         }
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
-        jButtonFilterCheck.setEnabled(true);
         Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.OWeightEarn).compareTo(arg0.OWeightEarn));
         RankTable rankTable = new RankTable(this, false, this, srList);
     }//GEN-LAST:event_jButtonFilterStartActionPerformed
-
-    private void jButtonFilterCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterCheckActionPerformed
-        //rankTable.setVisible(true);
-    }//GEN-LAST:event_jButtonFilterCheckActionPerformed
 
     /**
      ********************* Start of User-defined function ********************
@@ -456,7 +385,7 @@ public class MainView extends javax.swing.JFrame {
 
     public void investParaEva(String para) {
         String[] paras = para.replaceAll(" ", "").split(",");
-        jTextFieldInvestLevel.setText(paras[2]);
+        jTextFieldCriticalValue.setText(paras[2]);
 
         jButtonIpoEva.doClick();
     }
@@ -464,8 +393,8 @@ public class MainView extends javax.swing.JFrame {
     public void getInvestMode() {
     }
 
-    protected SystemReport updateSystemReport(Strategy stg) {
-        SystemReport sr = new SystemReport();
+    protected SystemReport updateSystemReport(Strategy stg, float cv) {
+        SystemReport sr = new SystemReport(cv);
 
         sr.OTotalGain = stg.getOTotalGain();
         sr.CTotalGain = stg.getCTotalGain();
@@ -473,8 +402,8 @@ public class MainView extends javax.swing.JFrame {
         sr.CTotalEarn = stg.getCTotalEarn();
         sr.OWeightEarn = stg.getOWeightEarn();
         sr.CWeightEarn = stg.getCWeightEarn();
-        sr.OWeightRestictEarn = stg.getOWeightRestictEarn(1);
-        sr.CWeightRestictEarn = stg.getCWeightRestictEarn(1);
+        sr.OWeightRestictEarn = stg.getOWeightRestictEarn(cv);
+        sr.CWeightRestictEarn = stg.getCWeightRestictEarn(cv);
         return sr;
     }
 
@@ -549,7 +478,6 @@ public class MainView extends javax.swing.JFrame {
     public int investDays = 0;
     public double testYears = 0;
     public double investCoef = 1;
-    public double investLevel = 1;
 
     public Strategy strategy;
     public boolean evaluated = false;
@@ -560,16 +488,11 @@ public class MainView extends javax.swing.JFrame {
     ArrayList<IpoInfo> ipoInfoList;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonFilterCheck;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonFilterStart;
     private javax.swing.JButton jButtonIpoEva;
     private javax.swing.JButton jButtonIpoInfo;
-    private javax.swing.JLabel jLabelDash1;
-    private javax.swing.JLabel jLabelDash2;
-    private javax.swing.JLabel jLabelInvestCoef;
-    private javax.swing.JLabel jLabelInvestLevel;
-    private javax.swing.JLabel jLabelPara1;
-    private javax.swing.JLabel jLabelPara2;
+    private javax.swing.JLabel jLabelCriticalValue;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
@@ -581,20 +504,15 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelCongfig;
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JPanel jPanelSysFilter;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButtonAddDif;
     private javax.swing.JRadioButton jRadioButtonAddLm;
+    private javax.swing.JRadioButton jRadioButtonAddLm1;
     private javax.swing.JRadioButton jRadioButtonAddMa;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPaneMsg;
+    private javax.swing.JScrollPane jScrollPaneTable;
     private javax.swing.JTable jTablePoint;
     private javax.swing.JTextArea jTextAreaMain;
-    private javax.swing.JTextField jTextFieldInvestCoef;
-    private javax.swing.JTextField jTextFieldInvestLevel;
-    private javax.swing.JTextField jTextFieldPE1;
-    private javax.swing.JTextField jTextFieldPE2;
-    private javax.swing.JTextField jTextFieldPS1;
-    private javax.swing.JTextField jTextFieldPS2;
+    private javax.swing.JTextField jTextFieldCriticalValue;
     // End of variables declaration//GEN-END:variables
 }
