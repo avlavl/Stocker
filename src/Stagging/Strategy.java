@@ -6,7 +6,6 @@
 package Stagging;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  *
@@ -112,130 +111,120 @@ public class Strategy {
         return totalEarning;
     }
 
-    public float getOWeightRestictEarn(float price) {
-        float totalEarning = 0;
+    public float getOWeightEarnRestict(int type, float point) {
+        float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.totalRaiseFunds < price) {
-                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+            float value = 0;
+            switch (type) {
+                case 1:
+                    value = ipoInfo.luckyRate;
+                    break;
+                case 2:
+                    value = ipoInfo.superPurchaseMultiples;
+                    break;
+                case 3:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+                case 4:
+                    value = ipoInfo.offerPrice;
+                    break;
+                default:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+            }
+            if (value < point) {
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
             }
         }
-        return totalEarning;
+        return totalEarn;
     }
 
-    public float getCWeightRestictEarn(float price) {
-        float totalEarning = 0;
+    public float getCWeightEarnRestict(int type, float point) {
+        float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.totalRaiseFunds < price) {
-                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+            float value = 0;
+            switch (type) {
+                case 1:
+                    value = ipoInfo.luckyRate;
+                    break;
+                case 2:
+                    value = ipoInfo.superPurchaseMultiples;
+                    break;
+                case 3:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+                case 4:
+                    value = ipoInfo.offerPrice;
+                    break;
+                default:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+            }
+            if (value < point) {
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
             }
         }
-        return totalEarning;
+        return totalEarn;
     }
 
-    public float getOCWeightRestictEarn(float price) {
-        float totalEarning = 0;
+    public float getOCWeightEarnRestict(int type, float point) {
+        float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.totalRaiseFunds < price) {
-                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+            float value = 0;
+            switch (type) {
+                case 1:
+                    value = ipoInfo.luckyRate;
+                    break;
+                case 2:
+                    value = ipoInfo.superPurchaseMultiples;
+                    break;
+                case 3:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+                case 4:
+                    value = ipoInfo.offerPrice;
+                    break;
+                default:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+            }
+            if (value < point) {
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
             } else {
-                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
             }
         }
-        return totalEarning;
+        return totalEarn;
     }
 
-    public float getCOWeightRestictEarn(float price) {
-        float totalEarning = 0;
+    public float getCOWeightEarnRestict(int type, float point) {
+        float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.totalRaiseFunds < price) {
-                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+            float value = 0;
+            switch (type) {
+                case 1:
+                    value = ipoInfo.luckyRate;
+                    break;
+                case 2:
+                    value = ipoInfo.superPurchaseMultiples;
+                    break;
+                case 3:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+                case 4:
+                    value = ipoInfo.offerPrice;
+                    break;
+                default:
+                    value = ipoInfo.totalRaiseFunds;
+                    break;
+            }
+            if (value < point) {
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
             } else {
-                totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
             }
         }
-        return totalEarning;
-    }
-
-    public double getMaxInvest() {
-        return Collections.max(totalInputList);
-    }
-
-    public double getMeanInvest() {
-        double totalInput = 0;
-        for (double input : totalInputList) {
-            totalInput += input;
-        }
-        return totalInput / totalInputList.size();
-    }
-
-    public double getMaxLoss() {
-        return Collections.min(profitList);
-    }
-
-    public double getMaxLossRatio() {
-        double loss = 0;
-        for (double ratio : profitRatios) {
-            if (ratio < loss) {
-                loss = ratio;
-            }
-        }
-        return loss * 100;
-    }
-
-    public double getMeanDiffRate() {
-        double totalDiffRate = 0;
-        for (double diffRate : diffRateList) {
-            totalDiffRate += diffRate;
-        }
-        return totalDiffRate / diffRateList.size();
-    }
-
-    public double getMeanNegaDiffRate() {
-        double totalDiffRate = 0;
-        int num = 0;
-        for (double diffRate : diffRateList) {
-            if (diffRate < 1) {
-                totalDiffRate += diffRate;
-                num++;
-            }
-        }
-        return totalDiffRate / num;
-    }
-
-    public double getMinDiffRate() {
-        return Collections.min(diffRateList);
-    }
-
-    public double getMeanInvestRate() {
-        return 1 / Math.pow(getMeanNegaDiffRate(), diffCoef);
-    }
-
-    public double getMaxInvestRate() {
-        return 1 / Math.pow(getMinDiffRate(), diffCoef);
-    }
-
-    public double getCurrentAsset() {
-        return totalPrice;
-    }
-
-    public double getCurrentRatio() {
-        return profitRatio * 100;
-    }
-
-    public double getKeyPoint() {
-        if (totalInput > 0) {
-            double keyPoint = (totalInput / totalNumber) * (1 + winLevel);
-            return keyPoint;
-        }
-        return basePoint;
-    }
-
-    public double getKeyRatio() {
-        if (totalInput > 0) {
-            double keyRatio = totalInput * (1 + winLevel) / totalPrice - 1;
-            return 100 * keyRatio;
-        }
-        return 100 * (basePoint - pList.get(items - 1)) / pList.get(items - 1);
+        return totalEarn;
     }
 
     public class RecordData {

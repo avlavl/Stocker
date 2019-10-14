@@ -27,8 +27,8 @@ public class SystemReport {
     public int investCounts;
     public float OWeightEarn;
     public float CWeightEarn;
-    public float OWeightRestictEarn;
-    public float CWeightRestictEarn;
-    public float OCWeightRestictEarn;
-    public float COWeightRestictEarn;
+    public float OWeightEarnRestict;
+    public float CWeightEarnRestict;
+    public float OCWeightEarnRestict;
+    public float COWeightEarnRestict;
 }

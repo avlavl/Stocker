@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -76,11 +75,11 @@ public class MainView extends javax.swing.JFrame {
         jButtonIpoInfo = new javax.swing.JButton();
         jLabelCriticalValue = new javax.swing.JLabel();
         jTextFieldCriticalValue = new javax.swing.JTextField();
-        jRadioButtonAddLm = new javax.swing.JRadioButton();
-        jRadioButtonAddMa = new javax.swing.JRadioButton();
-        jRadioButtonAddDif = new javax.swing.JRadioButton();
+        jRadioButtonSuperPurchaseMultiples = new javax.swing.JRadioButton();
+        jRadioButtonOfferPrice = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate = new javax.swing.JRadioButton();
         jButtonFilterStart = new javax.swing.JButton();
-        jRadioButtonAddLm1 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds = new javax.swing.JRadioButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -118,8 +117,8 @@ public class MainView extends javax.swing.JFrame {
                 {"开盘累计涨幅", null, "收盘累计涨幅", ""},
                 {"开盘累计收益", null, "收盘累计收益", null},
                 {"开盘加权收益", null, "收盘加权收益", ""},
-                {"开盘加权收益R", null, "收盘加权收益R", null},
-                {"", null, "", null},
+                {"开盘加限收益", null, "收盘加限收益", null},
+                {"开收加限收益", null, "收开加限收益", null},
                 {"", null, "", null}
             },
             new String [] {
@@ -180,21 +179,21 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldCriticalValue.setText("1.0");
         jPanelCongfig.add(jTextFieldCriticalValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 68, 110, -1));
 
-        buttonGroup1.add(jRadioButtonAddLm);
-        jRadioButtonAddLm.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonAddLm.setText("超购倍数");
-        jPanelCongfig.add(jRadioButtonAddLm, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+        buttonGroup1.add(jRadioButtonSuperPurchaseMultiples);
+        jRadioButtonSuperPurchaseMultiples.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples.setText("超购倍数");
+        jPanelCongfig.add(jRadioButtonSuperPurchaseMultiples, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
-        buttonGroup1.add(jRadioButtonAddMa);
-        jRadioButtonAddMa.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonAddMa.setText("发行价");
-        jPanelCongfig.add(jRadioButtonAddMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
+        buttonGroup1.add(jRadioButtonOfferPrice);
+        jRadioButtonOfferPrice.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonOfferPrice.setText("发行价");
+        jPanelCongfig.add(jRadioButtonOfferPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
 
-        buttonGroup1.add(jRadioButtonAddDif);
-        jRadioButtonAddDif.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonAddDif.setSelected(true);
-        jRadioButtonAddDif.setText("中签率");
-        jPanelCongfig.add(jRadioButtonAddDif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        buttonGroup1.add(jRadioButtonLuckRate);
+        jRadioButtonLuckRate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate.setSelected(true);
+        jRadioButtonLuckRate.setText("中签率");
+        jPanelCongfig.add(jRadioButtonLuckRate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonFilterStart.setText("统计分析");
@@ -206,10 +205,10 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelCongfig.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 70, 30));
 
-        buttonGroup1.add(jRadioButtonAddLm1);
-        jRadioButtonAddLm1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonAddLm1.setText("募资总额");
-        jPanelCongfig.add(jRadioButtonAddLm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        buttonGroup1.add(jRadioButtonTotalRaiseFunds);
+        jRadioButtonTotalRaiseFunds.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds.setText("募资总额");
+        jPanelCongfig.add(jRadioButtonTotalRaiseFunds, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
         jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 370, 160));
 
@@ -290,21 +289,20 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIpoInfoActionPerformed
 
     private void jButtonIpoEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIpoEvaActionPerformed
+        int type = 1;
+        if (jRadioButtonLuckRate.isSelected()) {
+            type = 1;
+        } else if (jRadioButtonSuperPurchaseMultiples.isSelected()) {
+            type = 2;
+        } else if (jRadioButtonTotalRaiseFunds.isSelected()) {
+            type = 3;
+        } else {
+            type = 4;
+        }
         float critPoint = Float.parseFloat(jTextFieldCriticalValue.getText());
         strategy = new Strategy(ipoInfoList);
 
-//        getInvestMode();
-//        double p1 = 0, p2 = 0, p3 = 0;
-//        String[] words = investPara.split(",");
-//        p1 = Double.parseDouble(words[0]);
-//        p2 = Double.parseDouble(words[1]);
-//        p3 = Double.parseDouble(words[2]);
-//        ret = strategy.sysEva(p1, p2, p3);
-//        if (!ret) {
-//            JOptionPane.showMessageDialog(new JFrame(), "无效的参数设置！");
-//            return;
-//        }
-        SystemReport sr = updateSystemReport(strategy, critPoint);
+        SystemReport sr = updateSystemReport(strategy, type, critPoint);
         updateTable(sr);
 
         evaluated = true;
@@ -316,30 +314,46 @@ public class MainView extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         SystemReport sr;
         ArrayList<SystemReport> srList = new ArrayList<>();
-//
-//        for (double i = ps1; i <= pe1; i += 10) {
-//            for (double j = ps2; j <= pe2; j += 0.1) {
-//                strategy = new Strategy(this, start, slope);
-//                if (strategy.sysSimpleInvestEva(i, j, k)) {
-//                    String para = String.format("%d,%.1f,%.1f", (int) i, j, k);
-//                    sr = updateSimpleReport(para, strategy);
-//                    srList.add(sr);
-//                }
-//            }
-//        }
 
         strategy = new Strategy(ipoInfoList);
         float oldOWeightRestictEarn = 0;
-        for (int i = 1; i < 100; i++) {
-            sr = updateSimpleReport((float) i / 10, strategy);
-            if (sr.OWeightRestictEarn != oldOWeightRestictEarn) {
-                oldOWeightRestictEarn = sr.OWeightRestictEarn;
-                srList.add(sr);
+        if (jRadioButtonLuckRate.isSelected()) {
+            for (int i = 1; i <= 100; i++) {
+                sr = updateSimpleReport(strategy, 1, (float) i);
+                if (sr.OWeightEarnRestict != oldOWeightRestictEarn) {
+                    oldOWeightRestictEarn = sr.OWeightEarnRestict;
+                    srList.add(sr);
+                }
+            }
+        } else if (jRadioButtonSuperPurchaseMultiples.isSelected()) {
+            for (int i = 1; i < 1000; i++) {
+                sr = updateSimpleReport(strategy, 2, (float) i);
+                if (sr.OWeightEarnRestict != oldOWeightRestictEarn) {
+                    oldOWeightRestictEarn = sr.OWeightEarnRestict;
+                    srList.add(sr);
+                }
+            }
+        } else if (jRadioButtonTotalRaiseFunds.isSelected()) {
+            for (int i = 1; i <= 1000; i++) {
+                sr = updateSimpleReport(strategy, 3, (float) i / 10);
+                if (sr.OWeightEarnRestict != oldOWeightRestictEarn) {
+                    oldOWeightRestictEarn = sr.OWeightEarnRestict;
+                    srList.add(sr);
+                }
+            }
+        } else {
+            for (int i = 1; i < 1000; i++) {
+                sr = updateSimpleReport(strategy, 4, (float) i / 10);
+                if (sr.OWeightEarnRestict != oldOWeightRestictEarn) {
+                    oldOWeightRestictEarn = sr.OWeightEarnRestict;
+                    srList.add(sr);
+                }
             }
         }
+
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
-        Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.OWeightEarn).compareTo(arg0.OWeightEarn));
+        //Collections.sort(srList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.OWeightEarnRestict).compareTo(arg0.OWeightEarnRestict));
         RankTable rankTable = new RankTable(this, false, this, srList);
     }//GEN-LAST:event_jButtonFilterStartActionPerformed
 
@@ -393,8 +407,8 @@ public class MainView extends javax.swing.JFrame {
     public void getInvestMode() {
     }
 
-    protected SystemReport updateSystemReport(Strategy stg, float cv) {
-        SystemReport sr = new SystemReport(cv);
+    protected SystemReport updateSystemReport(Strategy stg, int type, float cp) {
+        SystemReport sr = new SystemReport(cp);
 
         sr.OTotalGain = stg.getOTotalGain();
         sr.CTotalGain = stg.getCTotalGain();
@@ -402,18 +416,20 @@ public class MainView extends javax.swing.JFrame {
         sr.CTotalEarn = stg.getCTotalEarn();
         sr.OWeightEarn = stg.getOWeightEarn();
         sr.CWeightEarn = stg.getCWeightEarn();
-        sr.OWeightRestictEarn = stg.getOWeightRestictEarn(cv);
-        sr.CWeightRestictEarn = stg.getCWeightRestictEarn(cv);
+        sr.OWeightEarnRestict = stg.getOWeightEarnRestict(type, cp);
+        sr.CWeightEarnRestict = stg.getCWeightEarnRestict(type, cp);
+        sr.OCWeightEarnRestict = stg.getOCWeightEarnRestict(type, cp);
+        sr.COWeightEarnRestict = stg.getCOWeightEarnRestict(type, cp);
         return sr;
     }
 
-    protected SystemReport updateSimpleReport(float i, Strategy stg) {
-        SystemReport sr = new SystemReport(i);
+    protected SystemReport updateSimpleReport(Strategy stg, int type, float cp) {
+        SystemReport sr = new SystemReport(cp);
 
-        sr.OWeightRestictEarn = strategy.getOWeightRestictEarn(i);
-        sr.CWeightRestictEarn = strategy.getCWeightRestictEarn(i);
-        sr.OCWeightRestictEarn = strategy.getOCWeightRestictEarn(i);
-        sr.COWeightRestictEarn = strategy.getCOWeightRestictEarn(i);
+        sr.OWeightEarnRestict = strategy.getOWeightEarnRestict(type, cp);
+        sr.CWeightEarnRestict = strategy.getCWeightEarnRestict(type, cp);
+        sr.OCWeightEarnRestict = strategy.getOCWeightEarnRestict(type, cp);
+        sr.COWeightEarnRestict = strategy.getCOWeightEarnRestict(type, cp);
         return sr;
     }
 
@@ -430,10 +446,14 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(sr.OWeightEarn + "元", 2, 1);
         jTablePoint.setValueAt("收盘加权收益", 2, 2);
         jTablePoint.setValueAt(sr.CWeightEarn + "元", 2, 3);
-        jTablePoint.setValueAt("开盘加权收益R", 3, 0);
-        jTablePoint.setValueAt(sr.OWeightRestictEarn + "元", 3, 1);
-        jTablePoint.setValueAt("收盘加权收益R", 3, 2);
-        jTablePoint.setValueAt(sr.CWeightRestictEarn + "元", 3, 3);
+        jTablePoint.setValueAt("开盘加限收益", 3, 0);
+        jTablePoint.setValueAt(sr.OWeightEarnRestict + "元", 3, 1);
+        jTablePoint.setValueAt("收盘加限收益", 3, 2);
+        jTablePoint.setValueAt(sr.CWeightEarnRestict + "元", 3, 3);
+        jTablePoint.setValueAt("开收加限收益", 4, 0);
+        jTablePoint.setValueAt(sr.OCWeightEarnRestict + "元", 4, 1);
+        jTablePoint.setValueAt("收开加限收益", 4, 2);
+        jTablePoint.setValueAt(sr.COWeightEarnRestict + "元", 4, 3);
     }
 
     public void msgLogger(String str) {
@@ -505,10 +525,10 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelCongfig;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JRadioButton jRadioButtonAddDif;
-    private javax.swing.JRadioButton jRadioButtonAddLm;
-    private javax.swing.JRadioButton jRadioButtonAddLm1;
-    private javax.swing.JRadioButton jRadioButtonAddMa;
+    private javax.swing.JRadioButton jRadioButtonLuckRate;
+    private javax.swing.JRadioButton jRadioButtonOfferPrice;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds;
     private javax.swing.JScrollPane jScrollPaneMsg;
     private javax.swing.JScrollPane jScrollPaneTable;
     private javax.swing.JTable jTablePoint;

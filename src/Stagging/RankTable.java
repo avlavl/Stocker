@@ -32,10 +32,10 @@ public class RankTable extends javax.swing.JDialog {
             tableContent[i][0] = "" + (i + 1);
             tableContent[i][1] = "" + SRList.get(i).criticalPoint;
             tableContent[i][2] = "" + SRList.get(i).criticalPoint;
-            tableContent[i][3] = "" + SRList.get(i).OWeightRestictEarn;
-            tableContent[i][4] = "" + SRList.get(i).CWeightRestictEarn;
-            tableContent[i][5] = "" + SRList.get(i).OCWeightRestictEarn;
-            tableContent[i][6] = "" + SRList.get(i).COWeightRestictEarn;
+            tableContent[i][3] = "" + SRList.get(i).OWeightEarnRestict;
+            tableContent[i][4] = "" + SRList.get(i).CWeightEarnRestict;
+            tableContent[i][5] = "" + SRList.get(i).OCWeightEarnRestict;
+            tableContent[i][6] = "" + SRList.get(i).COWeightEarnRestict;
         }
         jTableRank.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
@@ -73,10 +73,10 @@ public class RankTable extends javax.swing.JDialog {
             jTableRank.setValueAt(i + idx + 1, i, 0);
             jTableRank.setValueAt(SRList.get(i + idx).criticalPoint, i, 1);
             jTableRank.setValueAt(SRList.get(i + idx).criticalPoint, i, 2);
-            jTableRank.setValueAt(SRList.get(i + idx).OWeightRestictEarn, i, 3);
-            jTableRank.setValueAt(SRList.get(i + idx).CWeightRestictEarn, i, 4);
-            jTableRank.setValueAt(SRList.get(i + idx).OCWeightRestictEarn, i, 5);
-            jTableRank.setValueAt(SRList.get(i + idx).COWeightRestictEarn, i, 6);
+            jTableRank.setValueAt(SRList.get(i + idx).OWeightEarnRestict, i, 3);
+            jTableRank.setValueAt(SRList.get(i + idx).CWeightEarnRestict, i, 4);
+            jTableRank.setValueAt(SRList.get(i + idx).OCWeightEarnRestict, i, 5);
+            jTableRank.setValueAt(SRList.get(i + idx).COWeightEarnRestict, i, 6);
         }
     }
 
@@ -184,16 +184,16 @@ public class RankTable extends javax.swing.JDialog {
             jTableRank.setColumnSelectionInterval(index, index);
             switch (index) {
                 case 3:
-                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.OWeightRestictEarn).compareTo(arg0.OWeightRestictEarn));
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.OWeightEarnRestict).compareTo(arg0.OWeightEarnRestict));
                     break;
                 case 4:
-                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.CWeightRestictEarn).compareTo(arg0.CWeightRestictEarn));
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.CWeightEarnRestict).compareTo(arg0.CWeightEarnRestict));
                     break;
                 case 5:
-                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg0.OCWeightRestictEarn).compareTo(arg1.OCWeightRestictEarn));
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg0.OCWeightEarnRestict).compareTo(arg1.OCWeightEarnRestict));
                     break;
                 case 6:
-                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.COWeightRestictEarn).compareTo(new Float(arg0.COWeightRestictEarn)));
+                    Collections.sort(SRList, (SystemReport arg0, SystemReport arg1) -> new Float(arg1.COWeightEarnRestict).compareTo(new Float(arg0.COWeightEarnRestict)));
                     break;
                 default:
                     break;

@@ -144,8 +144,8 @@
                       <Data value="&#x5f00;&#x76d8;&#x7d2f;&#x8ba1;&#x6da8;&#x5e45;"/>
                       <Data value="&#x5f00;&#x76d8;&#x7d2f;&#x8ba1;&#x6536;&#x76ca;"/>
                       <Data value="&#x5f00;&#x76d8;&#x52a0;&#x6743;&#x6536;&#x76ca;"/>
-                      <Data value="&#x5f00;&#x76d8;&#x52a0;&#x6743;&#x6536;&#x76ca;R"/>
-                      <Data value=""/>
+                      <Data value="&#x5f00;&#x76d8;&#x52a0;&#x9650;&#x6536;&#x76ca;"/>
+                      <Data value="&#x5f00;&#x6536;&#x52a0;&#x9650;&#x6536;&#x76ca;"/>
                       <Data value=""/>
                     </Column>
                     <Column editable="true" title="&#x5168;&#x90e8;&#x4ea4;&#x6613;" type="java.lang.Object"/>
@@ -153,8 +153,8 @@
                       <Data value="&#x6536;&#x76d8;&#x7d2f;&#x8ba1;&#x6da8;&#x5e45;"/>
                       <Data value="&#x6536;&#x76d8;&#x7d2f;&#x8ba1;&#x6536;&#x76ca;"/>
                       <Data value="&#x6536;&#x76d8;&#x52a0;&#x6743;&#x6536;&#x76ca;"/>
-                      <Data value="&#x6536;&#x76d8;&#x52a0;&#x6743;&#x6536;&#x76ca;R"/>
-                      <Data value=""/>
+                      <Data value="&#x6536;&#x76d8;&#x52a0;&#x9650;&#x6536;&#x76ca;"/>
+                      <Data value="&#x6536;&#x5f00;&#x52a0;&#x9650;&#x6536;&#x76ca;"/>
                       <Data value=""/>
                     </Column>
                     <Column editable="true" title="&#x5168;&#x90e8;&#x4ea4;&#x6613;" type="java.lang.Object">
@@ -318,7 +318,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButtonAddLm">
+            <Component class="javax.swing.JRadioButton" name="jRadioButtonSuperPurchaseMultiples">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -334,7 +334,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButtonAddMa">
+            <Component class="javax.swing.JRadioButton" name="jRadioButtonOfferPrice">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -350,7 +350,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButtonAddDif">
+            <Component class="javax.swing.JRadioButton" name="jRadioButtonLuckRate">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -386,7 +386,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButtonAddLm1">
+            <Component class="javax.swing.JRadioButton" name="jRadioButtonTotalRaiseFunds">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
