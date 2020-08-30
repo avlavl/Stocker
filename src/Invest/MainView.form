@@ -62,15 +62,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSZZSActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSZCZ">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZZWB">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+2"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x6df1;&#x5733;&#x6210;&#x6307;"/>
+                <Property name="text" type="java.lang.String" value="&#x4e2d;&#x8bc1;500"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSZCZActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemZZWBActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSWZQ">
@@ -95,15 +95,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemYLCYActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemZZCM">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemYYYB">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+5"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x4e2d;&#x8bc1;&#x4f20;&#x5a92;"/>
+                <Property name="text" type="java.lang.String" value="&#x533b;&#x836f;100"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemZZCMActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemYYYBActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
