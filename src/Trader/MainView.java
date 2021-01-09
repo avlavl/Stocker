@@ -920,7 +920,9 @@ public class MainView extends javax.swing.JFrame {
                             if (sysMAEva(i, j)) {
                                 String para = String.format("%d,%d", i, j);
                                 sr = updateSimpleReport(tradeMode, para, handle);
-                                srList.add(sr);
+                                if ((sr.maxLossRatio >= MAX_LOSS) && (sr.positionDaysRate >= POS_RATE)) {
+                                    srList.add(sr);
+                                }
                             }
                         }
                     }
@@ -934,7 +936,9 @@ public class MainView extends javax.swing.JFrame {
                             if (sysLMEva(tradeMode, i, j)) {
                                 String para = String.format("%d,%d", i, j);
                                 sr = updateSimpleReport(tradeMode, para, handle);
-                                srList.add(sr);
+                                if ((sr.maxLossRatio >= MAX_LOSS) && (sr.positionDaysRate >= POS_RATE)) {
+                                    srList.add(sr);
+                                }
                             }
                         }
                     }
@@ -946,7 +950,9 @@ public class MainView extends javax.swing.JFrame {
                     if (sysMACDEva(tradeMode, i)) {
                         String para = String.format("%d", i);
                         sr = updateSimpleReport(tradeMode, para, handle);
-                        srList.add(sr);
+                        if ((sr.maxLossRatio >= MAX_LOSS) && (sr.positionDaysRate >= POS_RATE)) {
+                            srList.add(sr);
+                        }
                     }
                 }
                 break;
@@ -956,7 +962,9 @@ public class MainView extends javax.swing.JFrame {
                         if (sysMACD2Eva(i, j)) {
                             String para = String.format("%d,%d", i, j);
                             sr = updateSimpleReport(tradeMode, para, handle);
-                            srList.add(sr);
+                            if ((sr.maxLossRatio >= MAX_LOSS) && (sr.positionDaysRate >= POS_RATE)) {
+                                srList.add(sr);
+                            }
                         }
                     }
                 }
@@ -970,7 +978,9 @@ public class MainView extends javax.swing.JFrame {
                                 if (sysMACDMAEva(tradeMode, i, j, k)) {
                                     String para = String.format("%d,%d,%d", i, j, k);
                                     sr = updateSimpleReport(tradeMode, para, handle);
-                                    srList.add(sr);
+                                    if ((sr.maxLossRatio >= MAX_LOSS) && (sr.positionDaysRate >= POS_RATE)) {
+                                        srList.add(sr);
+                                    }
                                 }
                             }
                         }
@@ -988,7 +998,9 @@ public class MainView extends javax.swing.JFrame {
                                 if (sysMACDLMEva(tradeMode, i, j, k)) {
                                     String para = String.format("%d,%d,%d", i, j, k);
                                     sr = updateSimpleReport(tradeMode, para, handle);
-                                    srList.add(sr);
+                                    if ((sr.maxLossRatio >= MAX_LOSS) && (sr.positionDaysRate >= POS_RATE)) {
+                                        srList.add(sr);
+                                    }
                                 }
                             }
                         }
@@ -2250,6 +2262,8 @@ public class MainView extends javax.swing.JFrame {
     public boolean lmStatus = true;
 
     public int gradeFlag = 1;
+    public float MAX_LOSS = -20;   // -20%
+    public float POS_RATE = 3; // 3%
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupLM;
