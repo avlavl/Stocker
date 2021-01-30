@@ -36,17 +36,17 @@ public class IpoTable extends javax.swing.JDialog {
             tableContent[i][0] = String.format("%d", i + 1);
             tableContent[i][1] = ipoInfoList.get(i).stockCode;
             tableContent[i][2] = ipoInfoList.get(i).stockName;
-            tableContent[i][3] = ipoInfoList.get(i).offerDate;
-            tableContent[i][4] = ipoInfoList.get(i).marketPlate;
-            tableContent[i][5] = ipoInfoList.get(i).luckyRate + "%";
-            tableContent[i][6] = ipoInfoList.get(i).superPurchaseMultiples + "";
-            tableContent[i][7] = ipoInfoList.get(i).totalRaiseFunds + "";
-            tableContent[i][8] = ipoInfoList.get(i).handFund + "";
-            tableContent[i][9] = ipoInfoList.get(i).offerPrice + "";
-            tableContent[i][10] = String.format("%.3f", ipoInfoList.get(i).blackPrice);
-            tableContent[i][11] = ipoInfoList.get(i).openPrice + "";
-            tableContent[i][12] = ipoInfoList.get(i).closePrice + "";
-            tableContent[i][13] = ipoInfoList.get(i).blackGain + "%";
+            tableContent[i][3] = ipoInfoList.get(i).marketPlate;
+            tableContent[i][4] = ipoInfoList.get(i).offerDate;
+            tableContent[i][5] = ipoInfoList.get(i).inquiryRange;
+            tableContent[i][6] = ipoInfoList.get(i).handFund + "";
+            tableContent[i][7] = ipoInfoList.get(i).luckyRate + "%";
+            tableContent[i][8] = ipoInfoList.get(i).offerPrice + "";
+            tableContent[i][9] = ipoInfoList.get(i).offerPE;
+            tableContent[i][10] = ipoInfoList.get(i).greenShoeRatio + "%";
+            tableContent[i][11] = ipoInfoList.get(i).superPurchaseMultiples + "";
+            tableContent[i][12] = ipoInfoList.get(i).totalRaiseFunds + "";
+            tableContent[i][13] = ipoInfoList.get(i).grayGain + "%";
             tableContent[i][14] = String.format("%.2f%%", ipoInfoList.get(i).openGain);
             tableContent[i][15] = ipoInfoList.get(i).closeGain + "%";
         }
@@ -54,7 +54,7 @@ public class IpoTable extends javax.swing.JDialog {
         jTableIpo.setModel(new javax.swing.table.DefaultTableModel(
                 tableContent,
                 new String[]{
-                    "序号", "代码", "名称", "上市日", "板块", "中签率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
+                    "序号", "代码", "名称", "板块", "上市日", "询价区间", "一手资金", "中签率", "发行价", "市盈率", "绿鞋/公开", "超购倍数", "募资总额", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
@@ -72,12 +72,12 @@ public class IpoTable extends javax.swing.JDialog {
             jTableIpo.getColumnModel().getColumn(0).setPreferredWidth(30);
             jTableIpo.getColumnModel().getColumn(1).setPreferredWidth(50);
             jTableIpo.getColumnModel().getColumn(2).setPreferredWidth(90);
-            jTableIpo.getColumnModel().getColumn(3).setPreferredWidth(80);
-            jTableIpo.getColumnModel().getColumn(4).setPreferredWidth(50);
-            jTableIpo.getColumnModel().getColumn(5).setPreferredWidth(60);
+            jTableIpo.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTableIpo.getColumnModel().getColumn(4).setPreferredWidth(80);
+            jTableIpo.getColumnModel().getColumn(5).setPreferredWidth(70);
             jTableIpo.getColumnModel().getColumn(6).setPreferredWidth(60);
             jTableIpo.getColumnModel().getColumn(7).setPreferredWidth(60);
-            jTableIpo.getColumnModel().getColumn(8).setPreferredWidth(60);
+            jTableIpo.getColumnModel().getColumn(8).setPreferredWidth(50);
             jTableIpo.getColumnModel().getColumn(9).setPreferredWidth(60);
             jTableIpo.getColumnModel().getColumn(10).setPreferredWidth(60);
             jTableIpo.getColumnModel().getColumn(11).setPreferredWidth(60);
@@ -130,17 +130,17 @@ public class IpoTable extends javax.swing.JDialog {
             jTableIpo.setValueAt(String.format("%d", i + 1 + idx), i, 0);
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockCode, i, 1);
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).stockName, i, 2);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerDate, i, 3);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).marketPlate, i, 4);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).luckyRate + "%", i, 5);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).superPurchaseMultiples, i, 6);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).totalRaiseFunds, i, 7);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).handFund, i, 8);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerPrice, i, 9);
-            jTableIpo.setValueAt(String.format("%.3f", ipoInfoList.get(i + idx).blackPrice), i, 10);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).openPrice, i, 11);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).closePrice, i, 12);
-            jTableIpo.setValueAt(ipoInfoList.get(i + idx).blackGain + "%", i, 13);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).marketPlate, i, 3);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerDate, i, 4);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).inquiryRange, i, 5);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).handFund, i, 6);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).luckyRate + "%", i, 7);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerPrice, i, 8);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).offerPE, i, 9);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).greenShoeRatio + "%", i, 10);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).superPurchaseMultiples, i, 11);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).totalRaiseFunds, i, 12);
+            jTableIpo.setValueAt(ipoInfoList.get(i + idx).grayGain + "%", i, 13);
             jTableIpo.setValueAt(String.format("%.2f%%", ipoInfoList.get(i + idx).openGain), i, 14);
             jTableIpo.setValueAt(ipoInfoList.get(i + idx).closeGain + "%", i, 15);
         }
@@ -176,7 +176,7 @@ public class IpoTable extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "序号", "代码", "名称", "上市日", "板块", "中签率", "超购倍数", "募资总额", "一手资金", "发行价", "暗盘", "开盘", "收盘", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
+                "序号", "代码", "名称", "板块", "上市日", "询价区间", "一手资金", "中签率", "发行价", "市盈率", "绿鞋/公开", "超购倍数", "募资总额", "暗盘涨幅", "开盘涨幅", "收盘涨幅"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -230,33 +230,43 @@ public class IpoTable extends javax.swing.JDialog {
             jTableIpo.setRowSelectionAllowed(false);
             jTableIpo.setColumnSelectionInterval(index, index);
             switch (index) {
-                case 2:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new String(arg1.offerDate).compareTo(arg0.offerDate));
+                case 3:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new String((order ? arg1 : arg0).marketPlate).compareTo((order ? arg0 : arg1).marketPlate));
                     break;
-                case 5:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg0.luckyRate).compareTo(arg1.luckyRate));
+                case 4:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new String((order ? arg1 : arg0).offerDate).compareTo((order ? arg0 : arg1).offerDate));
                     break;
                 case 6:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.superPurchaseMultiples).compareTo(arg0.superPurchaseMultiples));
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Integer((order ? arg0 : arg1).handFund).compareTo((order ? arg1 : arg0).handFund));
                     break;
                 case 7:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.totalRaiseFunds).compareTo(arg0.totalRaiseFunds));
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg0 : arg1).luckyRate).compareTo((order ? arg1 : arg0).luckyRate));
                     break;
-                case 9:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.offerPrice).compareTo(arg0.offerPrice));
+                case 8:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg1 : arg0).offerPrice).compareTo((order ? arg0 : arg1).offerPrice));
+                    break;
+                case 10:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg1 : arg0).greenShoeRatio).compareTo((order ? arg0 : arg1).greenShoeRatio));
+                    break;
+                case 11:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg1 : arg0).superPurchaseMultiples).compareTo((order ? arg0 : arg1).superPurchaseMultiples));
+                    break;
+                case 12:
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg1 : arg0).totalRaiseFunds).compareTo((order ? arg0 : arg1).totalRaiseFunds));
                     break;
                 case 13:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.blackGain).compareTo(arg0.blackGain));
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg1 : arg0).grayGain).compareTo((order ? arg0 : arg1).grayGain));
                     break;
                 case 14:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.openGain).compareTo(arg0.openGain));
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg1 : arg0).openGain).compareTo((order ? arg0 : arg1).openGain));
                     break;
                 case 15:
-                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float(arg1.closeGain).compareTo(arg0.closeGain));
+                    Collections.sort(ipoInfoList, (IpoInfo arg0, IpoInfo arg1) -> new Float((order ? arg1 : arg0).closeGain).compareTo((order ? arg0 : arg1).closeGain));
                     break;
                 default:
                     break;
             }
+            order = !order;
             listIndex = 0;
             updateTable(listIndex);
         }
@@ -265,6 +275,7 @@ public class IpoTable extends javax.swing.JDialog {
     private int listSize = 0;
     private int listIndex = 0;
     private int tableRows = 30;
+    private boolean order = true;
     private ArrayList<IpoInfo> ipoInfoList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPaneInvest;

@@ -21,17 +21,24 @@ public class IpoInfo {
 
     public String marketPlate;
     public String offerDate;
-    public float handFund;
+    public String inquiryRange;
+    public int handFund;
     public float luckyRate;
     public float offerPrice;
+    public String offerPE;
+    public float greenShoeRatio;
+    public String comparableCompany;
     public float superPurchaseMultiples;
     public float totalRaiseFunds;
-    public float blackGain;
-    public float openGain;
+    public float grayGain;
     public float closeGain;
-    public float blackPrice;
     public float openPrice;
     public float highPrice;
     public float lowPrice;
     public float closePrice;
+    public String underwriter;
+
+    public float handAmount;
+    public float grayPrice;
+    public float openGain;
 }

@@ -61,25 +61,84 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jMenuItemCopy = new javax.swing.JMenuItem();
-        jMenuItemClear = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanelMain = new javax.swing.JPanel();
+        jPanelCongfig1 = new javax.swing.JPanel();
+        jRadioButtonSuperPurchaseMultiples1 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate1 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds1 = new javax.swing.JRadioButton();
         jScrollPaneTable = new javax.swing.JScrollPane();
         jTablePoint = new javax.swing.JTable();
-        jScrollPaneMsg = new javax.swing.JScrollPane();
-        jTextAreaMain = new javax.swing.JTextArea();
         jPanelCongfig = new javax.swing.JPanel();
-        jButtonIpoEva = new javax.swing.JButton();
-        jButtonIpoInfo = new javax.swing.JButton();
         jLabelCriticalValue = new javax.swing.JLabel();
         jTextFieldCriticalValue = new javax.swing.JTextField();
         jRadioButtonSuperPurchaseMultiples = new javax.swing.JRadioButton();
         jRadioButtonOfferPrice = new javax.swing.JRadioButton();
         jRadioButtonLuckRate = new javax.swing.JRadioButton();
-        jButtonFilterStart = new javax.swing.JButton();
         jRadioButtonTotalRaiseFunds = new javax.swing.JRadioButton();
+        jButtonFilterStart2 = new javax.swing.JButton();
+        jPanelCongfig2 = new javax.swing.JPanel();
+        jLabelCriticalValue2 = new javax.swing.JLabel();
+        jTextFieldCriticalValue2 = new javax.swing.JTextField();
+        jRadioButtonSuperPurchaseMultiples2 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate2 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds2 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldCriticalValue3 = new javax.swing.JTextField();
+        jPanelCongfig3 = new javax.swing.JPanel();
+        jLabelCriticalValue3 = new javax.swing.JLabel();
+        jTextFieldCriticalValue4 = new javax.swing.JTextField();
+        jRadioButtonSuperPurchaseMultiples3 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate3 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds3 = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldCriticalValue5 = new javax.swing.JTextField();
+        jPanelCongfig4 = new javax.swing.JPanel();
+        jLabelCriticalValue4 = new javax.swing.JLabel();
+        jTextFieldCriticalValue6 = new javax.swing.JTextField();
+        jRadioButtonSuperPurchaseMultiples4 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate4 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds4 = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldCriticalValue7 = new javax.swing.JTextField();
+        jPanelCongfig5 = new javax.swing.JPanel();
+        jRadioButtonSuperPurchaseMultiples5 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate5 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds5 = new javax.swing.JRadioButton();
+        jPanelCongfig6 = new javax.swing.JPanel();
+        jLabelCriticalValue5 = new javax.swing.JLabel();
+        jTextFieldCriticalValue8 = new javax.swing.JTextField();
+        jRadioButtonSuperPurchaseMultiples6 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate6 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds6 = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldCriticalValue9 = new javax.swing.JTextField();
+        jPanelCongfig7 = new javax.swing.JPanel();
+        jRadioButtonSuperPurchaseMultiples7 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate7 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds7 = new javax.swing.JRadioButton();
+        jButtonIpoInfo = new javax.swing.JButton();
+        jButtonIpoEva = new javax.swing.JButton();
+        jButtonFilterStart = new javax.swing.JButton();
+        jButtonFilterStart1 = new javax.swing.JButton();
+        jPanelCongfig8 = new javax.swing.JPanel();
+        jLabelCriticalValue6 = new javax.swing.JLabel();
+        jTextFieldCriticalValue10 = new javax.swing.JTextField();
+        jRadioButtonSuperPurchaseMultiples8 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate8 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds8 = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        jTextFieldCriticalValue11 = new javax.swing.JTextField();
+        jPanelCongfig9 = new javax.swing.JPanel();
+        jLabelCriticalValue7 = new javax.swing.JLabel();
+        jTextFieldCriticalValue12 = new javax.swing.JTextField();
+        jRadioButtonSuperPurchaseMultiples9 = new javax.swing.JRadioButton();
+        jRadioButtonLuckRate9 = new javax.swing.JRadioButton();
+        jRadioButtonTotalRaiseFunds9 = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldCriticalValue13 = new javax.swing.JTextField();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -88,27 +147,32 @@ public class MainView extends javax.swing.JFrame {
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
-        jMenuItemCopy.setText("复制");
-        jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCopyActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItemCopy);
-
-        jMenuItemClear.setText("清除");
-        jMenuItemClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemClearActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItemClear);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("智能证券系统-港股打新");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanelCongfig1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "卖出策略", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroup2.add(jRadioButtonSuperPurchaseMultiples1);
+        jRadioButtonSuperPurchaseMultiples1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples1.setText("收盘");
+        jPanelCongfig1.add(jRadioButtonSuperPurchaseMultiples1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup2.add(jRadioButtonLuckRate1);
+        jRadioButtonLuckRate1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate1.setText("开盘");
+        jPanelCongfig1.add(jRadioButtonLuckRate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup2.add(jRadioButtonTotalRaiseFunds1);
+        jRadioButtonTotalRaiseFunds1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds1.setText("暗盘");
+        jPanelCongfig1.add(jRadioButtonTotalRaiseFunds1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jPanelMain.add(jPanelCongfig1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 250, 70));
+        jPanelCongfig1.getAccessibleContext().setAccessibleName("统计显示");
 
         jTablePoint.getTableHeader().setFont(new java.awt.Font("微软雅黑", 0, 12));
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -132,43 +196,10 @@ public class MainView extends javax.swing.JFrame {
             jTablePoint.getColumnModel().getColumn(2).setMinWidth(80);
         }
 
-        jPanelMain.add(jScrollPaneTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 370, 126));
-
-        jTextAreaMain.setColumns(20);
-        jTextAreaMain.setFont(new java.awt.Font("仿宋", 0, 11)); // NOI18N
-        jTextAreaMain.setRows(5);
-        jTextAreaMain.setComponentPopupMenu(jPopupMenu1);
-        jTextAreaMain.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTextAreaMainMouseReleased(evt);
-            }
-        });
-        jScrollPaneMsg.setViewportView(jTextAreaMain);
-
-        jPanelMain.add(jScrollPaneMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 370, 70));
+        jPanelMain.add(jScrollPaneTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 126));
 
         jPanelCongfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "定投配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelCongfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButtonIpoEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonIpoEva.setText("投资评测");
-        jButtonIpoEva.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonIpoEva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIpoEvaActionPerformed(evt);
-            }
-        });
-        jPanelCongfig.add(jButtonIpoEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 30));
-
-        jButtonIpoInfo.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonIpoInfo.setText("新股信息");
-        jButtonIpoInfo.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonIpoInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIpoInfoActionPerformed(evt);
-            }
-        });
-        jPanelCongfig.add(jButtonIpoInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
         jLabelCriticalValue.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabelCriticalValue.setText("临界位：");
@@ -191,9 +222,235 @@ public class MainView extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButtonLuckRate);
         jRadioButtonLuckRate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonLuckRate.setSelected(true);
         jRadioButtonLuckRate.setText("中签率");
         jPanelCongfig.add(jRadioButtonLuckRate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup1.add(jRadioButtonTotalRaiseFunds);
+        jRadioButtonTotalRaiseFunds.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds.setText("募资总额");
+        jPanelCongfig.add(jRadioButtonTotalRaiseFunds, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jButtonFilterStart2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonFilterStart2.setText("新股分析");
+        jButtonFilterStart2.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonFilterStart2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFilterStart2ActionPerformed(evt);
+            }
+        });
+        jPanelCongfig.add(jButtonFilterStart2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 70, 30));
+
+        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 370, 110));
+
+        jPanelCongfig2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "暗盘涨幅", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelCriticalValue2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCriticalValue2.setText("下位：");
+        jPanelCongfig2.add(jLabelCriticalValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jTextFieldCriticalValue2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue2.setText("0");
+        jPanelCongfig2.add(jTextFieldCriticalValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 50, -1));
+
+        buttonGroup3.add(jRadioButtonSuperPurchaseMultiples2);
+        jRadioButtonSuperPurchaseMultiples2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples2.setText("区间值");
+        jPanelCongfig2.add(jRadioButtonSuperPurchaseMultiples2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonLuckRate2);
+        jRadioButtonLuckRate2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate2.setText("下值");
+        jPanelCongfig2.add(jRadioButtonLuckRate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonTotalRaiseFunds2);
+        jRadioButtonTotalRaiseFunds2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds2.setText("上值");
+        jPanelCongfig2.add(jRadioButtonTotalRaiseFunds2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jLabel1.setText("上位：");
+        jPanelCongfig2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
+
+        jTextFieldCriticalValue3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue3.setText("100.0");
+        jPanelCongfig2.add(jTextFieldCriticalValue3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, -1));
+
+        jPanelMain.add(jPanelCongfig2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 270, 110));
+
+        jPanelCongfig3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "中签率", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelCriticalValue3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCriticalValue3.setText("下位：");
+        jPanelCongfig3.add(jLabelCriticalValue3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jTextFieldCriticalValue4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue4.setText("0");
+        jPanelCongfig3.add(jTextFieldCriticalValue4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 50, -1));
+
+        buttonGroup3.add(jRadioButtonSuperPurchaseMultiples3);
+        jRadioButtonSuperPurchaseMultiples3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples3.setText("区间值");
+        jPanelCongfig3.add(jRadioButtonSuperPurchaseMultiples3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonLuckRate3);
+        jRadioButtonLuckRate3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate3.setSelected(true);
+        jRadioButtonLuckRate3.setText("下值");
+        jPanelCongfig3.add(jRadioButtonLuckRate3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonTotalRaiseFunds3);
+        jRadioButtonTotalRaiseFunds3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds3.setText("上值");
+        jPanelCongfig3.add(jRadioButtonTotalRaiseFunds3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jLabel2.setText("上位：");
+        jPanelCongfig3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
+
+        jTextFieldCriticalValue5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue5.setText("100.0");
+        jPanelCongfig3.add(jTextFieldCriticalValue5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, -1));
+
+        jPanelMain.add(jPanelCongfig3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 270, 110));
+
+        jPanelCongfig4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "募资总额", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelCriticalValue4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCriticalValue4.setText("下位：");
+        jPanelCongfig4.add(jLabelCriticalValue4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jTextFieldCriticalValue6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue6.setText("0");
+        jPanelCongfig4.add(jTextFieldCriticalValue6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 50, -1));
+
+        buttonGroup3.add(jRadioButtonSuperPurchaseMultiples4);
+        jRadioButtonSuperPurchaseMultiples4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples4.setText("区间值");
+        jPanelCongfig4.add(jRadioButtonSuperPurchaseMultiples4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonLuckRate4);
+        jRadioButtonLuckRate4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate4.setText("下值");
+        jPanelCongfig4.add(jRadioButtonLuckRate4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonTotalRaiseFunds4);
+        jRadioButtonTotalRaiseFunds4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds4.setText("上值");
+        jPanelCongfig4.add(jRadioButtonTotalRaiseFunds4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jLabel3.setText("上位：");
+        jPanelCongfig4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
+
+        jTextFieldCriticalValue7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue7.setText("100.0");
+        jPanelCongfig4.add(jTextFieldCriticalValue7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, -1));
+
+        jPanelMain.add(jPanelCongfig4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, 270, 110));
+
+        jPanelCongfig5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "统计显示", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroup2.add(jRadioButtonSuperPurchaseMultiples5);
+        jRadioButtonSuperPurchaseMultiples5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples5.setText("加权");
+        jPanelCongfig5.add(jRadioButtonSuperPurchaseMultiples5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup2.add(jRadioButtonLuckRate5);
+        jRadioButtonLuckRate5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate5.setSelected(true);
+        jRadioButtonLuckRate5.setText("全部");
+        jPanelCongfig5.add(jRadioButtonLuckRate5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup2.add(jRadioButtonTotalRaiseFunds5);
+        jRadioButtonTotalRaiseFunds5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds5.setText("累加");
+        jPanelCongfig5.add(jRadioButtonTotalRaiseFunds5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jPanelMain.add(jPanelCongfig5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 250, 70));
+
+        jPanelCongfig6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "超购倍数", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelCriticalValue5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCriticalValue5.setText("下位：");
+        jPanelCongfig6.add(jLabelCriticalValue5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jTextFieldCriticalValue8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue8.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue8.setText("0");
+        jPanelCongfig6.add(jTextFieldCriticalValue8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 50, -1));
+
+        buttonGroup3.add(jRadioButtonSuperPurchaseMultiples6);
+        jRadioButtonSuperPurchaseMultiples6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples6.setText("区间值");
+        jPanelCongfig6.add(jRadioButtonSuperPurchaseMultiples6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonLuckRate6);
+        jRadioButtonLuckRate6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate6.setText("下值");
+        jPanelCongfig6.add(jRadioButtonLuckRate6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonTotalRaiseFunds6);
+        jRadioButtonTotalRaiseFunds6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds6.setText("上值");
+        jPanelCongfig6.add(jRadioButtonTotalRaiseFunds6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jLabel4.setText("上位：");
+        jPanelCongfig6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
+
+        jTextFieldCriticalValue9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue9.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue9.setText("100.0");
+        jPanelCongfig6.add(jTextFieldCriticalValue9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, -1));
+
+        jPanelMain.add(jPanelCongfig6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 270, 110));
+
+        jPanelCongfig7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "板块", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroup2.add(jRadioButtonSuperPurchaseMultiples7);
+        jRadioButtonSuperPurchaseMultiples7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples7.setText("主板");
+        jPanelCongfig7.add(jRadioButtonSuperPurchaseMultiples7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup2.add(jRadioButtonLuckRate7);
+        jRadioButtonLuckRate7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate7.setText("全部");
+        jPanelCongfig7.add(jRadioButtonLuckRate7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup2.add(jRadioButtonTotalRaiseFunds7);
+        jRadioButtonTotalRaiseFunds7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds7.setText("创业板");
+        jPanelCongfig7.add(jRadioButtonTotalRaiseFunds7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jPanelMain.add(jPanelCongfig7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 70));
+
+        jButtonIpoInfo.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonIpoInfo.setText("新股信息");
+        jButtonIpoInfo.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonIpoInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIpoInfoActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonIpoInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 150, -1, 30));
+
+        jButtonIpoEva.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonIpoEva.setText("投资评测");
+        jButtonIpoEva.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonIpoEva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIpoEvaActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonIpoEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 190, -1, 30));
 
         jButtonFilterStart.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jButtonFilterStart.setText("统计分析");
@@ -203,16 +460,93 @@ public class MainView extends javax.swing.JFrame {
                 jButtonFilterStartActionPerformed(evt);
             }
         });
-        jPanelCongfig.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 70, 30));
+        jPanelMain.add(jButtonFilterStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 230, 70, 30));
 
-        buttonGroup1.add(jRadioButtonTotalRaiseFunds);
-        jRadioButtonTotalRaiseFunds.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jRadioButtonTotalRaiseFunds.setText("募资总额");
-        jPanelCongfig.add(jRadioButtonTotalRaiseFunds, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        jButtonFilterStart1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonFilterStart1.setText("暗盘分析");
+        jButtonFilterStart1.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonFilterStart1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFilterStart1ActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonFilterStart1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 270, 70, 30));
 
-        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 370, 160));
+        jPanelCongfig8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "发行价", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 390));
+        jLabelCriticalValue6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCriticalValue6.setText("下位：");
+        jPanelCongfig8.add(jLabelCriticalValue6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jTextFieldCriticalValue10.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue10.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue10.setText("0");
+        jPanelCongfig8.add(jTextFieldCriticalValue10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 50, -1));
+
+        buttonGroup3.add(jRadioButtonSuperPurchaseMultiples8);
+        jRadioButtonSuperPurchaseMultiples8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples8.setText("区间值");
+        jPanelCongfig8.add(jRadioButtonSuperPurchaseMultiples8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonLuckRate8);
+        jRadioButtonLuckRate8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate8.setText("下值");
+        jPanelCongfig8.add(jRadioButtonLuckRate8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonTotalRaiseFunds8);
+        jRadioButtonTotalRaiseFunds8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds8.setText("上值");
+        jPanelCongfig8.add(jRadioButtonTotalRaiseFunds8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jLabel5.setText("上位：");
+        jPanelCongfig8.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
+
+        jTextFieldCriticalValue11.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue11.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue11.setText("100.0");
+        jPanelCongfig8.add(jTextFieldCriticalValue11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, -1));
+
+        jPanelMain.add(jPanelCongfig8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 270, 110));
+
+        jPanelCongfig9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "绿鞋/公开", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
+        jPanelCongfig9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelCriticalValue7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelCriticalValue7.setText("下位：");
+        jPanelCongfig9.add(jLabelCriticalValue7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jTextFieldCriticalValue12.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue12.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue12.setText("0");
+        jPanelCongfig9.add(jTextFieldCriticalValue12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 50, -1));
+
+        buttonGroup3.add(jRadioButtonSuperPurchaseMultiples9);
+        jRadioButtonSuperPurchaseMultiples9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonSuperPurchaseMultiples9.setText("区间值");
+        jPanelCongfig9.add(jRadioButtonSuperPurchaseMultiples9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonLuckRate9);
+        jRadioButtonLuckRate9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonLuckRate9.setText("下值");
+        jPanelCongfig9.add(jRadioButtonLuckRate9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        buttonGroup3.add(jRadioButtonTotalRaiseFunds9);
+        jRadioButtonTotalRaiseFunds9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jRadioButtonTotalRaiseFunds9.setText("上值");
+        jPanelCongfig9.add(jRadioButtonTotalRaiseFunds9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        jLabel6.setText("上位：");
+        jPanelCongfig9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
+
+        jTextFieldCriticalValue13.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jTextFieldCriticalValue13.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextFieldCriticalValue13.setText("100.0");
+        jPanelCongfig9.add(jTextFieldCriticalValue13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, -1));
+
+        jPanelMain.add(jPanelCongfig9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 270, 110));
+
+        getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 520));
 
         jMenuFile.setText("文件");
 
@@ -268,21 +602,6 @@ public class MainView extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(new JFrame(), "智能证券系统-港股打新 V19.10\n版权所有(C) 张向荣(Aioros Zhang)");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
-    private void jTextAreaMainMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaMainMouseReleased
-        if (evt.isPopupTrigger()) {
-            jPopupMenu1.show(this, evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_jTextAreaMainMouseReleased
-
-    private void jMenuItemClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearActionPerformed
-        jTextAreaMain.setText("");
-    }//GEN-LAST:event_jMenuItemClearActionPerformed
-
-    private void jMenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCopyActionPerformed
-        jTextAreaMain.selectAll();
-        jTextAreaMain.copy();
-    }//GEN-LAST:event_jMenuItemCopyActionPerformed
-
     private void jButtonIpoInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIpoInfoActionPerformed
         importData();
         IpoTable ipoTable = new IpoTable(this, false, ipoInfoList);
@@ -309,8 +628,6 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIpoEvaActionPerformed
 
     private void jButtonFilterStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStartActionPerformed
-        jTextAreaMain.setText("");
-
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         SystemReport sr;
         ArrayList<SystemReport> srList = new ArrayList<>();
@@ -357,6 +674,100 @@ public class MainView extends javax.swing.JFrame {
         RankTable rankTable = new RankTable(this, false, this, srList);
     }//GEN-LAST:event_jButtonFilterStartActionPerformed
 
+    private void jButtonFilterStart1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStart1ActionPerformed
+        int items = ipoInfoList.size();
+        int t_num = 0;
+        int num = 0;
+        float money = 0;
+        float level = (float) 0.4;
+        for (int bg = 30; bg < 31; bg++) {
+            System.out.println("bg:" + bg);
+            for (int f = 43; f <= 43; f++) {
+                level = (float) f / 100;
+                num = 0;
+                money = 0;
+                t_num = 0;
+                for (int i = 0; i < items; i++) {
+                    if (ipoInfoList.get(i).grayGain > bg) {
+                        t_num++;
+                        float bp = ipoInfoList.get(i).grayPrice;
+                        float op = ipoInfoList.get(i).openPrice;
+                        float hp = ipoInfoList.get(i).highPrice;
+                        float lp = ipoInfoList.get(i).lowPrice;
+                        float cp = ipoInfoList.get(i).closePrice;
+                        float hf = ipoInfoList.get(i).handFund / ipoInfoList.get(i).offerPrice;
+                        String openGain = String.format("%.1f", 100 * (op / bp - 1));
+                        String highGain = String.format("%.1f", 100 * (hp / bp - 1));
+                        String lowGain = String.format("%.1f", 100 * (lp / bp - 1));
+                        String closeGain = String.format("%.1f", 100 * (cp / bp - 1));
+                        //System.out.println("openGain: " + openGain + "\thighGain: " + highGain  + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).stockName);
+                        float earn = 0;
+                        if (op / bp - 1 >= level) {
+                            num++;
+                            earn = hf * (op - bp);
+                            //System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\tearn: " + earn + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                        } else if (hp / bp - 1 >= level) {
+                            num++;
+                            earn = hf * bp * level;
+                            //System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                        } else {
+                            earn = hf * (cp - bp);
+                            //System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                        }
+                        System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\tearn: " + earn + "\tblackGain: " + ipoInfoList.get(i).grayGain + "\t" + ipoInfoList.get(i).stockName);
+                        money += earn;
+                    }
+                }
+                System.out.println("t_num: " + t_num + "\tnum: " + num + "\tpercent: " + (float) num / t_num + "\tmoney: " + money);
+            }
+        }
+    }//GEN-LAST:event_jButtonFilterStart1ActionPerformed
+
+    private void jButtonFilterStart2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterStart2ActionPerformed
+        int items = ipoInfoList.size();
+        int t_num = 0;
+        int num = 0;
+        float money = 0;
+        float level = (float) 0.4;
+
+        for (int f = 250; f <= 250; f++) {
+            level = (float) f / 100;
+            num = 0;
+            money = 0;
+            t_num = 0;
+            for (int i = 0; i < items; i++) {
+                t_num++;
+                float ip = ipoInfoList.get(i).offerPrice;
+                float op = ipoInfoList.get(i).openPrice;
+                float hp = ipoInfoList.get(i).highPrice;
+                float lp = ipoInfoList.get(i).lowPrice;
+                float cp = ipoInfoList.get(i).closePrice;
+                float hf = ipoInfoList.get(i).handFund / ipoInfoList.get(i).offerPrice;
+                float lr = ipoInfoList.get(i).luckyRate / 100;
+                float rf = ipoInfoList.get(i).totalRaiseFunds;
+                String openGain = String.format("%.1f", 100 * (op / ip - 1));
+                String highGain = String.format("%.1f", 100 * (hp / ip - 1));
+                String lowGain = String.format("%.1f", 100 * (lp / ip - 1));
+                String closeGain = String.format("%.1f", 100 * (cp / ip - 1));
+                //System.out.println("openGain: " + openGain + "\thighGain: " + highGain  + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).stockName);
+                if ((op / ip - 1 >= level) || (rf < 1.4)) {
+                    num++;
+                    money += hf * (op - ip) * lr;
+                    //System.out.println("openGain: " + openGain + "\thighGain: " + highGain  + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                } else if (hp / ip - 1 >= level) {
+                    num++;
+                    money += hf * ip * level * lr;
+                    System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).grayGain + "\t" + ipoInfoList.get(i).stockName);
+                } else {
+                    money += hf * (cp - ip) * lr;
+                    //System.out.println("openGain: " + openGain + "\thighGain: " + highGain  + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                }
+            }
+            System.out.println("level: " + f + "\tnum: " + num + "\tpercent: " + (float) num / t_num + "\tmoney: " + money);
+
+        }
+    }//GEN-LAST:event_jButtonFilterStart2ActionPerformed
+
     /**
      ********************* Start of User-defined function ********************
      */
@@ -365,7 +776,7 @@ public class MainView extends javax.swing.JFrame {
             File file = new File(fileIn);
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
             BufferedReader br = new BufferedReader(isr);
-            String[] words = br.readLine().split("\t");
+            String[] words = br.readLine().split("\t+");
             column = words.length;
             ipoInfoList = new ArrayList<>();
             String line;
@@ -374,17 +785,25 @@ public class MainView extends javax.swing.JFrame {
                 IpoInfo ipoInfo = new IpoInfo(words[0], words[1]);
                 ipoInfo.marketPlate = words[2];
                 ipoInfo.offerDate = words[3];
-                ipoInfo.handFund = Float.parseFloat(words[4]);
-                ipoInfo.luckyRate = Float.parseFloat(words[5].substring(0, words[5].length() - 1));
-                ipoInfo.offerPrice = Float.parseFloat(words[6]);
-                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[7]);
-                ipoInfo.totalRaiseFunds = Float.parseFloat(words[8]);
-                ipoInfo.blackGain = Float.parseFloat(words[9].substring(0, words[9].length() - 1));
-                ipoInfo.blackPrice = ipoInfo.offerPrice * (1 + ipoInfo.blackGain / 100);
-                ipoInfo.closeGain = Float.parseFloat(words[10].substring(0, words[10].length() - 1));
-                ipoInfo.openPrice = Float.parseFloat(words[11]);
+                ipoInfo.inquiryRange = words[4];
+                ipoInfo.handFund = Integer.parseInt(words[5]);
+                ipoInfo.luckyRate = Float.parseFloat(words[6].substring(0, words[6].length() - 1));
+                ipoInfo.offerPrice = Float.parseFloat(words[7]);
+                ipoInfo.offerPE = words[8];
+                ipoInfo.greenShoeRatio = words[9].equals("-") ? 0 : Float.parseFloat(words[9].substring(0, words[9].length() - 1));;
+                ipoInfo.comparableCompany = words[10];
+                ipoInfo.superPurchaseMultiples = Float.parseFloat(words[11]);
+                ipoInfo.totalRaiseFunds = Float.parseFloat(words[12]);
+                ipoInfo.grayGain = Float.parseFloat(words[13].substring(0, words[13].length() - 1));
+                ipoInfo.closeGain = Float.parseFloat(words[14].substring(0, words[14].length() - 1));
+                ipoInfo.openPrice = Float.parseFloat(words[15]);
+                ipoInfo.highPrice = Float.parseFloat(words[16]);
+                ipoInfo.lowPrice = Float.parseFloat(words[17]);
+                ipoInfo.closePrice = Float.parseFloat(words[18]);
+                ipoInfo.underwriter = words[19];
+
                 ipoInfo.openGain = 100 * (ipoInfo.openPrice - ipoInfo.offerPrice) / ipoInfo.offerPrice;
-                ipoInfo.closePrice = Float.parseFloat(words[14]);
+                ipoInfo.grayPrice = ipoInfo.offerPrice * (1 + ipoInfo.grayGain / 100);
                 ipoInfoList.add(ipoInfo);
             }
             stocks = ipoInfoList.size();
@@ -457,7 +876,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     public void msgLogger(String str) {
-        jTextAreaMain.append(str + System.getProperty("line.separator"));
+        //jTextAreaMain.append(str + System.getProperty("line.separator"));
     }
 
     public void fileLogger(String str) {
@@ -485,7 +904,7 @@ public class MainView extends javax.swing.JFrame {
         }
     }
 
-    private String fileIn = "data\\others\\港股新股.txt";
+    private String fileIn = "data\\港股新股.txt";
     public FileWriter fileWriter;
 
     public String stockName = "W上证指数";
@@ -509,30 +928,89 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButtonFilterStart;
+    private javax.swing.JButton jButtonFilterStart1;
+    private javax.swing.JButton jButtonFilterStart2;
     private javax.swing.JButton jButtonIpoEva;
     private javax.swing.JButton jButtonIpoInfo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCriticalValue;
+    private javax.swing.JLabel jLabelCriticalValue2;
+    private javax.swing.JLabel jLabelCriticalValue3;
+    private javax.swing.JLabel jLabelCriticalValue4;
+    private javax.swing.JLabel jLabelCriticalValue5;
+    private javax.swing.JLabel jLabelCriticalValue6;
+    private javax.swing.JLabel jLabelCriticalValue7;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemClear;
-    private javax.swing.JMenuItem jMenuItemCopy;
     private javax.swing.JMenuItem jMenuItemDZH;
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenu jMenuRun;
     private javax.swing.JPanel jPanelCongfig;
+    private javax.swing.JPanel jPanelCongfig1;
+    private javax.swing.JPanel jPanelCongfig2;
+    private javax.swing.JPanel jPanelCongfig3;
+    private javax.swing.JPanel jPanelCongfig4;
+    private javax.swing.JPanel jPanelCongfig5;
+    private javax.swing.JPanel jPanelCongfig6;
+    private javax.swing.JPanel jPanelCongfig7;
+    private javax.swing.JPanel jPanelCongfig8;
+    private javax.swing.JPanel jPanelCongfig9;
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButtonLuckRate;
+    private javax.swing.JRadioButton jRadioButtonLuckRate1;
+    private javax.swing.JRadioButton jRadioButtonLuckRate2;
+    private javax.swing.JRadioButton jRadioButtonLuckRate3;
+    private javax.swing.JRadioButton jRadioButtonLuckRate4;
+    private javax.swing.JRadioButton jRadioButtonLuckRate5;
+    private javax.swing.JRadioButton jRadioButtonLuckRate6;
+    private javax.swing.JRadioButton jRadioButtonLuckRate7;
+    private javax.swing.JRadioButton jRadioButtonLuckRate8;
+    private javax.swing.JRadioButton jRadioButtonLuckRate9;
     private javax.swing.JRadioButton jRadioButtonOfferPrice;
     private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples1;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples2;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples3;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples4;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples5;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples6;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples7;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples8;
+    private javax.swing.JRadioButton jRadioButtonSuperPurchaseMultiples9;
     private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds;
-    private javax.swing.JScrollPane jScrollPaneMsg;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds1;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds2;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds3;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds4;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds5;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds6;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds7;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds8;
+    private javax.swing.JRadioButton jRadioButtonTotalRaiseFunds9;
     private javax.swing.JScrollPane jScrollPaneTable;
     private javax.swing.JTable jTablePoint;
-    private javax.swing.JTextArea jTextAreaMain;
     private javax.swing.JTextField jTextFieldCriticalValue;
+    private javax.swing.JTextField jTextFieldCriticalValue10;
+    private javax.swing.JTextField jTextFieldCriticalValue11;
+    private javax.swing.JTextField jTextFieldCriticalValue12;
+    private javax.swing.JTextField jTextFieldCriticalValue13;
+    private javax.swing.JTextField jTextFieldCriticalValue2;
+    private javax.swing.JTextField jTextFieldCriticalValue3;
+    private javax.swing.JTextField jTextFieldCriticalValue4;
+    private javax.swing.JTextField jTextFieldCriticalValue5;
+    private javax.swing.JTextField jTextFieldCriticalValue6;
+    private javax.swing.JTextField jTextFieldCriticalValue7;
+    private javax.swing.JTextField jTextFieldCriticalValue8;
+    private javax.swing.JTextField jTextFieldCriticalValue9;
     // End of variables declaration//GEN-END:variables
 }

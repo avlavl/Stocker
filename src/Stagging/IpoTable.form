@@ -61,16 +61,16 @@
                 <Column editable="false" title="&#x5e8f;&#x53f7;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x4ee3;&#x7801;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x540d;&#x79f0;" type="java.lang.Object"/>
-                <Column editable="false" title="&#x4e0a;&#x5e02;&#x65e5;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x677f;&#x5757;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x4e0a;&#x5e02;&#x65e5;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x8be2;&#x4ef7;&#x533a;&#x95f4;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x4e00;&#x624b;&#x8d44;&#x91d1;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x4e2d;&#x7b7e;&#x7387;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x53d1;&#x884c;&#x4ef7;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x5e02;&#x76c8;&#x7387;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x7eff;&#x978b;/&#x516c;&#x5f00;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x8d85;&#x8d2d;&#x500d;&#x6570;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x52df;&#x8d44;&#x603b;&#x989d;" type="java.lang.Object"/>
-                <Column editable="false" title="&#x4e00;&#x624b;&#x8d44;&#x91d1;" type="java.lang.Object"/>
-                <Column editable="false" title="&#x53d1;&#x884c;&#x4ef7;" type="java.lang.Object"/>
-                <Column editable="false" title="&#x6697;&#x76d8;" type="java.lang.Object"/>
-                <Column editable="false" title="&#x5f00;&#x76d8;" type="java.lang.Object"/>
-                <Column editable="false" title="&#x6536;&#x76d8;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x6697;&#x76d8;&#x6da8;&#x5e45;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x5f00;&#x76d8;&#x6da8;&#x5e45;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x6536;&#x76d8;&#x6da8;&#x5e45;" type="java.lang.Object"/>
