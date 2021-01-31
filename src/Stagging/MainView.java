@@ -79,11 +79,11 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonTotalRaiseFunds = new javax.swing.JRadioButton();
         jButtonFilterStart2 = new javax.swing.JButton();
         jPanelConf0 = new javax.swing.JPanel();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jPanelConf1 = new javax.swing.JPanel();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jPanelConf2 = new javax.swing.JPanel();
         jComboBox6 = new javax.swing.JComboBox<>();
+        jPanelConf1 = new javax.swing.JPanel();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jPanelConf2 = new javax.swing.JPanel();
+        jComboBox8 = new javax.swing.JComboBox<>();
         jButtonIpoInfo = new javax.swing.JButton();
         jButtonIpoEva = new javax.swing.JButton();
         jButtonBigDataAnalysis = new javax.swing.JButton();
@@ -236,42 +236,42 @@ public class MainView extends javax.swing.JFrame {
         jPanelConf0.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "统计运算", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConf0.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "全部", "累加", "加权" }));
-        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "全部", "累加", "加权" }));
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox7ActionPerformed(evt);
+                jComboBox6ActionPerformed(evt);
             }
         });
-        jPanelConf0.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 25, 70, -1));
+        jPanelConf0.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 25, 70, -1));
 
         jPanelMain.add(jPanelConf0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 110, 70));
 
         jPanelConf1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "板块", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConf1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "全部", "主板", "创业板" }));
-        jComboBox8.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "全部", "主板", "创业板" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox8ActionPerformed(evt);
+                jComboBox7ActionPerformed(evt);
             }
         });
-        jPanelConf1.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 25, 70, -1));
+        jPanelConf1.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 25, 70, -1));
 
         jPanelMain.add(jPanelConf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 110, 70));
 
         jPanelConf2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "卖出策略", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConf2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘", "开盘", "暗盘" }));
-        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘", "开盘", "暗盘" }));
+        jComboBox8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox6ActionPerformed(evt);
+                jComboBox8ActionPerformed(evt);
             }
         });
-        jPanelConf2.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 25, 70, -1));
+        jPanelConf2.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 25, 70, -1));
 
         jPanelMain.add(jPanelConf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 110, 70));
         jPanelConf2.getAccessibleContext().setAccessibleName("统计显示");
@@ -747,6 +747,10 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox8ActionPerformed
+
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox6ActionPerformed
@@ -754,10 +758,6 @@ public class MainView extends javax.swing.JFrame {
     private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox7ActionPerformed
-
-    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox8ActionPerformed
 
     /**
      ********************* Start of User-defined function ********************
@@ -854,16 +854,23 @@ public class MainView extends javax.swing.JFrame {
             if (!inSection(type, cpl, cph, ipoInfo.superPurchaseMultiples)) {
                 continue;
             }
+
             type = jComboBox4.getSelectedIndex();
             cpl = Float.parseFloat(jTextFieldL4.getText());
             cph = Float.parseFloat(jTextFieldH4.getText());
             if (!inSection(type, cpl, cph, ipoInfo.totalRaiseFunds)) {
                 continue;
             }
+
             type = jComboBox5.getSelectedIndex();
             cpl = Float.parseFloat(jTextFieldL5.getText());
             cph = Float.parseFloat(jTextFieldH5.getText());
             if (!inSection(type, cpl, cph, ipoInfo.grayGain)) {
+                continue;
+            }
+
+            int plate = jComboBox7.getSelectedIndex();
+            if (((ipoInfo.marketPlate.equals("主板")) && (plate == 2)) || ((ipoInfo.marketPlate.equals("创业板")) && (plate == 1))) {
                 continue;
             }
 
