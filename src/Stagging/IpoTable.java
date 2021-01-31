@@ -31,6 +31,7 @@ public class IpoTable extends javax.swing.JDialog {
 
         ipoInfoList = list;
         listSize = list.size();
+        tableRows = (listSize < 30) ? listSize : 30;
         String[][] tableContent = new String[tableRows][16];
         for (int i = 0; i < tableRows; i++) {
             tableContent[i][0] = String.format("%d", i + 1);
@@ -88,8 +89,8 @@ public class IpoTable extends javax.swing.JDialog {
         }
 
         //setTableRowColor(jTableIpo, new Color(0, 128, 0), new Color(220, 0, 0));
-        setPreferredSize(new java.awt.Dimension(1215, 60 * (listSize < 10 ? listSize : 10) + 90));
-        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(1120, 60 * (listSize < 10 ? listSize : 10) + 31));
+        setPreferredSize(new java.awt.Dimension(1215, 20 * tableRows + 90));
+        jScrollPaneInvest.setPreferredSize(new java.awt.Dimension(1120, 20 * tableRows + 31));
         getContentPane().add(jScrollPaneInvest, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1180, -1));
         pack();
         setLocationRelativeTo(parent);
