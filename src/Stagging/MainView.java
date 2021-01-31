@@ -897,6 +897,10 @@ public class MainView extends javax.swing.JFrame {
                 continue;
             }
 
+            if ((jComboBox9.getSelectedIndex() != 0) && (!ipoInfo.offerDate.contains(jComboBox9.getSelectedItem().toString()))) {
+                continue;
+            }
+
             ipoInfos.add(ipoInfo);
         }
 
