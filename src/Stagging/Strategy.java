@@ -63,6 +63,26 @@ public class Strategy {
         return (getOTotalGain() > 0);
     }
 
+    public int getSelectedStocks() {
+        return ipoInfoList.size();
+    }
+
+    public int getGainStocks() {
+        int gainStocks = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            gainStocks += (ipoInfo.closeGain > 0) ? 1 : 0;
+        }
+        return gainStocks;
+    }
+
+    public int getDropStocks() {
+        int dripStocks = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            dripStocks += (ipoInfo.closeGain <= 0) ? 1 : 0;
+        }
+        return dripStocks;
+    }
+
     public float getTotalGain() {
         float totalGain = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {

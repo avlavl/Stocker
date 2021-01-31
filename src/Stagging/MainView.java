@@ -127,16 +127,11 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldL5 = new javax.swing.JTextField();
         jLabelH5 = new javax.swing.JLabel();
         jTextFieldH5 = new javax.swing.JTextField();
-        jLabelDate = new javax.swing.JLabel();
-        jLabelDate1 = new javax.swing.JLabel();
-        jLabelDate2 = new javax.swing.JLabel();
-        jLabelDate3 = new javax.swing.JLabel();
-        jLabelDate4 = new javax.swing.JLabel();
-        jLabelDate5 = new javax.swing.JLabel();
-        jLabelDate6 = new javax.swing.JLabel();
-        jLabelDate7 = new javax.swing.JLabel();
-        jLabelDate8 = new javax.swing.JLabel();
-        jLabelDate9 = new javax.swing.JLabel();
+        jLabelStatistics0 = new javax.swing.JLabel();
+        jLabelStatistics1 = new javax.swing.JLabel();
+        jLabelStatistics2 = new javax.swing.JLabel();
+        jLabelStatistics3 = new javax.swing.JLabel();
+        jLabelStatistics4 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -509,55 +504,30 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelConfig5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 340, 80));
 
-        jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate.setText("样本总数:");
-        jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabelStatistics0.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelStatistics0.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelStatistics0.setText("样本总数:");
+        jPanelMain.add(jLabelStatistics0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabelDate1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate1.setText("----");
-        jPanelMain.add(jLabelDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
+        jLabelStatistics1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelStatistics1.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelStatistics1.setText("选中总数:");
+        jPanelMain.add(jLabelStatistics1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
-        jLabelDate2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate2.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate2.setText("选中总数:");
-        jPanelMain.add(jLabelDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+        jLabelStatistics2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelStatistics2.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelStatistics2.setText("选中比例:");
+        jPanelMain.add(jLabelStatistics2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
-        jLabelDate3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate3.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate3.setText("----");
-        jPanelMain.add(jLabelDate3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+        jLabelStatistics3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelStatistics3.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelStatistics3.setText("涨跌个数比:");
+        jPanelMain.add(jLabelStatistics3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
 
-        jLabelDate4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate4.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate4.setText("选中比例:");
-        jPanelMain.add(jLabelDate4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
-
-        jLabelDate5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate5.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate5.setText("----");
-        jPanelMain.add(jLabelDate5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
-
-        jLabelDate6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate6.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate6.setText("涨跌个数比:");
-        jPanelMain.add(jLabelDate6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
-
-        jLabelDate7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate7.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate7.setText("----");
-        jPanelMain.add(jLabelDate7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
-
-        jLabelDate8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate8.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate8.setText("上涨数比例:");
-        jPanelMain.add(jLabelDate8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
-
-        jLabelDate9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jLabelDate9.setForeground(new java.awt.Color(0, 0, 204));
-        jLabelDate9.setText("----");
-        jPanelMain.add(jLabelDate9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
+        jLabelStatistics4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelStatistics4.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelStatistics4.setText("上涨数比例:");
+        jPanelMain.add(jLabelStatistics4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 520));
 
@@ -635,6 +605,7 @@ public class MainView extends javax.swing.JFrame {
 
         SystemReport systemReport = updateSystemReport(strategy);
         updateTable(systemReport);
+        updateStatistics(systemReport);
 
         evaluated = true;
     }//GEN-LAST:event_jButtonIpoEvaActionPerformed
@@ -931,6 +902,10 @@ public class MainView extends javax.swing.JFrame {
     protected SystemReport updateSystemReport(Strategy strategy) {
         SystemReport systemReport = new SystemReport();
 
+        systemReport.selectedStocks = strategy.getSelectedStocks();
+        systemReport.gainStocks = strategy.getGainStocks();
+        systemReport.dropStocks = strategy.getDropStocks();
+
         systemReport.totalGain = strategy.getTotalGain();
         systemReport.totalEarn = strategy.getTotalEarn();
         systemReport.weightGain = strategy.getWeightGain();
@@ -979,6 +954,14 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setValueAt(systemReport.maxStockLoss + "元", 5, 3);
         jTablePoint.setValueAt(systemReport.maxWeightDrop + "%", 6, 3);
         jTablePoint.setValueAt(systemReport.maxWeightLoss + "元", 7, 3);
+    }
+
+    protected void updateStatistics(SystemReport systemReport) {
+        jLabelStatistics0.setText("样本总数: " + ipoInfoList.size());
+        jLabelStatistics1.setText("选中总数: " + systemReport.selectedStocks);
+        jLabelStatistics2.setText(String.format("选中比例: %.2f%%", 100 * ((float) systemReport.selectedStocks / ipoInfoList.size())));
+        jLabelStatistics3.setText(String.format("涨跌个数比: %d-%d", systemReport.gainStocks, systemReport.dropStocks));
+        jLabelStatistics4.setText(String.format("上涨数比例: %.2f%%", 100 * ((float) systemReport.gainStocks / systemReport.selectedStocks)));
     }
 
     public void msgLogger(String str) {
@@ -1048,16 +1031,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabelCriticalValue;
-    private javax.swing.JLabel jLabelDate;
-    private javax.swing.JLabel jLabelDate1;
-    private javax.swing.JLabel jLabelDate2;
-    private javax.swing.JLabel jLabelDate3;
-    private javax.swing.JLabel jLabelDate4;
-    private javax.swing.JLabel jLabelDate5;
-    private javax.swing.JLabel jLabelDate6;
-    private javax.swing.JLabel jLabelDate7;
-    private javax.swing.JLabel jLabelDate8;
-    private javax.swing.JLabel jLabelDate9;
     private javax.swing.JLabel jLabelH0;
     private javax.swing.JLabel jLabelH1;
     private javax.swing.JLabel jLabelH2;
@@ -1070,6 +1043,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelL3;
     private javax.swing.JLabel jLabelL4;
     private javax.swing.JLabel jLabelL5;
+    private javax.swing.JLabel jLabelStatistics0;
+    private javax.swing.JLabel jLabelStatistics1;
+    private javax.swing.JLabel jLabelStatistics2;
+    private javax.swing.JLabel jLabelStatistics3;
+    private javax.swing.JLabel jLabelStatistics4;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
