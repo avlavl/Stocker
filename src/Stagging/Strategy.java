@@ -354,50 +354,6 @@ public class Strategy {
         return totalEarn;
     }
 
-    public class RecordData {
-
-        public RecordData(String date, String type) {
-            this.date = date;
-            this.type = type;
-        }
-        public String date;
-        public String type;
-        public double price;
-        public double diff;
-        public double input;
-        public double number;
-        public double cost;
-        public double totalInput;
-        public double profit;
-        public double profitRatio;
-    }
-
-    public MainView mainView;
     ArrayList<IpoInfo> ipoInfoList;
     private int sellPoint = 2;
-    public ArrayList<Double> pList = new ArrayList<>();
-    public ArrayList<String> dList = new ArrayList<>();
-
-    public double start;
-    public double slope;
-    public double winLevel;
-    public double dispersion;
-    public double basePoint;
-    public double[] basePoints;
-
-    public int items;
-    public int sIndex = -1;
-    public int eIndex = 0;
-    public double[] weights;
-
-    public double totalInput = 0;
-    public double totalPrice = 0;
-    public double totalNumber = 0;
-    private ArrayList<String> bsDateList = new ArrayList<>();
-    public double[] profitRatios;
-    private double diffRate = 0;
-    private double profit = 0;
-    private double profitRatio = 0;
-    private double diffCoef = 1;
-    public double investCoef = 1;
 }
