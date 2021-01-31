@@ -791,26 +791,66 @@ public class MainView extends javax.swing.JFrame {
         evaluated = false;
     }
 
+    public boolean inSection(int sectType, float sectL, float sectH, float value) {
+        if (sectType == 1) {
+            if (value >= sectL) {
+                return false;
+            }
+        } else if (sectType == 2) {
+            if ((value < sectL) || (value > sectH)) {
+                return false;
+            }
+        } else if (sectType == 3) {
+            if (value <= sectH) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public ArrayList<IpoInfo> getSelectedIpoInfos() {
         ArrayList<IpoInfo> ipoInfos = new ArrayList<>();
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (jComboBox0.getSelectedIndex() == 1) {
-                float cpl0 = Float.parseFloat(jTextFieldL0.getText());
-                if (ipoInfo.luckyRate >= cpl0) {
-                    continue;
-                }
-            } else if (jComboBox0.getSelectedIndex() == 2) {
-                float cpl0 = Float.parseFloat(jTextFieldL0.getText());
-                float cph0 = Float.parseFloat(jTextFieldH0.getText());
-                if ((ipoInfo.luckyRate < cpl0) || (ipoInfo.luckyRate > cph0)) {
-                    continue;
-                }
-            } else if (jComboBox0.getSelectedIndex() == 3) {
-                float cph0 = Float.parseFloat(jTextFieldH0.getText());
-                if (ipoInfo.luckyRate <= cph0) {
-                    continue;
-                }
+            int type = jComboBox0.getSelectedIndex();
+            float cpl = Float.parseFloat(jTextFieldL0.getText());
+            float cph = Float.parseFloat(jTextFieldH0.getText());
+            if (!inSection(type, cpl, cph, ipoInfo.luckyRate)) {
+                continue;
             }
+
+            type = jComboBox1.getSelectedIndex();
+            cpl = Float.parseFloat(jTextFieldL1.getText());
+            cph = Float.parseFloat(jTextFieldH1.getText());
+            if (!inSection(type, cpl, cph, ipoInfo.offerPrice)) {
+                continue;
+            }
+
+            type = jComboBox2.getSelectedIndex();
+            cpl = Float.parseFloat(jTextFieldL2.getText());
+            cph = Float.parseFloat(jTextFieldH2.getText());
+            if (!inSection(type, cpl, cph, ipoInfo.greenShoeRatio)) {
+                continue;
+            }
+
+            type = jComboBox3.getSelectedIndex();
+            cpl = Float.parseFloat(jTextFieldL3.getText());
+            cph = Float.parseFloat(jTextFieldH3.getText());
+            if (!inSection(type, cpl, cph, ipoInfo.superPurchaseMultiples)) {
+                continue;
+            }
+            type = jComboBox4.getSelectedIndex();
+            cpl = Float.parseFloat(jTextFieldL4.getText());
+            cph = Float.parseFloat(jTextFieldH4.getText());
+            if (!inSection(type, cpl, cph, ipoInfo.totalRaiseFunds)) {
+                continue;
+            }
+            type = jComboBox5.getSelectedIndex();
+            cpl = Float.parseFloat(jTextFieldL5.getText());
+            cph = Float.parseFloat(jTextFieldH5.getText());
+            if (!inSection(type, cpl, cph, ipoInfo.grayGain)) {
+                continue;
+            }
+
             ipoInfos.add(ipoInfo);
         }
 
