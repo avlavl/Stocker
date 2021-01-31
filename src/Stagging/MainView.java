@@ -265,7 +265,8 @@ public class MainView extends javax.swing.JFrame {
         jPanelConf2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "收盘", "开盘", "暗盘" }));
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "暗盘", "开盘", "收盘" }));
+        jComboBox8.setSelectedIndex(2);
         jComboBox8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox8ActionPerformed(evt);
@@ -574,7 +575,8 @@ public class MainView extends javax.swing.JFrame {
             return;
         }
 
-        strategy = new Strategy(ipoInfos);
+        int sellPoint = jComboBox8.getSelectedIndex();
+        strategy = new Strategy(ipoInfos, sellPoint);
         SystemReport systemReport = updateSystemReport(strategy);
         updateTable(systemReport);
         updateStatistics(systemReport);
@@ -587,7 +589,8 @@ public class MainView extends javax.swing.JFrame {
         SystemReport sr;
         ArrayList<SystemReport> srList = new ArrayList<>();
 
-        strategy = new Strategy(ipoInfoList);
+        int sellPoint = jComboBox8.getSelectedIndex();
+        strategy = new Strategy(ipoInfoList, sellPoint);
         float oldOWeightRestictEarn = 0;
         if (jRadioButtonLuckRate.isSelected()) {
             for (int i = 1; i <= 100; i++) {
