@@ -18,6 +18,24 @@ public class SystemReport {
         criticalPoint = point;
     }
 
+    public float totalGain;
+    public float totalEarn;
+    public float weightGain;
+    public float weightEarn;
+    public float evenTotalGain;
+    public float evenTotalEarn;
+    public float evenWeightGain;
+    public float evenWeightEarn;
+
+    public float maxStockGain;
+    public float maxStockEarn;
+    public float maxWeightGain;
+    public float maxWeightEarn;
+    public float maxStockDrop;
+    public float maxStockLoss;
+    public float maxWeightDrop;
+    public float maxWeightLoss;
+
     public float criticalPoint;
 
     public float OTotalGain;

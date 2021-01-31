@@ -127,6 +127,16 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldL5 = new javax.swing.JTextField();
         jLabelH5 = new javax.swing.JLabel();
         jTextFieldH5 = new javax.swing.JTextField();
+        jLabelDate = new javax.swing.JLabel();
+        jLabelDate1 = new javax.swing.JLabel();
+        jLabelDate2 = new javax.swing.JLabel();
+        jLabelDate3 = new javax.swing.JLabel();
+        jLabelDate4 = new javax.swing.JLabel();
+        jLabelDate5 = new javax.swing.JLabel();
+        jLabelDate6 = new javax.swing.JLabel();
+        jLabelDate7 = new javax.swing.JLabel();
+        jLabelDate8 = new javax.swing.JLabel();
+        jLabelDate9 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -145,25 +155,27 @@ public class MainView extends javax.swing.JFrame {
         jTablePoint.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jTablePoint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"开盘累计涨幅", null, "收盘累计涨幅", ""},
-                {"开盘累计收益", null, "收盘累计收益", null},
-                {"开盘加权收益", null, "收盘加权收益", ""},
-                {"开盘加限收益", null, "收盘加限收益", null},
-                {"开收加限收益", null, "收开加限收益", null},
-                {"", null, "", null}
+                {"累计涨幅", null, "最大个股涨幅", ""},
+                {"累计收益", null, "最大个股收益", ""},
+                {"加权涨幅", null, "最大加权涨幅", null},
+                {"加权收益", null, "最大加权收益", null},
+                {"平均累计涨幅", null, "最大个股跌幅", null},
+                {"平均累计收益", null, "最大个股亏损", null},
+                {"平均加权涨幅", null, "最大加权跌幅", null},
+                {"平均加权收益", null, "最大加权亏损", null}
             },
             new String [] {
                 "统计指标", "全部交易", "统计指标", "全部交易"
             }
         ));
-        jTablePoint.setPreferredSize(new java.awt.Dimension(310, 96));
+        jTablePoint.setPreferredSize(new java.awt.Dimension(310, 130));
         jScrollPaneTable.setViewportView(jTablePoint);
         if (jTablePoint.getColumnModel().getColumnCount() > 0) {
             jTablePoint.getColumnModel().getColumn(0).setMinWidth(80);
             jTablePoint.getColumnModel().getColumn(2).setMinWidth(80);
         }
 
-        jPanelMain.add(jScrollPaneTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 126));
+        jPanelMain.add(jScrollPaneTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 500, 160));
 
         jPanelCongfig.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "定投配置", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelCongfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -207,7 +219,7 @@ public class MainView extends javax.swing.JFrame {
         });
         jPanelCongfig.add(jButtonFilterStart2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 70, 30));
 
-        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 370, 110));
+        jPanelMain.add(jPanelCongfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 370, 110));
 
         jPanelConf0.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "统计显示", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConf0.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -228,7 +240,7 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonTotalRaiseFunds5.setText("累加");
         jPanelConf0.add(jRadioButtonTotalRaiseFunds5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
-        jPanelMain.add(jPanelConf0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 250, 70));
+        jPanelMain.add(jPanelConf0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 70));
 
         jPanelConf1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "板块", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConf1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -248,7 +260,7 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonTotalRaiseFunds7.setText("创业板");
         jPanelConf1.add(jRadioButtonTotalRaiseFunds7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
-        jPanelMain.add(jPanelConf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 70));
+        jPanelMain.add(jPanelConf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 70));
 
         jPanelConf2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "卖出策略", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConf2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -268,7 +280,7 @@ public class MainView extends javax.swing.JFrame {
         jRadioButtonTotalRaiseFunds1.setText("暗盘");
         jPanelConf2.add(jRadioButtonTotalRaiseFunds1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
-        jPanelMain.add(jPanelConf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 250, 70));
+        jPanelMain.add(jPanelConf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 70));
         jPanelConf2.getAccessibleContext().setAccessibleName("统计显示");
 
         jButtonIpoInfo.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
@@ -340,7 +352,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldH0.setText("100.0");
         jPanelConfig0.add(jTextFieldH0, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 50, -1));
 
-        jPanelMain.add(jPanelConfig0, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 340, 80));
+        jPanelMain.add(jPanelConfig0, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 340, 80));
 
         jPanelConfig1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "发行价", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConfig1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -371,7 +383,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldH1.setText("100.0");
         jPanelConfig1.add(jTextFieldH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 50, -1));
 
-        jPanelMain.add(jPanelConfig1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 340, 80));
+        jPanelMain.add(jPanelConfig1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 340, 80));
 
         jPanelConfig2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "绿鞋/公开", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConfig2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -402,7 +414,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldH2.setText("100.0");
         jPanelConfig2.add(jTextFieldH2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 50, -1));
 
-        jPanelMain.add(jPanelConfig2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 340, 80));
+        jPanelMain.add(jPanelConfig2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 340, 80));
 
         jPanelConfig3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "超购倍数", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConfig3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -433,7 +445,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldH3.setText("100.0");
         jPanelConfig3.add(jTextFieldH3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 50, -1));
 
-        jPanelMain.add(jPanelConfig3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 340, 80));
+        jPanelMain.add(jPanelConfig3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 220, 340, 80));
 
         jPanelConfig4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "募资总额", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConfig4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -464,7 +476,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldH4.setText("100.0");
         jPanelConfig4.add(jTextFieldH4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 50, -1));
 
-        jPanelMain.add(jPanelConfig4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 340, 80));
+        jPanelMain.add(jPanelConfig4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 340, 80));
 
         jPanelConfig5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "暗盘涨幅", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConfig5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -495,7 +507,57 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldH5.setText("100.0");
         jPanelConfig5.add(jTextFieldH5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 50, -1));
 
-        jPanelMain.add(jPanelConfig5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 340, 80));
+        jPanelMain.add(jPanelConfig5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 340, 80));
+
+        jLabelDate.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate.setText("样本总数:");
+        jPanelMain.add(jLabelDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabelDate1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate1.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate1.setText("----");
+        jPanelMain.add(jLabelDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
+
+        jLabelDate2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate2.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate2.setText("选中总数:");
+        jPanelMain.add(jLabelDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+
+        jLabelDate3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate3.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate3.setText("----");
+        jPanelMain.add(jLabelDate3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+
+        jLabelDate4.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate4.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate4.setText("选中比例:");
+        jPanelMain.add(jLabelDate4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+
+        jLabelDate5.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate5.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate5.setText("----");
+        jPanelMain.add(jLabelDate5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+
+        jLabelDate6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate6.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate6.setText("涨跌个数比:");
+        jPanelMain.add(jLabelDate6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+
+        jLabelDate7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate7.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate7.setText("----");
+        jPanelMain.add(jLabelDate7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+
+        jLabelDate8.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate8.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate8.setText("上涨数比例:");
+        jPanelMain.add(jLabelDate8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
+
+        jLabelDate9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabelDate9.setForeground(new java.awt.Color(0, 0, 204));
+        jLabelDate9.setText("----");
+        jPanelMain.add(jLabelDate9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 520));
 
@@ -555,25 +617,24 @@ public class MainView extends javax.swing.JFrame {
 
     private void jButtonIpoInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIpoInfoActionPerformed
         ArrayList<IpoInfo> ipoInfos = getSelectedIpoInfos();
+        if (ipoInfos.isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "没有满足条件的新股！");
+            return;
+        }
         IpoTable ipoTable = new IpoTable(this, false, ipoInfos);
     }//GEN-LAST:event_jButtonIpoInfoActionPerformed
 
     private void jButtonIpoEvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIpoEvaActionPerformed
-        int type = 1;
-        if (jRadioButtonLuckRate.isSelected()) {
-            type = 1;
-        } else if (jRadioButtonSuperPurchaseMultiples.isSelected()) {
-            type = 2;
-        } else if (jRadioButtonTotalRaiseFunds.isSelected()) {
-            type = 3;
-        } else {
-            type = 4;
+        ArrayList<IpoInfo> ipoInfos = getSelectedIpoInfos();
+        if (ipoInfos.isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "没有满足条件的新股！");
+            return;
         }
-        float critPoint = Float.parseFloat(jTextFieldCriticalValue.getText());
-        strategy = new Strategy(ipoInfoList);
 
-        SystemReport sr = updateSystemReport(strategy, type, critPoint);
-        updateTable(sr);
+        strategy = new Strategy(ipoInfos);
+
+        SystemReport systemReport = updateSystemReport(strategy);
+        updateTable(systemReport);
 
         evaluated = true;
     }//GEN-LAST:event_jButtonIpoEvaActionPerformed
@@ -867,20 +928,27 @@ public class MainView extends javax.swing.JFrame {
     public void getInvestMode() {
     }
 
-    protected SystemReport updateSystemReport(Strategy stg, int type, float cp) {
-        SystemReport sr = new SystemReport(cp);
+    protected SystemReport updateSystemReport(Strategy strategy) {
+        SystemReport systemReport = new SystemReport();
 
-        sr.OTotalGain = stg.getOTotalGain();
-        sr.CTotalGain = stg.getCTotalGain();
-        sr.OTotalEarn = stg.getOTotalEarn();
-        sr.CTotalEarn = stg.getCTotalEarn();
-        sr.OWeightEarn = stg.getOWeightEarn();
-        sr.CWeightEarn = stg.getCWeightEarn();
-        sr.OWeightEarnRestict = stg.getOWeightEarnRestict(type, cp);
-        sr.CWeightEarnRestict = stg.getCWeightEarnRestict(type, cp);
-        sr.OCWeightEarnRestict = stg.getOCWeightEarnRestict(type, cp);
-        sr.COWeightEarnRestict = stg.getCOWeightEarnRestict(type, cp);
-        return sr;
+        systemReport.totalGain = strategy.getTotalGain();
+        systemReport.totalEarn = strategy.getTotalEarn();
+        systemReport.weightGain = strategy.getWeightGain();
+        systemReport.weightEarn = strategy.getWeightEarn();
+        systemReport.evenTotalGain = strategy.getEvenTotalGain();
+        systemReport.evenTotalEarn = strategy.getEvenTotalEarn();
+        systemReport.evenWeightGain = strategy.getEvenWeightGain();
+        systemReport.evenWeightEarn = strategy.getEvenWeightEarn();
+
+        systemReport.maxStockGain = strategy.getMaxStockGain();
+        systemReport.maxStockEarn = strategy.getMaxStockEarn();
+        systemReport.maxWeightGain = strategy.getMaxWeightGain();
+        systemReport.maxWeightEarn = strategy.getMaxWeightEarn();
+        systemReport.maxStockDrop = strategy.getMaxStockDrop();
+        systemReport.maxStockLoss = strategy.getMaxStockLoss();
+        systemReport.maxWeightDrop = strategy.getMaxWeightDrop();
+        systemReport.maxWeightLoss = strategy.getMaxWeightLoss();
+        return systemReport;
     }
 
     protected SystemReport updateSimpleReport(Strategy stg, int type, float cp) {
@@ -893,27 +961,24 @@ public class MainView extends javax.swing.JFrame {
         return sr;
     }
 
-    protected void updateTable(SystemReport sr) {
-        jTablePoint.setValueAt("开盘累计涨幅", 0, 0);
-        jTablePoint.setValueAt(sr.OTotalGain + "%", 0, 1);
-        jTablePoint.setValueAt("收盘累计涨幅", 0, 2);
-        jTablePoint.setValueAt(sr.CTotalGain + "%", 0, 3);
-        jTablePoint.setValueAt("开盘累计收益", 1, 0);
-        jTablePoint.setValueAt(sr.OTotalEarn + "元", 1, 1);
-        jTablePoint.setValueAt("收盘累计收益", 1, 2);
-        jTablePoint.setValueAt(sr.CTotalEarn + "元", 1, 3);
-        jTablePoint.setValueAt("开盘加权收益", 2, 0);
-        jTablePoint.setValueAt(sr.OWeightEarn + "元", 2, 1);
-        jTablePoint.setValueAt("收盘加权收益", 2, 2);
-        jTablePoint.setValueAt(sr.CWeightEarn + "元", 2, 3);
-        jTablePoint.setValueAt("开盘加限收益", 3, 0);
-        jTablePoint.setValueAt(sr.OWeightEarnRestict + "元", 3, 1);
-        jTablePoint.setValueAt("收盘加限收益", 3, 2);
-        jTablePoint.setValueAt(sr.CWeightEarnRestict + "元", 3, 3);
-        jTablePoint.setValueAt("开收加限收益", 4, 0);
-        jTablePoint.setValueAt(sr.OCWeightEarnRestict + "元", 4, 1);
-        jTablePoint.setValueAt("收开加限收益", 4, 2);
-        jTablePoint.setValueAt(sr.COWeightEarnRestict + "元", 4, 3);
+    protected void updateTable(SystemReport systemReport) {
+        jTablePoint.setValueAt(systemReport.totalGain + "%", 0, 1);
+        jTablePoint.setValueAt(systemReport.totalEarn + "元", 1, 1);
+        jTablePoint.setValueAt(systemReport.weightGain + "%", 2, 1);
+        jTablePoint.setValueAt(systemReport.weightEarn + "元", 3, 1);
+        jTablePoint.setValueAt(systemReport.evenTotalGain + "%", 4, 1);
+        jTablePoint.setValueAt(systemReport.evenTotalEarn + "元", 5, 1);
+        jTablePoint.setValueAt(systemReport.evenWeightGain + "%", 6, 1);
+        jTablePoint.setValueAt(systemReport.evenWeightEarn + "元", 7, 1);
+
+        jTablePoint.setValueAt(systemReport.maxStockGain + "%", 0, 3);
+        jTablePoint.setValueAt(systemReport.maxStockEarn + "元", 1, 3);
+        jTablePoint.setValueAt(systemReport.maxWeightGain + "%", 2, 3);
+        jTablePoint.setValueAt(systemReport.maxWeightEarn + "元", 3, 3);
+        jTablePoint.setValueAt(systemReport.maxStockDrop + "%", 4, 3);
+        jTablePoint.setValueAt(systemReport.maxStockLoss + "元", 5, 3);
+        jTablePoint.setValueAt(systemReport.maxWeightDrop + "%", 6, 3);
+        jTablePoint.setValueAt(systemReport.maxWeightLoss + "元", 7, 3);
     }
 
     public void msgLogger(String str) {
@@ -983,6 +1048,16 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabelCriticalValue;
+    private javax.swing.JLabel jLabelDate;
+    private javax.swing.JLabel jLabelDate1;
+    private javax.swing.JLabel jLabelDate2;
+    private javax.swing.JLabel jLabelDate3;
+    private javax.swing.JLabel jLabelDate4;
+    private javax.swing.JLabel jLabelDate5;
+    private javax.swing.JLabel jLabelDate6;
+    private javax.swing.JLabel jLabelDate7;
+    private javax.swing.JLabel jLabelDate8;
+    private javax.swing.JLabel jLabelDate9;
     private javax.swing.JLabel jLabelH0;
     private javax.swing.JLabel jLabelH1;
     private javax.swing.JLabel jLabelH2;

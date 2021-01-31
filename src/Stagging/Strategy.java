@@ -63,6 +63,154 @@ public class Strategy {
         return (getOTotalGain() > 0);
     }
 
+    public float getTotalGain() {
+        float totalGain = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalGain += ipoInfo.closeGain;
+        }
+        return totalGain;
+    }
+
+    public float getTotalEarn() {
+        float totalEarn = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarn += ipoInfo.handFund * ipoInfo.closeGain / 100;
+        }
+        return totalEarn;
+    }
+
+    public float getWeightGain() {
+        float totalGain = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalGain += ipoInfo.luckyRate * ipoInfo.closeGain / 100;
+        }
+        return totalGain;
+    }
+
+    public float getWeightEarn() {
+        float totalEarn = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+        }
+        return totalEarn;
+    }
+
+    public float getEvenTotalGain() {
+        float evenTotalGain = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            evenTotalGain += ipoInfo.openGain;
+        }
+        evenTotalGain = evenTotalGain / ipoInfoList.size();
+        return evenTotalGain;
+    }
+
+    public float getEvenTotalEarn() {
+        float evenTotalEarn = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            evenTotalEarn += ipoInfo.handFund * ipoInfo.closeGain / 100;
+        }
+        evenTotalEarn = evenTotalEarn / ipoInfoList.size();
+        return evenTotalEarn;
+    }
+
+    public float getEvenWeightGain() {
+        float evenWeightGain = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            evenWeightGain += ipoInfo.luckyRate * ipoInfo.closeGain / 100;
+        }
+        evenWeightGain = evenWeightGain / ipoInfoList.size();
+        return evenWeightGain;
+    }
+
+    public float getEvenWeightEarn() {
+        float evenWeightEarn = 0;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            evenWeightEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+        }
+        evenWeightEarn = evenWeightEarn / ipoInfoList.size();
+        return evenWeightEarn;
+    }
+
+    public float getMaxStockGain() {
+        float maxStockGain = ipoInfoList.get(0).closeGain;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.closeGain > maxStockGain) {
+                maxStockGain = ipoInfo.closeGain;
+            }
+        }
+        return maxStockGain;
+    }
+
+    public float getMaxStockEarn() {
+        float maxStockEarn = ipoInfoList.get(0).handFund * ipoInfoList.get(0).closeGain / 100;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.handFund * ipoInfo.closeGain / 100 > maxStockEarn) {
+                maxStockEarn = ipoInfo.handFund * ipoInfo.closeGain / 100;
+            }
+        }
+        return maxStockEarn;
+    }
+
+    public float getMaxWeightGain() {
+        float maxWeightGain = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).closeGain / 100;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.luckyRate * ipoInfo.closeGain / 100 > maxWeightGain) {
+                maxWeightGain = ipoInfo.luckyRate * ipoInfo.closeGain / 100;
+            }
+        }
+        return maxWeightGain;
+    }
+
+    public float getMaxWeightEarn() {
+        float maxWeightEarn = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFund * ipoInfoList.get(0).closeGain / 10000;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000 > maxWeightEarn) {
+                maxWeightEarn = ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+            }
+        }
+        return maxWeightEarn;
+    }
+
+    public float getMaxStockDrop() {
+        float maxStockDrop = ipoInfoList.get(0).closeGain;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.closeGain < maxStockDrop) {
+                maxStockDrop = ipoInfo.closeGain;
+            }
+        }
+        return maxStockDrop;
+    }
+
+    public float getMaxStockLoss() {
+        float maxStockLoss = ipoInfoList.get(0).handFund * ipoInfoList.get(0).closeGain / 100;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.handFund * ipoInfo.closeGain / 100 < maxStockLoss) {
+                maxStockLoss = ipoInfo.handFund * ipoInfo.closeGain / 100;
+            }
+        }
+        return maxStockLoss;
+    }
+
+    public float getMaxWeightDrop() {
+        float maxWeightDrop = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).closeGain / 100;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.luckyRate * ipoInfo.closeGain / 100 < maxWeightDrop) {
+                maxWeightDrop = ipoInfo.luckyRate * ipoInfo.closeGain / 100;
+            }
+        }
+        return maxWeightDrop;
+    }
+
+    public float getMaxWeightLoss() {
+        float maxWeightLoss = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFund * ipoInfoList.get(0).closeGain / 10000;
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            if (ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000 < maxWeightLoss) {
+                maxWeightLoss = ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+            }
+        }
+        return maxWeightLoss;
+    }
+
     public float getOTotalGain() {
         float totalGain = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
