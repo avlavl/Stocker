@@ -821,8 +821,7 @@ public class MainView extends javax.swing.JFrame {
                 ipoInfo.closePrice = Float.parseFloat(words[18]);
                 ipoInfo.underwriter = words[19];
 
-                ipoInfo.openGain = 100 * (ipoInfo.openPrice - ipoInfo.offerPrice) / ipoInfo.offerPrice;
-                ipoInfo.grayPrice = ipoInfo.offerPrice * (1 + ipoInfo.grayGain / 100);
+                ipoInfo.getLevel2();
                 ipoInfoList.add(ipoInfo);
             }
             stocks = ipoInfoList.size();

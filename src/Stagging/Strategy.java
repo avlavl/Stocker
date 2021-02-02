@@ -53,7 +53,7 @@ public class Strategy {
     public float getTotalEarn() {
         float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarn += ipoInfo.handFund * getSellGain(ipoInfo) / 100;
+            totalEarn += ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
         }
         return totalEarn;
     }
@@ -69,7 +69,7 @@ public class Strategy {
     public float getWeightEarn() {
         float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * getSellGain(ipoInfo) / 10000;
+            totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
         }
         return totalEarn;
     }
@@ -86,7 +86,7 @@ public class Strategy {
     public float getEvenTotalEarn() {
         float evenTotalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            evenTotalEarn += ipoInfo.handFund * getSellGain(ipoInfo) / 100;
+            evenTotalEarn += ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
         }
         evenTotalEarn = evenTotalEarn / ipoInfoList.size();
         return evenTotalEarn;
@@ -104,7 +104,7 @@ public class Strategy {
     public float getEvenWeightEarn() {
         float evenWeightEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            evenWeightEarn += ipoInfo.luckyRate * ipoInfo.handFund * getSellGain(ipoInfo) / 10000;
+            evenWeightEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
         }
         evenWeightEarn = evenWeightEarn / ipoInfoList.size();
         return evenWeightEarn;
@@ -121,10 +121,10 @@ public class Strategy {
     }
 
     public float getMaxStockEarn() {
-        float maxStockEarn = ipoInfoList.get(0).handFund * getSellGain(ipoInfoList.get(0)) / 100;
+        float maxStockEarn = ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 100;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.handFund * getSellGain(ipoInfo) / 100 > maxStockEarn) {
-                maxStockEarn = ipoInfo.handFund * getSellGain(ipoInfo) / 100;
+            if (ipoInfo.handFundReal * getSellGain(ipoInfo) / 100 > maxStockEarn) {
+                maxStockEarn = ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
             }
         }
         return maxStockEarn;
@@ -141,10 +141,10 @@ public class Strategy {
     }
 
     public float getMaxWeightEarn() {
-        float maxWeightEarn = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFund * getSellGain(ipoInfoList.get(0)) / 10000;
+        float maxWeightEarn = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 10000;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.luckyRate * ipoInfo.handFund * getSellGain(ipoInfo) / 10000 > maxWeightEarn) {
-                maxWeightEarn = ipoInfo.luckyRate * ipoInfo.handFund * getSellGain(ipoInfo) / 10000;
+            if (ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000 > maxWeightEarn) {
+                maxWeightEarn = ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
             }
         }
         return maxWeightEarn;
@@ -161,10 +161,10 @@ public class Strategy {
     }
 
     public float getMaxStockLoss() {
-        float maxStockLoss = ipoInfoList.get(0).handFund * getSellGain(ipoInfoList.get(0)) / 100;
+        float maxStockLoss = ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 100;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.handFund * getSellGain(ipoInfo) / 100 < maxStockLoss) {
-                maxStockLoss = ipoInfo.handFund * getSellGain(ipoInfo) / 100;
+            if (ipoInfo.handFundReal * getSellGain(ipoInfo) / 100 < maxStockLoss) {
+                maxStockLoss = ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
             }
         }
         return maxStockLoss;
@@ -181,10 +181,10 @@ public class Strategy {
     }
 
     public float getMaxWeightLoss() {
-        float maxWeightLoss = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFund * getSellGain(ipoInfoList.get(0)) / 10000;
+        float maxWeightLoss = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 10000;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.luckyRate * ipoInfo.handFund * getSellGain(ipoInfo) / 10000 < maxWeightLoss) {
-                maxWeightLoss = ipoInfo.luckyRate * ipoInfo.handFund * getSellGain(ipoInfo) / 10000;
+            if (ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000 < maxWeightLoss) {
+                maxWeightLoss = ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
             }
         }
         return maxWeightLoss;
@@ -209,7 +209,7 @@ public class Strategy {
     public float getOTotalEarn() {
         float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarning += ipoInfo.handFund * ipoInfo.openGain / 100;
+            totalEarning += ipoInfo.handFundReal * ipoInfo.openGain / 100;
         }
         return totalEarning;
     }
@@ -217,7 +217,7 @@ public class Strategy {
     public float getCTotalEarn() {
         float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarning += ipoInfo.handFund * ipoInfo.closeGain / 100;
+            totalEarning += ipoInfo.handFundReal * ipoInfo.closeGain / 100;
         }
         return totalEarning;
     }
@@ -225,7 +225,7 @@ public class Strategy {
     public float getOWeightEarn() {
         float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+            totalEarning += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.openGain / 10000;
         }
         return totalEarning;
     }
@@ -233,7 +233,7 @@ public class Strategy {
     public float getCWeightEarn() {
         float totalEarning = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarning += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+            totalEarning += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.closeGain / 10000;
         }
         return totalEarning;
     }
@@ -260,7 +260,7 @@ public class Strategy {
                     break;
             }
             if (value < point) {
-                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.openGain / 10000;
             }
         }
         return totalEarn;
@@ -288,7 +288,7 @@ public class Strategy {
                     break;
             }
             if (value < point) {
-                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.closeGain / 10000;
             }
         }
         return totalEarn;
@@ -316,9 +316,9 @@ public class Strategy {
                     break;
             }
             if (value < point) {
-                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.openGain / 10000;
             } else {
-                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.closeGain / 10000;
             }
         }
         return totalEarn;
@@ -346,9 +346,9 @@ public class Strategy {
                     break;
             }
             if (value < point) {
-                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.closeGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.closeGain / 10000;
             } else {
-                totalEarn += ipoInfo.luckyRate * ipoInfo.handFund * ipoInfo.openGain / 10000;
+                totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * ipoInfo.openGain / 10000;
             }
         }
         return totalEarn;

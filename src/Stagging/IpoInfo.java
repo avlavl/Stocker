@@ -38,7 +38,22 @@ public class IpoInfo {
     public float closePrice;
     public String underwriter;
 
-    public float handAmount;
+    public float handFundReal;
     public float grayPrice;
     public float openGain;
+
+    public void getLevel2() {
+        openGain = 100 * (openPrice - offerPrice) / offerPrice;
+        grayPrice = offerPrice * (1 + grayGain / 100);
+        getHandFundReal();
+    }
+
+    public void getHandFundReal() {
+        if (inquiryRange.contains("-")) {
+            float inquiryHigh = Float.parseFloat(inquiryRange.substring(inquiryRange.indexOf("-") + 1));
+            handFundReal = (handFund / inquiryHigh) * offerPrice;
+        } else {
+            handFundReal = handFund;
+        }
+    }
 }
