@@ -897,6 +897,13 @@ public class MainView extends javax.swing.JFrame {
                 continue;
             }
 
+            type = jComboBox6.getSelectedIndex();
+            cpl = Float.parseFloat(jTextFieldL6.getText());
+            cph = Float.parseFloat(jTextFieldH6.getText());
+            if (!inSection(type, cpl, cph, ipoInfo.handFund)) {
+                continue;
+            }
+
             int plate = jComboBoxS1.getSelectedIndex();
             if (((ipoInfo.marketPlate.equals("主板")) && (plate == 2)) || ((ipoInfo.marketPlate.equals("创业板")) && (plate == 1))) {
                 continue;
