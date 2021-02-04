@@ -655,45 +655,51 @@ public class MainView extends javax.swing.JFrame {
         int num = 0;
         float money = 0;
         float level = (float) 0.4;
-        for (int bg = 30; bg < 31; bg++) {
-            System.out.println("bg:" + bg);
-            for (int f = 43; f <= 43; f++) {
+        float t_gain = 0;
+        for (int gg = 30; gg <= 60; gg++) {
+            //System.out.println("gg:" + gg);
+            for (int f = 38; f <= 38; f++) {
                 level = (float) f / 100;
                 num = 0;
                 money = 0;
                 t_num = 0;
+                t_gain = 0;
                 for (int i = 0; i < items; i++) {
-                    if (ipoInfoList.get(i).grayGain > bg) {
+                    if (ipoInfoList.get(i).grayGain > gg) {
                         t_num++;
                         float bp = ipoInfoList.get(i).grayPrice;
                         float op = ipoInfoList.get(i).openPrice;
                         float hp = ipoInfoList.get(i).highPrice;
                         float lp = ipoInfoList.get(i).lowPrice;
                         float cp = ipoInfoList.get(i).closePrice;
-                        float hf = ipoInfoList.get(i).handFund / ipoInfoList.get(i).offerPrice;
+                        float hf = ipoInfoList.get(i).handFundReal / ipoInfoList.get(i).offerPrice;
                         String openGain = String.format("%.1f", 100 * (op / bp - 1));
                         String highGain = String.format("%.1f", 100 * (hp / bp - 1));
                         String lowGain = String.format("%.1f", 100 * (lp / bp - 1));
                         String closeGain = String.format("%.1f", 100 * (cp / bp - 1));
-                        //System.out.println("openGain: " + openGain + "\thighGain: " + highGain  + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).stockName);
                         float earn = 0;
+                        float gain = 0;
                         if (op / bp - 1 >= level) {
                             num++;
                             earn = hf * (op - bp);
-                            //System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\tearn: " + earn + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                            gain = (op - bp) / bp;
                         } else if (hp / bp - 1 >= level) {
                             num++;
                             earn = hf * bp * level;
-                            //System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                            gain = level;
                         } else {
                             earn = hf * (cp - bp);
-                            //System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\t" + ipoInfoList.get(i).blackGain + "\t" + ipoInfoList.get(i).stockName);
+                            gain = (cp - bp) / bp;
                         }
-                        System.out.println("openGain: " + openGain + "\thighGain: " + highGain + "\tcloseGain: " + closeGain + "\tearn: " + earn + "\tblackGain: " + ipoInfoList.get(i).grayGain + "\t" + ipoInfoList.get(i).stockName);
+                        //String stockInfo = String.format("greyGain: %.2f%%\topenGain: %5s%%\thighGain: %5s%%\tcloseGain: %5s%%\tearn: %.2f\tgain: %6.2f%%\t%-10s", ipoInfoList.get(i).grayGain, openGain, highGain, closeGain, earn, 100 * gain, ipoInfoList.get(i).stockName);
+                        //System.out.println(stockInfo);
+
                         money += earn;
+                        t_gain += gain;
                     }
                 }
-                System.out.println("t_num: " + t_num + "\tnum: " + num + "\tpercent: " + (float) num / t_num + "\tmoney: " + money);
+                String schemeInfo = String.format("greyGain: %d%%\tlevel: %d%%\tnum: %d/%d\tpercent: %.2f%%\tmoney: %.2f\te_money: %6.2f\tt_gain: %.2f%%\te_gain: %.2f%%", gg, f, num, t_num, (float) num / t_num, money, money / t_num, 100 * t_gain, 100 * t_gain / t_num);
+                System.out.println(schemeInfo);
             }
         }
     }//GEN-LAST:event_jButtonGrayAnalysisActionPerformed
