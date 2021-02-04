@@ -18,6 +18,7 @@ public class SystemReport {
         criticalPoint = point;
     }
 
+    public int totalStocks;
     public int selectedStocks;
     public int gainStocks;
     public int dropStocks;

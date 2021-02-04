@@ -13,178 +13,177 @@ import java.util.ArrayList;
  */
 public class Strategy {
 
-    public Strategy(ArrayList<IpoInfo> list, int sp) {
+    public Strategy(ArrayList<IpoInfo> list) {
         ipoInfoList = list;
-        sellPoint = sp;
     }
 
-    public float getSellGain(IpoInfo ipoInfo) {
-        return (sellPoint == 0) ? ipoInfo.grayGain : ((sellPoint == 1) ? ipoInfo.openGain : ipoInfo.closeGain);
+    public float getSellGain(IpoInfo ipoInfo, int sp) {
+        return (sp == 0) ? ipoInfo.grayGain : ((sp == 1) ? ipoInfo.openGain : ipoInfo.closeGain);
     }
 
     public int getSelectedStocks() {
         return ipoInfoList.size();
     }
 
-    public int getGainStocks() {
+    public int getGainStocks(int sp) {
         int gainStocks = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            gainStocks += (getSellGain(ipoInfo) > 0) ? 1 : 0;
+            gainStocks += (getSellGain(ipoInfo, sp) > 0) ? 1 : 0;
         }
         return gainStocks;
     }
 
-    public int getDropStocks() {
+    public int getDropStocks(int sp) {
         int dripStocks = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            dripStocks += (getSellGain(ipoInfo) <= 0) ? 1 : 0;
+            dripStocks += (getSellGain(ipoInfo, sp) <= 0) ? 1 : 0;
         }
         return dripStocks;
     }
 
-    public float getTotalGain() {
+    public float getTotalGain(int sp) {
         float totalGain = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalGain += getSellGain(ipoInfo);
+            totalGain += getSellGain(ipoInfo, sp);
         }
         return totalGain;
     }
 
-    public float getTotalEarn() {
+    public float getTotalEarn(int sp) {
         float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarn += ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
+            totalEarn += ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 100;
         }
         return totalEarn;
     }
 
-    public float getWeightGain() {
+    public float getWeightGain(int sp) {
         float totalGain = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalGain += ipoInfo.luckyRate * getSellGain(ipoInfo) / 100;
+            totalGain += ipoInfo.luckyRate * getSellGain(ipoInfo, sp) / 100;
         }
         return totalGain;
     }
 
-    public float getWeightEarn() {
+    public float getWeightEarn(int sp) {
         float totalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
+            totalEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 10000;
         }
         return totalEarn;
     }
 
-    public float getEvenTotalGain() {
+    public float getEvenTotalGain(int sp) {
         float evenTotalGain = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            evenTotalGain += getSellGain(ipoInfo);
+            evenTotalGain += getSellGain(ipoInfo, sp);
         }
         evenTotalGain = evenTotalGain / ipoInfoList.size();
         return evenTotalGain;
     }
 
-    public float getEvenTotalEarn() {
+    public float getEvenTotalEarn(int sp) {
         float evenTotalEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            evenTotalEarn += ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
+            evenTotalEarn += ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 100;
         }
         evenTotalEarn = evenTotalEarn / ipoInfoList.size();
         return evenTotalEarn;
     }
 
-    public float getEvenWeightGain() {
+    public float getEvenWeightGain(int sp) {
         float evenWeightGain = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            evenWeightGain += ipoInfo.luckyRate * getSellGain(ipoInfo) / 100;
+            evenWeightGain += ipoInfo.luckyRate * getSellGain(ipoInfo, sp) / 100;
         }
         evenWeightGain = evenWeightGain / ipoInfoList.size();
         return evenWeightGain;
     }
 
-    public float getEvenWeightEarn() {
+    public float getEvenWeightEarn(int sp) {
         float evenWeightEarn = 0;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            evenWeightEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
+            evenWeightEarn += ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 10000;
         }
         evenWeightEarn = evenWeightEarn / ipoInfoList.size();
         return evenWeightEarn;
     }
 
-    public float getMaxStockGain() {
-        float maxStockGain = getSellGain(ipoInfoList.get(0));
+    public float getMaxStockGain(int sp) {
+        float maxStockGain = getSellGain(ipoInfoList.get(0), sp);
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (getSellGain(ipoInfo) > maxStockGain) {
-                maxStockGain = getSellGain(ipoInfo);
+            if (getSellGain(ipoInfo, sp) > maxStockGain) {
+                maxStockGain = getSellGain(ipoInfo, sp);
             }
         }
         return maxStockGain;
     }
 
-    public float getMaxStockEarn() {
-        float maxStockEarn = ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 100;
+    public float getMaxStockEarn(int sp) {
+        float maxStockEarn = ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0), sp) / 100;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.handFundReal * getSellGain(ipoInfo) / 100 > maxStockEarn) {
-                maxStockEarn = ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
+            if (ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 100 > maxStockEarn) {
+                maxStockEarn = ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 100;
             }
         }
         return maxStockEarn;
     }
 
-    public float getMaxWeightGain() {
-        float maxWeightGain = ipoInfoList.get(0).luckyRate * getSellGain(ipoInfoList.get(0)) / 100;
+    public float getMaxWeightGain(int sp) {
+        float maxWeightGain = ipoInfoList.get(0).luckyRate * getSellGain(ipoInfoList.get(0), sp) / 100;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.luckyRate * getSellGain(ipoInfo) / 100 > maxWeightGain) {
-                maxWeightGain = ipoInfo.luckyRate * getSellGain(ipoInfo) / 100;
+            if (ipoInfo.luckyRate * getSellGain(ipoInfo, sp) / 100 > maxWeightGain) {
+                maxWeightGain = ipoInfo.luckyRate * getSellGain(ipoInfo, sp) / 100;
             }
         }
         return maxWeightGain;
     }
 
-    public float getMaxWeightEarn() {
-        float maxWeightEarn = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 10000;
+    public float getMaxWeightEarn(int sp) {
+        float maxWeightEarn = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0), sp) / 10000;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000 > maxWeightEarn) {
-                maxWeightEarn = ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
+            if (ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 10000 > maxWeightEarn) {
+                maxWeightEarn = ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 10000;
             }
         }
         return maxWeightEarn;
     }
 
-    public float getMaxStockDrop() {
-        float maxStockDrop = getSellGain(ipoInfoList.get(0));
+    public float getMaxStockDrop(int sp) {
+        float maxStockDrop = getSellGain(ipoInfoList.get(0), sp);
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (getSellGain(ipoInfo) < maxStockDrop) {
-                maxStockDrop = getSellGain(ipoInfo);
+            if (getSellGain(ipoInfo, sp) < maxStockDrop) {
+                maxStockDrop = getSellGain(ipoInfo, sp);
             }
         }
         return maxStockDrop;
     }
 
-    public float getMaxStockLoss() {
-        float maxStockLoss = ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 100;
+    public float getMaxStockLoss(int sp) {
+        float maxStockLoss = ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0), sp) / 100;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.handFundReal * getSellGain(ipoInfo) / 100 < maxStockLoss) {
-                maxStockLoss = ipoInfo.handFundReal * getSellGain(ipoInfo) / 100;
+            if (ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 100 < maxStockLoss) {
+                maxStockLoss = ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 100;
             }
         }
         return maxStockLoss;
     }
 
-    public float getMaxWeightDrop() {
-        float maxWeightDrop = ipoInfoList.get(0).luckyRate * getSellGain(ipoInfoList.get(0)) / 100;
+    public float getMaxWeightDrop(int sp) {
+        float maxWeightDrop = ipoInfoList.get(0).luckyRate * getSellGain(ipoInfoList.get(0), sp) / 100;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.luckyRate * getSellGain(ipoInfo) / 100 < maxWeightDrop) {
-                maxWeightDrop = ipoInfo.luckyRate * getSellGain(ipoInfo) / 100;
+            if (ipoInfo.luckyRate * getSellGain(ipoInfo, sp) / 100 < maxWeightDrop) {
+                maxWeightDrop = ipoInfo.luckyRate * getSellGain(ipoInfo, sp) / 100;
             }
         }
         return maxWeightDrop;
     }
 
-    public float getMaxWeightLoss() {
-        float maxWeightLoss = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0)) / 10000;
+    public float getMaxWeightLoss(int sp) {
+        float maxWeightLoss = ipoInfoList.get(0).luckyRate * ipoInfoList.get(0).handFundReal * getSellGain(ipoInfoList.get(0), sp) / 10000;
         for (IpoInfo ipoInfo : ipoInfoList) {
-            if (ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000 < maxWeightLoss) {
-                maxWeightLoss = ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo) / 10000;
+            if (ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 10000 < maxWeightLoss) {
+                maxWeightLoss = ipoInfo.luckyRate * ipoInfo.handFundReal * getSellGain(ipoInfo, sp) / 10000;
             }
         }
         return maxWeightLoss;
@@ -355,5 +354,4 @@ public class Strategy {
     }
 
     ArrayList<IpoInfo> ipoInfoList;
-    private int sellPoint = 2;
 }
