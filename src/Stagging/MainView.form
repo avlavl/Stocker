@@ -277,13 +277,17 @@
                   <Font name="&#x5fae;&#x8f6f;&#x96c5;&#x9ed1;" size="12" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="6">
+                  <StringArray count="10">
                     <StringItem index="0" value="&#x5168;&#x90e8;"/>
-                    <StringItem index="1" value="2021"/>
-                    <StringItem index="2" value="2020"/>
-                    <StringItem index="3" value="2019"/>
-                    <StringItem index="4" value="2018"/>
-                    <StringItem index="5" value="2017"/>
+                    <StringItem index="1" value="&#x8fd1;&#x4e09;&#x6708;"/>
+                    <StringItem index="2" value="&#x8fd1;&#x534a;&#x5e74;"/>
+                    <StringItem index="3" value="&#x8fd1;&#x4e00;&#x5e74;"/>
+                    <StringItem index="4" value="&#x8fd1;&#x4e24;&#x5e74;"/>
+                    <StringItem index="5" value="2021"/>
+                    <StringItem index="6" value="2020"/>
+                    <StringItem index="7" value="2019"/>
+                    <StringItem index="8" value="2018"/>
+                    <StringItem index="9" value="2017"/>
                   </StringArray>
                 </Property>
               </Properties>

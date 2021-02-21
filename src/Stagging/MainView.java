@@ -13,7 +13,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -196,7 +198,7 @@ public class MainView extends javax.swing.JFrame {
         jPanelConf2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBoxS2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jComboBoxS2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "全部", "2021", "2020", "2019", "2018", "2017" }));
+        jComboBoxS2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "全部", "近三月", "近半年", "近一年", "近两年", "2021", "2020", "2019", "2018", "2017" }));
         jComboBoxS2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxS2ActionPerformed(evt);
@@ -850,6 +852,39 @@ public class MainView extends javax.swing.JFrame {
         return true;
     }
 
+    public static boolean inDateScope(int scopeType, String dateStr) {
+        if (scopeType == 0) {
+            return true;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String currentDate = sdf.format(new Date());
+        String[] ymd = currentDate.split("/");
+        int year = Integer.parseInt(ymd[0]);
+        int month = Integer.parseInt(ymd[1]);
+        int date = Integer.parseInt(ymd[2]);
+        switch (scopeType) {
+            case 1:
+                year = (month > 3) ? year : year - 1;
+                month = (month > 3) ? (month - 3) : (month + 9);
+                break;
+            case 2:
+                year = (month > 6) ? year : year - 1;
+                month = (month > 6) ? (month - 6) : (month + 6);
+                break;
+            case 3:
+                year = year - 1;
+                break;
+            case 4:
+                year = year - 2;
+                break;
+            default:
+                break;
+        }
+        String lastDate = String.format("%d/%02d/%02d", year, month, date);
+        return dateStr.compareTo(lastDate) > 0;
+    }
+
     public ArrayList<IpoInfo> getSelectedIpoInfos() {
         ArrayList<IpoInfo> ipoInfos = new ArrayList<>();
         for (IpoInfo ipoInfo : ipoInfoList) {
@@ -907,7 +942,11 @@ public class MainView extends javax.swing.JFrame {
                 continue;
             }
 
-            if ((jComboBoxS2.getSelectedIndex() != 0) && (!ipoInfo.offerDate.contains(jComboBoxS2.getSelectedItem().toString()))) {
+            if (jComboBoxS2.getSelectedIndex() < 5) {
+                if ((!inDateScope(jComboBoxS2.getSelectedIndex(), ipoInfo.offerDate))) {
+                    continue;
+                }
+            } else if (!ipoInfo.offerDate.contains(jComboBoxS2.getSelectedItem().toString())) {
                 continue;
             }
 
