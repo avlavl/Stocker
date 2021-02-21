@@ -50,6 +50,7 @@ public class MainView extends javax.swing.JFrame {
             setIconImage(new ImageIcon(filename, "Icon").getImage());
         }
         importData();
+        getUnderwriter();
     }
 
     /**
@@ -66,6 +67,8 @@ public class MainView extends javax.swing.JFrame {
         jPanelDebug = new javax.swing.JPanel();
         jComboBox10 = new javax.swing.JComboBox<>();
         jButtonBigDataAnalysis = new javax.swing.JButton();
+        jButtonGrayAnalysis = new javax.swing.JButton();
+        jButtonFilterStart2 = new javax.swing.JButton();
         jPanelConf1 = new javax.swing.JPanel();
         jComboBoxS1 = new javax.swing.JComboBox<>();
         jPanelConf2 = new javax.swing.JPanel();
@@ -74,7 +77,6 @@ public class MainView extends javax.swing.JFrame {
         jComboBoxS3 = new javax.swing.JComboBox<>();
         jButtonIpoInfo = new javax.swing.JButton();
         jButtonIpoEva = new javax.swing.JButton();
-        jButtonGrayAnalysis = new javax.swing.JButton();
         jPanelConfig0 = new javax.swing.JPanel();
         jComboBox0 = new javax.swing.JComboBox<>();
         jLabelL0 = new javax.swing.JLabel();
@@ -117,7 +119,7 @@ public class MainView extends javax.swing.JFrame {
         jTextFieldL6 = new javax.swing.JTextField();
         jLabelH6 = new javax.swing.JLabel();
         jTextFieldH6 = new javax.swing.JTextField();
-        jButtonFilterStart2 = new javax.swing.JButton();
+        jButtonUnderwriter = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -152,7 +154,27 @@ public class MainView extends javax.swing.JFrame {
                 jButtonBigDataAnalysisActionPerformed(evt);
             }
         });
-        jPanelDebug.add(jButtonBigDataAnalysis, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 70, 40));
+        jPanelDebug.add(jButtonBigDataAnalysis, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 70, 30));
+
+        jButtonGrayAnalysis.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonGrayAnalysis.setText("暗盘分析");
+        jButtonGrayAnalysis.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonGrayAnalysis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGrayAnalysisActionPerformed(evt);
+            }
+        });
+        jPanelDebug.add(jButtonGrayAnalysis, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, 30));
+
+        jButtonFilterStart2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonFilterStart2.setText("新股分析");
+        jButtonFilterStart2.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonFilterStart2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFilterStart2ActionPerformed(evt);
+            }
+        });
+        jPanelDebug.add(jButtonFilterStart2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 70, 30));
 
         jPanelMain.add(jPanelDebug, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 340, 360));
 
@@ -219,16 +241,6 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jPanelMain.add(jButtonIpoEva, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, 30));
-
-        jButtonGrayAnalysis.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonGrayAnalysis.setText("暗盘分析");
-        jButtonGrayAnalysis.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonGrayAnalysis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGrayAnalysisActionPerformed(evt);
-            }
-        });
-        jPanelMain.add(jButtonGrayAnalysis, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 70, 30));
 
         jPanelConfig0.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "中签率", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("微软雅黑", 0, 12))); // NOI18N
         jPanelConfig0.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -447,15 +459,15 @@ public class MainView extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelConfig6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 340, 70));
 
-        jButtonFilterStart2.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButtonFilterStart2.setText("新股分析");
-        jButtonFilterStart2.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jButtonFilterStart2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUnderwriter.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButtonUnderwriter.setText("承销商");
+        jButtonUnderwriter.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jButtonUnderwriter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFilterStart2ActionPerformed(evt);
+                jButtonUnderwriterActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonFilterStart2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 70, 30));
+        jPanelMain.add(jButtonUnderwriter, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 70, 30));
 
         getContentPane().add(jPanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 510));
 
@@ -738,6 +750,22 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox10ActionPerformed
 
+    private void jButtonUnderwriterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnderwriterActionPerformed
+        ArrayList<IpoInfo> ipoInfos = getSelectedIpoInfos();
+        if (ipoInfos.isEmpty()) {
+            JOptionPane.showMessageDialog(new JFrame(), "没有满足条件的新股！");
+            return;
+        }
+
+        for (Underwriter underwriter : underwriterList) {
+            underwriter.getStatisInfo();
+        }
+
+        UnderwrTable underwrTable = new UnderwrTable(this, false, underwriterList);
+
+        evaluated = true;
+    }//GEN-LAST:event_jButtonUnderwriterActionPerformed
+
     /**
      ********************* Start of User-defined function ********************
      */
@@ -747,7 +775,6 @@ public class MainView extends javax.swing.JFrame {
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "gbk");
             BufferedReader br = new BufferedReader(isr);
             String[] words = br.readLine().split("\t+");
-            column = words.length;
             ipoInfoList = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {
@@ -775,7 +802,6 @@ public class MainView extends javax.swing.JFrame {
                 ipoInfo.getLevel2();
                 ipoInfoList.add(ipoInfo);
             }
-            stocks = ipoInfoList.size();
             br.close();
             isr.close();
         } catch (IOException | NumberFormatException e) {
@@ -783,6 +809,28 @@ public class MainView extends javax.swing.JFrame {
         }
 
         evaluated = false;
+    }
+
+    protected void getUnderwriter() {
+        underwriterList = new ArrayList<>();
+        for (IpoInfo ipoInfo : ipoInfoList) {
+            String[] uws = ipoInfo.underwriter.split("/");
+            for (int i = 0; i < uws.length; i++) {
+                boolean matched = false;
+                for (Underwriter underwriter : underwriterList) {
+                    if (underwriter.name.equals(uws[i])) {
+                        underwriter.ipoInfoList.add(ipoInfo);
+                        matched = true;
+                        break;
+                    }
+                }
+                if (!matched) {
+                    Underwriter underwriter = new Underwriter(uws[i]);
+                    underwriter.ipoInfoList.add(ipoInfo);
+                    underwriterList.add(underwriter);
+                }
+            }
+        }
     }
 
     public boolean inSection(int sectType, float sectL, float sectH, float value) {
@@ -939,24 +987,13 @@ public class MainView extends javax.swing.JFrame {
     private String fileIn = "data\\港股新股.txt";
     public FileWriter fileWriter;
 
-    public String stockName = "W上证指数";
-    public String stockCode = "000001";
-    public int column = 0;
-    public int stocks = 0;
-
-    public int sIdx = -1;
-    public int eIdx = 0;
-    public int investDays = 0;
-    public double testYears = 0;
-    public double investCoef = 1;
-
     public Strategy strategy;
     public boolean evaluated = false;
     //public RankTable rankTable;
-    public String investPara;
     public ArrayList<CheckData> chkDataList;
 
     ArrayList<IpoInfo> ipoInfoList;
+    ArrayList<Underwriter> underwriterList;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -965,6 +1002,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGrayAnalysis;
     private javax.swing.JButton jButtonIpoEva;
     private javax.swing.JButton jButtonIpoInfo;
+    private javax.swing.JButton jButtonUnderwriter;
     private javax.swing.JComboBox<String> jComboBox0;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox10;
